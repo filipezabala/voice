@@ -14,7 +14,7 @@
 #' @return \code{$fcast} predicted time series using the model that minimizes the forecasting mean square error.
 #' \code{$runtime} running time.
 #' \code{mse.pred} mean squared error of prediction. Used to decide the best model.
-#' @import e1071, parallelSVM, parallel
+#' @import e1071, parallel, parallelSVM
 #' @references
 #' Vapnik, Vladimir (2000). The Nature of Statistical Learning Theory, Springer.
 #' @examples

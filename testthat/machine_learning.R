@@ -1,10 +1,10 @@
 # packs
-library(tidyverse)
+# library(tidyverse)
+# library(e1071)
+# library(parallel)
+# library(parallelSVM)
 # library(gridExtra)
 # library(ggfortify)
-library(e1071)
-library(parallelSVM)
-library(parallel)
 # library(foreach)
 # library(itertools)
 
