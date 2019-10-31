@@ -4,13 +4,10 @@
 \alias{class_svm}
 \title{Fits and forecast SVM models, serial and parallelized.}
 \usage{
-class_svm(df, modelo, filtro = c("id"), percTreino = 0.5,
-  setSeed = 1, custo = 1, gama = 1, paralelo = T, simbolico = F,
-  restart = F)
+class_svm(df0, modelo, filtro = c("id"), percTreino = 0.5,
+  setSeed = 1, custo = 1, gama = 1, paralelo = T, print.cm = T)
 }
 \arguments{
-\item{df}{A data frame or tibble.}
-
 \item{modelo}{Character containing the model structure.}
 
 \item{filtro}{Column(s) to filter the samples.}
@@ -24,6 +21,8 @@ class_svm(df, modelo, filtro = c("id"), percTreino = 0.5,
 \item{gama}{Needed for all kernels except linear (default: 1/(data dimension))}
 
 \item{paralelo}{Logical. Should the process be parallelized?}
+
+\item{df}{A data frame or tibble.}
 
 \item{simbolico}{Logical. Should the symbolic confusion matrix be printed?}
 

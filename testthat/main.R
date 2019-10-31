@@ -14,7 +14,7 @@ library(devtools)
 session_info()
 
 # creating manual
-devtools::document()
+devtools::document(setwd('~/Dropbox/[D] Filipe Zabala/pacotes/voice/'))
 
 # loading jurimetrics
 devtools::load_all()
