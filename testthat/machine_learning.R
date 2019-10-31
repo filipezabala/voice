@@ -61,24 +61,29 @@ df0NA <- cbind(df0NA, wX.matrix)
 dim(df0NA)
 
 # models
-for(i in 1:nX) {
-  (model <- expand_model('gender', paste0('pc',1:nX), i)[1])
-  fit <- class_svm(df0NA, modelo = model)
-  write_csv(model$result, paste0('~/Dropbox/[D] Filipe Zabala/dados/modelos/model-av-',
-                                 models_gender[[1]][i], '.csv'))
-  write_list(model$cm.svm, paste0('~/Dropbox/[D] Filipe Zabala/dados/cm/cm-av-',
-                                  models_gender[[1]][i], '.txt'))
-  write_list(model$cm.svm.tab, paste0('~/Dropbox/[D] Filipe Zabala/dados/cm/cm.tab-av-',
-                                      models_gender[[1]][i], '.txt'))
+for(i in 1:3) {
+  (model <- expand_model('anyep_diff_w1', paste0('pc',1:nX), i))
+  fit <- class_svm(df0NA, modelo = model[1])
+  write_csv(fit$result, paste0('~/Dropbox/[D] Filipe Zabala/dados/modelos/fit-',
+                                 model[1], '.csv'))
+  write_list(fit$cm.svm, paste0('~/Dropbox/[D] Filipe Zabala/dados/cm/cm-',
+                                  model[1], '.txt'))
+  write_list(fit$cm.svm.tab, paste0('~/Dropbox/[D] Filipe Zabala/dados/cm/cm.tab-',
+                                      model[1], '.txt'))
   gc()
   # restart()
   # rm(e)
   # gc(verbose = T, reset = T)
   # gctorture(on = F)
   # gctorture2(step, wait = step, inhibit_release = FALSE)
-}
-# beepr::beep(1)
 
+# readcomp_diff_w1
+# read_diff_w1
+# rspeed_diff_w1
+# write_diff_w1
+# anyep_diff_w1
+}
+restart()
 
 # # combinações
 # expand_model('highRisk', x, 1)

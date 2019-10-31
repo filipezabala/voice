@@ -1,6 +1,6 @@
-#' Fits and forecast SVM models, serial and parallelized.
+#' Fits and forecasts SVM models, serial and parallelized.
 #'
-#' @param df A data frame or tibble.
+#' @param df0 A data frame or tibble.
 #' @param modelo Character containing the model structure.
 #' @param filtro Column(s) to filter the samples.
 #' @param percTreino Percentage of the database used to train the model, filtered by \code{filtro}.
@@ -11,8 +11,8 @@
 #' @param simbolico Logical. Should the symbolic confusion matrix be printed?
 #' @param restart Logical. Should the R session be restarted? (It frees memory)
 #' @return \code{$fcast} predicted time series using the model that minimizes the forecasting mean square error.
-#' \code{$runtime} running time.
-#' \code{mse.pred} mean squared error of prediction. Used to decide the best model.
+#' @return \code{$runtime} running time.
+#' @return \code{mse.pred} mean squared error of prediction. Used to decide the best model.
 #' @import e1071, parallel, parallelSVM
 #' @references
 #' Vapnik, Vladimir (2000). The Nature of Statistical Learning Theory, Springer.
@@ -29,7 +29,7 @@ class_svm <- function(df0, modelo,
                       print.cm = T){
 
   # df0 = df0NA
-  # modelo = 'anyep_diff_w1 ~ f0'
+  # modelo = 'gender ~ pc1'
   # filtro = c('id')
   # # id0 = c('id','wordType')
   # setSeed = 1
@@ -52,7 +52,8 @@ class_svm <- function(df0, modelo,
   cat('1#4 START - SAMPLE', '\n')
 
   # criando idFull
-  idFull <- apply(as.matrix(df0[,filtro]), 1, paste, collapse = ',')
+  # idFull <- apply(df0[filtro], 1, paste, collapse = ',')
+  idFull <- df0[filtro]
 
   # idFullUn
   idFullUn <- as.data.frame(unique(idFull))
@@ -64,8 +65,8 @@ class_svm <- function(df0, modelo,
   treino <- sort(base::sample(1:nFullUn, floor(nFullUn*percTreino)))
   idTreino <- idFullUn[treino,]
   idTeste <- idFullUn[-treino,]
-  trainset <- as.data.frame(df %>% filter(id %in% idTreino))
-  testset <- as.data.frame(df %>% filter(id %in% idTeste))
+  trainset <- as.data.frame(df0 %>% filter(id %in% idTreino))
+  testset <- as.data.frame(df0 %>% filter(id %in% idTeste))
   nTest <- nrow(testset)
   nCores <- parallel::detectCores()
   nGrupo <- nrow(testset)/nCores
