@@ -2,6 +2,6 @@
 
 export(class_svm)
 export(rp)
-import(e1071)
-import(parallel)
+import("e1071,")
+import("parallel,")
 import(parallelSVM)

@@ -60,6 +60,9 @@ colnames(wX.matrix) <- tolower(colnames(ev$rotation))
 df0NA <- cbind(df0NA, wX.matrix)
 dim(df0NA)
 
+
+i=1
+
 # models
 for(i in 1:nX) {
   (model <- expand_model('gender', paste0('pc',1:nX), i)[1])
