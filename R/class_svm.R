@@ -11,8 +11,8 @@
 #' @param simbolico Logical. Should the symbolic confusion matrix be printed?
 #' @param restart Logical. Should the R session be restarted? (It frees memory)
 #' @return \code{$fcast} predicted time series using the model that minimizes the forecasting mean square error.
+#' @return \code{$mse.pred} mean squared error of prediction. Used to decide the best model.
 #' @return \code{$runtime} running time.
-#' @return \code{mse.pred} mean squared error of prediction. Used to decide the best model.
 #' @import e1071, parallel, parallelSVM
 #' @references
 #' Vapnik, Vladimir (2000). The Nature of Statistical Learning Theory, Springer.
