@@ -16,11 +16,11 @@ session_info()
 # updatig and creating manual
 devtools::document(setwd('~/Dropbox/[D] Filipe Zabala/pacotes/voice/'))
 
-# loading jurimetrics
+# loading
 devtools::load_all()
 search()
 
-# installing and attaching jurimetrics
+# installing and attaching
 devtools::install_github('filipezabala/voice', force = T)
 library(voice)
 
