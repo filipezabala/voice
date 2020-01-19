@@ -14,6 +14,7 @@
 #' @return \code{$runtime} running time.
 #' @return \code{mse.pred} mean squared error of prediction. Used to decide the best model.
 #' @import e1071, parallel, parallelSVM
+#' @import e1071 parallelSVM
 #' @references
 #' Vapnik, Vladimir (2000). The Nature of Statistical Learning Theory, Springer.
 #' @examples
