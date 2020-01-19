@@ -24,6 +24,6 @@ search()
 # installing and attaching
 devtools::install_github('filipezabala/voice', force = T)
 library(voice)
-
+?rp
 
 
