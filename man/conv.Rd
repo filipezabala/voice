@@ -2,7 +2,7 @@
 % Please edit documentation in R/conv.R
 \name{conv}
 \alias{conv}
-\title{Compact/convolute vectors.}
+\title{Convolute vectors.}
 \usage{
 conv(x, compact.to = 0.1, drop.zeros = T)
 }
@@ -17,7 +17,7 @@ conv(x, compact.to = 0.1, drop.zeros = T)
 A vector of convoluted values with length near to \code{compact.to*length(x)}.
 }
 \description{
-Compact/convolute vectors.
+Convolute vectors.
 }
 \examples{
 conv(1:100, compact.to = 0.2)

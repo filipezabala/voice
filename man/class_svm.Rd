@@ -4,8 +4,17 @@
 \alias{class_svm}
 \title{Fits and forecasts SVM models, serial and parallelized.}
 \usage{
-class_svm(df0, modelo, filtro = c("id"), percTreino = 0.5,
-  setSeed = 1, custo = 1, gama = 1, paralelo = T, print.cm = T)
+class_svm(
+  df0,
+  modelo,
+  filtro = c("id"),
+  percTreino = 0.5,
+  setSeed = 1,
+  custo = 1,
+  gama = 1,
+  paralelo = T,
+  print.cm = T
+)
 }
 \arguments{
 \item{df0}{A data frame or tibble.}
