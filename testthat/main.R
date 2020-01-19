@@ -19,7 +19,7 @@ devtools::document(setwd('~/Dropbox/[D] Filipe Zabala/pacotes/voice/'))
 # loading
 devtools::load_all()
 search()
-?rp
+?expand_model
 
 # installing and attaching
 devtools::install_github('filipezabala/voice', force = T)
