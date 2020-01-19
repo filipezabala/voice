@@ -8,7 +8,7 @@ URL: https://github.com/filipezabala/voice
 BugReports: https://github.com/filipezabala/voice/issues
 Description: General purpouse tools for voice analysis, speecher recognition
     and mood inference. Gathers tools to solve problems concerning voice.
-Depends: R (>= 3.6.1), e1071, parallelSVM, parallel
+Depends: R (>= 3.6.2), e1071, parallelSVM, parallel
 Imports: tidyverse
 License: GPL-3
 Encoding: UTF-8
