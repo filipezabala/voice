@@ -12,7 +12,7 @@
 #'
 #' @seealso \code{conv} \code{conv_mc}
 #' @export
-conv_df <- function(x, columns = NULL, by.filter = NULL, compact.to,
+conv_df <- function(x, compact.to, columns = NULL, by.filter = NULL,
                     drop.zeros = T, to.data.frame = T, mc.cores = detectCores()){
   ini <- Sys.time()
 

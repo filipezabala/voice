@@ -6,9 +6,9 @@
 \usage{
 conv_df(
   x,
+  compact.to,
   columns = NULL,
   by.filter = NULL,
-  compact.to,
   drop.zeros = T,
   to.data.frame = T,
   mc.cores = detectCores()
