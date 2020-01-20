@@ -28,7 +28,12 @@ A vector of convoluted values with length near to \code{compact.to*length(x)}.
 Convolute vectors multicore.
 }
 \examples{
-
+conv_mc(1:100, compact.to = 0.2)
+(v0 <- c(1:5,rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
+conv(v0, 0.1)
+conv(v0, 0.2)
+conv(v0, 0.5)
+conv(v0, drop.zeros = F)
 }
 \seealso{
 \code{conv} \code{conv_df}
