@@ -9,6 +9,7 @@
 #' expand_model('y', LETTERS[1:4], 2)
 #' expand_model('y', LETTERS[1:4], 3)
 #' expand_model('y', LETTERS[1:4], 4)
+#' @export
 expand_model <- function(y, x, k){
 
   y <- paste0(y, ' ~ ')

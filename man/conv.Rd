@@ -4,7 +4,7 @@
 \alias{conv}
 \title{Convolute vectors.}
 \usage{
-conv(x, compact.to = 0.1, drop.zeros = T)
+conv(x, compact.to, drop.zeros)
 }
 \arguments{
 \item{x}{A vector or time series.}
@@ -39,5 +39,5 @@ conv(v0)
 conv(v0, 1, T)
 }
 \seealso{
-\code{rm0}
+\code{rm0} \code{conv_mc} \code{conv_df}
 }

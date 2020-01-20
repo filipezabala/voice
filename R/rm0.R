@@ -21,7 +21,6 @@
 #' (v0 <- c(rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
 #' rm0(v0)
 #' @export
-
 rm0 <- function(x){
 
   if(sum(x^2) == 0){ # null vector

@@ -22,10 +22,9 @@
 #' (v0 <- c(1:10,rep(0,99),1:66, rep(0,2)))
 #' conv(v0)
 #' conv(v0, 1, T)
-#' @seealso \code{rm0}
+#' @seealso \code{rm0} \code{conv_mc} \code{conv_df}
 #' @export
-
-conv <- function(x, compact.to = 0.1, drop.zeros = T){
+conv <- function(x, compact.to, drop.zeros){
 
   lx <- length(x)
 
