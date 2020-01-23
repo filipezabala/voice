@@ -18,7 +18,6 @@
 #' @seealso \code{conv} \code{conv_df}
 #' @export
 conv_mc <- function(x, columns, compact.to, drop.zeros, mc.cores = detectCores()){
-
   cm <- mclapply(x[,columns], voice::conv, compact.to = compact.to,
                  drop.zeros = drop.zeros, mc.cores = mc.cores)
   return(cm)

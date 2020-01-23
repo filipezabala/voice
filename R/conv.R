@@ -1,11 +1,14 @@
 #' Convolute vectors.
 #'
 #' @param x A vector or time series.
-#' @param compact Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.
+#' @param compact.to Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.
 #' @param drop.zeros Logical. Drop repeated zeros or compress to 1 zero per null set?
 #' @return A vector of convoluted values with length near to \code{compact.to*length(x)}.
 #' @examples
-#' conv(1:100, compact.to = 0.2)
+#' x1 <- conv(1:100, compact.to = 0.2)
+#' length(x1)
+#' plot(1:100, type = 'l')
+#' points(names(x1), x1, col='red')
 #' (v0 <- c(1:5,rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
 #' conv(v0, 0.1)
 #' conv(v0, 0.2)
