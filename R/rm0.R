@@ -44,7 +44,7 @@ rm0 <- function(y){
   n0 <- sum(change)+1 # number of sets with 0's
 
   if(sum(is.zero) == n0){ # number of zeros equals to number of sets with 0's
-    v <- y
+    return(y)
   }
 
   lv <- ly - lw0 + n0 # length of compacted vector, after cleaning 0's
