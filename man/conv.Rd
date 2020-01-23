@@ -9,7 +9,7 @@ conv(y, compact.to, drop.zeros)
 \arguments{
 \item{\code{y}}{A vector or time series.}
 
-\item{\code{compact.to}}{Proportion of remaining points after compactation, between (and including) 0 and 1. If equals to 1 and keep.zeros = T, the original vector is presented.}
+\item{\code{compact.to}}{Proportion of remaining points after compactation, between (including) 0 and 1. If equals to 1 and keep.zeros = T, the original vector is presented.}
 
 \item{\code{drop.zeros}}{Logical. Drop repeated zeros?}
 }

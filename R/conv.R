@@ -1,7 +1,7 @@
 #' Convolute vectors.
 #'
 #' @param \code{y} A vector or time series.
-#' @param \code{compact.to} Proportion of remaining points after compactation, between (and including) 0 and 1. If equals to 1 and keep.zeros = T, the original vector is presented.
+#' @param \code{compact.to} Proportion of remaining points after compactation, between (including) 0 and 1. If equals to 1 and keep.zeros = T, the original vector is presented.
 #' @param \code{drop.zeros} Logical. Drop repeated zeros?
 #' @return A list of convoluted \code{x} and \code{y} values with length near to \code{compact.to*length(y)}.
 #' @examples
