@@ -4,10 +4,10 @@
 \alias{rm0}
 \title{Transforms \code{n} sets of \code{m>n} zeros (alternated with sets of non zeros) into \code{n} sets of \code{n} zeros.}
 \usage{
-rm0(x)
+rm0(y)
 }
 \arguments{
-\item{x}{A vector or time series.}
+\item{\code{y}}{A vector or time series.}
 }
 \value{
 Vector with n zeros.
@@ -19,18 +19,18 @@ Transforms \code{n} sets of \code{m>n} zeros (alternated with sets of non zeros)
 (v0 <- c(1:20,rep(0,10)))
 rm0(v0)
 
-(v0 <- c(rep(0,10),1:20))
-rm0(v0)
+(v1 <- c(rep(0,10),1:20))
+rm0(v1)
 
-(v0 <- c(1:5,rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
-rm0(v0)
+(v2 <- c(1:5, rep(0,10), 1:10, rep(0,5), 10:20, rep(0,10)))
+rm0(v2)
 
-(v0 <- rep(0,10))
-rm0(v0)
+(v3 <- rep(0,10))
+rm0(v3)
 
-(v0 <- c(0:10))
-rm0(v0)
+(v4 <- c(0:10))
+rm0(v4)
 
-(v0 <- c(rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
-rm0(v0)
+(v5 <- c(rep(0,10), 1:10, rep(0,5), 10:20, rep(0,10)))
+rm0(v5)
 }

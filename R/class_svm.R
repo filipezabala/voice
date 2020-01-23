@@ -183,8 +183,8 @@ class_svm <- function(df0, modelo,
     fpr <- 1-spe
 
     # desempenho
-    des <- c(acc=acc, sen=sen, spe=spe, pre=pre, mcc=mcc, F05=F05, F1=F1, F2=F2,
-             err=err, fpr=fpr)
+    des <- c(acc=acc, sen=sen, spe=spe, pre=pre, mcc=mcc,
+             F05=F05, F1=F1, F2=F2, err=err, fpr=fpr)
 
   ptd4 <- proc.time()-pt4
   cat('4#4 END IN', ptd4[3], 'SECONDS\n\n')

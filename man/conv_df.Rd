@@ -17,11 +17,11 @@ conv_df(
 \arguments{
 \item{\code{x}}{A vector or time series.}
 
+\item{\code{compact.to}}{Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.}
+
 \item{\code{columns}}{A \code{char} vector indicating the colnames. If \code{NULL}, uses the columns of the \code{numeric} class.}
 
 \item{\code{by.filter}}{A \code{char} indicating the column to filter by. If \code{NULL} the filter is off.}
-
-\item{\code{compact.to}}{Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.}
 
 \item{\code{drop.zeros}}{Logical. Drop repeated zeros or compress to 1 zero per null set?}
 
@@ -36,8 +36,10 @@ A vector of convoluted values with length near to \code{compact.to*length(x)}.
 Convolute data frames.
 }
 \examples{
-
+library(voice)
+data(dat)
+conv_df(dat, 0.1)
 }
 \seealso{
-\code{conv} \code{conv_mc}
+\code{conv}, \code{conv_mc}
 }

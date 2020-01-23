@@ -4,40 +4,39 @@
 \alias{conv}
 \title{Convolute vectors.}
 \usage{
-conv(x, compact.to, drop.zeros)
+conv(y, compact.to, drop.zeros)
 }
 \arguments{
-\item{x}{A vector or time series.}
+\item{\code{y}}{A vector or time series.}
 
-\item{drop.zeros}{Logical. Drop repeated zeros or compress to 1 zero per null set?}
+\item{\code{compact.to}}{Proportion of remaining points after compactation, between (and including) 0 and 1. If equals to 1 and keep.zeros = T, the original vector is presented.}
 
-\item{compact}{Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.}
+\item{\code{drop.zeros}}{Logical. Drop repeated zeros?}
 }
 \value{
-A vector of convoluted values with length near to \code{compact.to*length(x)}.
+A list of convoluted \code{x} and \code{y} values with length near to \code{compact.to*length(y)}.
 }
 \description{
 Convolute vectors.
 }
 \examples{
-conv(1:100, compact.to = 0.2)
-(v0 <- c(1:5,rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
-conv(v0, 0.1)
-conv(v0, 0.2)
-conv(v0, 0.5)
-conv(v0, drop.zeros = F)
+(c1 <- conv(1:100, compact.to = 0.2, drop.zeros = T))
+length(c1$y)
+plot(1:100, type = 'l')
+points(c1$x, c1$y, col='red')
 
-(v0 <- c(rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
-conv(v0)
+(v2 <- c(1:5,rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
+length(v2)
+conv(v2, 0.1, drop.zeros = T)
+conv(v2, 0.2, drop.zeros = T)
+conv(v2, 0.2, drop.zeros = F)
 
-(v0 <- c(rep(0,10),1:20, rep(0,4)))
-conv(v0)
-plot(v0); points(as.numeric(names(conv(v0))), conv(v0), type = 'l')
-
-(v0 <- c(1:10,rep(0,99),1:66, rep(0,2)))
-conv(v0)
-conv(v0, 1, T)
+(v3 <- c(rep(0,10),1:20, rep(0,3)))
+(c3 <- conv(v3, 1/3, drop.zeros = F))
+lapply(c3, length)
+plot(v3, type = 'l')
+points(c3$x, c3$y, col = 'red')
 }
 \seealso{
-\code{rm0} \code{conv_mc} \code{conv_df}
+\code{rm0}, \code{conv_mc}, \code{conv_df}
 }

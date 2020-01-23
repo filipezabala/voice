@@ -4,37 +4,33 @@
 \alias{conv_mc}
 \title{Convolute vectors multicore.}
 \usage{
-conv_mc(x, columns, compact.to, drop.zeros, mc.cores = detectCores())
+conv_mc(y, compact.to, drop.zeros, mc.cores = detectCores())
 }
 \arguments{
-\item{\code{x}}{A vector or time series.}
-
-\item{\code{columns}}{A \code{char} vector indicating the colnames. If \code{NULL}, uses the columns of the \code{numeric} class.}
-
-\item{\code{by.filter}}{A \code{char} indicating the column to filter by. If \code{NULL} the filter is off.}
+\item{\code{y}}{A numeric vector, matrix or data frame.}
 
 \item{\code{compact.to}}{Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.}
-
-\item{\code{drop.zeros}}{Logical. Drop repeated zeros or compress to 1 zero per null set?}
-
-\item{\code{to.data.frame}}{Logical. Should the return be a data frame? If \code{F} returns a list.}
 
 \item{\code{mc.cores}}{The number of cores to mclapply.}
 }
 \value{
-A vector of convoluted values with length near to \code{compact.to*length(x)}.
+A list of x and y convoluted values with length near to \code{compact.to*length(y)}.
 }
 \description{
 Convolute vectors multicore.
 }
 \examples{
-conv_mc(1:100, compact.to = 0.2)
-(v0 <- c(1:5,rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
-conv(v0, 0.1)
-conv(v0, 0.2)
-conv(v0, 0.5)
-conv(v0, drop.zeros = F)
+library(voice)
+# Same result of conv if x is a vector
+conv_mc(1:100, compact.to = 0.2, drop.zeros = T)
+conv(1:100, compact.to = 0.2, drop.zeros = T)
+
+library(tidyverse)
+dat.num <- dat \%>\%
+select(f0:mhs1)
+cm1 <- conv_mc(dat.num, compact.to = 0.1, drop.zeros = T)
+lapply(cm1$f0, length)
 }
 \seealso{
-\code{conv} \code{conv_df}
+\code{rm0}, \code{conv}, \code{conv_df}
 }

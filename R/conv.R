@@ -1,57 +1,34 @@
 #' Convolute vectors.
 #'
-#' @param x A vector or time series.
-#' @param compact.to Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.
-#' @param drop.zeros Logical. Drop repeated zeros or compress to 1 zero per null set?
-#' @return A vector of convoluted values with length near to \code{compact.to*length(x)}.
+#' @param \code{y} A vector or time series.
+#' @param \code{compact.to} Proportion of remaining points after compactation, between (and including) 0 and 1. If equals to 1 and keep.zeros = T, the original vector is presented.
+#' @param \code{drop.zeros} Logical. Drop repeated zeros?
+#' @return A list of convoluted \code{x} and \code{y} values with length near to \code{compact.to*length(y)}.
 #' @examples
-#' x1 <- conv(1:100, compact.to = 0.2)
-#' length(x1)
+#' (c1 <- conv(1:100, compact.to = 0.2, drop.zeros = T))
+#' length(c1$y)
 #' plot(1:100, type = 'l')
-#' points(names(x1), x1, col='red')
-#' (v0 <- c(1:5,rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
-#' conv(v0, 0.1)
-#' conv(v0, 0.2)
-#' conv(v0, 0.5)
-#' conv(v0, drop.zeros = F)
+#' points(c1$x, c1$y, col='red')
 #'
-#' (v0 <- c(rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
-#' conv(v0)
+#' (v2 <- c(1:5,rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
+#' length(v2)
+#' conv(v2, 0.1, drop.zeros = T)
+#' conv(v2, 0.2, drop.zeros = T)
+#' conv(v2, 0.2, drop.zeros = F)
 #'
-#' (v0 <- c(rep(0,10),1:20, rep(0,4)))
-#' conv(v0)
-#' plot(v0); points(as.numeric(names(conv(v0))), conv(v0), type = 'l')
-#'
-#' (v0 <- c(1:10,rep(0,99),1:66, rep(0,2)))
-#' conv(v0)
-#' conv(v0, 1, T)
-#' @seealso \code{rm0} \code{conv_mc} \code{conv_df}
+#' (v3 <- c(rep(0,10),1:20, rep(0,3)))
+#' (c3 <- conv(v3, 1/3, drop.zeros = F))
+#' lapply(c3, length)
+#' plot(v3, type = 'l')
+#' points(c3$x, c3$y, col = 'red')
+#' @seealso \code{rm0}, \code{conv_mc}, \code{conv_df}
 #' @export
-conv <- function(x, compact.to, drop.zeros){
+conv <- function(y, compact.to, drop.zeros){
 
-  lx <- length(x)
-
-  # original vector
-  if(compact.to == 1 & !drop.zeros){
-    return(x)
-  }
-
-  # dropping zeros
-  if(drop.zeros){
-    v <- rm0(x)
-  }
-
-  # not dropping zeros
-  if(!drop.zeros){
-    v <- x
-  }
-
+  ifelse(drop.zeros, v <- voice::rm0(y), v <- y)
   lv <- length(v)
 
-  # compacting
-  f <- rep(1:ceiling(compact.to*lv), each = 1/compact.to)[1:lv]
-  s <- split(v,f)
-  m <- lapply(s, median)
-  names(m) <- seq(1, max(x), length.out = length(m))
-  return(unlist(m))
+  # interpolating
+  cv <- approx(v, n = ceiling(compact.to*lv))
+  return(cv)
 }
