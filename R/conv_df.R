@@ -9,25 +9,15 @@
 #' @param \code{mc.cores} The number of cores to mclapply.
 #' @return A vector of convoluted values with length near to \code{compact.to*length(x)}.
 #' @examples
+#' library(tidyverse)
 #' library(voice)
 #' x <- dat %>%
 #' mutate_each(as.factor, id:anyep_diff_w1)
-#' conv_df(x, 0.1)
+#' cx <- conv_df(x, 0.1)
+#' dim(x)
+#' dim(cx)
 #' @seealso \code{conv}, \code{conv_mc}
 #' @export
-
-x <- dat %>%
-  mutate_each(as.character, id) %>%
-  mutate_each(as.factor, wordType:anyep_diff_w1)
-compact.to = 0.1
-colnum = NULL
-id = 'id'
-by.filter = id
-drop.zeros = T
-to.data.frame = T
-mc.cores = detectCores()
-
-
 conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id,
                     drop.zeros = T, to.data.frame = T, mc.cores = parallel::detectCores()){
   ini <- Sys.time()
