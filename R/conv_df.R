@@ -60,23 +60,25 @@ conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id,
 
   # convoluting numeric variables
   ld <- lapply(snum, voice::conv_mc, compact.to = compact.to,
-               drop.zeros = drop.zeros, mc.cores = mc.cores)
+               drop.zeros = drop.zeros, to.data.frame = T, mc.cores = mc.cores)
+
+  # transforming in dataframe
+  ld.df <- lapply(ld, as.data.frame)
 
   # compact list
   li <- vector('list', length = nid)
   for(i in 1:nid){
     index <- 1:n[i]
     li[[i]] <- snon[[i]][index,]
+    li[[i]] <- bind_cols(li[[i]], ld.df[[i]])
     names(li)[i] <- nlv[i]
   }
 
-  # binding compact non-numeric columns
+  # compact dataframe
+  if(to.data.frame){
+    li <- do.call(bind_rows, li)
+  }
 
-  ld[[1]]
-
-  [names(ld[[1]])[1]]
-
-  names(ld[[1]])[1]
-  names(li)[1]
+  return(li)
 
 }
