@@ -12,7 +12,7 @@ library(dplyr)
 length(r4)
 
 # conv
-(v3 <- c(rep(0,10),1:20, rep(0,3)))
+(v3 <- c(rep(0,10), 1:20, rep(0,3)))
 (c3 <- conv(v3, 1/3, drop.zeros = F, to.data.frame = F))
 lapply(c3, length)
 plot(v3, type = 'l')
