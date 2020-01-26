@@ -29,24 +29,24 @@ conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id,
   }
 
   # non-numeric columns
-  colnon <- setdiff(colnames(x), colnum)
+  # colnon <- setdiff(colnames(x), colnum)
 
   # split numeric columns by.filter
   snum <- split(x[,colnum], x[,by.filter])
 
   # split non-numeric columns by.filter
-  snon <- split(x[,colnon], x[,by.filter])
+  # snon <- split(x[,colnon], x[,by.filter])
 
   # original lengths by.filter
-  (lv <- table(x[,by.filter]))
+  lv <- table(x[,by.filter])
 
   #  vector and length of distinct id's
-  (nlv <- names(lv))
-  (nid <- length(nlv))
+  nlv <- names(lv)
+  nid <- length(nlv)
 
   # compact lengths by.filter
-  (n <- ceiling(compact.to*lv))
-  (cs <- c(0, cumsum(n)))
+  n <- ceiling(compact.to*lv)
+  cs <- c(0, cumsum(n))
 
   # convoluting numeric variables
   ld <- lapply(snum, voice::conv_mc, compact.to = compact.to,
@@ -60,15 +60,14 @@ conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id,
   for(i in 1:nid){
     index <- 1:n[i]
     li[[i]] <- snon[[i]][index,]
-    li[[i]] <- bind_cols(li[[i]], ld.df[[i]])
+    li[[i]] <- dplyr::bind_cols(li[[i]], ld.df[[i]])
     names(li)[i] <- nlv[i]
   }
 
   # compact dataframe
   if(to.data.frame){
-    li <- do.call(bind_rows, li)
+    li <- do.call(dplyr::bind_rows, li)
   }
 
   return(li)
-
 }
