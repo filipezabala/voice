@@ -7,15 +7,16 @@
 conv_df(
   x,
   compact.to,
-  columns = NULL,
-  by.filter = NULL,
+  colnum = NULL,
+  id = "id",
+  by.filter = id,
   drop.zeros = T,
   to.data.frame = T,
-  mc.cores = detectCores()
+  mc.cores = parallel::detectCores()
 )
 }
 \arguments{
-\item{\code{x}}{A vector or time series.}
+\item{\code{x}}{A data frame.}
 
 \item{\code{compact.to}}{Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.}
 
@@ -37,8 +38,9 @@ Convolute data frames.
 }
 \examples{
 library(voice)
-data(dat)
-conv_df(dat, 0.1)
+x <- dat \%>\%
+mutate_each(as.factor, id:anyep_diff_w1)
+conv_df(x, 0.1)
 }
 \seealso{
 \code{conv}, \code{conv_mc}

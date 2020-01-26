@@ -4,22 +4,27 @@
 #' @return Vector with n zeros.
 #' @examples
 #' (v0 <- c(1:20,rep(0,10)))
-#' rm0(v0)
+#' (r0 <- rm0(v0))
+#' length(v0)
+#' length(r0)
+#' sum(v0 == 0)
 #'
 #' (v1 <- c(rep(0,10),1:20))
-#' rm0(v1)
+#' (r1 <- rm0(v1))
+#' length(r1)
 #'
-#' (v2 <- c(1:5, rep(0,10), 1:10, rep(0,5), 10:20, rep(0,10)))
-#' rm0(v2)
+#' (v2 <- rep(0,10))
+#' (r2 <- rm0(v2))
+#' length(r2)
 #'
-#' (v3 <- rep(0,10))
-#' rm0(v3)
+#' (v3 <- c(0:10))
+#' (r3 <- rm0(v3))
+#' length(r3)
 #'
-#' (v4 <- c(0:10))
-#' rm0(v4)
-#'
-#' (v5 <- c(rep(0,10), 1:10, rep(0,5), 10:20, rep(0,10)))
-#' rm0(v5)
+#' (v4 <- c(rep(0,10), 1:10, rep(0,5), 10:20, rep(0,10)))
+#' (r4 <- rm0(v4))
+#' length(r4)
+#' sum(v4 == 0)
 #' @export
 rm0 <- function(y){
 
@@ -33,13 +38,13 @@ rm0 <- function(y){
   }
 
   ly <- length(y)
-  first.zero <- is.zero[1] # is the first position a zero?
+  first.zero <- is.zero[1] # is the First position a Zero?
   diz <- diff(is.zero) # Difference of Is.Zero
 
   w0 <- which(is.zero) # positions containing zeros
-  lw0 <- length(w0)
+  lw0 <- length(w0) # number of (positions containing) zeros
 
-  d0 <- diff(w0) # position of the changes (F-T or T-F in v0==0)
+  d0 <- diff(w0) # position of the changes (F-T or T-F) in v0 == 0
   change <- d0 != 1
   n0 <- sum(change)+1 # number of sets with 0's
 

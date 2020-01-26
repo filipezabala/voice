@@ -4,7 +4,7 @@
 \alias{conv}
 \title{Convolute vectors.}
 \usage{
-conv(y, compact.to, drop.zeros)
+conv(y, compact.to, drop.zeros, to.data.frame = F)
 }
 \arguments{
 \item{\code{y}}{A vector or time series.}
@@ -25,14 +25,15 @@ length(c1$y)
 plot(1:100, type = 'l')
 points(c1$x, c1$y, col='red')
 
-(v2 <- c(1:5,rep(0,10),1:10,rep(0,5),10:20,rep(0,10)))
+(v2 <- c(1:5, rep(0,10), 1:10, rep(0,5), 10:20, rep(0,10)))
 length(v2)
-conv(v2, 0.1, drop.zeros = T)
+conv(v2, 0.1, drop.zeros = T, to.data.frame = F)
+conv(v2, 0.1, drop.zeros = T, to.data.frame = T)
 conv(v2, 0.2, drop.zeros = T)
 conv(v2, 0.2, drop.zeros = F)
 
 (v3 <- c(rep(0,10),1:20, rep(0,3)))
-(c3 <- conv(v3, 1/3, drop.zeros = F))
+(c3 <- conv(v3, 1/3, drop.zeros = F, to.data.frame = F))
 lapply(c3, length)
 plot(v3, type = 'l')
 points(c3$x, c3$y, col = 'red')

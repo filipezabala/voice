@@ -4,7 +4,13 @@
 \alias{conv_mc}
 \title{Convolute vectors multicore.}
 \usage{
-conv_mc(y, compact.to, drop.zeros, mc.cores = detectCores())
+conv_mc(
+  y,
+  compact.to,
+  drop.zeros,
+  to.data.frame,
+  mc.cores = parallel::detectCores()
+)
 }
 \arguments{
 \item{\code{y}}{A numeric vector, matrix or data frame.}
@@ -21,14 +27,19 @@ Convolute vectors multicore.
 }
 \examples{
 library(voice)
-# Same result of conv if x is a vector
-conv_mc(1:100, compact.to = 0.2, drop.zeros = T)
-conv(1:100, compact.to = 0.2, drop.zeros = T)
+# Same result of conv() function if x is a vector
+conv(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = F)
+conv_mc(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = F)
+
+conv(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = T)
+conv_mc(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = T)
 
 library(tidyverse)
 dat.num <- dat \%>\%
 select(f0:mhs1)
-cm1 <- conv_mc(dat.num, compact.to = 0.1, drop.zeros = T)
+nrow(dat.num)
+cm1 <- conv_mc(dat.num, compact.to = 0.1, drop.zeros = T, to.data.frame = F)
+names(cm1)
 lapply(cm1$f0, length)
 }
 \seealso{
