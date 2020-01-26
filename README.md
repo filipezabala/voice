@@ -18,6 +18,7 @@ plot(v3, type = 'l')
 points(c3$x, c3$y, col = 'red')
 
 # conv_mc
+library(dplyr)
 dat.num <- dat %>%
   select(f0:mhs1)
 nrow(dat.num)
