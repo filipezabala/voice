@@ -12,9 +12,10 @@
 #' library(voice)
 #' x <- dat %>%
 #' mutate_each(as.factor, id:anyep_diff_w1)
-#' (cx <- conv_df(x, 0.1))
+#' (cx.df <- conv_df(x, 0.1))
 #' dim(x)
-#' dim(cx)
+#' dim(cx.df)
+#' (cx.list <- conv_df(x, 0.1, to.data.frame = F))
 #' @seealso \code{conv}, \code{conv_mc}
 #' @export
 conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id,
