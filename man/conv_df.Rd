@@ -40,7 +40,9 @@ Convolute data frames.
 library(voice)
 x <- dat \%>\%
 mutate_each(as.factor, id:anyep_diff_w1)
-conv_df(x, 0.1)
+(cx <- conv_df(x, 0.1))
+dim(x)
+dim(cx)
 }
 \seealso{
 \code{conv}, \code{conv_mc}
