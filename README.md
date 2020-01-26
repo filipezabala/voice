@@ -32,4 +32,5 @@ x <- dat %>%
 (cx <- conv_df(x, 0.1))
 dim(x)
 dim(cx)
+
 ```
