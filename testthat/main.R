@@ -22,6 +22,5 @@ devtools::load_all()
 # installing and attaching
 devtools::install_github('filipezabala/voice', force = T)
 library(voice)
-?rp
 ?conv_df
 

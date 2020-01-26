@@ -20,15 +20,17 @@ conv_df(
 
 \item{\code{compact.to}}{Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.}
 
-\item{\code{columns}}{A \code{char} vector indicating the colnames. If \code{NULL}, uses the columns of the \code{numeric} class.}
+\item{\code{colnum}}{A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.}
 
-\item{\code{by.filter}}{A \code{char} indicating the column to filter by. If \code{NULL} the filter is off.}
+\item{\code{id}}{The identification column.}
+
+\item{\code{by.filter}}{A \code{char} indicating the column to filter by. If \code{NULL} uses the \code{id} content.}
 
 \item{\code{drop.zeros}}{Logical. Drop repeated zeros or compress to 1 zero per null set?}
 
 \item{\code{to.data.frame}}{Logical. Should the return be a data frame? If \code{F} returns a list.}
 
-\item{\code{mc.cores}}{The number of cores to mclapply.}
+\item{\code{mc.cores}}{The number of cores to mclapply. By default uses \code{parallel::detectCores()}.}
 }
 \value{
 A vector of convoluted values with length near to \code{compact.to*length(x)}.
@@ -40,9 +42,10 @@ Convolute data frames.
 library(voice)
 x <- dat \%>\%
 mutate_each(as.factor, id:anyep_diff_w1)
-(cx <- conv_df(x, 0.1))
+(cx.df <- conv_df(x, 0.1))
 dim(x)
-dim(cx)
+dim(cx.df)
+(cx.list <- conv_df(x, 0.1, to.data.frame = F))
 }
 \seealso{
 \code{conv}, \code{conv_mc}
