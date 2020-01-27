@@ -40,6 +40,7 @@ Convolute data frames.
 }
 \examples{
 library(voice)
+library(tidyverse)
 x <- dat \%>\%
 mutate_each(as.factor, id:anyep_diff_w1)
 (cx.df <- conv_df(x, 0.1))

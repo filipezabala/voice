@@ -5,8 +5,8 @@
 \title{Fits and forecasts SVM models, serial and parallelized.}
 \usage{
 class_svm(
-  df0,
-  modelo,
+  x,
+  model,
   filtro = c("id"),
   percTreino = 0.5,
   setSeed = 1,
@@ -17,25 +17,25 @@ class_svm(
 )
 }
 \arguments{
-\item{df0}{A data frame or tibble.}
+\item{\code{x}}{A data frame or tibble.}
 
-\item{modelo}{Character containing the model structure.}
+\item{\code{model}}{Character containing the model structure. See \code{expand_model}.}
 
-\item{filtro}{Column(s) to filter the samples.}
+\item{\code{filtro}}{Column(s) to filter the samples.}
 
-\item{percTreino}{Percentage of the database used to train the model, filtered by \code{filtro}.}
+\item{\code{percTreino}}{Percentage of the database used to train the model, filtered by \code{filtro}.}
 
-\item{setSeed}{Specified seed for the pseudo-random parts.}
+\item{\code{setSeed}}{Specified seed for the pseudo-random parts.}
 
-\item{custo}{Cost of constraints violation (default: 1)—it is the ‘C’-constant of the regularization term in the Lagrange formulation.}
+\item{\code{custo}}{Cost of constraints violation (default: 1)—it is the ‘C’-constant of the regularization term in the Lagrange formulation.}
 
-\item{gama}{Needed for all kernels except linear (default: 1/(data dimension))}
+\item{\code{gama}}{Needed for all kernels except linear (default: 1/(data dimension))}
 
-\item{paralelo}{Logical. Should the process be parallelized?}
+\item{\code{paralelo}}{Logical. Should the process be parallelized?}
 
-\item{simbolico}{Logical. Should the symbolic confusion matrix be printed?}
+\item{\code{simbolico}}{Logical. Should the symbolic confusion matrix be printed?}
 
-\item{restart}{Logical. Should the R session be restarted? (It frees memory)}
+\item{\code{restart}}{Logical. Should the R session be restarted? (It frees memory)}
 }
 \value{
 \code{$fcast} predicted time series using the model that minimizes the forecasting mean square error.

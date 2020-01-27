@@ -1,15 +1,15 @@
 #' Fits and forecasts SVM models, serial and parallelized.
 #'
-#' @param df0 A data frame or tibble.
-#' @param modelo Character containing the model structure.
-#' @param filtro Column(s) to filter the samples.
-#' @param percTreino Percentage of the database used to train the model, filtered by \code{filtro}.
-#' @param setSeed Specified seed for the pseudo-random parts.
-#' @param custo Cost of constraints violation (default: 1)—it is the ‘C’-constant of the regularization term in the Lagrange formulation.
-#' @param gama Needed for all kernels except linear (default: 1/(data dimension))
-#' @param paralelo Logical. Should the process be parallelized?
-#' @param simbolico Logical. Should the symbolic confusion matrix be printed?
-#' @param restart Logical. Should the R session be restarted? (It frees memory)
+#' @param \code{x} A data frame or tibble.
+#' @param \code{model} Character containing the model structure. See \code{expand_model}.
+#' @param \code{filtro} Column(s) to filter the samples.
+#' @param \code{percTreino} Percentage of the database used to train the model, filtered by \code{filtro}.
+#' @param \code{setSeed} Specified seed for the pseudo-random parts.
+#' @param \code{custo} Cost of constraints violation (default: 1)—it is the ‘C’-constant of the regularization term in the Lagrange formulation.
+#' @param \code{gama} Needed for all kernels except linear (default: 1/(data dimension))
+#' @param \code{paralelo} Logical. Should the process be parallelized?
+#' @param \code{simbolico} Logical. Should the symbolic confusion matrix be printed?
+#' @param \code{restart} Logical. Should the R session be restarted? (It frees memory)
 #' @return \code{$fcast} predicted time series using the model that minimizes the forecasting mean square error.
 #' @return \code{$runtime} running time.
 #' @return \code{mse.pred} mean squared error of prediction. Used to decide the best model.
@@ -19,7 +19,7 @@
 #' @examples
 #' library(voice)
 #' @export
-class_svm <- function(df0, modelo,
+class_svm <- function(x, model,
                       filtro = c('id'),
                       percTreino = 0.5,
                       setSeed = 1,
@@ -28,9 +28,9 @@ class_svm <- function(df0, modelo,
                       paralelo = T,
                       print.cm = T){
 
-  # df0 = df0NA
-  # modelo = 'gender ~ pc1'
-  # filtro = c('id')
+  # x = dat2
+  # model = 'gender ~ pc1'
+  # filter = c('id')
   # # id0 = c('id','wordType')
   # setSeed = 1
   # percTreino = 0.5
@@ -43,17 +43,17 @@ class_svm <- function(df0, modelo,
   pt1 <- proc.time() # to final table
 
   # parametros globais
-  modelo <<- modelo  # pq so global?
+  model <<- model  # pq so global?
   # custo <<- custo # nem global!
   # gama <<- gama # nem global!
 
   # message 1
-  cat('MODEL -', modelo,'\n\n')
+  cat('MODEL -', model,'\n\n')
   cat('1#4 START - SAMPLE', '\n')
 
   # criando idFull
-  # idFull <- apply(df0[filtro], 1, paste, collapse = ',')
-  idFull <- df0[filtro]
+  # idFull <- apply(x[filtro], 1, paste, collapse = ',')
+  idFull <- x[filtro]
 
   # idFullUn
   idFullUn <- as.data.frame(unique(idFull))
@@ -65,8 +65,8 @@ class_svm <- function(df0, modelo,
   treino <- sort(base::sample(1:nFullUn, floor(nFullUn*percTreino)))
   idTreino <- idFullUn[treino,]
   idTeste <- idFullUn[-treino,]
-  trainset <- as.data.frame(df0 %>% filter(id %in% idTreino))
-  testset <- as.data.frame(df0 %>% filter(id %in% idTeste))
+  trainset <- as.data.frame(x %>% filter(id %in% idTreino))
+  testset <- as.data.frame(x %>% filter(id %in% idTeste))
   nTest <- nrow(testset)
   nCores <- parallel::detectCores()
   nGrupo <- nrow(testset)/nCores
@@ -82,13 +82,13 @@ class_svm <- function(df0, modelo,
   cat('2#4 START - MODEL', '\n')
 
   if(paralelo){
-    fit.svm <- parallelSVM::parallelSVM(as.formula(modelo), data = trainset, cost = 1, gamma = 1)
+    fit.svm <- parallelSVM::parallelSVM(as.formula(model), data = trainset, cost = 1, gamma = 1)
   }
   if(!paralelo){
-    fit.svm <- e1071::svm(as.formula(modelo), data = trainset, cost = custo, gamma = gama)
+    fit.svm <- e1071::svm(as.formula(model), data = trainset, cost = custo, gamma = gama)
   }
 
-  # Tempo do modelo
+  # model time
   ptd2 <- proc.time()-pt2
   cat('2#4 END IN', ptd2[3], 'SECONDS\n\n')
 
@@ -114,7 +114,7 @@ class_svm <- function(df0, modelo,
   cat('4#4 START - PERFORMANCE', '\n')
 
   # identifying and counting y levels
-  y <- gsub(' ', '', unlist(strsplit(modelo,'~'))[1], fixed = T)
+  y <- gsub(' ', '', unlist(strsplit(model,'~'))[1], fixed = T)
   l <- as.numeric(levels(testset[,y]))
   n <- length(l)
 
@@ -130,8 +130,8 @@ class_svm <- function(df0, modelo,
 
   # expand_grid & bind_cols
   tab <- tidyr::expand_grid(true=l, pred=l)
-  tab <- tab %>%
-    mutate(rp = apply(tab,1,rp))
+  # tab <- tab %>%
+  #   mutate(rp = apply(tab,1,rp))
   tab <- left_join(tab, temp, by = c('true','pred'))
 
   # fulfilling cm.svm
@@ -193,7 +193,7 @@ class_svm <- function(df0, modelo,
 
   # gathering results
   result <- tibble(timestamp=Sys.time(),
-                   y=y, model=modelo,
+                   y=y, model=model,
                    acc=acc, sen=sen, spe=spe, pre=pre,
                    mcc=mcc, F05=F05, F1=F1, F2=F2,
                    err=err, fpr=fpr, filtro=filtro,
