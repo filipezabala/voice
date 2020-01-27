@@ -1,0 +1,21 @@
+memory profiling: sample.interval=20000
+:1006191:1363693:81585560:2:
+:1006191:1363693:81601072:0:
+:1006578:1364722:81710832:45:"ls" "FUN" "lapply" ".rs.objectsOnSearchPath" ".rs.getCompletionsSearchPath" "Reduce" "<Anonymous>" 
+:1009714:1416362:82179720:145:
+:1018421:1424922:85257256:1062:"as.list.default" "as.list" ".rs.getHelpFromObject" ".rs.getHelpFunction" "<Anonymous>" 
+:1042035:1424922:94346392:3841:"tryCatch" ".rs.getHelpFromObject" ".rs.getHelpFunction" "<Anonymous>" 
+:925245:1320662:53638816:2557:"tryCatchOne" "tryCatchList" "tryCatch" ".rs.getHelpFromObject" ".rs.getHelpFunction" "<Anonymous>" 
+:943976:1353264:58422280:1780:"FUN" "vapply" "urlify" "paste0" "writeLines" "writeLinesUTF8" "of0" "Rd2HTML" "tools:::httpd" "withCallingHandlers" "suppressWarnings" ".rs.getHelp" ".rs.getHelpFromObject" ".rs.getHelpFunction" "<Anonymous>" 
+:955124:1354885:64256976:3127:"htmlify" "utils:::getSrcByte" "isBlankLineRd" "addParaBreaks" "writeLines" "writeLinesUTF8" "of1" "writeBlock" "writeContent" "writeSection" "Rd2HTML" "tools:::httpd" "withCallingHandlers" "suppressWarnings" ".rs.getHelp" ".rs.getHelpFromObject" ".rs.getHelpFunction" "<Anonymous>" 
+:960350:1358819:66257352:1057:
+:960350:1358819:66272976:0:
+:960560:1358819:66338216:30:"structure" "simpleWarning" "doWithOneRestart" "withOneRestart" "withRestarts" ".signalSimpleWarning" ".rs.normalizePath" "withCallingHandlers" "suppressWarnings" "<Anonymous>" 
+:961173:1392329:66437280:22:"==" ".rs.startsWith" ".rs.fuzzyMatches" ".rs.getCompletionsSearchPath" "Reduce" "<Anonymous>" 
+:969707:1422107:68206320:718:"h" "tryInline" "cmpCall" "cmp" "cmpPrim1" "h" "tryInline" "cmpCall" "cmp" "cmpWhileBody" "h" "tryInline" "cmpCall" "cmp" "h" "tryInline" "cmpCall" "cmp" "genCode" "cmpfun" "doTryCatch" "tryCatchOne" "tryCatchList" "tryCatch" "compiler:::tryCmpfun" "<Anonymous>" 
+:974868:1425563:69365800:426:"ls" "FUN" "lapply" ".rs.objectsOnSearchPath" ".rs.getCompletionsSearchPath" "Reduce" "<Anonymous>" 
+:975445:1472460:69518904:42:"==" ".rs.getCompletionsPackages" "Reduce" "<Anonymous>" 
+:977730:1478240:69997872:182:"ls" "FUN" "lapply" ".rs.objectsOnSearchPath" ".rs.getCompletionsSearchPath" "Reduce" "<Anonymous>" 
+:978178:1528018:70138152:42:"substring" ".rs.startsWith" ".rs.fuzzyMatches" ".rs.selectFuzzyMatches" ".rs.getCompletionsPackages" "Reduce" "<Anonymous>" 
+:979830:1533626:70522144:139:".rs.getCompletionsSearchPath" "Reduce" "<Anonymous>" 
+:984645:1582565:71009792:134:
