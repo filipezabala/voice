@@ -29,7 +29,7 @@ conv_mc <- function(y, compact.to, drop.zeros, to.data.frame, mc.cores = paralle
   }
   if(is.matrix(y) | is.data.frame(y)){
     cm <- parallel::mclapply(y, voice::conv, compact.to = compact.to, drop.zeros = drop.zeros,
-                             mc.cores = mc.cores, to.data.frame = to.data.frame)
+                             to.data.frame = to.data.frame, mc.cores = mc.cores)
   }
   return(cm)
 }
