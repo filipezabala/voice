@@ -1,4 +1,5 @@
-#' @description Extract 1093 features from WAV or MP3 audio.
+#' Extracts 1093 features from WAV or MP3 audio.
+#' @description Extracts 1093 features from WAV or MP3 audio.
 #' @param \code{x} A directory containing audio file(s) in WAV or MP3 formats. If more than one directory is provided, only the first one is used.
 #' @param \code{gender} = <code>: set gender specific parameters where <code> = 'f'[emale], 'm'[ale] or 'u'[nknown] (default: 'u'). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
 #' @param \code{windowShift} = <dur>: set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rmsana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
