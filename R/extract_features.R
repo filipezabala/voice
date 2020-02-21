@@ -242,33 +242,3 @@ extract_features <- function(x, gender = 'u', windowShift = 5, numFormants = 8,
        return(as_tibble(df))
     } else{return(df)}
 }
-
-
-
-
-# x <- (path2wav)
-x <- dirname(path2wav)
-gender = 'u'
-windowShift = 5
-numFormants = 8
-numcep = 12
-dcttype = c('t2', 't1', 't3', 't4')
-fbtype = c('mel', 'htkmel', 'fcmel', 'bark')
-usecmp = FALSE
-mc.cores = parallel::detectCores()
-convert.mp3 = FALSE
-dest.path = NULL
-full.names = TRUE
-recursive = FALSE
-as.tibble = TRUE
-resolution = 40
-
-
-
-
-
-
-# library(tuneR)    # setWavPlayer, readMP3, writeWave
-# # devtools::install_github('maRce10/warbleR')
-# library(warbleR)  # checkwaves, mp32wav
-
