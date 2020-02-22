@@ -25,19 +25,3 @@ devtools::install_github('filipezabala/voice', force = T)
 library(voice)
 ?conv_df
 ?extract_features
-
-
-library(ellipse)
-library(RColorBrewer)
-
-# Usando o famoso banco de dados 'mtcars'
-data <- cor(cor(xx[-1]))
-
-# Painel de 100 cores com Rcolor Brewer
-my_colors <- brewer.pal(5, "Spectral")
-my_colors <- colorRampPalette(my_colors)(100)
-
-# Ordenando a matriz de correlação
-ord <- order(data[1, ])
-data_ord <- data[ord, ord]
-plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
