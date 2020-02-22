@@ -46,8 +46,6 @@ features = c('f0','formants','zcr','rms','mhs',
 \item{\code{full.names}}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.}
 
 \item{\code{recursive}}{Logical. Should the listing recurse into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
-
-\item{\code{as.tibble}}{Logical. Sould the output be a tibble or a data frame? (default: \code{TRUE})}
 }
 \description{
 Extracts features from WAV or MP3 audio.
@@ -68,8 +66,8 @@ xx
 xx2 <- extract_features(dirname(path2wav),
  features = c('f0','formants','zcr','rms','mhs',
  'gain','rfc','ac','mfcc'))
- ncol(xx2)
- xx2
+ncol(xx2)
+xx2
 
  library(ellipse)
  library(RColorBrewer)
@@ -89,6 +87,7 @@ xx2 <- extract_features(dirname(path2wav),
 # Principal Component Analysis (PCA)
 (pc <- prcomp(xx2[-1], scale = T))
 screeplot(pc, type = 'lines')
+
 library(ggfortify)
 autoplot(pc, data = xx2, colour = 'audio', loadings = T, loadings.label = T)
 
