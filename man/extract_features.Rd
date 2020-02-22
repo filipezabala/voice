@@ -4,8 +4,8 @@
 \alias{extract_features}
 \title{Extracts features from WAV or MP3 audio.}
 \usage{
-\code{extract_features <- function(x,
-features = c('f0','formants','zcr','rms','mhs',
+extract_features <- function(x,
+             features = c('f0','formants','zcr','rms','mhs',
              'gain','rfc,','ac','cep','dft','css',
              'lps','mfcc'),
              gender = 'u', windowShift = 5, numFormants = 8,
@@ -14,7 +14,7 @@ features = c('f0','formants','zcr','rms','mhs',
              resolution = 40, usecmp = FALSE,
              mc.cores = parallel::detectCores(), convert.mp3 = FALSE,
              dest.path = NULL, full.names = TRUE, recursive = FALSE,
-             as.tibble = TRUE)}
+             as.tibble = TRUE)
 }
 \arguments{
 \item{\code{x}}{A directory containing audio file(s) in WAV or MP3 formats. If more than one directory is provided, only the first one is used.}

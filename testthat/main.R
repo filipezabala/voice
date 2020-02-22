@@ -13,7 +13,7 @@ library(devtools)
 # session_info
 session_info()
 
-# updatig and creating manual
+# updating and creating manual
 devtools::document(setwd('~/Dropbox/D_Filipe_Zabala/pacotes/voice/'))
 
 # loading
