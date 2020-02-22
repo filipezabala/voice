@@ -46,6 +46,26 @@
 #'  'gain','rfc','ac','mfcc'))
 #'  ncol(xx2)
 #'  xx2
+#'
+#'  library(ellipse)
+#'  library(RColorBrewer)
+#'
+#'  # calculating correlation of xx2
+#'  data <- cor(xx2[-1])
+#'
+#'  # pane with 100 colors using RcolorBrewer
+#'  my_colors <- brewer.pal(5, "Spectral")
+#'  my_colors <- colorRampPalette(my_colors)(100)
+#'
+#'  # ordering the correlation matrix
+#'  ord <- order(data[1, ])
+#'  data_ord <- data[ord, ord]
+#'  plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
+#'
+#' (pc <- prcomp(xx2[-1], scale = T))
+#' screeplot(pc, type = 'lines')
+#' library(ggfortify)
+#' autoplot(pc, data = xx2, colour = 'audio', loadings = T, loadings.label = T)
 #' @export
 extract_features <- function(x,
                              features = c('f0','formants','zcr','rms','mhs',
