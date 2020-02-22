@@ -2,38 +2,34 @@
 % Please edit documentation in R/extract_features.R
 \name{extract_features}
 \alias{extract_features}
-\title{Extracts 1093 features from WAV or MP3 audio.}
+\title{Extracts features from WAV or MP3 audio.}
 \usage{
-extract_features(
-  x,
-  gender = "u",
-  windowShift = 5,
-  numFormants = 8,
-  numcep = 12,
-  dcttype = c("t2", "t1", "t3", "t4"),
-  fbtype = c("mel", "htkmel", "fcmel", "bark"),
-  resolution = 40,
-  usecmp = FALSE,
-  mc.cores = parallel::detectCores(),
-  convert.mp3 = FALSE,
-  dest.path = NULL,
-  full.names = TRUE,
-  recursive = FALSE,
-  as.tibble = TRUE
-)
+\code{extract_features <- function(x,
+features = c('f0','formants','zcr','rms','mhs',
+             'gain','rfc,','ac','cep','dft','css',
+             'lps','mfcc'),
+             gender = 'u', windowShift = 5, numFormants = 8,
+             numcep = 12, dcttype = c('t2', 't1', 't3', 't4'),
+             fbtype = c('mel', 'htkmel', 'fcmel', 'bark'),
+             resolution = 40, usecmp = FALSE,
+             mc.cores = parallel::detectCores(), convert.mp3 = FALSE,
+             dest.path = NULL, full.names = TRUE, recursive = FALSE,
+             as.tibble = TRUE)}
 }
 \arguments{
 \item{\code{x}}{A directory containing audio file(s) in WAV or MP3 formats. If more than one directory is provided, only the first one is used.}
 
-\item{\code{gender}}{= <code>: set gender specific parameters where <code> = 'f'[emale], 'm'[ale] or 'u'[nknown] (default: 'u'). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.}
+\item{\code{features}}{Vector of features to be extracted. (default: f0, formants). The following four features contain 257 columns each: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
 
-\item{\code{windowShift}}{= <dur>: set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rmsana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.}
+\item{\code{gender}}{= <code>: set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.}
+
+\item{\code{windowShift}}{= <dur>: set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.}
 
 \item{\code{numFormants}}{= <num>: <num>ber of formants (default: 8). Used by \code{wrassp::forest}.}
 
 \item{\code{numcep}}{Number of Mel-frequency cepstral coefficients (cepstra) to return (default: 12). Used by \code{tuneR::melfcc}.}
 
-\item{\code{dcttype}}{Type of DCT used. 't1' or 't2', 't3' for HTK 't4' for feacalc (default = 't2'). Used by \code{tuneR::melfcc}.}
+\item{\code{dcttype}}{Type of DCT used. \code{'t1'} or \code{'t2'}, \code{'t3'} for HTK \code{'t4'} for feacalc (default = \code{'t2'}). Used by \code{tuneR::melfcc}.}
 
 \item{\code{fbtype}}{Auditory frequency scale to use: \code{'mel'}, \code{'bark'}, \code{'htkmel'}, \code{'fcmel'} (default: \code{'mel'}). Used by \code{tuneR::melfcc}.}
 
@@ -54,16 +50,24 @@ extract_features(
 \item{\code{as.tibble}}{Logical. Sould the output be a tibble or a data frame? (default: \code{TRUE})}
 }
 \description{
-Extracts 1093 features from WAV or MP3 audio.
+Extracts features from WAV or MP3 audio.
 }
 \examples{
 library(voice)
 
 # get path to audio file
 path2wav <- list.files(system.file("extdata", package = "wrassp"),
-pattern = glob2rx("*.wav"),
-full.names = TRUE)
-# calculate fundamental frequency contour
-ef <- extract_features(dirname(path2wav))
-ef
+pattern = glob2rx("*.wav"), full.names = TRUE)
+
+# getting all the 1092 features
+xx <- extract_features(dirname(path2wav))
+ncol(xx)
+xx
+
+# dropping 'cep','dft','css' and 'lps' (4*257 = 1028 columns)
+xx2 <- extract_features(dirname(path2wav),
+ features = c('f0','formants','zcr','rms','mhs',
+ 'gain','rfc','ac','mfcc'))
+ ncol(xx2)
+ xx2
 }

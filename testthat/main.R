@@ -14,13 +14,14 @@ library(devtools)
 session_info()
 
 # updatig and creating manual
-devtools::document(setwd('~/Dropbox/[D] Filipe Zabala/pacotes/voice/'))
+devtools::document(setwd('~/Dropbox/D_Filipe_Zabala/pacotes/voice/'))
 
 # loading
 devtools::load_all()
 
 # installing and attaching
+update.packages(ask=F)
 devtools::install_github('filipezabala/voice', force = T)
 library(voice)
 ?conv_df
-
+?extract_features

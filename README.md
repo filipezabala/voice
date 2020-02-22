@@ -33,4 +33,13 @@ x <- dat %>%
 dim(x)
 dim(cx)
 
+# get path to audio file
+path2wav <- list.files(system.file("extdata", package = "wrassp"),
+pattern = glob2rx("*.wav"), full.names = TRUE)
+
+# getting all the 1092 features
+xx <- extract_features(dirname(path2wav))
+ncol(xx)
+xx
+
 ```
