@@ -1,6 +1,6 @@
 #' Extracts features from WAV or MP3 audio.
 #' @description Extracts features from WAV or MP3 audio.
-#' @usage extract_features <- function(x,
+#' @usage extract_features(x,
 #'              features = c('f0','formants','zcr','rms','mhs',
 #'              'gain','rfc,','ac','cep','dft','css',
 #'              'lps','mfcc'),
