@@ -302,7 +302,7 @@ extract_features <- function(x,
   }
 
   # concatenating
-  for(j in 1:nWav){ # upgrade: use bind_rows
+  for(j in 1:nWav){ # upgrade: use bind_rows, foreach
 
     # time processing
     pt1 <- proc.time()

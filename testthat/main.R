@@ -19,9 +19,11 @@ devtools::document(setwd('~/Dropbox/D_Filipe_Zabala/pacotes/voice/'))
 # loading
 devtools::load_all()
 
-# installing and attaching
+# installing
 update.packages(ask=F)
 devtools::install_github('filipezabala/voice', force = T)
+
+# attaching
 library(voice)
 ?conv_df
 ?extract_features

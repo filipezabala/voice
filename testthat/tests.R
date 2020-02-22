@@ -9,7 +9,7 @@ library(tuneR)
 path2wav <- list.files(system.file("extdata", package = "wrassp"),
                        pattern = glob2rx("*.wav"),
                        full.names = TRUE)
-# path2mp3 <- "/Users/filipezabala/Dropbox/D_Filipe_Zabala/pacotes/voice/aa.mp3"
+# path2mp3 <- "~/Dropbox/D_Filipe_Zabala/pacotes/voice/aa.mp3"
 
 # calculate fundamental frequency contour
 xx <- extract_features(dirname(path2wav))
@@ -23,7 +23,7 @@ ncol(xx2)
 xx2
 
 xx3 <- extract_features(dirname(path2wav),
-                        features = c('f0'))
+                        features = c('rms'))
 ncol(xx3)
 xx3
 

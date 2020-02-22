@@ -182,7 +182,7 @@ class_svm <- function(x, model,
     # false positive rate
     fpr <- 1-spe
 
-    # desempenho
+    # performance
     des <- c(acc=acc, sen=sen, spe=spe, pre=pre, mcc=mcc,
              F05=F05, F1=F1, F2=F2, err=err, fpr=fpr)
 

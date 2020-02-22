@@ -1,4 +1,4 @@
-#' Gives the amount of memory free, total and percentage.
+#' Gives the amount of memory RAM free, total and percentage = free/total.
 #'
 #' @param \code{unit} A \code{char} indicating \code{bytes}, \code{kbytes}, \code{mbytes} and \code{gbytes}.
 #' @examples
