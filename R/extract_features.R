@@ -2,8 +2,7 @@
 #' @description Extracts features from WAV or MP3 audio.
 #' @usage extract_features(x,
 #'              features = c('f0','formants','zcr','rms','mhs',
-#'              'gain','rfc,','ac','cep','dft','css',
-#'              'lps','mfcc'),
+#'              'gain','rfc,','ac','mfcc'),
 #'              gender = 'u', windowShift = 5, numFormants = 8,
 #'              numcep = 12, dcttype = c('t2', 't1', 't3', 't4'),
 #'              fbtype = c('mel', 'htkmel', 'fcmel', 'bark'),
