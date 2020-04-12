@@ -12,7 +12,7 @@
 #'              dest.path = NULL, full.names = TRUE, recursive = FALSE,
 #'              as.tibble = TRUE)
 #' @param \code{x} A directory containing audio file(s) in WAV or MP3 formats. If more than one directory is provided, only the first one is used.
-#' @param \code{features} Vector of features to be extracted. (default: f0, formants). The following four features contain 257 columns each: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
+#' @param \code{features} Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
 #' @param \code{gender} = <code>: set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
 #' @param \code{windowShift} = <dur>: set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
 #' @param \code{numFormants} = <num>: <num>ber of formants (default: 8). Used by \code{wrassp::forest}.
@@ -35,14 +35,13 @@
 #' pattern = glob2rx("*.wav"), full.names = TRUE)
 #'
 #'# getting all the 1092 features
-#' xx <- extract_features(dirname(path2wav))
+#' xx <- extract_features(dirname(path2wav), features = c('f0','formants',
+#' 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc')
 #' ncol(xx)
 #' xx
 #'
-#' # dropping 'cep','dft','css' and 'lps' (4*257 = 1028 columns)
-#' xx2 <- extract_features(dirname(path2wav),
-#'  features = c('f0','formants','zcr','rms','mhs',
-#'  'gain','rfc','ac','mfcc'))
+#' # using the default, i.e., not using 'cep','dft','css' and 'lps' (4*257 = 1028 columns)
+#' xx2 <- extract_features(dirname(path2wav))
 #'ncol(xx2)
 #'xx2
 #'
@@ -73,8 +72,7 @@
 #' @export
 extract_features <- function(x,
                              features = c('f0','formants','zcr','mhs','rms',
-                                          'gain','rfc','ac','cep','dft','css',
-                                          'lps','mfcc'),
+                                          'gain','rfc','ac','mfcc'),
                              gender = 'u', windowShift = 5, numFormants = 8,
                              numcep = 12, dcttype = c('t2', 't1', 't3', 't4'),
                              fbtype = c('mel', 'htkmel', 'fcmel', 'bark'),
