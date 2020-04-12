@@ -19,7 +19,7 @@ extract_features(x,
 \arguments{
 \item{\code{x}}{A directory containing audio file(s) in WAV or MP3 formats. If more than one directory is provided, only the first one is used.}
 
-\item{\code{features}}{Vector of features to be extracted. (default: f0, formants). The following four features contain 257 columns each: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
+\item{\code{features}}{Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
 
 \item{\code{gender}}{= <code>: set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.}
 
@@ -58,14 +58,13 @@ path2wav <- list.files(system.file("extdata", package = "wrassp"),
 pattern = glob2rx("*.wav"), full.names = TRUE)
 
 # getting all the 1092 features
-xx <- extract_features(dirname(path2wav))
+xx <- extract_features(dirname(path2wav), features = c('f0','formants',
+'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc')
 ncol(xx)
 xx
 
-# dropping 'cep','dft','css' and 'lps' (4*257 = 1028 columns)
-xx2 <- extract_features(dirname(path2wav),
- features = c('f0','formants','zcr','rms','mhs',
- 'gain','rfc','ac','mfcc'))
+# using the default, i.e., not using 'cep','dft','css' and 'lps' (4*257 = 1028 columns)
+xx2 <- extract_features(dirname(path2wav))
 ncol(xx2)
 xx2
 
