@@ -35,7 +35,7 @@
 #'
 #'# getting all the 1092 features
 #' xx <- extract_features(dirname(path2wav), features = c('f0','formants',
-#' 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc')
+#' 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'))
 #' ncol(xx)
 #' xx
 #'
