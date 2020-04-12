@@ -41,8 +41,13 @@ path2wav <- list.files(system.file("extdata", package = "wrassp"),
 pattern = glob2rx("*.wav"), full.names = TRUE)
 
 # getting all the 1092 features
-xx <- extract_features(dirname(path2wav))
+xx <- extract_features(dirname(path2wav), features = c('f0','formants',
+'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'))
 ncol(xx)
 xx
 
+# using the default, i.e., not using 'cep','dft','css' and 'lps' (4*257 = 1028 columns)
+xx2 <- extract_features(dirname(path2wav))
+ncol(xx2)
+xx2
 ```
