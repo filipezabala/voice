@@ -441,11 +441,11 @@ extract_features <- function(x,
     }
 
   if('formants' %in% features){
-    colnames(features.list$formants) <- paste0('F', 1:numFormants)
+    colnames(features.list$formants) <- paste0('F', 1:ncol(features.list$formants))
     }
 
   if('zcr' %in% features){
-    colnames(features.list$zcr) <- paste0('ZCR')
+    colnames(features.list$zcr) <- paste0('ZCR', 1:ncol(features.list$zcr))
     }
 
   if('mhs' %in% features){
@@ -461,31 +461,31 @@ extract_features <- function(x,
   }
 
   if('rfc' %in% features){
-    colnames(features.list$rfc) <- paste0('RFC', 1:19)
+    colnames(features.list$rfc) <- paste0('RFC', 1:ncol(features.list$rfc))
   }
 
   if('ac' %in% features){
-    colnames(features.list$ac) <- paste0('ACF', 1:20)
+    colnames(features.list$ac) <- paste0('ACF', 1:ncol(features.list$ac))
   }
 
   if('cep' %in% features){
-    colnames(features.list$cep) <- paste0('CEP', 1:257)
+    colnames(features.list$cep) <- paste0('CEP', 1:ncol(features.list$cep))
   }
 
   if('dft' %in% features){
-    colnames(features.list$dft) <- paste0('DFT', 1:257)
+    colnames(features.list$dft) <- paste0('DFT', 1:ncol(features.list$dft))
   }
 
   if('css' %in% features){
-    colnames(features.list$css) <- paste0('CSS', 1:257)
+    colnames(features.list$css) <- paste0('CSS', 1:ncol(features.list$css))
   }
 
   if('lps' %in% features){
-    colnames(features.list$lps) <- paste0('LPS', 1:257)
+    colnames(features.list$lps) <- paste0('LPS', 1:ncol(features.list$lps))
   }
 
   if('mfcc' %in% features){
-    colnames(features.list$mfcc) <- paste0('MFCC', 1:numcep)
+    colnames(features.list$mfcc) <- paste0('MFCC', 1:ncol(features.list$mfcc))
   }
 
   # final data frame
