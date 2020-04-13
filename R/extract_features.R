@@ -491,6 +491,9 @@ extract_features <- function(x,
   # final data frame
   dat <- dplyr::bind_cols(id, features.list)
 
+  # replacing NaN by 0
+  dat[sapply(dat, is.nan)] <- 0
+
   # total time
   t0 <- proc.time()-pt0
   cat('TOTAL TIME', t0[3], 'SECONDS\n\n')
