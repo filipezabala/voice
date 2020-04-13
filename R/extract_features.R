@@ -69,29 +69,6 @@
 #' library(pca3d)
 #' pca3d(pc, group=xx2$audio)
 #' @export
-#'
-
-
-x <- setwd('~/Dropbox/D_Filipe_Zabala/thesis/data/')
-# path2wav <- list.files(system.file("extdata", package = "wrassp"),
-#                        pattern = glob2rx("*.wav"), full.names = TRUE)
-# x <- dirname(path2wav)
-features = c('f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc')
-gender = 'u'
-windowShift = 5
-numFormants = 8
-numcep = 12
-dcttype = c('t2', 't1', 't3', 't4')
-fbtype = c('mel', 'htkmel', 'fcmel', 'bark')
-resolution = 40
-usecmp = FALSE
-mc.cores = parallel::detectCores()
-convert.mp3 = FALSE
-dest.path = NULL
-full.names = TRUE
-recursive = FALSE
-
-
 extract_features <- function(x,
                              features = c('f0','formants','zcr','mhs','rms',
                                           'gain','rfc','ac','mfcc'),
