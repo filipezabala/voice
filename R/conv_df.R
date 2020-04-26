@@ -15,13 +15,15 @@
 #' x <- dat %>%
 #' mutate_each(as.factor, id:anyep_diff_w1)
 #' (cx.df <- conv_df(x, 0.1))
+#' (cx.df2 <- conv_df(x, 0.1, drop.x = T))
 #' dim(x)
 #' dim(cx.df)
+#' dim(cx.df2)
 #' (cx.list <- conv_df(x, 0.1, to.data.frame = F))
 #' @seealso \code{conv}, \code{conv_mc}
 #' @export
-conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id,
-                    drop.zeros = T, to.data.frame = T, mc.cores = parallel::detectCores()){
+conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id, drop.x = F,
+                    drop.zeros = F, to.data.frame = T, mc.cores = parallel::detectCores()){
   ini <- Sys.time()
 
   # numeric columns
@@ -62,7 +64,9 @@ conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id,
   for(i in 1:nid){
     index <- 1:n[i]
     cn.li[[i]] <- snon[[i]][index,]
-    cn.li[[i]] <- dplyr::bind_cols(cn.li[[i]], cn.df[[i]])
+    even <- seq(2, ncol(cn.df[[i]]), by = 2)
+    index2 <- sort(union(even, even-!drop.x))
+    cn.li[[i]] <- dplyr::bind_cols(cn.li[[i]], cn.df[[i]][,index2])
     names(cn.li)[i] <- nlv[i]
   }
 

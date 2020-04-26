@@ -20,7 +20,7 @@
 #' library(voice)
 #' @export
 class_svm <- function(x, model,
-                      filtro = c('id'),
+                      filtro = c('id'), # CORRIGIR!
                       percTreino = 0.5,
                       setSeed = 1,
                       # normalize = T,

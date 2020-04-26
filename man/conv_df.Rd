@@ -10,7 +10,8 @@ conv_df(
   colnum = NULL,
   id = "id",
   by.filter = id,
-  drop.zeros = T,
+  drop.x = F,
+  drop.zeros = F,
   to.data.frame = T,
   mc.cores = parallel::detectCores()
 )
@@ -44,8 +45,10 @@ library(tidyverse)
 x <- dat \%>\%
 mutate_each(as.factor, id:anyep_diff_w1)
 (cx.df <- conv_df(x, 0.1))
+(cx.df2 <- conv_df(x, 0.1, drop.x = T))
 dim(x)
 dim(cx.df)
+dim(cx.df2)
 (cx.list <- conv_df(x, 0.1, to.data.frame = F))
 }
 \seealso{
