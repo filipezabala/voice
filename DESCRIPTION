@@ -1,7 +1,7 @@
 Package: voice
 Type: Package
 Title: General Tools for voice analysis, speecher recognition and mood inference.
-Version: 0.0.1
+Version: 0.0.2
 Author@R: c(person("Filipe", "J. Zabala", email = "filipe.zabala@gmail.com", role = c("aut","cre")), person("Giovanni", "Salum Jr.", email = "gsalumjr@gmail.com", role = "aut"))
 Maintainer: Filipe J. Zabala <filipe.zabala@gmail.com>
 URL: https://github.com/filipezabala/voice
