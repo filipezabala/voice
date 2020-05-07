@@ -1,4 +1,4 @@
-#' Fits and forecasts SVM models, serial and parallelized.
+#' Fits, forecasts and gets performance from SVM models, serial and parallelized.
 #'
 #' @param \code{x} A data frame or tibble.
 #' @param \code{model} Character containing the model structure. See \code{expand_model}.
@@ -28,21 +28,10 @@ class_svm <- function(x, model,
                       paralelo = T,
                       print.cm = T){
 
-  # x = dat2
-  # model = 'gender ~ pc1'
-  # filter = c('id')
-  # # id0 = c('id','wordType')
-  # setSeed = 1
-  # percTreino = 0.5
-  # custo = 1
-  # gama = 1
-  # paralelo = T
-  # simbolico = F
-
-  # contando o tempo
+  # counting time
   pt1 <- proc.time() # to final table
 
-  # parametros globais
+  # global parameters
   model <<- model  # pq so global?
   # custo <<- custo # nem global!
   # gama <<- gama # nem global!
@@ -51,14 +40,13 @@ class_svm <- function(x, model,
   cat('MODEL -', model,'\n\n')
   cat('1#4 START - SAMPLE', '\n')
 
-  # criando idFull
+  # creating idFull
   # idFull <- apply(x[filtro], 1, paste, collapse = ',')
   idFull <- x[filtro]
 
   # idFullUn
   idFullUn <- as.data.frame(unique(idFull))
   nFullUn <- nrow(idFullUn)
-
 
   # sample
   set.seed(setSeed)
@@ -67,6 +55,8 @@ class_svm <- function(x, model,
   idTeste <- idFullUn[-treino,]
   trainset <- as.data.frame(x %>% filter(id %in% idTreino))
   testset <- as.data.frame(x %>% filter(id %in% idTeste))
+  num <- sapply(testset, is.numeric)
+  testset.m <- as.matrix(testset[,num])
   nTest <- nrow(testset)
   nCores <- parallel::detectCores()
   nGrupo <- nrow(testset)/nCores
@@ -83,9 +73,11 @@ class_svm <- function(x, model,
 
   if(paralelo){
     fit.svm <- parallelSVM::parallelSVM(as.formula(model), data = trainset, cost = 1, gamma = 1)
+    gc()
   }
   if(!paralelo){
     fit.svm <- e1071::svm(as.formula(model), data = trainset, cost = custo, gamma = gama)
+    gc()
   }
 
   # model time
@@ -97,12 +89,15 @@ class_svm <- function(x, model,
   cat('3#4 START - PREDICT', '\n')
 
   if(paralelo){
-    testsetSplit <- split(testset, grupo)
+    testsetSplit <- split(as.data.frame(testset.m), grupo)
+    testsetSplit <- lapply(testsetSplit, as.matrix)
     temp <- parallel::mcMap(predict, testsetSplit, object = fit.svm, mc.cores = nCores) # 2.950665 secs (f0)
     pred.svm <- do.call(c, temp)-1 # por que está somando 1???
+    gc()
   }
   if(!paralelo){
-    pred.svm  <- stats::predict(fit.svm, testset) # 1.806881 mins (f0), 13.06865 mins (f0:mhs1)
+    pred.svm  <- stats::predict(fit.svm, testset.m) # 1.806881 mins (f0), 13.06865 mins (f0:mhs1)
+    gc()
   }
 
   # predict time
@@ -115,7 +110,8 @@ class_svm <- function(x, model,
 
   # identifying and counting y levels
   y <- gsub(' ', '', unlist(strsplit(model,'~'))[1], fixed = T)
-  l <- as.numeric(levels(testset[,y]))
+  # l <- as.numeric(levels(testset[,y]))
+  l <- 1:nlevels(testset[,y])
   n <- length(l)
 
   # creating full table

@@ -2,7 +2,7 @@
 % Please edit documentation in R/class_svm.R
 \name{class_svm}
 \alias{class_svm}
-\title{Fits and forecasts SVM models, serial and parallelized.}
+\title{Fits, forecasts and gets performance from SVM models, serial and parallelized.}
 \usage{
 class_svm(
   x,
@@ -45,7 +45,7 @@ class_svm(
 \code{mse.pred} mean squared error of prediction. Used to decide the best model.
 }
 \description{
-Fits and forecasts SVM models, serial and parallelized.
+Fits, forecasts and gets performance from SVM models, serial and parallelized.
 }
 \examples{
 library(voice)
