@@ -2,7 +2,7 @@
 % Please edit documentation in R/conv_mc.R
 \name{conv_mc}
 \alias{conv_mc}
-\title{Convolute vectors multicore.}
+\title{Convolute vectors using multicore.}
 \usage{
 conv_mc(
   y,
@@ -23,7 +23,7 @@ conv_mc(
 A list of x and y convoluted values with length near to \code{compact.to*length(y)}.
 }
 \description{
-Convolute vectors multicore.
+Convolute vectors using multicore.
 }
 \examples{
 library(voice)

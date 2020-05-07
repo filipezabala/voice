@@ -1,4 +1,4 @@
-#' Convolute vectors multicore.
+#' Convolute vectors using multicore.
 #'
 #' @param \code{y} A numeric vector, matrix or data frame.
 #' @param \code{compact.to} Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.
@@ -23,7 +23,6 @@
 #' @seealso \code{rm0}, \code{conv}, \code{conv_df}
 #' @export
 conv_mc <- function(y, compact.to, drop.zeros, to.data.frame, mc.cores = parallel::detectCores()){
-
   if(is.vector(y)){
     cm <- voice::conv(y, compact.to = compact.to, drop.zeros = drop.zeros, to.data.frame = to.data.frame)
   }
