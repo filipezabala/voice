@@ -26,4 +26,5 @@ devtools::install_github('filipezabala/voice', force = T)
 # attaching
 library(voice)
 ?conv_df
+?conv_mc
 ?extract_features
