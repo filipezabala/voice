@@ -1,0 +1,41 @@
+macOS / OS X
+============
+
+These instructions ought to work for installing the Parselmouth library for use in the standalone PsychoPy Builder. They were tested with the "StandalonePsychoPy-1.85.2-OSX_64bit.dmg" version downloaded from http://psychopy.org/installation.html.
+
+1. Go to https://pypi.python.org/pypi/praat-parselmouth.
+2. Download the file "praat_parselmouth-x.y.z-cp27-cp27m-macosx_10_6_intel.whl" - where x.y.z will be the latest released version of Parselmouth. Be sure to find the right file in the list, containing 'cp27' and 'macosx' in its name!
+3. Rename the downloaded file by replacing the '.whl' extension by '.zip'.
+4. Extract this zip archive somewhere on your computer, in your directory of choice. Remember the name and location of the extracted folder that contains the file "parselmouth.so".
+5. Open PsychoPy, open the Preferences window, go to the General tab.
+6. In the General tab of the PsychoPy Preferences, in the 'paths' field, add the folder where you just extracted the Parselmouth library to the list, enclosing the path in quotemarks. For example, if the list was empty (an empty list looks like "[]"), you could make it look like "['/Users/yannick/Parselmouth-0.1.1/']".
+    - To find the right location to enter in the PsychoPy settings, right click "parselmouth.so", choose "Get info", and look at the "where" field. Dragging the folder into a terminal will also give you the full path, with slashes.
+7. Click 'Ok' to save the settings and close the Preferences window.
+8. Optional: if you want to check if Parselmouth was installed correctly, open the Coder interface, open the 'Shell' tab, and type "import parselmouth".
+    - If this results in an error message, please let us know, and we'll try to help you fix what went wrong!
+    - If this does not give you an error, congratulations, you can now use Parselmouth in your PsychoPy Builder!
+
+
+For more details on step 6, see the PsychoPy documentation: http://www.psychopy.org/recipes/addCustomModules.html
+
+
+
+Windows
+=======
+
+These instructions ought to work for installing the Parselmouth library for use in the standalone PsychoPy Builder. They were tested with the "StandalonePsychoPy-1.85.2-win32.exe" version downloaded from http://psychopy.org/installation.html.
+
+1. Go to https://pypi.python.org/pypi/praat-parselmouth.
+2. Download the file "praat_parselmouth-x.y.z-cp27-cp27m-win32.whl" - where x.y.z will be the latest released version of Parselmouth. Be sure to find the right file in the list, containing 'cp27' and 'win32' in its name!
+3. Rename the downloaded file by replacing the '.whl' extension by '.zip'.
+4. Extract this zip archive somewhere on your computer, in your directory of choice. Remember the name and location of the extracted folder that contains the file "parselmouth.pyd".
+5. Open PsychoPy, open the Preferences window, go to the General tab.
+6. In the General tab of the PsychoPy Preferences, in the 'paths' field, add the folder where you just extracted the Parselmouth library to the list, enclosing the path in quotemarks and replacing all '\' characters by '/'. For example, if the list was empty (an empty list looks like "[]"), you could make it look like "['C:/Users/Yannick/Parselmouth-0.1.1/']".
+    - To find the right location to enter in the PsychoPy settings, right click "parselmouth.pyd", choose "Properties", and look at the "Location" field.
+7. Click 'Ok' to save the settings and close the Preferences window.
+8. Optional: if you want to check if Parselmouth was installed correctly, open the Coder interface, open the 'Shell' tab, and type "import parselmouth".
+    - If this results in an error message, please let us know, and we'll try to help you fix what went wrong!
+    - If this does not give you an error, congratulations, you can now use Parselmouth in your PsychoPy Builder!
+
+
+For more details on step 6, see the PsychoPy documentation: http://www.psychopy.org/recipes/addCustomModules.html

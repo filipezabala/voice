@@ -1,0 +1,10 @@
+https://github.com/pyannote/pyannote-audio
+https://github.com/YannickJadoul/Parselmouth
+https://parselmouth.readthedocs.io/en/stable/
+https://github.com/YoeriNijs/PraatPitch
+https://sites.google.com/site/praatscripts/
+https://osf.io/huz7d/
+https://osf.io/mgu9w/
+https://www.ims.uni-stuttgart.de/institut/arbeitsgruppen/ehemalig/ep-dogil/helps/praat-scripting/praat.tutorial.pdf
+https://jakevdp.github.io/PythonDataScienceHandbook/
+https://github.com/faroit/awesome-python-scientific-audio
