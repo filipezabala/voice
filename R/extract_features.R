@@ -1,6 +1,6 @@
 #' Extracts features from WAV audio files.
 #' @description Extracts features from WAV audio files.
-#' @usage extract_features(x,
+#' @usage extract_features(directory,
 #'              features = c('f0','formants','zcr','rms','mhs',
 #'              'gain','rfc,','ac','mfcc'),
 #'              gender = 'u', windowShift = 5, numFormants = 8,
@@ -9,7 +9,7 @@
 #'              resolution = 40, usecmp = FALSE,
 #'              mc.cores = parallel::detectCores(), full.names = TRUE,
 #'              recursive = FALSE, as.tibble = TRUE)
-#' @param \code{x} A directory containing audio file(s) in WAV or MP3 formats. If more than one directory is provided, only the first one is used.
+#' @param \code{directory} A directory containing audio file(s) in WAV or MP3 formats. If more than one directory is provided, only the first one is used.
 #' @param \code{features} Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
 #' @param \code{gender} = <code>: set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
 #' @param \code{windowShift} = <dur>: set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
@@ -66,7 +66,7 @@
 #' library(pca3d)
 #' pca3d(pc, group=xx2$audio)
 #' @export
-extract_features <- function(x,
+extract_features <- function(directory,
                              features = c('f0','formants','zcr','mhs','rms',
                                           'gain','rfc','ac','mfcc'),
                              gender = 'u', windowShift = 5, numFormants = 8,
@@ -80,10 +80,10 @@ extract_features <- function(x,
   pt0 <- proc.time()
 
   # removing duplicates, using the first directory provided
-  x <- x[1]
+  directory <- directory[1]
 
   # listing wav files
-  wavFiles <- list.files(x, pattern = glob2rx('*.wav'),
+  wavFiles <- list.files(directory, pattern = glob2rx('*.wav'),
                          full.names = full.names, recursive = recursive)
 
   # number of wav files
