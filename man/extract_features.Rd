@@ -2,21 +2,20 @@
 % Please edit documentation in R/extract_features.R
 \name{extract_features}
 \alias{extract_features}
-\title{Extracts features from WAV or MP3 audio.}
+\title{Extracts features from WAV audio files.}
 \usage{
-extract_features(x,
+extract_features(directory,
              features = c('f0','formants','zcr','rms','mhs',
              'gain','rfc,','ac','mfcc'),
              gender = 'u', windowShift = 5, numFormants = 8,
              numcep = 12, dcttype = c('t2', 't1', 't3', 't4'),
              fbtype = c('mel', 'htkmel', 'fcmel', 'bark'),
              resolution = 40, usecmp = FALSE,
-             mc.cores = parallel::detectCores(), convert.mp3 = FALSE,
-             dest.path = NULL, full.names = TRUE, recursive = FALSE,
-             as.tibble = TRUE)
+             mc.cores = parallel::detectCores(), full.names = TRUE,
+             recursive = FALSE, as.tibble = TRUE)
 }
 \arguments{
-\item{\code{x}}{A directory containing audio file(s) in WAV or MP3 formats. If more than one directory is provided, only the first one is used.}
+\item{\code{directory}}{A directory containing audio file(s) in WAV or MP3 formats. If more than one directory is provided, only the first one is used.}
 
 \item{\code{features}}{Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
 
@@ -38,16 +37,12 @@ extract_features(x,
 
 \item{\code{mc.cores}}{Number of cores to be used in parallel processing. (default: \code{parallel::detectCores()})}
 
-\item{\code{convert.mp3}}{Logical. Should .mp3 files be converted to .wav? (default: \code{FALSE}) Used by \code{warbleR::mp32wav}.}
-
-\item{\code{dest.path}}{Character string containing the directory path where the .wav files will be saved. If \code{NULL} (default) then the folder containing the sound files will be used. Used by \code{warbleR::mp32wav}.}
-
 \item{\code{full.names}}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.}
 
 \item{\code{recursive}}{Logical. Should the listing recurse into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
 }
 \description{
-Extracts features from WAV or MP3 audio.
+Extracts features from WAV audio files.
 }
 \examples{
 library(voice)
