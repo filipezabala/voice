@@ -19,11 +19,10 @@ extract_features_py <- function(directory,
   directory <- directory[1]
 
   # # getting python functions - MUST BE A BETTER WAY TO DO THIS!
-  # /Library/Frameworks/R.framework/Resources/library/voice
-  # if('f0' %in% features & !file.exists(paste0(getwd(),'/testthat/extract_f0.py'))){
-  #   download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_f0.py',
-  #                 './testthat/extract_f0.py')
-  # }
+  if('f0' %in% features & !file.exists(paste0(getwd(),'extract_f0.py'))){
+    download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_f0.py',
+                  'extract_f0.py')
+  }
   # command <- paste0('python3 ./extract_f0.py ', directory)
   if('f0' %in% features){
     command <- paste0('python3 ./extract_f0.py ', directory)
