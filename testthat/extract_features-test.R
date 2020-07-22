@@ -19,3 +19,9 @@ f0_R <- extract_features('/Users/filipezabala/Dropbox/D_Filipe_Zabala/audios/coo
 Sys.time()-ini # Time difference of 5.339381 secs, 15.13803 secs
 by(f0_R$F0, f0_R$audio, quantile, probs=seq(0,1,.01))
 by(f0_R$F0, f0_R$audio, length)
+
+
+ef_py <- extract_features_py('/Users/filipezabala/Dropbox/D_Filipe_Zabala/audios/coorte')
+
+lapply(ef_py, quantile, probs=seq(0,1,.1))
+lapply(ef_py, length)
