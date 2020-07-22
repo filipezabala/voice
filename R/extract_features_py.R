@@ -18,11 +18,12 @@ extract_features_py <- function(directory,
   # removing duplicates, using the first directory provided
   directory <- directory[1]
 
-  # getting python functions - MUST BE A BETTER WAY TO DO THIS!
-  if('f0' %in% features & !file.exists(paste0(getwd(),'/testthat/extract_f0.py'))){
-    download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_f0.py',
-                  './testthat/extract_f0.py')
-  }
+  # # getting python functions - MUST BE A BETTER WAY TO DO THIS!
+
+  # if('f0' %in% features & !file.exists(paste0(getwd(),'/testthat/extract_f0.py'))){
+  #   download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_f0.py',
+  #                 './testthat/extract_f0.py')
+  # }
   # command <- paste0('python3 ./extract_f0.py ', directory)
   if('f0' %in% features){
     command <- paste0('python3 ./extract_f0.py ', directory)
