@@ -1,11 +1,13 @@
 # packs
 library(tidyverse)
 library(voice)
+library(reticulate)
 
 # extraction via parselmouth.Sound.to_pitch, pitch_ceiling = 600.0
 ini <- Sys.time()
-f0_py <- system('python3 ./testthat/extract_f0.py /Users/filipezabala/Dropbox/D_Filipe_Zabala/audios/coorte',
-            wait = FALSE, intern = T)
+# f0_py <- system('python3 ./testthat/extract_f0.py /Users/filipezabala/Dropbox/D_Filipe_Zabala/audios/coorte',
+#             wait = FALSE, intern = T)
+f0_py <- extract_features_py('/Users/filipezabala/Dropbox/D_Filipe_Zabala/audios/coorte')
 Sys.time()-ini # Time difference of 4.468059 secs, 9.350217 secs
 f0_py <- sapply(f0_py, strsplit, ',')
 f0_py <- lapply(f0_py, as.numeric)
