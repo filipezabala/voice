@@ -1,6 +1,6 @@
 #' Extract features from WAV audios using Python's Parselmouth library.
 #'
-#' @param \code{directory} A directory/folder containing the WAV files.
+#' @param \code{directory} A directory/folder containing WAV files.
 #' @param \code{features} Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc').
 #' @return \code{char} vector containing the expanded models.
 #' @details The function uses the \code{getwd()} folder to write the temp files.

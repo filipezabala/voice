@@ -28,3 +28,5 @@ library(voice)
 ?conv_df
 ?conv_mc
 ?extract_features
+find.package('voice')
+packageDescription('voice')
