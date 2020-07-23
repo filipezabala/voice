@@ -9,8 +9,16 @@
 #' pattern <- glob2rx("*.wav"), full.names = TRUE)
 #' extract_features_py(dirname(path2wav)[1])
 #' @export
+
+# test
+# directory <- '/Users/filipezabala/Dropbox/D_Filipe_Zabala/audios/coorte'
+# features = c('f0')
+# full.names = TRUE
+# recursive = FALSE
+
 extract_features_py <- function(directory,
-                                features = c('f0')){
+                                features = c('f0'),
+                                full.names = TRUE, recursive = FALSE){
 
   # process time
   pt0 <- proc.time()
@@ -19,16 +27,43 @@ extract_features_py <- function(directory,
   directory <- directory[1]
 
   # # getting python functions - MUST BE A BETTER WAY TO DO THIS!
-  if('f0' %in% features & !file.exists(paste0(getwd(),'extract_f0.py'))){
+  if('f0' %in% features & !file.exists(paste0(getwd(),'/extract_f0.py'))){
     download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_f0.py',
                   'extract_f0.py')
   }
-  # command <- paste0('python3 ./extract_f0.py ', directory)
+
+  # listing wav files
+  wavFiles <- list.files(directory, pattern = glob2rx('*.wav'),
+                         full.names = full.names, recursive = recursive)
+
+  # list of features
+  features.list <- vector('list', length(features))
+  i <- 0
+
+  # 1. F0 analysis of the signal
   if('f0' %in% features){
+    i <- i+1
     command <- paste0('python3 ./extract_f0.py ', directory)
-    f0_py <- system(command, wait = FALSE, intern = T)
-    f0_py <- sapply(f0_py, strsplit, ',')
-    f0_py <- lapply(f0_py, as.numeric)
+    f0 <- system(command, wait = FALSE, intern = T)
+    f0 <- sapply(f0, strsplit, ',')
+    f0 <- lapply(f0, as.numeric)
+    # names(f0) <- basename(wavFiles)
+    n_f0 <- sapply(f0,length)
+    names(features.list) <- 'f0'
+    features.list[[i]] <- bind_cols(unlist(f0))
+    colnames(features.list[[i]]) <- 'F0'
   }
-  return(f0_py)
+
+  # id
+  id <- tibble::enframe(rep(basename(wavFiles), n_f0), value = 'audio', name = NULL)
+
+  # final data frame
+  dat <- dplyr::bind_cols(audio=id, features.list)
+
+  # total time
+  t0 <- proc.time()-pt0
+  cat('TOTAL TIME', t0[3], 'SECONDS\n\n')
+
+  # return(dat)
+  return(dat)
 }
