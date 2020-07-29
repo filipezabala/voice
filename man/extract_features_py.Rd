@@ -4,7 +4,12 @@
 \alias{extract_features_py}
 \title{Extract features from WAV audios using Python's Parselmouth library.}
 \usage{
-extract_features_py(directory, features = c("f0"))
+extract_features_py(
+  directory,
+  features = c("f0"),
+  full.names = TRUE,
+  recursive = FALSE
+)
 }
 \arguments{
 \item{\code{directory}}{A directory/folder containing WAV files.}

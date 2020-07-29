@@ -1,14 +1,17 @@
 Package: voice
 Type: Package
 Title: General Tools for voice analysis, speecher recognition and mood inference.
-Version: 0.0.4
-Author@R: c(person("Filipe", "J. Zabala", email = "filipe.zabala@gmail.com", role = c("aut","cre")), person("Giovanni", "Salum Jr.", email = "gsalumjr@gmail.com", role = "aut"))
+Version: 0.0.5
+Date: 2020-07-29
+Authors@R: c(
+    person("Zabala", "Filipe J.", email = "filipe.zabala@gmail.com", role = c("cre","aut")),
+    person("Salum Jr.", "Giovanni A.", email = "gsalumjr@gmail.com", role = "aut"))
 Maintainer: Filipe J. Zabala <filipe.zabala@gmail.com>
 URL: https://github.com/filipezabala/voice
 BugReports: https://github.com/filipezabala/voice/issues
-Description: General purpouse tools for voice analysis, speecher recognition
+Description: General purpose tools for voice analysis, speecher recognition
     and mood inference. Gathers R and Python tools to solve problems concerning voice.
-Depends: R (>= 3.6.3), e1071, parallelSVM, parallel
+Depends: R (>= 4.0.0), e1071, parallelSVM
 Imports: tidyverse
 License: GPL-3
 Encoding: UTF-8
