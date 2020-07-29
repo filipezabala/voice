@@ -51,7 +51,7 @@ extract_features_py <- function(directory,
   # 1. F0 analysis of the signal
   if('f0' %in% features){
     i <- i+1
-    extract_f0 <- paste0('python3 ./temp_extract_f0.py', directory)
+    extract_f0 <- paste0('python3 ./temp_extract_f0.py ', directory)
     f0 <- system(extract_f0, wait = FALSE, intern = T)
     f0 <- sapply(f0, strsplit, ',')
     f0 <- lapply(f0, as.numeric)
