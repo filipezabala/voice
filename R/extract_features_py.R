@@ -47,10 +47,9 @@ extract_features_py <- function(directory,
     f0 <- system(command, wait = FALSE, intern = T)
     f0 <- sapply(f0, strsplit, ',')
     f0 <- lapply(f0, as.numeric)
-    # names(f0) <- basename(wavFiles)
     n_f0 <- sapply(f0,length)
     names(features.list) <- 'f0'
-    features.list[[i]] <- bind_cols(unlist(f0))
+    features.list[[i]] <- dplyr::bind_cols(unlist(f0))
     colnames(features.list[[i]]) <- 'F0'
   }
 
