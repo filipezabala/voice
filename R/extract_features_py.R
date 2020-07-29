@@ -27,9 +27,9 @@ extract_features_py <- function(directory,
   directory <- directory[1]
 
   # # getting python functions - MUST BE A BETTER WAY TO DO THIS!
-  if('f0' %in% features & !file.exists(paste0(getwd(),'/extract_f0.py'))){
+  if('f0' %in% features & !file.exists(paste0(getwd(),'/temp_extract_f0.py'))){
     download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_f0.py',
-                  'extract_f0.py')
+                  'temp_extract_f0.py')
   }
 
   # listing wav files
@@ -43,7 +43,7 @@ extract_features_py <- function(directory,
   # 1. F0 analysis of the signal
   if('f0' %in% features){
     i <- i+1
-    extract_f0 <- paste0('python3 ./extract_f0.py ', directory)
+    extract_f0 <- paste0('python3 ./temp_extract_f0.py ', directory)
     f0 <- system(extract_f0, wait = FALSE, intern = T)
     f0 <- sapply(f0, strsplit, ',')
     f0 <- lapply(f0, as.numeric)

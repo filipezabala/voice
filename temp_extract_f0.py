@@ -1,7 +1,7 @@
 import os
 import sys
 import numpy
-import parselmouth  # pip3 install praat-parselmouth
+import parselmouth
 from parselmouth.praat import call
 
 for file in os.listdir(sys.argv[1]):
