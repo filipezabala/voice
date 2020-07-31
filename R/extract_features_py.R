@@ -12,12 +12,13 @@
 
 # test
 # directory <- '/Users/filipezabala/Dropbox/D_Filipe_Zabala/audios/coorte'
-# features = c('f0')
-# full.names = TRUE
-# recursive = FALSE
+directory <- '/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'
+features = c('formants')
+full.names = TRUE
+recursive = FALSE
 
 extract_features_py <- function(directory,
-                                features = c('f0'),
+                                features = c('f0','formants'),
                                 full.names = TRUE, recursive = FALSE){
 
   # process time
@@ -37,7 +38,12 @@ extract_features_py <- function(directory,
                   'temp_extract_f0.py')
   }
 
-  # calling libraries
+  if('formants' %in% features & !file.exists(paste0(getwd(),'/temp_extract_formants.py'))){
+    download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_formants.py',
+                  'temp_extract_formants.py')
+  }
+
+  # calling libraries - MUST BE A BETTER WAY TO DO THIS!
   reticulate::source_python('./temp_libs.py')
 
   # listing wav files
@@ -60,6 +66,10 @@ extract_features_py <- function(directory,
     features.list[[i]] <- dplyr::bind_cols(unlist(f0))
     colnames(features.list[[i]]) <- 'F0'
   }
+
+  # 2. Formants
+  extract_formants <- paste0('python3 ./temp_extract_formants.py ', directory)
+  formants <- system(extract_formants, wait = FALSE, intern = T)
 
   # id
   id <- tibble::enframe(rep(basename(wavFiles), n_f0), value = 'audio', name = NULL)

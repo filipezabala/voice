@@ -1,7 +1,6 @@
 # packs
 library(tidyverse)
 library(voice)
-library(reticulate)
 
 # extraction via parselmouth.Sound.to_pitch, pitch_ceiling = 600.0
 ini <- Sys.time()
