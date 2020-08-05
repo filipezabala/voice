@@ -9,7 +9,7 @@ from parselmouth.praat import call
 pandas.set_option('display.max_rows', None)
 pandas.set_option('display.max_columns', None)
 pandas.set_option('display.width', None)
-pandas.set_option('display.max_colwidth', None)
+pandas.set_option('display.max_colwidth', -1)
 dfs = []
 
 # for file in os.listdir('/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'):
