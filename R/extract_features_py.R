@@ -71,6 +71,20 @@ extract_features_py <- function(directory,
   extract_formants <- paste0('python3 ./temp_extract_formants.py ', directory)
   formants <- system(extract_formants, wait = FALSE, intern = T)
 
+  splist <- lapply(formants, strsplit, '\\s+')
+
+
+  head(formants)
+  names(splist) <- 1:length(splist)
+  dplyr::bind_rows(splist)
+  names(splist)
+  strsplit(formants[2], '\\s+')
+
+
+
+  sapply(formants, strsplit, '[:blank:]')
+  length(formants)
+
   # id
   id <- tibble::enframe(rep(basename(wavFiles), n_f0), value = 'audio', name = NULL)
 
