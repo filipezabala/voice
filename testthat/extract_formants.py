@@ -5,6 +5,9 @@ import pandas
 import parselmouth  # pip3 install praat-parselmouth
 from parselmouth.praat import call
 
+# <<<<
+dfs = []
+
 # for file in os.listdir('/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'):
 for file in os.listdir(sys.argv[1]):
   if file.endswith(".wav"):
@@ -13,7 +16,7 @@ for file in os.listdir(sys.argv[1]):
     snd = parselmouth.Sound(file_list)
     max_formants = 8
     formant = snd.to_formant_burg(time_step=5/1000, max_number_of_formants=max_formants)
-    formant.get_number_of_frames()
+    # formant.get_number_of_frames()
     n_formants = numpy.arange(1, max_formants+1,1)
     interval = numpy.arange(formant.start_time, formant.end_time-5/100, 5/1000)
     n_interval = len(interval)
@@ -28,11 +31,10 @@ for file in os.listdir(sys.argv[1]):
     
     df_formants_wide = df_formants_long.pivot_table(index=['interval','file_name'], columns='formant', values='value', dropna=False).reset_index().sort_values('interval')
     df_formants_wide.columns.rename('', inplace=True)
-    print(df_formants_wide)
     
-    
-    # dfs = []
-    # dfs.append(df_formants_wide)
-    # print(dfs)
-    # df_final = pandas.concat(dfs, axis=0)
-    # print(df_final)
+    # <<<<
+    dfs.append(df_formants_wide)
+
+# <<<<
+df_final = pandas.concat(dfs, axis=0)
+print(df_final.shape)
