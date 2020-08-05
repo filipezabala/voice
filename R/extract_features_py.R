@@ -13,7 +13,7 @@
 # test
 # directory <- '/Users/filipezabala/Dropbox/D_Filipe_Zabala/audios/coorte'
 directory <- '/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'
-features = c('formants')
+features = c('f0','formants')
 full.names = TRUE
 recursive = FALSE
 
@@ -51,7 +51,7 @@ extract_features_py <- function(directory,
                          full.names = full.names, recursive = recursive)
 
   # list of features
-  features.list <- vector('list', length(features))
+  features.list <- vector('list', 1)
   i <- 0
 
   # 1. F0 analysis of the signal
@@ -68,22 +68,23 @@ extract_features_py <- function(directory,
   }
 
   # 2. Formants
-  extract_formants <- paste0('python3 ./temp_extract_formants.py ', directory)
-  formants <- system(extract_formants, wait = FALSE, intern = T)
+  if('formants' %in% features){
+    i <- i+1
+    extract_formants <- paste0('python3 ./temp_extract_formants.py ', directory)
+    formants <- system(extract_formants, wait = FALSE, intern = T)
+    splist <- sapply(formants, strsplit, '\\s+')
+    names(splist) <- 1:length(splist)
+    df_formants <- t(dplyr::bind_rows(splist[-1]))[,-1]
+    colnames(df_formants) <- t(dplyr::bind_rows(splist[1]))[,-1]
+    colnames(df_formants)[-(1:2)] <- paste0('F',1:8)
+    df_formants <- df_formants %>%
+      as_tibble %>%
+      mutate_at(vars(-file_name),
+                funs(as.numeric)) %>%
+      select(file_name,interval,F1:F8) %>%
+      arrange(file_name, interval)
+  }
 
-  splist <- lapply(formants, strsplit, '\\s+')
-
-
-  head(formants)
-  names(splist) <- 1:length(splist)
-  dplyr::bind_rows(splist)
-  names(splist)
-  strsplit(formants[2], '\\s+')
-
-
-
-  sapply(formants, strsplit, '[:blank:]')
-  length(formants)
 
   # id
   id <- tibble::enframe(rep(basename(wavFiles), n_f0), value = 'audio', name = NULL)
