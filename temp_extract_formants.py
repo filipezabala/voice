@@ -28,8 +28,9 @@ for file in os.listdir(sys.argv[1]):
     
     df_formants_wide = df_formants_long.pivot_table(index=['interval','file_name'], columns='formant', values='value', dropna=False).reset_index().sort_values('interval')
     df_formants_wide.columns.rename('', inplace=True)
-    print(df_formants_wide)
+    # print(df_formants_wide)
     
+    return(df_formants_wide)
     
     # dfs = []
     # dfs.append(df_formants_wide)
