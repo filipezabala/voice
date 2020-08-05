@@ -6,15 +6,13 @@ import parselmouth  # pip3 install praat-parselmouth
 from parselmouth.praat import call
 
 # <<<<
-pandas.set_option('display.max_rows', None)
-pandas.set_option('display.max_columns', None)
 dfs = []
 
-for file in os.listdir('/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'):
-# for file in os.listdir(sys.argv[1]):
+# for file in os.listdir('/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'):
+for file in os.listdir(sys.argv[1]):
   if file.endswith(".wav"):
-    file_list = os.path.join('/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/', file)
-    # file_list = os.path.join(sys.argv[1], file)
+    # file_list = os.path.join('/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/', file)
+    file_list = os.path.join(sys.argv[1], file)
     snd = parselmouth.Sound(file_list)
     max_formants = 8
     formant = snd.to_formant_burg(time_step=5/1000, max_number_of_formants=max_formants)
@@ -31,7 +29,7 @@ for file in os.listdir('/Library/Frameworks/R.framework/Versions/4.0/Resources/l
     df_formants_long['value'] = df_formants_long.apply(lambda x: formant.get_value_at_time(formant_number=int(x['formant']), time=x['interval']), axis=1)
     # print(df_formants_long)
     
-    df_formants_wide = df_formants_long.pivot_table(index=['interval','file_name'], columns='formant', values='value', dropna=False).reset_index().sort_values(['interval','file_name'])
+    df_formants_wide = df_formants_long.pivot_table(index=['interval','file_name'], columns='formant', values='value', dropna=False).reset_index().sort_values('interval')
     df_formants_wide.columns.rename('', inplace=True)
     
     # <<<<
@@ -39,4 +37,4 @@ for file in os.listdir('/Library/Frameworks/R.framework/Versions/4.0/Resources/l
 
 # <<<<
 df_final = pandas.concat(dfs, axis=0)
-print(df_final)
+print(df_final.shape)
