@@ -17,6 +17,7 @@ directory <- '/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wra
 features = c('f0','formants')
 full.names = TRUE
 recursive = FALSE
+library(dplyr)
 
 extract_features_py <- function(directory,
                                 features = c('f0','formants'),
