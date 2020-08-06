@@ -13,11 +13,11 @@
 
 # test
 # directory <- '/Users/filipezabala/Dropbox/D_Filipe_Zabala/audios/coorte'
-directory <- '/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'
-features = c('f0','formants')
-full.names = TRUE
-recursive = FALSE
-library(dplyr)
+# directory <- '/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'
+# features = c('f0','formants')
+# full.names = TRUE
+# recursive = FALSE
+# library(dplyr)
 
 extract_features_py <- function(directory,
                                 features = c('f0','formants'),
@@ -58,45 +58,40 @@ extract_features_py <- function(directory,
 
   # 1. F0 analysis of the signal
   if('f0' %in% features){
-    i <- i+1
     extract_f0 <- paste0('python3 ./temp_extract_f0.py ', directory)
     f0 <- system(extract_f0, wait = FALSE, intern = T)
     splist_f0 <- sapply(f0, strsplit, '\\s+')
     names(splist_f0) <- 1:length(splist_f0)
-    df_f0 <- t(dplyr::bind_rows(splist_f0[-1]))[,-1]
-    colnames(df_f0) <- t(dplyr::bind_rows(splist_f0[1]))[,-1]
+    df_f0 <- t(dplyr::bind_rows(splist_f0[-1]))
+    colnames(df_f0) <- as.vector(t(dplyr::bind_rows(splist_f0[1])))
+    colnames(df_f0)[1] <- 'id'
     df_f0 <- df_f0 %>%
-      as_tibble %>%
+      as_tibble() %>%
       mutate_at(vars(-file_name),
                 list(as.numeric)) %>%
-      select(file_name,interval,F0) %>%
+      select(id, file_name,interval,F0) %>%
       arrange(file_name, interval)
   }
 
   # 2. Formants
   if('formants' %in% features){
-    i <- i+1
     extract_formants <- paste0('python3 ./temp_extract_formants.py ', directory)
     formants <- system(extract_formants, wait = FALSE, intern = T)
     splist_fo <- sapply(formants, strsplit, '\\s+')
     names(splist_fo) <- 1:length(splist_fo)
-    df_formants <- t(dplyr::bind_rows(splist_fo[-1]))[,-1]
-    colnames(df_formants) <- t(dplyr::bind_rows(splist_fo[1]))[,-1]
-    colnames(df_formants)[-(1:2)] <- paste0('F',1:8)
+    df_formants <- t(dplyr::bind_rows(splist_fo[-1]))
+    colnames(df_formants) <- as.vector(t(dplyr::bind_rows(splist_fo[1])))
+    colnames(df_formants)[-(2:3)] <- c('id',paste0('F',1:8))
     df_formants <- df_formants %>%
       as_tibble %>%
       mutate_at(vars(-file_name),
                 list(as.numeric)) %>%
-      select(file_name,interval,F1:F8) %>%
+      select(id,file_name,interval,F1:F8) %>%
       arrange(file_name, interval)
   }
 
-
-  # id
-  id <- tibble::enframe(rep(basename(wavFiles), n_f0), value = 'audio', name = NULL)
-
   # final data frame
-  dat <- dplyr::bind_cols(audio=id, features.list)
+  dat <- dplyr::left_join(df_f0, df_formants, by=c('id','file_name','interval'))
 
   # total time
   t0 <- proc.time()-pt0
