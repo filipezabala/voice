@@ -20,7 +20,7 @@ for file in os.listdir(sys.argv[1]):
     max_formants = 8
     formant = snd.to_formant_burg(time_step = 5/1000, max_number_of_formants = max_formants)
     n_formants = numpy.arange(1, max_formants+1, 1)
-    interval = numpy.arange(formant.start_time, formant.end_time-5/100, 5/1000)
+    interval = numpy.arange(formant.start_time, formant.end_time, 5/1000)
     n_interval = len(interval)
     formant_values = numpy.zeros((n_interval, max_formants))
     
@@ -40,3 +40,4 @@ for file in os.listdir(sys.argv[1]):
 # <<<<
 df_final = pandas.concat(dfs, axis=0)
 print(df_final)
+# df_final.shape

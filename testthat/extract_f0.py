@@ -18,7 +18,7 @@ for file in os.listdir(sys.argv[1]):
     file_list = os.path.join(sys.argv[1], file)
     snd = parselmouth.Sound(file_list)
     pitch = snd.to_pitch(time_step = 5/1000)
-    interval = numpy.arange(pitch.start_time, pitch.end_time-4/100, 5/1000)
+    interval =  numpy.arange(pitch.start_time, pitch.end_time, 5/1000)
     n_interval = len(interval)
     df_f0_long = pandas.DataFrame(data=[[i] for i in interval], columns=['interval'])
     df_f0_long['file_name'] = file
@@ -29,5 +29,6 @@ for file in os.listdir(sys.argv[1]):
 # <<<<
 df_final = pandas.concat(dfs, axis=0)
 print(df_final)
+# df_final.shape
 
 # pitch_strength = pitch.selected_array['strength']

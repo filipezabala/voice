@@ -8,6 +8,7 @@
 #' path2wav <- list.files(system.file("extdata", package = "wrassp"),
 #' pattern <- glob2rx("*.wav"), full.names = TRUE)
 #' extract_features_py(dirname(path2wav)[1])
+#' @import dplyr
 #' @export
 
 # test
@@ -59,12 +60,16 @@ extract_features_py <- function(directory,
     i <- i+1
     extract_f0 <- paste0('python3 ./temp_extract_f0.py ', directory)
     f0 <- system(extract_f0, wait = FALSE, intern = T)
-    f0 <- sapply(f0, strsplit, ',')
-    f0 <- lapply(f0, as.numeric)
-    n_f0 <- sapply(f0,length)
-    names(features.list) <- 'f0'
-    features.list[[i]] <- dplyr::bind_cols(unlist(f0))
-    colnames(features.list[[i]]) <- 'F0'
+    splist_f0 <- sapply(f0, strsplit, '\\s+')
+    names(splist_f0) <- 1:length(splist_f0)
+    df_f0 <- t(dplyr::bind_rows(splist_f0[-1]))[,-1]
+    colnames(df_f0) <- t(dplyr::bind_rows(splist_f0[1]))[,-1]
+    df_f0 <- df_f0 %>%
+      as_tibble %>%
+      mutate_at(vars(-file_name),
+                list(as.numeric)) %>%
+      select(file_name,interval,F0) %>%
+      arrange(file_name, interval)
   }
 
   # 2. Formants
@@ -72,15 +77,15 @@ extract_features_py <- function(directory,
     i <- i+1
     extract_formants <- paste0('python3 ./temp_extract_formants.py ', directory)
     formants <- system(extract_formants, wait = FALSE, intern = T)
-    splist <- sapply(formants, strsplit, '\\s+')
-    names(splist) <- 1:length(splist)
-    df_formants <- t(dplyr::bind_rows(splist[-1]))[,-1]
-    colnames(df_formants) <- t(dplyr::bind_rows(splist[1]))[,-1]
+    splist_fo <- sapply(formants, strsplit, '\\s+')
+    names(splist_fo) <- 1:length(splist_fo)
+    df_formants <- t(dplyr::bind_rows(splist_fo[-1]))[,-1]
+    colnames(df_formants) <- t(dplyr::bind_rows(splist_fo[1]))[,-1]
     colnames(df_formants)[-(1:2)] <- paste0('F',1:8)
     df_formants <- df_formants %>%
       as_tibble %>%
       mutate_at(vars(-file_name),
-                funs(as.numeric)) %>%
+                list(as.numeric)) %>%
       select(file_name,interval,F1:F8) %>%
       arrange(file_name, interval)
   }
