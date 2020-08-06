@@ -6,7 +6,7 @@
 \usage{
 extract_features_py(
   directory,
-  features = c("f0"),
+  features = c("f0", "formants"),
   full.names = TRUE,
   recursive = FALSE
 )
