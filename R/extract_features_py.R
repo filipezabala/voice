@@ -1,13 +1,23 @@
 #' Extract features from WAV audios using Python's Parselmouth library.
 #'
 #' @param \code{directory} A directory/folder containing WAV files.
-#' @param \code{features} Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc').
+#' @param \code{filesRange} The desired range of directory files (default: \code{NULL}, i.e., all files).
+#' @param \code{features} Vector of features to be extracted. (default: 'f0' (pitch),'formants' (F1:F8)).
 #' @return \code{char} vector containing the expanded models.
 #' @details The function uses the \code{getwd()} folder to write the temp files.
 #' @examples
+#' library(voice)
 #' path2wav <- list.files(system.file("extdata", package = "wrassp"),
 #' pattern <- glob2rx("*.wav"), full.names = TRUE)
-#' extract_features_py(dirname(path2wav)[1])
+#' efp <- extract_features_py(dirname(path2wav))
+#' efp
+#' table(efp$file_name)
+#'
+#' # limiting filesRange
+#' efpl <- extract_features_py(dirname(path2wav), filesRange = 3:6)
+#' efpl
+#' table(efpl$file_name)
+#'
 #' @import dplyr
 #' @export
 
@@ -18,8 +28,7 @@
 # full.names = TRUE
 # recursive = FALSE
 # library(dplyr)
-
-extract_features_py <- function(directory,
+extract_features_py <- function(directory, filesRange = NULL,
                                 features = c('f0','formants'),
                                 full.names = TRUE, recursive = FALSE){
 
@@ -48,10 +57,6 @@ extract_features_py <- function(directory,
   # calling libraries - MUST BE A BETTER WAY TO DO THIS!
   reticulate::source_python('./temp_libs.py')
 
-  # listing wav files
-  wavFiles <- list.files(directory, pattern = glob2rx('*.wav'),
-                         full.names = full.names, recursive = recursive)
-
   # list of features
   features.list <- vector('list', 1)
   i <- 0
@@ -69,7 +74,7 @@ extract_features_py <- function(directory,
       as_tibble() %>%
       mutate_at(vars(-file_name),
                 list(as.numeric)) %>%
-      select(id, file_name,interval,F0) %>%
+      select(id, file_name, interval, F0) %>%
       arrange(file_name, interval)
   }
 

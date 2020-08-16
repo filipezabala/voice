@@ -10,6 +10,7 @@
 #'              mc.cores = parallel::detectCores(), full.names = TRUE,
 #'              recursive = FALSE, as.tibble = TRUE)
 #' @param \code{directory} A directory containing audio file(s) in WAV or MP3 formats. If more than one directory is provided, only the first one is used.
+#' @param \code{filesRange} The desired range of directory files (default: \code{NULL}, i.e., all files).
 #' @param \code{features} Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
 #' @param \code{gender} = <code>: set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
 #' @param \code{windowShift} = <dur>: set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
@@ -30,43 +31,50 @@
 #' path2wav <- list.files(system.file("extdata", package = "wrassp"),
 #' pattern <- glob2rx("*.wav"), full.names = TRUE)
 #'
-#'# getting all the 1092 features
-#' xx <- extract_features(dirname(path2wav), features = c('f0','formants',
+#' # getting all the 1092 features
+#' ef <- extract_features(dirname(path2wav), features = c('f0','formants',
 #' 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'))
-#' ncol(xx)
-#' xx
+#' dim(ef)
+#' ef
 #'
 #' # using the default, i.e., not using 'cep','dft','css' and 'lps' (4*257 = 1028 columns)
-#' xx2 <- extract_features(dirname(path2wav))
-#'ncol(xx2)
-#'xx2
+#' ef2 <- extract_features(dirname(path2wav))
+#' dim(ef2)
+#' ef2
+#' table(ef2$file_name)
 #'
-#'  library(ellipse)
-#'  library(RColorBrewer)
+#' # limiting filesRange
+#' ef3 <- extract_features(dirname(path2wav), filesRange = 3:6)
+#' dim(ef3)
+#' ef3
+#' table(ef3$file_name)
 #'
-#'  # calculating correlation of xx2
-#'  data <- cor(xx2[-1])
+#' library(ellipse)
+#' library(RColorBrewer)
 #'
-#'  # pane with 100 colors using RcolorBrewer
-#'  my_colors <- brewer.pal(5, "Spectral")
-#'  my_colors <- colorRampPalette(my_colors)(100)
+#' # calculating correlation of ef2
+#' data <- cor(ef2[-1])
 #'
-#'  # ordering the correlation matrix
-#'  ord <- order(data[1, ])
-#'  data_ord <- data[ord, ord]
-#'  plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
+#' # pane with 100 colors using RcolorBrewer
+#' my_colors <- brewer.pal(5, "Spectral")
+#' my_colors <- colorRampPalette(my_colors)(100)
+#'
+#' # ordering the correlation matrix
+#' ord <- order(data[1, ])
+#' data_ord <- data[ord, ord]
+#' plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
 #'
 #' # Principal Component Analysis (PCA)
-#' (pc <- prcomp(xx2[-1], scale = T))
+#' (pc <- prcomp(ef2[-1], scale = T))
 #' screeplot(pc, type = 'lines')
 #'
 #' library(ggfortify)
-#' autoplot(pc, data = xx2, colour = 'audio', loadings = T, loadings.label = T)
+#' autoplot(pc, data = ef2, colour = 'file_name', loadings = T, loadings.label = T)
 #'
 #' library(pca3d)
-#' pca3d(pc, group=xx2$audio)
+#' pca3d(pc, group=ef2$file_name)
 #' @export
-extract_features <- function(directory,
+extract_features <- function(directory, filesRange = NULL,
                              features = c('f0','formants','zcr','mhs','rms',
                                           'gain','rfc','ac','mfcc'),
                              gender = 'u', windowShift = 5, numFormants = 8,
@@ -86,7 +94,14 @@ extract_features <- function(directory,
   wavFiles <- list.files(directory, pattern = glob2rx('*.wav'),
                          full.names = full.names, recursive = recursive)
 
-  # number of wav files
+  # filtering by fileRange
+  if(!is.null(filesRange)){
+    fullRange <- 1:length(wavFiles)
+    filesRange <- base::intersect(fullRange,filesRange)
+    wavFiles <- wavFiles[filesRange]
+  }
+
+  # number of wav files to be extracted
   nWav <- length(wavFiles)
 
   # checking lpa features
@@ -415,7 +430,7 @@ extract_features <- function(directory,
   }
 
   # id, using smaller length: n_min
-  id <- tibble::enframe(rep(basename(wavFiles), n_min), value = 'audio',
+  id <- tibble::enframe(rep(basename(wavFiles), n_min), value = 'file_name',
                         name = NULL)
 
   # colnames
