@@ -22,8 +22,8 @@ for file in os.listdir(sys.argv[1]):
     df_f0_long = pandas.DataFrame(data=[[i] for i in interval], columns=['interval'])
     df_f0_long['interval'] = df_f0_long['interval'].astype(float)
     df_f0_long['file_name'] = file
-    # df_f0_long['F0'] = df_f0_long.apply(lambda x: pitch.get_value_at_time(time=x['interval']), axis=1)
-    df_f0_long['F0'] = pitch.selected_array['frequency']
+    df_f0_long['F0'] = df_f0_long.apply(lambda x: pitch.get_value_at_time(time=x['interval']), axis=1)
+    # df_f0_long['F0'] = pitch.selected_array['frequency']
     dfs.append(df_f0_long)
 
 df_final = pandas.concat(dfs, axis=0)
