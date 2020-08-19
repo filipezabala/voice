@@ -60,9 +60,9 @@ extract_features_py <- function(directory, filesRange = NULL,
   # calling libraries - MUST BE A BETTER WAY TO DO THIS!
   reticulate::source_python('./temp_libs.py')
 
-  # list of features
-  features.list <- vector('list', 1)
-  i <- 0
+  # # list of features
+  # features.list <- vector('list', 1)
+  # i <- 0
 
   # 1. F0 analysis of the signal
   if('f0' %in% features){
