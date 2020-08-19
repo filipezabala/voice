@@ -83,7 +83,8 @@ extract_features_py <- function(directory, filesRange = NULL,
 
   # 2. Formants
   if('formants' %in% features){
-    extract_formants <- paste0('python3 ./temp_extract_formants.py ', directory)
+    extract_formants <- paste('python3 ./temp_extract_formants.py ', directory,
+                              windowShift)
     formants <- system(extract_formants, wait = FALSE, intern = T)
     splist_fo <- sapply(formants, strsplit, '\\s+')
     names(splist_fo) <- 1:length(splist_fo)
