@@ -23,13 +23,16 @@
 
 # test
 # directory <- '/Users/filipezabala/Dropbox/D_Filipe_Zabala/audios/coorte'
-# directory <- '/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'
-# features = c('f0','formants')
-# full.names = TRUE
-# recursive = FALSE
-# library(dplyr)
+directory <- '/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'
+features = c('f0','formants')
+windowShift = 5/1000
+full.names = TRUE
+recursive = FALSE
+library(dplyr)
+
 extract_features_py <- function(directory, filesRange = NULL,
                                 features = c('f0','formants'),
+                                windowShift = 5/1000,
                                 full.names = TRUE, recursive = FALSE){
 
   # process time
@@ -63,7 +66,7 @@ extract_features_py <- function(directory, filesRange = NULL,
 
   # 1. F0 analysis of the signal
   if('f0' %in% features){
-    extract_f0 <- paste0('python3 ./temp_extract_f0.py ', directory)
+    extract_f0 <- paste('python3 ./temp_extract_f0.py', directory, windowShift)
     f0 <- system(extract_f0, wait = FALSE, intern = T)
     splist_f0 <- sapply(f0, strsplit, '\\s+')
     names(splist_f0) <- 1:length(splist_f0)
