@@ -9,6 +9,8 @@ To make full use of the R part of the `voice` package you may use the following 
 packs <- c('devtools', 'tidyverse', 'tuneR', 'wrassp', 'ellipse', 'RColorBrewer',
            'ggfortify', 'pca3d')
 install.packages(packs, dep = T)
+update.packages(ask = F)
+
 devtools::install_github('filipezabala/voice', force = T)
 ```
 ### The Python part
@@ -80,7 +82,7 @@ conv(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = T)
 conv_mc(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = T)
 
 dat.num <- dat %>%
-select(f0:mhs1)
+  select(f0:mhs1)
 nrow(dat.num)
 cm1 <- conv_mc(dat.num, compact.to = 0.1, drop.zeros = T, to.data.frame = F)
 names(cm1)
