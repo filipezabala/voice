@@ -11,8 +11,23 @@ pandas.set_option('display.width', None)
 pandas.set_option('display.max_colwidth', None)
 dfs = []
 
-# for file in os.listdir('/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'):
-for file in os.listdir(sys.argv[1]):
+# dirlist = sorted(os.listdir('/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'))
+# teste = '3:6'
+dirlist = sorted(os.listdir(sys.argv[1]))
+n_dir = len(dirlist)
+
+# filtering by fileRange
+if(sys.argv[3] != 'NULL'):
+  fullRange = numpy.arange(1, n_dir+1, 1)
+  start0 = int(sys.argv[3].split(':')[0])
+  end0 = int(sys.argv[3].split(':')[1])
+  filesRange = numpy.arange(start0, end0+1, 1)
+  filesRange = set(fullRange).intersection(filesRange)
+  start = min(filesRange)
+  end = max(filesRange)
+
+# for file in sorted(os.listdir('/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/')):
+for file in dirlist[start-1:end]:
   if file.endswith('.wav'):
     # file_list = os.path.join('/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/', file)
     file_list = os.path.join(sys.argv[1], file)
