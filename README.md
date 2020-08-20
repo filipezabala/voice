@@ -6,20 +6,29 @@ General tools for voice analysis. The `voice` package is being developed to be a
 ### The R part
 To make full use of the R part of the `voice` package you may use the following code.
 ```r
-packs <- c('devtools', 'tidyverse', 'tuneR', 'wrassp', 'ellipse', 'RColorBrewer',
-           'ggfortify', 'pca3d')
+packs <- c('devtools', 'tidyverse', 'tuneR', 'wrassp', 'reticulate', 'ellipse',
+           'RColorBrewer', 'ggfortify', 'pca3d')
 install.packages(packs, dep = T)
 update.packages(ask = F)
 
 devtools::install_github('filipezabala/voice', force = T)
 ```
 ### The Python part
-To make use of the Python part of the `voice` package the user must be aware of the incresing of complexity of maintaining and operating simultaneously two systems.  
-TO BE CONTINUED
+To make use of the Python part of the `voice` package the user must be aware of the incresing of complexity of maintaining and operating simultaneously two systems. 
+#### At R
+```r
+reticulate::py_config()
+R.home()
+```
+#### At command-line
+The following instructions should work on [command-line](https://en.wikipedia.org/wiki/Command-line_interface) of [Unix-like](https://en.wikipedia.org/wiki/Unix-like) systems.
+```bash
+pip3 install numpy pandas praat-parselmouth
+```
 
 ### Examples
 #### `rm0`
-Remove zeros.
+Transforms `n` sets of `m>n` zeros (alternated with sets of non zeros) into `n` sets of `n` zeros.
 ```r
 library(voice)
 
@@ -103,7 +112,7 @@ dim(cx.df2)
 (cx.list <- conv_df(x, 0.1, to.data.frame = F))
 ```
 #### `extract_features`
-Extract features using `tuneR` and `wrassp` functions.
+Extract features from WAV files using `tuneR` and `wrassp` functions.
 ```r
 library(voice)
 
@@ -156,7 +165,7 @@ library(pca3d)
 pca3d(pc, group=ef2$file_name)
 ```
 #### `extract_features_py`
-Extract features using Python's `parselmouth`.
+Extract features from WAV files using Python's `parselmouth`.
 ```r
 library(voice)
 
