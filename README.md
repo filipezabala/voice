@@ -159,18 +159,18 @@ data_ord <- data[ord, ord]
 plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
 ```
 ![](img/plotcorr.png)
-```
+```r
 # Principal Component Analysis (PCA)
 (pc <- prcomp(ef2[-1], scale = T))
 screeplot(pc, type = 'lines')
 ```
 ![](img/scree.png)
-```
+```r
 library(ggfortify)
 autoplot(pc, data = ef2, colour = 'file_name', loadings = T, loadings.label = T)
 ```
 ![](img/autoplot.png)
-```
+```r
 library(pca3d)
 pca3d(pc, group=ef2$file_name)
 ```
