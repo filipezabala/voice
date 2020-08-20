@@ -14,7 +14,7 @@ update.packages(ask = F)
 devtools::install_github('filipezabala/voice', force = T)
 ```
 ### The Python part
-To make use of the Python part of the `voice` package the user must be aware of the incresing of complexity of maintaining and operating simultaneously two systems. 
+To make use of the Python part of the `voice` package the user must be aware of the increased complexity to manage and maintain simultaneously two systems. 
 #### At R
 ```r
 reticulate::py_config()
