@@ -23,14 +23,13 @@
 
 # test
 # directory <- '~/Dropbox/D_Filipe_Zabala/audios/coorte'
-directory <- '/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'
-filesRange = 3:6
-features = c('f0','formants')
-windowShift = 5/1000
-full.names = TRUE
-recursive = FALSE
-library(dplyr)
-
+# directory <- '/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'
+# filesRange = 3:6
+# features = c('f0','formants')
+# windowShift = 5/1000
+# full.names = TRUE
+# recursive = FALSE
+# library(dplyr)
 extract_features_py <- function(directory, filesRange = 0,
                                 features = c('f0','formants'),
                                 windowShift = 5/1000,
@@ -60,10 +59,6 @@ extract_features_py <- function(directory, filesRange = 0,
 
   # calling libraries - MUST BE A BETTER WAY TO DO THIS!
   reticulate::source_python('./temp_libs.py')
-
-  # # list of features
-  # features.list <- vector('list', 1)
-  # i <- 0
 
   # 1. F0 analysis of the signal
   if('f0' %in% features){

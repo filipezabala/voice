@@ -4,9 +4,9 @@ library(voice)
 
 # extraction via parselmouth.Sound.to_pitch, pitch_ceiling = 600.0
 ini <- Sys.time()
-# f0_py <- system('python3 ./testthat/extract_f0.py ~/Dropbox/D_Filipe_Zabala/audios/coorte',
-#             wait = FALSE, intern = T)
-ef_py <- extract_features_py('~/Dropbox/D_Filipe_Zabala/audios/coorte')
+ef_py <- extract_features_py('~/Dropbox/D_Filipe_Zabala/audios/coorte', filesRange = 2:7)
+ef_py <- extract_features_py('/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/',
+                             filesRange = 2:7)
 Sys.time()-ini
 by(ef_py$F0, ef_py$file_name, quantile, probs=seq(0,1,.1), na.rm = T)
 by(ef_py$F0, ef_py$file_name, function(x) sum(is.nan(x))/length(x))
