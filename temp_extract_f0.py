@@ -5,14 +5,12 @@ import pandas
 import parselmouth  # pip3 install praat-parselmouth
 from parselmouth.praat import call
 
-# setting options
 pandas.set_option('display.max_rows', None)
 pandas.set_option('display.max_columns', None)
 pandas.set_option('display.width', None)
 pandas.set_option('display.max_colwidth', None)
 dfs = []
 
-# listing directory files
 dirlist = sorted(os.listdir(sys.argv[1]))
 n_dir = len(dirlist)
 

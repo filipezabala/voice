@@ -23,14 +23,15 @@
 
 # test
 # directory <- '~/Dropbox/D_Filipe_Zabala/audios/coorte'
-# directory <- '/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'
-# features = c('f0','formants')
-# windowShift = 5/1000
-# full.names = TRUE
-# recursive = FALSE
-# library(dplyr)
+directory <- '/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'
+filesRange = 3:6
+features = c('f0','formants')
+windowShift = 5/1000
+full.names = TRUE
+recursive = FALSE
+library(dplyr)
 
-extract_features_py <- function(directory, filesRange = NULL,
+extract_features_py <- function(directory, filesRange = 0,
                                 features = c('f0','formants'),
                                 windowShift = 5/1000,
                                 full.names = TRUE, recursive = FALSE){
@@ -67,7 +68,7 @@ extract_features_py <- function(directory, filesRange = NULL,
   # 1. F0 analysis of the signal
   if('f0' %in% features){
     extract_f0 <- paste('python3 ./temp_extract_f0.py', directory, windowShift,
-                        filesRange)
+                        min(filesRange), max(filesRange))
     f0 <- system(extract_f0, wait = FALSE, intern = T)
     splist_f0 <- sapply(f0, strsplit, '\\s+')
     names(splist_f0) <- 1:length(splist_f0)
@@ -85,7 +86,7 @@ extract_features_py <- function(directory, filesRange = NULL,
   # 2. Formants
   if('formants' %in% features){
     extract_formants <- paste('python3 ./temp_extract_formants.py ', directory,
-                              windowShift)
+                              windowShift, min(filesRange), max(filesRange))
     formants <- system(extract_formants, wait = FALSE, intern = T)
     splist_fo <- sapply(formants, strsplit, '\\s+')
     names(splist_fo) <- 1:length(splist_fo)
