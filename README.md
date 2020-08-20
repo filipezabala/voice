@@ -5,7 +5,7 @@ General tools for voice analysis. The `voice` package is being developed to be a
 ## Installation
 ### The R part
 To make full use of the R part of the `voice` package you may use the following code.
-```
+```r
 packs <- c('devtools', 'tidyverse', 'tuneR', 'wrassp', 'ellipse', 'RColorBrewer',
            'ggfortify', 'pca3d')
 install.packages(packs, dep = T)
@@ -18,7 +18,7 @@ TO BE CONTINUED
 ### Examples
 #### `rm0`
 Remove zeros.
-```
+```r
 library(voice)
 
 (v0 <- c(1:20,rep(0,10)))
@@ -46,7 +46,7 @@ sum(v4 == 0)
 ```
 #### `conv`
 Convolute vectors.
-```
+```r
 library(voice)
 
 (c1 <- conv(1:100, compact.to = 0.2, drop.zeros = T))
@@ -69,7 +69,7 @@ points(c3$x, c3$y, col = 'red')
 ```
 #### `conv_mc`
 Convolute vectors using multicore.
-```
+```r
 library(voice)
 
 # Same result of conv() function if x is a vector
@@ -88,7 +88,7 @@ lapply(cm1$f0, length)
 ```
 #### `conv_df`
 Convolute data frames using multicore.
-```
+```r
 library(voice)
 
 x <- dat %>%
@@ -102,7 +102,7 @@ dim(cx.df2)
 ```
 #### `extract_features`
 Extract features using `tuneR` and `wrassp` functions.
-```
+```r
 library(voice)
 
 # get path to audio file
@@ -155,7 +155,7 @@ pca3d(pc, group=ef2$file_name)
 ```
 #### `extract_features_py`
 Extract features using Python's `parselmouth`.
-```
+```r
 library(voice)
 
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
