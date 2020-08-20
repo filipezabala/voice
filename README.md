@@ -26,8 +26,8 @@ The following instructions should work on [command-line](https://en.wikipedia.or
 pip3 install numpy pandas praat-parselmouth
 ```
 
-### Examples
-#### `rm0`
+## Examples
+### `rm0`
 Transforms `n` sets of `m>n` zeros (alternated with sets of non zeros) into `n` sets of `n` zeros.
 ```r
 library(voice)
@@ -55,7 +55,7 @@ length(r3)
 length(r4)
 sum(v4 == 0)
 ```
-#### `conv`
+### `conv`
 Convolute vectors.
 ```r
 library(voice)
@@ -78,7 +78,7 @@ lapply(c3, length)
 plot(v3, type = 'l')
 points(c3$x, c3$y, col = 'red')
 ```
-#### `conv_mc`
+### `conv_mc`
 Convolute vectors using multicore.
 ```r
 library(voice)
@@ -97,7 +97,7 @@ cm1 <- conv_mc(dat.num, compact.to = 0.1, drop.zeros = T, to.data.frame = F)
 names(cm1)
 lapply(cm1$f0, length)
 ```
-#### `conv_df`
+### `conv_df`
 Convolute data frames using multicore.
 ```r
 library(voice)
@@ -111,7 +111,7 @@ dim(cx.df)
 dim(cx.df2)
 (cx.list <- conv_df(x, 0.1, to.data.frame = F))
 ```
-#### `extract_features`
+### `extract_features`
 Extract features from WAV files using `tuneR` and `wrassp` functions.
 ```r
 library(voice)
@@ -164,7 +164,7 @@ autoplot(pc, data = ef2, colour = 'file_name', loadings = T, loadings.label = T)
 library(pca3d)
 pca3d(pc, group=ef2$file_name)
 ```
-#### `extract_features_py`
+### `extract_features_py`
 Extract features from WAV files using Python's `parselmouth`.
 ```r
 library(voice)
