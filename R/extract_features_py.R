@@ -1,14 +1,14 @@
 #' Extract features from WAV audios using Python's Parselmouth library.
 #'
 #' @param \code{directory} A directory/folder containing WAV files.
-#' @param \code{filesRange} The desired range of directory files (default: \code{NULL}, i.e., all files).
+#' @param \code{filesRange} The desired range of directory files (default: 0, i.e., all files).
 #' @param \code{features} Vector of features to be extracted. (default: 'f0' (pitch),'formants' (F1:F8)).
 #' @return \code{char} vector containing the expanded models.
 #' @details The function uses the \code{getwd()} folder to write the temp files.
 #' @examples
 #' library(voice)
-#' path2wav <- list.files(system.file("extdata", package = "wrassp"),
-#' pattern <- glob2rx("*.wav"), full.names = TRUE)
+#' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+#' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #' efp <- extract_features_py(dirname(path2wav))
 #' efp
 #' table(efp$file_name)
@@ -17,19 +17,8 @@
 #' efpl <- extract_features_py(dirname(path2wav), filesRange = 3:6)
 #' efpl
 #' table(efpl$file_name)
-#'
 #' @import dplyr
 #' @export
-
-# test
-# directory <- '~/Dropbox/D_Filipe_Zabala/audios/coorte'
-# directory <- '/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/'
-# filesRange = 3:6
-# features = c('f0','formants')
-# windowShift = 5/1000
-# full.names = TRUE
-# recursive = FALSE
-# library(dplyr)
 extract_features_py <- function(directory, filesRange = 0,
                                 features = c('f0','formants'),
                                 windowShift = 5/1000,

@@ -13,7 +13,6 @@
 #' conv(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = T)
 #' conv_mc(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = T)
 #'
-#' library(tidyverse)
 #' dat.num <- dat %>%
 #' select(f0:mhs1)
 #' nrow(dat.num)

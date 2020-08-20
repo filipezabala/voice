@@ -4,7 +4,7 @@ library(voice)
 
 # extraction via parselmouth.Sound.to_pitch, pitch_ceiling = 600.0
 ini <- Sys.time()
-ef_py <- extract_features_py('~/Dropbox/D_Filipe_Zabala/audios/coorte', filesRange = 2:7)
+# ef_py <- extract_features_py('~/Dropbox/D_Filipe_Zabala/audios/coorte', filesRange = 2:7)
 ef_py <- extract_features_py('/Library/Frameworks/R.framework/Versions/4.0/Resources/library/wrassp/extdata/',
                              filesRange = 2:7)
 Sys.time()-ini
