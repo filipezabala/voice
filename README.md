@@ -66,7 +66,7 @@ plot(1:100, type = 'l')
 points(c1$x, c1$y, col='red')
 ```
 ![](img/points1.png)
-```
+```r
 (v2 <- c(1:5, rep(0,10), 1:10, rep(0,5), 10:20, rep(0,10)))
 length(v2)
 conv(v2, 0.1, drop.zeros = T, to.data.frame = F)
