@@ -13,6 +13,7 @@ conv_df(
   drop.x = F,
   drop.zeros = F,
   to.data.frame = T,
+  round.off = NULL,
   mc.cores = parallel::detectCores()
 )
 }
@@ -23,13 +24,17 @@ conv_df(
 
 \item{\code{colnum}}{A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.}
 
-\item{\code{id}}{The identification column.}
+\item{\code{id}}{The identification column. Default: \code{'id'}.}
 
 \item{\code{by.filter}}{A \code{char} indicating the column to filter by. If \code{NULL} uses the \code{id} content.}
 
-\item{\code{drop.zeros}}{Logical. Drop repeated zeros or compress to 1 zero per null set?}
+\item{\code{drop.x}}{Logical. Drop columns containing .x? Default: \code{'FALSE'}.}
 
-\item{\code{to.data.frame}}{Logical. Should the return be a data frame? If \code{F} returns a list.}
+\item{\code{drop.zeros}}{Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{'FALSE'}.}
+
+\item{\code{to.data.frame}}{Logical. Should the return be a data frame? If \code{F} returns a list. Default: \code{'TRUE'}.}
+
+\item{\code{round.off}}{Number of decimal places of the convoluted vector. Default: \code{'NULL'}.}
 
 \item{\code{mc.cores}}{The number of cores to mclapply. By default uses \code{parallel::detectCores()}.}
 }
@@ -41,7 +46,7 @@ Convolute data frames.
 }
 \examples{
 library(voice)
-library(tidyverse)
+
 x <- dat \%>\%
 mutate_each(as.factor, id:anyep_diff_w1)
 (cx.df <- conv_df(x, 0.1))

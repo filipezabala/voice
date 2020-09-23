@@ -4,7 +4,7 @@
 \alias{extract_features}
 \title{Extracts features from WAV audio files.}
 \usage{
-extract_features(directory,
+extract_features(directory, filesRange = NULL,
              features = c('f0','formants','zcr','rms','mhs',
              'gain','rfc,','ac','mfcc'),
              gender = 'u', windowShift = 5, numFormants = 8,
@@ -50,8 +50,8 @@ Extracts features from WAV audio files.
 library(voice)
 
 # get path to audio file
-path2wav <- list.files(system.file("extdata", package = "wrassp"),
-pattern <- glob2rx("*.wav"), full.names = TRUE)
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
 
 # getting all the 1092 features
 ef <- extract_features(dirname(path2wav), features = c('f0','formants',
@@ -78,7 +78,7 @@ library(RColorBrewer)
 data <- cor(ef2[-1])
 
 # pane with 100 colors using RcolorBrewer
-my_colors <- brewer.pal(5, "Spectral")
+my_colors <- brewer.pal(5, 'Spectral')
 my_colors <- colorRampPalette(my_colors)(100)
 
 # ordering the correlation matrix

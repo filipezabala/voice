@@ -7,17 +7,24 @@
 conv_mc(
   y,
   compact.to,
-  drop.zeros,
-  to.data.frame,
+  drop.zeros = F,
+  to.data.frame = F,
+  round.off = NULL,
   mc.cores = parallel::detectCores()
 )
 }
 \arguments{
 \item{\code{y}}{A numeric vector, matrix or data frame.}
 
-\item{\code{compact.to}}{Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.}
+\item{\code{compact.to}}{Percentage of remaining points after compression. If equals to 1 and keep.zeros = T, the original vector is presented.}
 
-\item{\code{mc.cores}}{The number of cores to mclapply.}
+\item{\code{drop.zeros}}{Logical. Drop repeated zeros? Default: \code{'FALSE'}.}
+
+\item{\code{to.data.frame}}{Logical. Convert to data frame? Default: \code{'FALSE'}.}
+
+\item{\code{round.off}}{Number of decimal places of the convoluted vector. Default: \code{'NULL'}.}
+
+\item{\code{mc.cores}}{The number of cores to mclapply. Default: \code{'parallel::detectCores()'}.}
 }
 \value{
 A list of x and y convoluted values with length near to \code{compact.to*length(y)}.
@@ -34,7 +41,6 @@ conv_mc(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = F)
 conv(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = T)
 conv_mc(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = T)
 
-library(tidyverse)
 dat.num <- dat \%>\%
 select(f0:mhs1)
 nrow(dat.num)

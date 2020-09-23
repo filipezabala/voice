@@ -4,14 +4,18 @@
 \alias{conv}
 \title{Convolute vectors.}
 \usage{
-conv(y, compact.to, drop.zeros, to.data.frame = F)
+conv(y, compact.to, drop.zeros = F, to.data.frame = F, round.off = NULL)
 }
 \arguments{
 \item{\code{y}}{A vector or time series.}
 
 \item{\code{compact.to}}{Proportion of remaining points after compactation, between (including) 0 and 1. If equals to 1 and keep.zeros = T, the original vector is presented.}
 
-\item{\code{drop.zeros}}{Logical. Drop repeated zeros?}
+\item{\code{drop.zeros}}{Logical. Drop repeated zeros? Default: \code{'FALSE'}.}
+
+\item{\code{to.data.frame}}{Logical. Convert to data frame? Default: \code{'FALSE'}.}
+
+\item{\code{round.off}}{Number of decimal places of the convoluted vector. Default: \code{'NULL'}.}
 }
 \value{
 A list of convoluted \code{x} and \code{y} values with length near to \code{compact.to*length(y)}.
@@ -37,6 +41,9 @@ conv(v2, 0.2, drop.zeros = F)
 lapply(c3, length)
 plot(v3, type = 'l')
 points(c3$x, c3$y, col = 'red')
+
+(v4 <- c(rnorm(1:100)))
+(c4 <- conv(v4, 1/4, round.off = 3))
 }
 \seealso{
 \code{rm0}, \code{conv_mc}, \code{conv_df}

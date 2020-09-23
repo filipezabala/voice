@@ -2,7 +2,9 @@
 #'
 #' @param \code{y} A vector or time series.
 #' @param \code{compact.to} Proportion of remaining points after compactation, between (including) 0 and 1. If equals to 1 and keep.zeros = T, the original vector is presented.
-#' @param \code{drop.zeros} Logical. Drop repeated zeros?
+#' @param \code{drop.zeros} Logical. Drop repeated zeros? Default: \code{'FALSE'}.
+#' @param \code{to.data.frame} Logical. Convert to data frame? Default: \code{'FALSE'}.
+#' @param \code{round.off} Number of decimal places of the convoluted vector. Default: \code{'NULL'}.
 #' @return A list of convoluted \code{x} and \code{y} values with length near to \code{compact.to*length(y)}.
 #' @examples
 #' (c1 <- conv(1:100, compact.to = 0.2, drop.zeros = T))
@@ -22,17 +24,24 @@
 #' lapply(c3, length)
 #' plot(v3, type = 'l')
 #' points(c3$x, c3$y, col = 'red')
+#'
+#' (v4 <- c(rnorm(1:100)))
+#' (c4 <- conv(v4, 1/4, round.off = 3))
 #' @seealso \code{rm0}, \code{conv_mc}, \code{conv_df}
 #' @export
-conv <- function(y, compact.to, drop.zeros, to.data.frame = F){
+conv <- function(y, compact.to, drop.zeros = F, to.data.frame = F,
+                 round.off = NULL){
 
   ifelse(drop.zeros, v <- voice::rm0(y), v <- y)
   lv <- length(v)
 
   # interpolating
   cv <- approx(v, n = ceiling(compact.to*lv))
+  if(!is.null(round.off)){
+    cv <- lapply(cv, round, round.off)
+  }
   if(to.data.frame){
-    cv <- do.call(cbind,cv)
+    cv <- do.call(cbind, cv)
   }
   return(cv)
 }

@@ -1,6 +1,6 @@
 #' Extracts features from WAV audio files.
 #' @description Extracts features from WAV audio files.
-#' @usage extract_features(directory,
+#' @usage extract_features(directory, filesRange = NULL,
 #'              features = c('f0','formants','zcr','rms','mhs',
 #'              'gain','rfc,','ac','mfcc'),
 #'              gender = 'u', windowShift = 5, numFormants = 8,

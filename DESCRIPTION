@@ -1,8 +1,8 @@
 Package: voice
 Type: Package
 Title: General Tools for voice analysis, speecher recognition and mood inference.
-Version: 0.0.7
-Date: 2020-07-29
+Version: 0.0.8
+Date: 2020-09-23
 Authors@R: c(
     person("Zabala", "Filipe J.", email = "filipe.zabala@gmail.com", role = c("cre","aut")),
     person("Salum Jr.", "Giovanni A.", email = "gsalumjr@gmail.com", role = "aut"))

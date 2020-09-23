@@ -1,8 +1,11 @@
 #' Convolute vectors using multicore.
 #'
 #' @param \code{y} A numeric vector, matrix or data frame.
-#' @param \code{compact.to} Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.
-#' @param \code{mc.cores} The number of cores to mclapply.
+#' @param \code{compact.to} Percentage of remaining points after compression. If equals to 1 and keep.zeros = T, the original vector is presented.
+#' @param \code{drop.zeros} Logical. Drop repeated zeros? Default: \code{'FALSE'}.
+#' @param \code{to.data.frame} Logical. Convert to data frame? Default: \code{'FALSE'}.
+#' @param \code{round.off} Number of decimal places of the convoluted vector. Default: \code{'NULL'}.
+#' @param \code{mc.cores} The number of cores to mclapply. Default: \code{'parallel::detectCores()'}.
 #' @return A list of x and y convoluted values with length near to \code{compact.to*length(y)}.
 #' @examples
 #' library(voice)
@@ -21,14 +24,17 @@
 #' lapply(cm1$f0, length)
 #' @seealso \code{rm0}, \code{conv}, \code{conv_df}
 #' @export
-conv_mc <- function(y, compact.to, drop.zeros, to.data.frame, mc.cores = parallel::detectCores()){
+conv_mc <- function(y, compact.to, drop.zeros = F, to.data.frame = F,
+                    round.off = NULL, mc.cores = parallel::detectCores()){
   if(is.vector(y)){
-    cm <- voice::conv(y, compact.to = compact.to, drop.zeros = drop.zeros, to.data.frame = to.data.frame)
+    cm <- voice::conv(y, compact.to = compact.to, drop.zeros = drop.zeros,
+                      to.data.frame = to.data.frame, round.off = round.off)
   }
   if(is.matrix(y) | is.data.frame(y)){
-    cm <- parallel::mclapply(y, voice::conv, compact.to = compact.to, drop.zeros = drop.zeros,
-                             to.data.frame = to.data.frame, mc.cores = mc.cores)
+    cm <- parallel::mclapply(y, voice::conv, compact.to = compact.to,
+                             drop.zeros = drop.zeros,
+                             to.data.frame = to.data.frame,
+                             round.off = round.off, mc.cores = mc.cores)
   }
   return(cm)
 }
-
