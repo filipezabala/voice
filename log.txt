@@ -1,0 +1,12 @@
+1. Voice
+ . fazer rodar via 4.0.2 ou menor
+
+2. extract_features
+ v 0 -> NA
+ v validar/converter stereo -> mono
+ v zcr : Error in rbind(deparse.level, ...) :   numbers of columns of arguments do not match
+ v tirar MP3 da documentação
+
+3. extract_features_py
+ v NaN -> NA
+ . adicionar outras características

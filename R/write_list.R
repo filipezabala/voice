@@ -1,10 +1,10 @@
-#' Writes a list.
+#' Writes a list to a path.
 #'
-#' @param \code{lista} A list.
-#' @param \code{caminho} The directory.
+#' @param \code{x} A list.
+#' @param \code{directory} A directory.
 #' @export
-write_list <- function(lista, caminho){
-  sink(caminho)
-  print(lista)
+write_list <- function(x, directory){
+  sink(directory)
+  print(x)
   sink()
 }

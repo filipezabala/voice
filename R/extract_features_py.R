@@ -82,11 +82,14 @@ extract_features_py <- function(directory, filesRange = 0,
       mutate_at(vars(-file_name),
                 list(as.numeric)) %>%
       select(id,file_name,interval,F1:F8) %>%
-      arrange(file_name, interval)
+      dplyr::arrange(file_name, interval)
   }
 
   # final data frame
   dat <- dplyr::left_join(df_f0, df_formants, by=c('id','file_name','interval'))
+
+  # replacing NaN by NA
+  dat[sapply(dat, is.nan)] <- NA
 
   # total time
   t0 <- proc.time()-pt0

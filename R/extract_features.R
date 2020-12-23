@@ -9,7 +9,7 @@
 #'              resolution = 40, usecmp = FALSE,
 #'              mc.cores = parallel::detectCores(), full.names = TRUE,
 #'              recursive = FALSE, as.tibble = TRUE)
-#' @param \code{directory} A directory containing audio file(s) in WAV or MP3 formats. If more than one directory is provided, only the first one is used.
+#' @param \code{directory} A directory containing audio file(s) in WAV format. If more than one directory is provided, only the first one is used.
 #' @param \code{filesRange} The desired range of directory files (default: \code{NULL}, i.e., all files).
 #' @param \code{features} Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
 #' @param \code{gender} = <code>: set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
@@ -23,6 +23,10 @@
 #' @param \code{mc.cores} Number of cores to be used in parallel processing. (default: \code{parallel::detectCores()})
 #' @param \code{full.names} Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
 #' @param \code{recursive} Logical. Should the listing recurse into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
+#' @param \code{check.mono} Logical. Check if the WAV file is mono. (default: \code{TRUE})
+#' @param \code{stereo2mono} Logical. Should files be converted from stereo to mono? (default: \code{FALSE})
+#' @param \code{overwrite} Logical. Should converted files be overwrited? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})
+#' @param \code{freq} Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
 #' @import parallel tibble tidyr tuneR wrassp
 #' @examples
 #' library(voice)
@@ -82,7 +86,9 @@ extract_features <- function(directory, filesRange = NULL,
                              fbtype = c('mel', 'htkmel', 'fcmel', 'bark'),
                              resolution = 40, usecmp = FALSE,
                              mc.cores = parallel::detectCores(),
-                             full.names = TRUE, recursive = FALSE){
+                             full.names = TRUE, recursive = FALSE,
+                             check.mono = TRUE, stereo2mono = FALSE,
+                             overwrite = FALSE, freq = 44100){
 
   # time processing
   pt0 <- proc.time()
@@ -103,6 +109,33 @@ extract_features <- function(directory, filesRange = NULL,
 
   # number of wav files to be extracted
   nWav <- length(wavFiles)
+
+  # checking mono/stereo (GO PARALLEL?)
+  if(check.mono){
+    mono <- sapply(wavFiles, voice::is_mono)
+    which.stereo <- which(!mono)
+    ns <- length(which.stereo)
+    if(sum(which.stereo)){
+      cat('The following', ns,'audio files are stereo and must be converted to mono: \n',
+          paste0(names(mono[which.stereo]), sep = '\n'), '\n')
+      if(stereo2mono){
+        audio <- sapply(wavFiles[which.stereo], tuneR::readWave)
+        new.mono <- sapply(audio, tuneR::mono)
+        n <- sapply(wavFiles[which.stereo], nchar)
+        for(i in 1:ns){
+          if(overwrite){
+            seewave::savewav(new.mono[[i]], f=freq,
+                             filename = wavFiles[which.stereo][i])
+          }
+          else if(!overwrite){
+            new.name <- substr(wavFiles[which.stereo][i], 1, n[i]-4)
+            new.name <- paste0(new.name, '_mono.wav')
+            seewave::savewav(new.mono[[i]], f=freq, filename = new.name)
+          }
+        }
+      }
+    }
+  }
 
   # checking lpa features
   f <- vector(length = 3)
@@ -489,8 +522,8 @@ extract_features <- function(directory, filesRange = NULL,
   # final data frame
   dat <- dplyr::bind_cols(id, features.list)
 
-  # replacing NaN by 0
-  dat[sapply(dat, is.nan)] <- 0
+  # replacing 0 by NA
+  dat[-1][sapply(dat[-1], R.utils::isZero)] <- NA
 
   # total time
   t0 <- proc.time()-pt0
