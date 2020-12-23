@@ -15,7 +15,7 @@ extract_features(directory, filesRange = NULL,
              recursive = FALSE, as.tibble = TRUE)
 }
 \arguments{
-\item{\code{directory}}{A directory containing audio file(s) in WAV or MP3 formats. If more than one directory is provided, only the first one is used.}
+\item{\code{directory}}{A directory containing audio file(s) in WAV format. If more than one directory is provided, only the first one is used.}
 
 \item{\code{filesRange}}{The desired range of directory files (default: \code{NULL}, i.e., all files).}
 
@@ -42,6 +42,14 @@ extract_features(directory, filesRange = NULL,
 \item{\code{full.names}}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.}
 
 \item{\code{recursive}}{Logical. Should the listing recurse into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
+
+\item{\code{check.mono}}{Logical. Check if the WAV file is mono. (default: \code{TRUE})}
+
+\item{\code{stereo2mono}}{Logical. Should files be converted from stereo to mono? (default: \code{FALSE})}
+
+\item{\code{overwrite}}{Logical. Should converted files be overwrited? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})}
+
+\item{\code{freq}}{Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})}
 }
 \description{
 Extracts features from WAV audio files.

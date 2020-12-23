@@ -2,15 +2,15 @@
 % Please edit documentation in R/write_list.R
 \name{write_list}
 \alias{write_list}
-\title{Writes a list.}
+\title{Writes a list to a path.}
 \usage{
-write_list(lista, caminho)
+write_list(x, directory)
 }
 \arguments{
-\item{\code{lista}}{A list.}
+\item{\code{x}}{A list.}
 
-\item{\code{caminho}}{The directory.}
+\item{\code{directory}}{A directory.}
 }
 \description{
-Writes a list.
+Writes a list to a path.
 }
