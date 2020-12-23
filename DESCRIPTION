@@ -1,6 +1,6 @@
 Package: voice
 Type: Package
-Title: General Tools for voice analysis, speecher recognition and mood inference.
+Title: General Tools for voice analysis, speecher recognition and mood inference
 Version: 0.0.9
 Date: 2020-12-22
 Authors@R: c(

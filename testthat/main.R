@@ -30,3 +30,4 @@ library(voice)
 ?extract_features
 find.package('voice')
 packageDescription('voice')
+citation('voice')
