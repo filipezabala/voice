@@ -65,7 +65,7 @@ length(c1$y)
 plot(1:100, type = 'l')
 points(c1$x, c1$y, col='red')
 ```
-![](img/points1.png)
+![](draft/img/points1.png)
 ```r
 (v2 <- c(1:5, rep(0,10), 1:10, rep(0,5), 10:20, rep(0,10)))
 length(v2)
@@ -83,7 +83,7 @@ points(c3$x, c3$y, col = 'red')
 (v4 <- c(rnorm(1:100)))
 (c4 <- conv(v4, 1/4, round.off = 3))
 ```
-![](img/points3.png)
+![](draft/img/points3.png)
 
 ### `conv_mc`
 Convolute vectors using multicore.
@@ -175,19 +175,19 @@ ord <- order(data[1, ])
 data_ord <- data[ord, ord]
 ellipse::plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
 ```
-![](img/plotcorr.png)
+![](draft/img/plotcorr.png)
 ```r
 # Principal Component Analysis (PCA)
 (pc <- prcomp(na.omit(ef2[-1]), scale = TRUE))
 stats::screeplot(pc, type = 'lines')
 ```
-![](img/scree.png)
+![](draft/img/scree.png)
 ```r
 library(ggfortify)
 ggplot2::autoplot(pc, data = na.omit(ef2), colour = 'file_name',
                   loadings = TRUE, loadings.label = TRUE)
 ```
-![](img/autoplot.png)
+![](draft/img/autoplot.png)
 
 ### `extract_features_py`
 Extract features from WAV files using Python's `parselmouth`.
