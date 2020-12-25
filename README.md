@@ -7,7 +7,7 @@ General tools for voice analysis. The `voice` package is being developed to be a
 To make full use of the R part of the `voice` package you may use the following code.
 ```r
 packs <- c('devtools', 'tidyverse', 'tuneR', 'wrassp', 'reticulate', 'ellipse',
-           'RColorBrewer', 'ggfortify', 'pca3d')
+           'RColorBrewer', 'ggfortify')
 install.packages(packs, dep = T)
 update.packages(ask = F)
 
@@ -60,7 +60,7 @@ Convolute vectors.
 ```r
 library(voice)
 
-(c1 <- conv(1:100, compact.to = 0.2, drop.zeros = T))
+(c1 <- conv(1:100, compact.to = 0.2, drop.zeros = TRUE))
 length(c1$y)
 plot(1:100, type = 'l')
 points(c1$x, c1$y, col='red')
@@ -69,16 +69,19 @@ points(c1$x, c1$y, col='red')
 ```r
 (v2 <- c(1:5, rep(0,10), 1:10, rep(0,5), 10:20, rep(0,10)))
 length(v2)
-conv(v2, 0.1, drop.zeros = T, to.data.frame = F)
-conv(v2, 0.1, drop.zeros = T, to.data.frame = T)
-conv(v2, 0.2, drop.zeros = T)
-conv(v2, 0.2, drop.zeros = F)
+conv(v2, 0.1, drop.zeros = TRUE, to.data.frame = FALSE)
+conv(v2, 0.1, drop.zeros = TRUE, to.data.frame = TRUE)
+conv(v2, 0.2, drop.zeros = TRUE)
+conv(v2, 0.2, drop.zeros = FALSE)
 
 (v3 <- c(rep(0,10), 1:20, rep(0,3)))
-(c3 <- conv(v3, 1/3, drop.zeros = F, to.data.frame = F))
+(c3 <- conv(v3, 1/3, drop.zeros = FALSE, to.data.frame = FALSE))
 lapply(c3, length)
 plot(v3, type = 'l')
 points(c3$x, c3$y, col = 'red')
+
+(v4 <- c(rnorm(1:100)))
+(c4 <- conv(v4, 1/4, round.off = 3))
 ```
 ![](img/points3.png)
 
@@ -88,16 +91,25 @@ Convolute vectors using multicore.
 library(voice)
 
 # Same result of conv() function if x is a vector
-conv(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = F)
-conv_mc(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = F)
+conv(1:100, compact.to = 0.1, drop.zeros = TRUE, to.data.frame = FALSE)
+conv_mc(1:100, compact.to = 0.1, drop.zeros = TRUE, to.data.frame = FALSE)
 
-conv(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = T)
-conv_mc(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = T)
+conv(1:100, compact.to = 0.1, drop.zeros = TRUE, to.data.frame = TRUE)
+conv_mc(1:100, compact.to = 0.1, drop.zeros = TRUE, to.data.frame = TRUE)
 
-dat.num <- dat %>%
-  select(f0:mhs1)
-nrow(dat.num)
-cm1 <- conv_mc(dat.num, compact.to = 0.1, drop.zeros = T, to.data.frame = F)
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
+
+# getting all the 1092 features
+ef <- extract_features(dirname(path2wav), features = c('f0','formants',
+'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
+mc.cores = 1)
+
+ef.num <- ef[-1]
+nrow(ef.num)
+cm1 <- conv_mc(ef.num, compact.to = 0.1, drop.zeros = TRUE,
+to.data.frame = FALSE, mc.cores = 1)
 names(cm1)
 lapply(cm1$f0, length)
 ```
@@ -106,14 +118,22 @@ Convolute data frames using multicore.
 ```r
 library(voice)
 
-x <- dat %>%
-  mutate_each(as.factor, id:anyep_diff_w1)
-(cx.df <- conv_df(x, 0.1))
-(cx.df2 <- conv_df(x, 0.1, drop.x = T))
-dim(x)
-dim(cx.df)
-dim(cx.df2)
-(cx.list <- conv_df(x, 0.1, to.data.frame = F))
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
+
+# getting all the 1092 features
+ef <- extract_features(dirname(path2wav), features = c('f0','formants',
+'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
+mc.cores = 1)
+
+(cef.df <- conv_df(ef, 0.1, id = 'file_name', mc.cores = 1))
+(cef.df2 <- conv_df(ef, 0.1, id = 'file_name', drop.x = TRUE, mc.cores = 1))
+
+dim(ef)
+dim(cef.df)
+dim(cef.df2)
+(cef.list <- conv_df(ef, 0.1, id = 'file_name', to.data.frame = FALSE, mc.cores = 1))
 ```
 ### `extract_features`
 Extract features from WAV files using `tuneR` and `wrassp` functions.
@@ -125,55 +145,49 @@ path2wav <- list.files(system.file('extdata', package = 'wrassp'),
                        pattern <- glob2rx('*.wav'), full.names = TRUE)
 
 # getting all the 1092 features
-ef <- extract_features(dirname(path2wav), 
-                       features = c('f0','formants','zcr','mhs','rms','gain',
-                                    'rfc','ac','cep','dft','css','lps','mfcc'))
+ef <- extract_features(dirname(path2wav), features = c('f0','formants',
+                       'zcr','mhs','rms','gain','rfc','ac','cep','dft',
+                       'css','lps','mfcc'), mc.cores = 1)
 dim(ef)
 ef
 
 # using the default, i.e., not using 'cep','dft','css' and 'lps' (4*257 = 1028 columns)
-ef2 <- extract_features(dirname(path2wav))
+ef2 <- extract_features(dirname(path2wav), mc.cores = 1)
 dim(ef2)
 ef2
 table(ef2$file_name)
 
 # limiting filesRange
-ef3 <- extract_features(dirname(path2wav), filesRange = 3:6)
+ef3 <- extract_features(dirname(path2wav), filesRange = 3:6, mc.cores = 1)
 dim(ef3)
 ef3
 table(ef3$file_name)
-
-library(ellipse)
-library(RColorBrewer)
 
 # calculating correlation of ef2
 data <- cor(ef2[-1])
 
 # pane with 100 colors using RcolorBrewer
-my_colors <- brewer.pal(5, 'Spectral')
-my_colors <- colorRampPalette(my_colors)(100)
+my_colors <- RColorBrewer::brewer.pal(5, 'Spectral')
+my_colors <- grDevices::colorRampPalette(my_colors)(100)
 
 # ordering the correlation matrix
 ord <- order(data[1, ])
 data_ord <- data[ord, ord]
-plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
+ellipse::plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
 ```
 ![](img/plotcorr.png)
 ```r
 # Principal Component Analysis (PCA)
-(pc <- prcomp(ef2[-1], scale = T))
-screeplot(pc, type = 'lines')
+(pc <- prcomp(na.omit(ef2[-1]), scale = TRUE))
+stats::screeplot(pc, type = 'lines')
 ```
 ![](img/scree.png)
 ```r
 library(ggfortify)
-autoplot(pc, data = ef2, colour = 'file_name', loadings = T, loadings.label = T)
+ggplot2::autoplot(pc, data = na.omit(ef2), colour = 'file_name',
+                  loadings = TRUE, loadings.label = TRUE)
 ```
 ![](img/autoplot.png)
-```r
-library(pca3d)
-pca3d(pc, group=ef2$file_name)
-```
 
 ### `extract_features_py`
 Extract features from WAV files using Python's `parselmouth`.

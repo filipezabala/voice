@@ -1,12 +1,16 @@
 #' Extract features from WAV audios using Python's Parselmouth library.
 #'
-#' @param \code{directory} A directory/folder containing WAV files.
-#' @param \code{filesRange} The desired range of directory files (default: 0, i.e., all files).
-#' @param \code{features} Vector of features to be extracted. (default: 'f0' (pitch),'formants' (F1:F8)).
+#' @param directory A directory/folder containing WAV files.
+#' @param filesRange The desired range of directory files (default: 0, i.e., all files).
+#' @param features Vector of features to be extracted. (default: 'f0' (pitch),'formants' (F1:F8)).
+#' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5/1000).
+#' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE})
+#' @param recursive Logical. Should the listing recurse into directories? (default: \code{FALSE})
 #' @return \code{char} vector containing the expanded models.
 #' @details The function uses the \code{getwd()} folder to write the temp files.
 #' @examples
 #' library(voice)
+#'
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #' efp <- extract_features_py(dirname(path2wav))
@@ -17,7 +21,6 @@
 #' efpl <- extract_features_py(dirname(path2wav), filesRange = 3:6)
 #' efpl
 #' table(efpl$file_name)
-#' @import dplyr
 #' @export
 extract_features_py <- function(directory, filesRange = 0,
                                 features = c('f0','formants'),
@@ -32,17 +35,17 @@ extract_features_py <- function(directory, filesRange = 0,
 
   # # getting python functions - MUST BE A BETTER WAY TO DO THIS!
   if(!file.exists(paste0(getwd(),'/temp_libs.py'))){
-    download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/libs.py',
+    utils::download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/libs.py',
                   'temp_libs.py')
   }
 
   if('f0' %in% features & !file.exists(paste0(getwd(),'/temp_extract_f0.py'))){
-    download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_f0.py',
+    utils::download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_f0.py',
                   'temp_extract_f0.py')
   }
 
   if('formants' %in% features & !file.exists(paste0(getwd(),'/temp_extract_formants.py'))){
-    download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_formants.py',
+    utils::download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_formants.py',
                   'temp_extract_formants.py')
   }
 
@@ -60,11 +63,11 @@ extract_features_py <- function(directory, filesRange = 0,
     colnames(df_f0) <- as.vector(t(dplyr::bind_rows(splist_f0[1])))
     colnames(df_f0)[1] <- 'id'
     df_f0 <- df_f0 %>%
-      as_tibble() %>%
-      mutate_at(vars(-file_name),
+      dplyr::as_tibble() %>%
+      dplyr::mutate_at(dplyr::vars(-file_name),
                 list(as.numeric)) %>%
-      select(id, file_name, interval, F0) %>%
-      arrange(file_name, interval)
+      dplyr::select(id, file_name, interval, F0) %>%
+      dplyr::arrange(file_name, interval)
   }
 
   # 2. Formants
@@ -78,10 +81,10 @@ extract_features_py <- function(directory, filesRange = 0,
     colnames(df_formants) <- as.vector(t(dplyr::bind_rows(splist_fo[1])))
     colnames(df_formants)[-(2:3)] <- c('id',paste0('F',1:8))
     df_formants <- df_formants %>%
-      as_tibble %>%
-      mutate_at(vars(-file_name),
+      dplyr::as_tibble() %>%
+      dplyr::mutate_at(dplyr::vars(-file_name),
                 list(as.numeric)) %>%
-      select(id,file_name,interval,F1:F8) %>%
+      dplyr::select(id,file_name,interval,F1:F8) %>%
       dplyr::arrange(file_name, interval)
   }
 

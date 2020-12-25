@@ -1,31 +1,41 @@
 #' Convolute data frames.
 #'
-#' @param \code{x} A data frame.
-#' @param \code{compact.to} Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.
-#' @param \code{colnum} A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.
-#' @param \code{id} The identification column. Default: \code{'id'}.
-#' @param \code{by.filter} A \code{char} indicating the column to filter by. If \code{NULL} uses the \code{id} content.
-#' @param \code{drop.x} Logical. Drop columns containing .x? Default: \code{'FALSE'}.
-#' @param \code{drop.zeros} Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{'FALSE'}.
-#' @param \code{to.data.frame} Logical. Should the return be a data frame? If \code{F} returns a list. Default: \code{'TRUE'}.
-#' @param \code{round.off} Number of decimal places of the convoluted vector. Default: \code{'NULL'}.
-#' @param \code{mc.cores} The number of cores to mclapply. By default uses \code{parallel::detectCores()}.
+#' @param x A data frame.
+#' @param compact.to Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.
+#' @param colnum A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.
+#' @param id The identification column. Default: \code{'id'}.
+#' @param by.filter A \code{char} indicating the column to filter by. If \code{NULL} uses the \code{id} content.
+#' @param drop.x Logical. Drop columns containing .x? Default: \code{'FALSE'}.
+#' @param drop.zeros Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{'FALSE'}.
+#' @param to.data.frame Logical. Should the return be a data frame? If \code{F} returns a list. Default: \code{'TRUE'}.
+#' @param round.off Number of decimal places of the convoluted vector. Default: \code{'NULL'}.
+#' @param mc.cores The number of cores to mclapply. By default uses \code{parallel::detectCores()}.
 #' @return A vector of convoluted values with length near to \code{compact.to*length(x)}.
+#' @importFrom dplyr %>%
+#' @importFrom dplyr mutate_each
 #' @examples
 #' library(voice)
 #'
-#' x <- dat %>%
-#' mutate_each(as.factor, id:anyep_diff_w1)
-#' (cx.df <- conv_df(x, 0.1))
-#' (cx.df2 <- conv_df(x, 0.1, drop.x = T))
-#' dim(x)
-#' dim(cx.df)
-#' dim(cx.df2)
-#' (cx.list <- conv_df(x, 0.1, to.data.frame = F))
+#' # get path to audio file
+#' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+#' pattern <- glob2rx('*.wav'), full.names = TRUE)
+#'
+#' # getting all the 1092 features
+#' ef <- extract_features(dirname(path2wav), features = c('f0','formants',
+#' 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
+#' mc.cores = 1)
+#'
+#' (cef.df <- conv_df(ef, 0.1, id = 'file_name', mc.cores = 1))
+#' (cef.df2 <- conv_df(ef, 0.1, id = 'file_name', drop.x = TRUE, mc.cores = 1))
+#'
+#' dim(ef)
+#' dim(cef.df)
+#' dim(cef.df2)
+#' (cef.list <- conv_df(ef, 0.1, id = 'file_name', to.data.frame = FALSE, mc.cores = 1))
 #' @seealso \code{conv}, \code{conv_mc}
 #' @export
 conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id,
-                    drop.x = F, drop.zeros = F, to.data.frame = T,
+                    drop.x = FALSE, drop.zeros = FALSE, to.data.frame = TRUE,
                     round.off = NULL, mc.cores = parallel::detectCores()){
   ini <- Sys.time()
 
@@ -57,7 +67,7 @@ conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id,
 
   # convoluting numeric variables
   cn.li <- lapply(snum, voice::conv_mc, compact.to = compact.to,
-                  drop.zeros = drop.zeros, to.data.frame = T,
+                  drop.zeros = drop.zeros, to.data.frame = TRUE,
                   round.off = round.off, mc.cores = mc.cores)
 
   # transforming in dataframe

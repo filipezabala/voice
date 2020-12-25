@@ -14,11 +14,17 @@ extract_features_py(
 )
 }
 \arguments{
-\item{\code{directory}}{A directory/folder containing WAV files.}
+\item{directory}{A directory/folder containing WAV files.}
 
-\item{\code{filesRange}}{The desired range of directory files (default: 0, i.e., all files).}
+\item{filesRange}{The desired range of directory files (default: 0, i.e., all files).}
 
-\item{\code{features}}{Vector of features to be extracted. (default: 'f0' (pitch),'formants' (F1:F8)).}
+\item{features}{Vector of features to be extracted. (default: 'f0' (pitch),'formants' (F1:F8)).}
+
+\item{windowShift}{\code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5/1000).}
+
+\item{full.names}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE})}
+
+\item{recursive}{Logical. Should the listing recurse into directories? (default: \code{FALSE})}
 }
 \value{
 \code{char} vector containing the expanded models.
@@ -31,6 +37,7 @@ The function uses the \code{getwd()} folder to write the temp files.
 }
 \examples{
 library(voice)
+
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 pattern <- glob2rx('*.wav'), full.names = TRUE)
 efp <- extract_features_py(dirname(path2wav))

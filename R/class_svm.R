@@ -1,19 +1,18 @@
 #' Fits, forecasts and gets performance from SVM models, serial and parallelized.
 #'
-#' @param \code{x} A data frame or tibble.
-#' @param \code{model} Character containing the model structure. See \code{expand_model}.
-#' @param \code{filtro} Column(s) to filter the samples.
-#' @param \code{percTreino} Percentage of the database used to train the model, filtered by \code{filtro}.
-#' @param \code{setSeed} Specified seed for the pseudo-random parts.
-#' @param \code{custo} Cost of constraints violation (default: 1)—it is the ‘C’-constant of the regularization term in the Lagrange formulation.
-#' @param \code{gama} Needed for all kernels except linear (default: 1/(data dimension))
-#' @param \code{paralelo} Logical. Should the process be parallelized?
-#' @param \code{simbolico} Logical. Should the symbolic confusion matrix be printed?
-#' @param \code{restart} Logical. Should the R session be restarted? (It frees memory)
-#' @return \code{$fcast} predicted time series using the model that minimizes the forecasting mean square error.
-#' @return \code{$runtime} running time.
+#' @param x A data frame or tibble.
+#' @param model Character containing the model structure. See \code{expand_model}.
+#' @param filtro Column(s) to filter the samples.
+#' @param percTreino Percentage of the database used to train the model, filtered by \code{filtro}.
+#' @param setSeed Specified seed for the pseudo-random parts.
+#' @param custo Cost of constraints violation (default: 1)—it is the ‘C’-constant of the regularization term in the Lagrange formulation.
+#' @param gama Needed for all kernels except linear (default: 1/(data dimension))
+#' @param paralelo Logical. Should the process be parallelized?
+#' @param print.cm Logical. Should the confusion matrix be shown?
+#' @return \code{fcast} predicted time series using the model that minimizes the forecasting mean square error.
+#' @return \code{runtime} running time.
 #' @return \code{mse.pred} mean squared error of prediction. Used to decide the best model.
-#' @import e1071 parallelSVM
+#' @importFrom dplyr %>%
 #' @references
 #' Vapnik, Vladimir (2000). The Nature of Statistical Learning Theory, Springer.
 #' @examples
@@ -23,10 +22,10 @@ class_svm <- function(x, model,
                       filtro = c('id'), # CORRIGIR!
                       percTreino = 0.5,
                       setSeed = 1,
-                      # normalize = T,
+                      # normalize = TRUE,
                       custo = 1, gama = 1,
-                      paralelo = T,
-                      print.cm = T){
+                      paralelo = TRUE,
+                      print.cm = TRUE){
 
   # counting time
   pt1 <- proc.time() # to final table
@@ -53,8 +52,8 @@ class_svm <- function(x, model,
   treino <- sort(base::sample(1:nFullUn, floor(nFullUn*percTreino)))
   idTreino <- idFullUn[treino,]
   idTeste <- idFullUn[-treino,]
-  trainset <- as.data.frame(x %>% filter(id %in% idTreino))
-  testset <- as.data.frame(x %>% filter(id %in% idTeste))
+  trainset <- as.data.frame(x %>% dplyr::filter(id %in% idTreino))
+  testset <- as.data.frame(x %>% dplyr::filter(id %in% idTeste))
   num <- sapply(testset, is.numeric)
   testset.m <- as.matrix(testset[,num])
   nTest <- nrow(testset)
@@ -72,11 +71,11 @@ class_svm <- function(x, model,
   cat('2#4 START - MODEL', '\n')
 
   if(paralelo){
-    fit.svm <- parallelSVM::parallelSVM(as.formula(model), data = trainset, cost = 1, gamma = 1)
+    fit.svm <- parallelSVM::parallelSVM(stats::as.formula(model), data = trainset, cost = 1, gamma = 1)
     gc()
   }
   if(!paralelo){
-    fit.svm <- e1071::svm(as.formula(model), data = trainset, cost = custo, gamma = gama)
+    fit.svm <- e1071::svm(stats::as.formula(model), data = trainset, cost = custo, gamma = gama)
     gc()
   }
 
@@ -91,7 +90,7 @@ class_svm <- function(x, model,
   if(paralelo){
     testsetSplit <- split(as.data.frame(testset.m), grupo)
     testsetSplit <- lapply(testsetSplit, as.matrix)
-    temp <- parallel::mcMap(predict, testsetSplit, object = fit.svm, mc.cores = nCores) # 2.950665 secs (f0)
+    temp <- parallel::mcMap(stats::predict, testsetSplit, object = fit.svm, mc.cores = nCores) # 2.950665 secs (f0)
     pred.svm <- do.call(c, temp)-1 # por que está somando 1???
     gc()
   }
@@ -118,8 +117,8 @@ class_svm <- function(x, model,
   table(testset[,y])
   cm.svm.tab <- table(true = testset[,y], pred = pred.svm)
   cm.svm <- matrix(0, nrow=n, ncol=n, dimnames = list(l,l))
-  (temp <- as_tibble(table(true = testset[,y], pred = pred.svm),
-                         stringsAsFactors = F))
+  (temp <- dplyr::as_tibble(table(true = testset[,y], pred = pred.svm),
+                         stringsAsFactors = FALSE))
   temp$true <- as.numeric(temp$true)
   temp$pred <- as.numeric(temp$pred)
   ntab <- nrow(temp)
@@ -128,7 +127,7 @@ class_svm <- function(x, model,
   tab <- tidyr::expand_grid(true=l, pred=l)
   # tab <- tab %>%
   #   mutate(rp = apply(tab,1,rp))
-  tab <- left_join(tab, temp, by = c('true','pred'))
+  tab <- dplyr::left_join(tab, temp, by = c('true','pred'))
 
   # fulfilling cm.svm
   k <- 0
@@ -188,7 +187,7 @@ class_svm <- function(x, model,
   cat('##### -------------- #####\n\n')
 
   # gathering results
-  result <- tibble(timestamp=Sys.time(),
+  result <- dplyr::tibble(timestamp=Sys.time(),
                    y=y, model=model,
                    acc=acc, sen=sen, spe=spe, pre=pre,
                    mcc=mcc, F05=F05, F1=F1, F2=F2,

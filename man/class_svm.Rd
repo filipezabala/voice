@@ -12,35 +12,33 @@ class_svm(
   setSeed = 1,
   custo = 1,
   gama = 1,
-  paralelo = T,
-  print.cm = T
+  paralelo = TRUE,
+  print.cm = TRUE
 )
 }
 \arguments{
-\item{\code{x}}{A data frame or tibble.}
+\item{x}{A data frame or tibble.}
 
-\item{\code{model}}{Character containing the model structure. See \code{expand_model}.}
+\item{model}{Character containing the model structure. See \code{expand_model}.}
 
-\item{\code{filtro}}{Column(s) to filter the samples.}
+\item{filtro}{Column(s) to filter the samples.}
 
-\item{\code{percTreino}}{Percentage of the database used to train the model, filtered by \code{filtro}.}
+\item{percTreino}{Percentage of the database used to train the model, filtered by \code{filtro}.}
 
-\item{\code{setSeed}}{Specified seed for the pseudo-random parts.}
+\item{setSeed}{Specified seed for the pseudo-random parts.}
 
-\item{\code{custo}}{Cost of constraints violation (default: 1)—it is the ‘C’-constant of the regularization term in the Lagrange formulation.}
+\item{custo}{Cost of constraints violation (default: 1)—it is the ‘C’-constant of the regularization term in the Lagrange formulation.}
 
-\item{\code{gama}}{Needed for all kernels except linear (default: 1/(data dimension))}
+\item{gama}{Needed for all kernels except linear (default: 1/(data dimension))}
 
-\item{\code{paralelo}}{Logical. Should the process be parallelized?}
+\item{paralelo}{Logical. Should the process be parallelized?}
 
-\item{\code{simbolico}}{Logical. Should the symbolic confusion matrix be printed?}
-
-\item{\code{restart}}{Logical. Should the R session be restarted? (It frees memory)}
+\item{print.cm}{Logical. Should the confusion matrix be shown?}
 }
 \value{
-\code{$fcast} predicted time series using the model that minimizes the forecasting mean square error.
+\code{fcast} predicted time series using the model that minimizes the forecasting mean square error.
 
-\code{$runtime} running time.
+\code{runtime} running time.
 
 \code{mse.pred} mean squared error of prediction. Used to decide the best model.
 }

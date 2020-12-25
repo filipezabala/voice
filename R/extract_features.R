@@ -1,33 +1,23 @@
 #' Extracts features from WAV audio files.
 #' @description Extracts features from WAV audio files.
-#' @usage extract_features(directory, filesRange = NULL,
-#'              features = c('f0','formants','zcr','rms','mhs',
-#'              'gain','rfc,','ac','mfcc'),
-#'              gender = 'u', windowShift = 5, numFormants = 8,
-#'              numcep = 12, dcttype = c('t2', 't1', 't3', 't4'),
-#'              fbtype = c('mel', 'htkmel', 'fcmel', 'bark'),
-#'              resolution = 40, usecmp = FALSE,
-#'              mc.cores = parallel::detectCores(), full.names = TRUE,
-#'              recursive = FALSE, as.tibble = TRUE)
-#' @param \code{directory} A directory containing audio file(s) in WAV format. If more than one directory is provided, only the first one is used.
-#' @param \code{filesRange} The desired range of directory files (default: \code{NULL}, i.e., all files).
-#' @param \code{features} Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
-#' @param \code{gender} = <code>: set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
-#' @param \code{windowShift} = <dur>: set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
-#' @param \code{numFormants} = <num>: <num>ber of formants (default: 8). Used by \code{wrassp::forest}.
-#' @param \code{numcep} Number of Mel-frequency cepstral coefficients (cepstra) to return (default: 12). Used by \code{tuneR::melfcc}.
-#' @param \code{dcttype} Type of DCT used. \code{'t1'} or \code{'t2'}, \code{'t3'} for HTK \code{'t4'} for feacalc (default = \code{'t2'}). Used by \code{tuneR::melfcc}.
-#' @param \code{fbtype} Auditory frequency scale to use: \code{'mel'}, \code{'bark'}, \code{'htkmel'}, \code{'fcmel'} (default: \code{'mel'}). Used by \code{tuneR::melfcc}.
-#' @param \code{resolution} = <freq>: set FFT length to the smallest value which results in a frequency resolution of <freq> Hz or better (default: 40.0). Used by \code{wrassp::cssSpectrum}, \code{wrassp::dftSpectrum} and \code{wrassp::lpsSpectrum}.
-#' @param \code{usecmp}. Logical. Apply equal-loudness weighting and cube-root compression (PLP instead of LPC) (default: \code{FALSE}). Used by \code{tuneR::melfcc}.
-#' @param \code{mc.cores} Number of cores to be used in parallel processing. (default: \code{parallel::detectCores()})
-#' @param \code{full.names} Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
-#' @param \code{recursive} Logical. Should the listing recurse into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
-#' @param \code{check.mono} Logical. Check if the WAV file is mono. (default: \code{TRUE})
-#' @param \code{stereo2mono} Logical. Should files be converted from stereo to mono? (default: \code{FALSE})
-#' @param \code{overwrite} Logical. Should converted files be overwrited? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})
-#' @param \code{freq} Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
-#' @import parallel tibble tidyr tuneR wrassp
+#' @param directory A directory containing audio file(s) in WAV format. If more than one directory is provided, only the first one is used.
+#' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
+#' @param features Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
+#' @param gender \code{= <code>} set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
+#' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
+#' @param numFormants \code{= <num>} <num>ber of formants (default: 8). Used by \code{wrassp::forest}.
+#' @param numcep Number of Mel-frequency cepstral coefficients (cepstra) to return (default: 12). Used by \code{tuneR::melfcc}.
+#' @param dcttype Type of DCT used. \code{'t1'} or \code{'t2'}, \code{'t3'} for HTK \code{'t4'} for feacalc (default = \code{'t2'}). Used by \code{tuneR::melfcc}.
+#' @param fbtype Auditory frequency scale to use: \code{'mel'}, \code{'bark'}, \code{'htkmel'}, \code{'fcmel'} (default: \code{'mel'}). Used by \code{tuneR::melfcc}.
+#' @param resolution \code{= <freq>} set FFT length to the smallest value which results in a frequency resolution of <freq> Hz or better (default: 40.0). Used by \code{wrassp::cssSpectrum}, \code{wrassp::dftSpectrum} and \code{wrassp::lpsSpectrum}.
+#' @param usecmp Logical. Apply equal-loudness weighting and cube-root compression (PLP instead of LPC) (default: \code{FALSE}). Used by \code{tuneR::melfcc}.
+#' @param mc.cores Number of cores to be used in parallel processing. (default: \code{parallel::detectCores()})
+#' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
+#' @param recursive Logical. Should the listing recurse into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
+#' @param check.mono Logical. Check if the WAV file is mono. (default: \code{TRUE})
+#' @param stereo2mono Logical. Should files be converted from stereo to mono? (default: \code{FALSE})
+#' @param overwrite Logical. Should converted files be overwrited? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})
+#' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
 #' @examples
 #' library(voice)
 #'
@@ -37,46 +27,42 @@
 #'
 #' # getting all the 1092 features
 #' ef <- extract_features(dirname(path2wav), features = c('f0','formants',
-#' 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'))
+#' 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
+#' mc.cores = 1)
 #' dim(ef)
 #' ef
 #'
 #' # using the default, i.e., not using 'cep','dft','css' and 'lps' (4*257 = 1028 columns)
-#' ef2 <- extract_features(dirname(path2wav))
+#' ef2 <- extract_features(dirname(path2wav), mc.cores = 1)
 #' dim(ef2)
 #' ef2
 #' table(ef2$file_name)
 #'
 #' # limiting filesRange
-#' ef3 <- extract_features(dirname(path2wav), filesRange = 3:6)
+#' ef3 <- extract_features(dirname(path2wav), filesRange = 3:6, mc.cores = 1)
 #' dim(ef3)
 #' ef3
 #' table(ef3$file_name)
-#'
-#' library(ellipse)
-#' library(RColorBrewer)
 #'
 #' # calculating correlation of ef2
 #' data <- cor(ef2[-1])
 #'
 #' # pane with 100 colors using RcolorBrewer
-#' my_colors <- brewer.pal(5, 'Spectral')
-#' my_colors <- colorRampPalette(my_colors)(100)
+#' my_colors <- RColorBrewer::brewer.pal(5, 'Spectral')
+#' my_colors <- grDevices::colorRampPalette(my_colors)(100)
 #'
 #' # ordering the correlation matrix
 #' ord <- order(data[1, ])
 #' data_ord <- data[ord, ord]
-#' plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
+#' ellipse::plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
 #'
 #' # Principal Component Analysis (PCA)
-#' (pc <- prcomp(ef2[-1], scale = T))
-#' screeplot(pc, type = 'lines')
+#' (pc <- prcomp(na.omit(ef2[-1]), scale = TRUE))
+#' stats::screeplot(pc, type = 'lines')
 #'
 #' library(ggfortify)
-#' autoplot(pc, data = ef2, colour = 'file_name', loadings = T, loadings.label = T)
-#'
-#' library(pca3d)
-#' pca3d(pc, group=ef2$file_name)
+#' ggplot2::autoplot(pc, data = na.omit(ef2), colour = 'file_name',
+#' loadings = TRUE, loadings.label = TRUE)
 #' @export
 extract_features <- function(directory, filesRange = NULL,
                              features = c('f0','formants','zcr','mhs','rms',
@@ -97,7 +83,7 @@ extract_features <- function(directory, filesRange = NULL,
   directory <- directory[1]
 
   # listing wav files
-  wavFiles <- list.files(directory, pattern = glob2rx('*.wav'),
+  wavFiles <- list.files(directory, pattern = utils::glob2rx('*.wav'),
                          full.names = full.names, recursive = recursive)
 
   # filtering by fileRange

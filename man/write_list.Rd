@@ -7,9 +7,9 @@
 write_list(x, directory)
 }
 \arguments{
-\item{\code{x}}{A list.}
+\item{x}{A list.}
 
-\item{\code{directory}}{A directory.}
+\item{directory}{A directory.}
 }
 \description{
 Writes a list to a path.

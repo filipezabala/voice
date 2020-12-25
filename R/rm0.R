@@ -1,6 +1,6 @@
 #' Transforms \code{n} sets of \code{m>n} zeros (alternated with sets of non zeros) into \code{n} sets of \code{n} zeros.
 #'
-#' @param \code{y} A vector or time series.
+#' @param y A vector or time series.
 #' @return Vector with n zeros.
 #' @examples
 #' (v0 <- c(1:20,rep(0,10)))
@@ -28,12 +28,12 @@
 #' @export
 rm0 <- function(y){
 
-  if(sum(y^2) == 0){ # null vector
+  if(sum(y^2, na.rm = TRUE) == 0){ # null vector
     return(0)
   }
 
   is.zero <- y == 0 # is zero?
-  if(sum(is.zero) == 0){ # no zeros, returns original vector
+  if(sum(is.zero, na.rm = TRUE) == 0){ # no zeros, returns original vector
     return(y)
   }
 
@@ -46,7 +46,7 @@ rm0 <- function(y){
 
   d0 <- diff(w0) # position of the changes (F-T or T-F) in v0 == 0
   change <- d0 != 1
-  n0 <- sum(change)+1 # number of sets with 0's
+  n0 <- sum(change, na.rm = TRUE)+1 # number of sets with 0's
 
   if(sum(is.zero) == n0){ # number of zeros equals to number of sets with 0's
     return(y)

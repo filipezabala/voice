@@ -7,7 +7,7 @@
 rm0(y)
 }
 \arguments{
-\item{\code{y}}{A vector or time series.}
+\item{y}{A vector or time series.}
 }
 \value{
 Vector with n zeros.

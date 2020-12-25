@@ -1,7 +1,6 @@
 #' Verify if an audio is mono.
 #' @usage is_mono(x)
-#' @param \code{x} Path to WAV audio file.
-#' @import tuneR
+#' @param x Path to WAV audio file.
 #' @examples
 #' library(voice)
 #' # get path to audio file

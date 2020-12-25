@@ -7,11 +7,11 @@
 expand_model(y, x, k)
 }
 \arguments{
-\item{\code{y}}{The Y variable.}
+\item{y}{The Y variable.}
 
-\item{\code{x}}{The X variables.}
+\item{x}{The X variables.}
 
-\item{\code{k}}{Number of additive components.}
+\item{k}{Number of additive components.}
 }
 \value{
 A \code{char} vector containing the expanded models.

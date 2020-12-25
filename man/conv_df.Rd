@@ -10,33 +10,33 @@ conv_df(
   colnum = NULL,
   id = "id",
   by.filter = id,
-  drop.x = F,
-  drop.zeros = F,
-  to.data.frame = T,
+  drop.x = FALSE,
+  drop.zeros = FALSE,
+  to.data.frame = TRUE,
   round.off = NULL,
   mc.cores = parallel::detectCores()
 )
 }
 \arguments{
-\item{\code{x}}{A data frame.}
+\item{x}{A data frame.}
 
-\item{\code{compact.to}}{Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.}
+\item{compact.to}{Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.}
 
-\item{\code{colnum}}{A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.}
+\item{colnum}{A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.}
 
-\item{\code{id}}{The identification column. Default: \code{'id'}.}
+\item{id}{The identification column. Default: \code{'id'}.}
 
-\item{\code{by.filter}}{A \code{char} indicating the column to filter by. If \code{NULL} uses the \code{id} content.}
+\item{by.filter}{A \code{char} indicating the column to filter by. If \code{NULL} uses the \code{id} content.}
 
-\item{\code{drop.x}}{Logical. Drop columns containing .x? Default: \code{'FALSE'}.}
+\item{drop.x}{Logical. Drop columns containing .x? Default: \code{'FALSE'}.}
 
-\item{\code{drop.zeros}}{Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{'FALSE'}.}
+\item{drop.zeros}{Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{'FALSE'}.}
 
-\item{\code{to.data.frame}}{Logical. Should the return be a data frame? If \code{F} returns a list. Default: \code{'TRUE'}.}
+\item{to.data.frame}{Logical. Should the return be a data frame? If \code{F} returns a list. Default: \code{'TRUE'}.}
 
-\item{\code{round.off}}{Number of decimal places of the convoluted vector. Default: \code{'NULL'}.}
+\item{round.off}{Number of decimal places of the convoluted vector. Default: \code{'NULL'}.}
 
-\item{\code{mc.cores}}{The number of cores to mclapply. By default uses \code{parallel::detectCores()}.}
+\item{mc.cores}{The number of cores to mclapply. By default uses \code{parallel::detectCores()}.}
 }
 \value{
 A vector of convoluted values with length near to \code{compact.to*length(x)}.
@@ -47,14 +47,22 @@ Convolute data frames.
 \examples{
 library(voice)
 
-x <- dat \%>\%
-mutate_each(as.factor, id:anyep_diff_w1)
-(cx.df <- conv_df(x, 0.1))
-(cx.df2 <- conv_df(x, 0.1, drop.x = T))
-dim(x)
-dim(cx.df)
-dim(cx.df2)
-(cx.list <- conv_df(x, 0.1, to.data.frame = F))
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
+
+# getting all the 1092 features
+ef <- extract_features(dirname(path2wav), features = c('f0','formants',
+'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
+mc.cores = 1)
+
+(cef.df <- conv_df(ef, 0.1, id = 'file_name', mc.cores = 1))
+(cef.df2 <- conv_df(ef, 0.1, id = 'file_name', drop.x = TRUE, mc.cores = 1))
+
+dim(ef)
+dim(cef.df)
+dim(cef.df2)
+(cef.list <- conv_df(ef, 0.1, id = 'file_name', to.data.frame = FALSE, mc.cores = 1))
 }
 \seealso{
 \code{conv}, \code{conv_mc}

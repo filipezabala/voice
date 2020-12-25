@@ -7,7 +7,7 @@
 is_mono(x)
 }
 \arguments{
-\item{\code{x}}{Path to WAV audio file.}
+\item{x}{Path to WAV audio file.}
 }
 \description{
 Verify if an audio is mono.

@@ -1,8 +1,8 @@
 #' Expand model given \code{y} and \code{x} variables.
 #'
-#' @param \code{y} The Y variable.
-#' @param \code{x} The X variables.
-#' @param \code{k} Number of additive components.
+#' @param y The Y variable.
+#' @param x The X variables.
+#' @param k Number of additive components.
 #' @return A \code{char} vector containing the expanded models.
 #' @examples
 #' expand_model('y', LETTERS[1:4], 1)
@@ -13,7 +13,7 @@
 expand_model <- function(y, x, k){
 
   y <- paste0(y, ' ~ ')
-  comb <- combn(x, k)
+  comb <- utils::combn(x, k)
 
   if(k == 1){
     models <- unlist(lapply(y, paste0, comb))

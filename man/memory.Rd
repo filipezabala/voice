@@ -6,9 +6,6 @@
 \usage{
 memory()
 }
-\arguments{
-\item{\code{unit}}{A \code{char} indicating \code{bytes}, \code{kbytes}, \code{mbytes} and \code{gbytes}.}
-}
 \description{
 Gives the amount of memory RAM free, total and percentage = free/total.
 }

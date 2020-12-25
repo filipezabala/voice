@@ -7,24 +7,24 @@
 conv_mc(
   y,
   compact.to,
-  drop.zeros = F,
-  to.data.frame = F,
+  drop.zeros = FALSE,
+  to.data.frame = FALSE,
   round.off = NULL,
   mc.cores = parallel::detectCores()
 )
 }
 \arguments{
-\item{\code{y}}{A numeric vector, matrix or data frame.}
+\item{y}{A numeric vector, matrix or data frame.}
 
-\item{\code{compact.to}}{Percentage of remaining points after compression. If equals to 1 and keep.zeros = T, the original vector is presented.}
+\item{compact.to}{Percentage of remaining points after compression. If equals to 1 and keep.zeros = T, the original vector is presented.}
 
-\item{\code{drop.zeros}}{Logical. Drop repeated zeros? Default: \code{'FALSE'}.}
+\item{drop.zeros}{Logical. Drop repeated zeros? Default: \code{'FALSE'}.}
 
-\item{\code{to.data.frame}}{Logical. Convert to data frame? Default: \code{'FALSE'}.}
+\item{to.data.frame}{Logical. Convert to data frame? Default: \code{'FALSE'}.}
 
-\item{\code{round.off}}{Number of decimal places of the convoluted vector. Default: \code{'NULL'}.}
+\item{round.off}{Number of decimal places of the convoluted vector. Default: \code{'NULL'}.}
 
-\item{\code{mc.cores}}{The number of cores to mclapply. Default: \code{'parallel::detectCores()'}.}
+\item{mc.cores}{The number of cores to mclapply. Default: \code{'parallel::detectCores()'}.}
 }
 \value{
 A list of x and y convoluted values with length near to \code{compact.to*length(y)}.
@@ -35,16 +35,25 @@ Convolute vectors using multicore.
 \examples{
 library(voice)
 # Same result of conv() function if x is a vector
-conv(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = F)
-conv_mc(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = F)
+conv(1:100, compact.to = 0.1, drop.zeros = TRUE, to.data.frame = FALSE)
+conv_mc(1:100, compact.to = 0.1, drop.zeros = TRUE, to.data.frame = FALSE)
 
-conv(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = T)
-conv_mc(1:100, compact.to = 0.1, drop.zeros = T, to.data.frame = T)
+conv(1:100, compact.to = 0.1, drop.zeros = TRUE, to.data.frame = TRUE)
+conv_mc(1:100, compact.to = 0.1, drop.zeros = TRUE, to.data.frame = TRUE)
 
-dat.num <- dat \%>\%
-select(f0:mhs1)
-nrow(dat.num)
-cm1 <- conv_mc(dat.num, compact.to = 0.1, drop.zeros = T, to.data.frame = F)
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
+
+# getting all the 1092 features
+ef <- extract_features(dirname(path2wav), features = c('f0','formants',
+'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
+mc.cores = 1)
+
+ef.num <- ef[-1]
+nrow(ef.num)
+cm1 <- conv_mc(ef.num, compact.to = 0.1, drop.zeros = TRUE,
+to.data.frame = FALSE, mc.cores = 1)
 names(cm1)
 lapply(cm1$f0, length)
 }
