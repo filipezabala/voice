@@ -35,17 +35,17 @@ extract_features_py <- function(directory, filesRange = 0,
 
   # # getting python functions - MUST BE A BETTER WAY TO DO THIS!
   if(!file.exists(paste0(getwd(),'/temp_libs.py'))){
-    utils::download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/libs.py',
+    utils::download.file('https://raw.githubusercontent.com/filipezabala/voice/master/tests/libs.py',
                   'temp_libs.py')
   }
 
   if('f0' %in% features & !file.exists(paste0(getwd(),'/temp_extract_f0.py'))){
-    utils::download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_f0.py',
+    utils::download.file('https://raw.githubusercontent.com/filipezabala/voice/master/tests/extract_f0.py',
                   'temp_extract_f0.py')
   }
 
   if('formants' %in% features & !file.exists(paste0(getwd(),'/temp_extract_formants.py'))){
-    utils::download.file('https://raw.githubusercontent.com/filipezabala/voice/master/testthat/extract_formants.py',
+    utils::download.file('https://raw.githubusercontent.com/filipezabala/voice/master/tests/extract_formants.py',
                   'temp_extract_formants.py')
   }
 
