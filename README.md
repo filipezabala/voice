@@ -7,7 +7,7 @@ General tools for voice analysis. The `voice` package is being developed to be a
 To make full use of the R part of the `voice` package you may use the following code.
 ```r
 packs <- c('devtools', 'tidyverse', 'tuneR', 'wrassp', 'reticulate', 'ellipse',
-           'RColorBrewer', 'ggfortify', 'seewave')
+           'RColorBrewer', 'ggfortify', 'seewave', 'R.utils','e1071','parallelSVM')
 install.packages(packs, dep = T)
 update.packages(ask = F)
 
