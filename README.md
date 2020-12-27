@@ -205,3 +205,6 @@ efpl <- extract_features_py(dirname(path2wav), filesRange = 3:6)
 efpl
 table(efpl$file_name)
 ```
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/filipezabala/voice/workflows/R-CMD-check/badge.svg)](https://github.com/filipezabala/voice/actions)
+<!-- badges: end -->

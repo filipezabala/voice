@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 ^draft$
 ^cran-comments\.md$
+^\.travis\.yml$
+^\.github$
