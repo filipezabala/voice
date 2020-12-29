@@ -36,6 +36,8 @@ Extract features from WAV audios using Python's Parselmouth library.
 The function uses the \code{getwd()} folder to write the temp files.
 }
 \examples{
+
+\dontrun{
 library(voice)
 
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
@@ -48,4 +50,5 @@ table(efp$file_name)
 efpl <- extract_features_py(dirname(path2wav), filesRange = 3:6)
 efpl
 table(efpl$file_name)
+}
 }

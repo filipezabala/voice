@@ -9,6 +9,8 @@
 #' @return \code{char} vector containing the expanded models.
 #' @details The function uses the \code{getwd()} folder to write the temp files.
 #' @examples
+#'
+#' \dontrun{
 #' library(voice)
 #'
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
@@ -21,6 +23,7 @@
 #' efpl <- extract_features_py(dirname(path2wav), filesRange = 3:6)
 #' efpl
 #' table(efpl$file_name)
+#' }
 #' @export
 extract_features_py <- function(directory, filesRange = 0,
                                 features = c('f0','formants'),
