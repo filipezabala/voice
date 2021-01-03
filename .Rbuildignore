@@ -5,3 +5,6 @@
 ^\.travis\.yml$
 ^\.github$
 ^revdep$
+^tests/extract_f0\.py$
+^tests/extract_formants\.py$
+^tests/libs\.py$
