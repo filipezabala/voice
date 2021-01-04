@@ -13,10 +13,10 @@
 #' @param usecmp Logical. Apply equal-loudness weighting and cube-root compression (PLP instead of LPC) (default: \code{FALSE}). Used by \code{tuneR::melfcc}.
 #' @param mc.cores Number of cores to be used in parallel processing. (default: \code{parallel::detectCores()})
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
-#' @param recursive Logical. Should the listing recurse into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
+#' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
 #' @param check.mono Logical. Check if the WAV file is mono. (default: \code{TRUE})
 #' @param stereo2mono Logical. Should files be converted from stereo to mono? (default: \code{FALSE})
-#' @param overwrite Logical. Should converted files be overwrited? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})
+#' @param overwrite Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})
 #' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
 #' @examples
 #' library(voice)

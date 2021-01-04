@@ -5,7 +5,7 @@
 #' @param features Vector of features to be extracted. (default: 'f0' (pitch),'formants' (F1:F8)).
 #' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5/1000).
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE})
-#' @param recursive Logical. Should the listing recurse into directories? (default: \code{FALSE})
+#' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE})
 #' @return \code{char} vector containing the expanded models.
 #' @details The function uses the \code{getwd()} folder to write the temp files.
 #' @examples
