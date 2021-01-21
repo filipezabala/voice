@@ -20,9 +20,10 @@ extract_features(
   full.names = TRUE,
   recursive = FALSE,
   check.mono = TRUE,
-  stereo2mono = FALSE,
+  stereo2mono = TRUE,
   overwrite = FALSE,
-  freq = 44100
+  freq = 44100,
+  round.to = NULL
 )
 }
 \arguments{
@@ -56,7 +57,7 @@ extract_features(
 
 \item{check.mono}{Logical. Check if the WAV file is mono. (default: \code{TRUE})}
 
-\item{stereo2mono}{Logical. Should files be converted from stereo to mono? (default: \code{FALSE})}
+\item{stereo2mono}{Logical. Should files be converted from stereo to mono? (default: \code{TRUE})}
 
 \item{overwrite}{Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})}
 
