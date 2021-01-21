@@ -56,6 +56,7 @@ ef <- extract_features(dirname(path2wav), features = c('f0','formants',
 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
 mc.cores = 1)
 
+\dontrun{
 (cef.df <- conv_df(ef, 0.1, id = 'file_name', mc.cores = 1))
 (cef.df2 <- conv_df(ef, 0.1, id = 'file_name', drop.x = TRUE, mc.cores = 1))
 
@@ -63,6 +64,7 @@ dim(ef)
 dim(cef.df)
 dim(cef.df2)
 (cef.list <- conv_df(ef, 0.1, id = 'file_name', to.data.frame = FALSE, mc.cores = 1))
+}
 }
 \seealso{
 \code{conv}, \code{conv_mc}

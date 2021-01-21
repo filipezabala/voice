@@ -1,9 +1,9 @@
 Package: voice
 Type: Package
 Title: General Tools for Voice Analysis, Speaker Recognition and Mood Inference
-Version: 0.0.0.9000
-Date: 2020-12-28
-Authors@R: c(
+Version: 0.0.0.9001
+Date: 2021-01-21
+Author: c(
     person("Zabala", "Filipe J.", email = "filipe.zabala@gmail.com", role = c("cre","aut")),
     person("Salum Jr.", "Giovanni A.", email = "gsalumjr@gmail.com", role = "aut"))
 Maintainer: Filipe J. Zabala <filipe.zabala@gmail.com>
@@ -12,8 +12,7 @@ BugReports: https://github.com/filipezabala/voice/issues
 Description: General purpose tools for voice analysis, speaker recognition and 
     mood inference. Gathers R and Python tools to solve problems concerning voice.
 Depends: R (>= 4.0.0)
-Imports: R.utils, dplyr, e1071, parallelSVM, reticulate, seewave, tibble, tidyr,
-    tuneR, wrassp, RColorBrewer, ellipse, ggplot2, ggfortify
+Imports: R.utils, parallelSVM, reticulate, seewave, tidyr, wrassp, ellipse, ggplot2, ggfortify, RColorBrewer, dplyr, e1071, tibble, tuneR
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true

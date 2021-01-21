@@ -24,7 +24,7 @@ extract_features_py(
 
 \item{full.names}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE})}
 
-\item{recursive}{Logical. Should the listing recurse into directories? (default: \code{FALSE})}
+\item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE})}
 }
 \value{
 \code{char} vector containing the expanded models.

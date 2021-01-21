@@ -15,11 +15,16 @@
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
 #' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
 #' @param check.mono Logical. Check if the WAV file is mono. (default: \code{TRUE})
-#' @param stereo2mono Logical. Should files be converted from stereo to mono? (default: \code{FALSE})
+#' @param stereo2mono Logical. Should files be converted from stereo to mono? (default: \code{TRUE})
 #' @param overwrite Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})
 #' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
 #' @examples
 #' library(voice)
+#' library(RColorBrewer)
+#' library(ellipse)
+#' library(ggplot2)
+#' library(grDevices)
+#' library(ggfortify)
 #'
 #' # get path to audio file
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
@@ -48,20 +53,19 @@
 #' data <- cor(ef2[-1])
 #'
 #' # pane with 100 colors using RcolorBrewer
-#' my_colors <- RColorBrewer::brewer.pal(5, 'Spectral')
-#' my_colors <- grDevices::colorRampPalette(my_colors)(100)
+#' my_colors <- brewer.pal(5, 'Spectral')
+#' my_colors <- colorRampPalette(my_colors)(100)
 #'
 #' # ordering the correlation matrix
 #' ord <- order(data[1, ])
 #' data_ord <- data[ord, ord]
-#' ellipse::plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
+#' plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
 #'
 #' # Principal Component Analysis (PCA)
 #' (pc <- prcomp(na.omit(ef2[-1]), scale = TRUE))
 #' stats::screeplot(pc, type = 'lines')
 #'
-#' library(ggfortify)
-#' ggplot2::autoplot(pc, data = na.omit(ef2), colour = 'file_name',
+#' autoplot(pc, data = na.omit(ef2), colour = 'file_name',
 #' loadings = TRUE, loadings.label = TRUE)
 #' @export
 extract_features <- function(directory, filesRange = NULL,
@@ -73,8 +77,9 @@ extract_features <- function(directory, filesRange = NULL,
                              resolution = 40, usecmp = FALSE,
                              mc.cores = parallel::detectCores(),
                              full.names = TRUE, recursive = FALSE,
-                             check.mono = TRUE, stereo2mono = FALSE,
-                             overwrite = FALSE, freq = 44100){
+                             check.mono = TRUE, stereo2mono = TRUE,
+                             overwrite = FALSE, freq = 44100,
+                             round.to = NULL){
 
   # time processing
   pt0 <- proc.time()
@@ -507,6 +512,11 @@ extract_features <- function(directory, filesRange = NULL,
 
   # final data frame
   dat <- dplyr::bind_cols(id, features.list)
+
+  # rounding
+  if(!is.null(round.to)){
+    dat[-1] <- round(dat[-1], round.to)
+  }
 
   # replacing 0 by NA
   dat[-1][sapply(dat[-1], R.utils::isZero)] <- NA

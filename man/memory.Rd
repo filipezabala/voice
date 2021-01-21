@@ -10,6 +10,8 @@ memory()
 Gives the amount of memory RAM free, total and percentage = free/total.
 }
 \examples{
+\dontrun{
 library(voice)
 memory()
+}
 }
