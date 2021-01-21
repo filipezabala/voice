@@ -10,7 +10,8 @@ extract_features_py(
   features = c("f0", "formants"),
   windowShift = 5/1000,
   full.names = TRUE,
-  recursive = FALSE
+  recursive = FALSE,
+  round.to = NULL
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ extract_features_py(
 \item{full.names}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE})}
 
 \item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE})}
+
+\item{round.to}{Number of decimal places to round to. (default: \code{NULL})}
 }
 \value{
 \code{char} vector containing the expanded models.

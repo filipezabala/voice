@@ -62,6 +62,8 @@ extract_features(
 \item{overwrite}{Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})}
 
 \item{freq}{Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})}
+
+\item{round.to}{Number of decimal places to round to. (default: \code{NULL})}
 }
 \description{
 Extracts features from WAV audio files.
