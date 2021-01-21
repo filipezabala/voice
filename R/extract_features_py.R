@@ -6,6 +6,7 @@
 #' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5/1000).
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE})
 #' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE})
+#' @param round.to Number of decimal places to round to. (default: \code{NULL})
 #' @return \code{char} vector containing the expanded models.
 #' @details The function uses the \code{getwd()} folder to write the temp files.
 #' @examples
@@ -28,7 +29,8 @@
 extract_features_py <- function(directory, filesRange = 0,
                                 features = c('f0','formants'),
                                 windowShift = 5/1000,
-                                full.names = TRUE, recursive = FALSE){
+                                full.names = TRUE, recursive = FALSE,
+                                round.to = NULL){
 
   # process time
   pt0 <- proc.time()
@@ -93,6 +95,11 @@ extract_features_py <- function(directory, filesRange = 0,
 
   # final data frame
   dat <- dplyr::left_join(df_f0, df_formants, by=c('id','file_name','interval'))
+
+  # rounding
+  if(!is.null(round.to)){
+    dat[,-(1:2)] <- round(dat[,-(1:2)], round.to)
+  }
 
   # replacing NaN by NA
   dat[sapply(dat, is.nan)] <- NA
