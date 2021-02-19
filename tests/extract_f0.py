@@ -32,7 +32,7 @@ for file in dirlist:
     file_list = os.path.join(sys.argv[1], file)
     snd = parselmouth.Sound(file_list)
     pitch = snd.to_pitch(time_step = float(sys.argv[2]))
-    interval =  numpy.arange(pitch.start_time, pitch.end_time, float(sys.argv[2]))
+    interval = numpy.arange(pitch.start_time, pitch.end_time, float(sys.argv[2]))
     df_f0_long = pandas.DataFrame(data=[[i] for i in interval], columns=['interval'])
     df_f0_long['interval'] = df_f0_long['interval'].astype(float)
     df_f0_long['file_name'] = file
