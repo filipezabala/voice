@@ -1,4 +1,4 @@
-#' Extract features from WAV audios using Python's Parselmouth library.
+#' Diarization (who speaks when?) from WAV audios using Python's pyannote-audio library.
 #'
 #' @param directory A directory/folder containing WAV files.
 #' @export

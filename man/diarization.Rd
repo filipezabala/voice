@@ -2,7 +2,7 @@
 % Please edit documentation in R/diarization.R
 \name{diarization}
 \alias{diarization}
-\title{Extract features from WAV audios using Python's Parselmouth library.}
+\title{Diarization (who speaks when?) from WAV audios using Python's pyannote-audio library.}
 \usage{
 diarization(directory)
 }
@@ -10,5 +10,5 @@ diarization(directory)
 \item{directory}{A directory/folder containing WAV files.}
 }
 \description{
-Extract features from WAV audios using Python's Parselmouth library.
+Diarization (who speaks when?) from WAV audios using Python's pyannote-audio library.
 }
