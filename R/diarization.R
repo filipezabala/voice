@@ -1,3 +1,7 @@
+#' Extract features from WAV audios using Python's Parselmouth library.
+#'
+#' @param directory A directory/folder containing WAV files.
+#' @export
 diarization <- function(directory){
 
   # process time
