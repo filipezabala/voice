@@ -21,7 +21,7 @@ diarization <- function(directory){
                          'temp_diarization-pyannote.py')
   }
 
-  dia <- paste('python3 ./temp_temp_diarization-pyannote.py', directory)
+  dia <- paste('python3 ./temp_diarization-pyannote.py', directory)
   system(dia, wait = FALSE, intern = T)
 
 }
