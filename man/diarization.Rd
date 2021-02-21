@@ -4,10 +4,16 @@
 \alias{diarization}
 \title{Diarization (who speaks when?) from WAV audios using Python's pyannote-audio library.}
 \usage{
-diarization(directory)
+diarization(
+  directory,
+  extension,
+  condacall = "~/miniconda3/envs/py38phdz/bin/python"
+)
 }
 \arguments{
 \item{directory}{A directory/folder containing WAV files.}
+
+\item{extension}{The extension of audio files to be extracted. Case sensitive.}
 }
 \description{
 Diarization (who speaks when?) from WAV audios using Python's pyannote-audio library.
