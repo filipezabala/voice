@@ -1,8 +1,10 @@
 #' Diarization (who speaks when?) from WAV audios using Python's pyannote-audio library.
 #'
 #' @param directory A directory/folder containing WAV files.
+#' @param extension The extension of audio files to be extracted. Case sensitive.
 #' @export
-diarization <- function(directory){
+diarization <- function(directory, extension,
+                        condacall = '~/miniconda3/envs/py38phdz/bin/python'){
 
   # process time
   pt0 <- proc.time()
@@ -21,10 +23,6 @@ diarization <- function(directory){
                          'temp_diarization-pyannote.py')
   }
 
-
-  setwd('~/Dropbox/D_Filipe_Zabala/thesis/')
-  directory <- '~/Dropbox/D_Filipe_Zabala/audios/coorte/wav/'
-  cmd2 <- paste('~/miniconda3/envs/py38phdz/bin/python ./temp_diarization-pyannote.py', directory)
-  system(cmd2, wait = FALSE, intern = T)
-
+  cmd <- paste(condacall, './temp_diarization-pyannote.py', directory, extension)
+  system(cmd, wait = FALSE, intern = T)
 }
