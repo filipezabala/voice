@@ -21,7 +21,10 @@ diarization <- function(directory){
                          'temp_diarization-pyannote.py')
   }
 
-  dia <- paste('python3 ./temp_diarization-pyannote.py', directory)
-  system(dia, wait = FALSE, intern = T)
+
+  setwd('~/Dropbox/D_Filipe_Zabala/thesis/')
+  directory <- '~/Dropbox/D_Filipe_Zabala/audios/coorte/wav/'
+  cmd2 <- paste('~/miniconda3/envs/py38phdz/bin/python ./temp_diarization-pyannote.py', directory)
+  system(cmd2, wait = FALSE, intern = T)
 
 }

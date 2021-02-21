@@ -21,33 +21,18 @@ import sys
 import torch
 import pandas
 
-# def run():
-#     torch.multiprocessing.freeze_support()
-#     print('loop')
-#
-# if __name__ == '__main__':
-#     run()
-
 # working directory
 os.chdir(sys.argv[1])
-# os.chdir('/Users/filipezabala/Dropbox/D_Filipe_Zabala/audios/testes/')
-# os.chdir('/Users/filipezabala/Dropbox/D_Filipe_Zabala/audios/coorte/wav/')
-
-# # setting options
-# pandas.set_option('display.max_rows', None)
-# pandas.set_option('display.max_columns', None)
-# pandas.set_option('display.width', None)
-# pandas.set_option('display.max_colwidth', None)
-# dfs = []
 
 # listing directory files
 dirlist = sorted(os.listdir())
 n_dir = len(dirlist)
 
 # applying diarization
-pipeline = torch.hub.load('pyannote/pyannote-audio', 'dia')
 for file in dirlist:
     if file.endswith('.WAV') and __name__ == '__main__':
+        torch.multiprocessing.freeze_support()
+        pipeline = torch.hub.load('pyannote/pyannote-audio', 'dia')
         file_list = os.path.join(os.getcwd(), file)
         diarization = pipeline({'audio': file_list})
         file_name = re.findall('(.+?).WAV', file)
