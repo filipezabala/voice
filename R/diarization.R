@@ -2,6 +2,10 @@
 #'
 #' @param directory A directory/folder containing WAV files.
 #' @param extension The extension of audio files to be extracted. Case sensitive.
+#' @examples
+#' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+#' pattern <- glob2rx('*.wav'), full.names = TRUE)
+#' diarization(path2wav, '.wav')
 #' @export
 diarization <- function(directory, extension,
                         condacall = '~/miniconda3/envs/py38phdz/bin/python'){
@@ -23,6 +27,7 @@ diarization <- function(directory, extension,
                          'temp_diarization-pyannote.py')
   }
 
+  directory <-
   cmd <- paste(condacall, './temp_diarization-pyannote.py', directory, extension)
   system(cmd, wait = FALSE, intern = T)
 }
