@@ -18,3 +18,8 @@ diarization(
 \description{
 Diarization (who speaks when?) from WAV audios using Python's pyannote-audio library.
 }
+\examples{
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
+diarization(path2wav, '.wav')
+}
