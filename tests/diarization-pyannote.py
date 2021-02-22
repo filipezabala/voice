@@ -24,24 +24,12 @@ import warnings
 # ignorar warnings
 warnings.filterwarnings('ignore')
 
-
-# path = sys.argv[0]
-# filter = sys.argv[1]
-# def list_files(path: str, filter: str):
-    """
-    Lista todos os arquivos de um diretório e subdiretórios.
-
-    :param path: diretório a partir do qual se deseja procurar arquivos
-    :param filter: extensão utilizada para filtrar os arquivos. Default: '.wav'.
-    :return: tupla contendo o caminho completo para o arquivo e o nome do arquivo. Ex: ('/home', 'file.wav')
-    """
+# arquivos
 for root, dirs, files in os.walk(sys.argv[1]):
     for f in files:
         if f.lower().endswith(sys.argv[2]):
             yield root, f
 
-# if __name__ == '__main__':
-#     list_files(sys.argv)
 
 def main():
     """
