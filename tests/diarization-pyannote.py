@@ -25,7 +25,9 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-def list_files(path = sys.argv[0], filter = sys.argv[1]):
+path = sys.argv[1]
+filter = sys.argv[2]
+def list_files(path: str, filter: str):
     """
     Lista todos os arquivos de um diretório e subdiretórios.
 
