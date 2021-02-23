@@ -7,7 +7,7 @@
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #' diarization(path2wav, '.wav')
 #' @export
-diarization <- function(from, to = from,
+diarization <- function(from, to = paste0(from, '/rttm/'),
                         pycall = '~/miniconda3/envs/py38phdz/bin/python'){
 
   # process time
@@ -29,13 +29,6 @@ diarization <- function(from, to = from,
                          'temp_diarization-pyannote.py')
   }
 
-
-  path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-                         pattern <- glob2rx('*.wav'), full.names = TRUE)
-  pycall = '~/miniconda3/envs/py38phdz/bin/python'
-  from <- dirname(path2wav)[1]
-  to = from
-
-  (cmd <- paste(pycall, '-m temp_diarization-pyannote --pathfrom', from))
+  cmd <- paste(pycall, '-m temp_diarization-pyannote --pathfrom', from, '--pathto', to)
   system(cmd, wait = FALSE, intern = T)
 }

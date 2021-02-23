@@ -5,9 +5,9 @@
 \title{Diarization (who speaks when?) from WAV audios using Python's pyannote-audio library.}
 \usage{
 diarization(
-  directory,
-  extension,
-  condacall = "~/miniconda3/envs/py38phdz/bin/python"
+  from,
+  to = paste0(from, "/rttm/"),
+  pycall = "~/miniconda3/envs/py38phdz/bin/python"
 )
 }
 \arguments{
