@@ -27,9 +27,6 @@ diarization <- function(from, to = from,
                          'temp_diarization-pyannote.py')
   }
 
-  pycall <- '~/miniconda3/envs/py38phdz/bin/python'
-  from <- dirname(path2wav)[1]
-  to <- from
   cmd <- paste(pycall, '-m temp_diarization-pyannote --path', from, to)
   system(cmd, wait = FALSE, intern = T)
 }

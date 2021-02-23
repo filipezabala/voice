@@ -41,7 +41,7 @@ def list_files(pathfrom: str, filter: str = '.wav'):
                 yield root, f
 
 
-def main():
+def main(pathto: str):
     # """
     # An main() function is used as good practice in python, which concentrates calls to python modules,
     # mainly those that will be invoked by command line or by other programs.
@@ -69,7 +69,7 @@ def main():
         diarization = pipeline({'audio': os.path.join(fileroot, filename)})
         filename_base, filename_ext = os.path.splitext(filename)
         filename_out = '{}.rttm'.format(filename_base)
-        with open(os.path.join(fileroot, filename_out), 'w') as f:
+        with open(os.path.join(pathto, filename_out), 'w') as f:
             diarization.write_rttm(f)
 
 
