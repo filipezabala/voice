@@ -1,20 +1,23 @@
-# from ~/D_Filipe_Zabala/thesis/code/praaython/pyannote-audio_v3.py and pyannote-audio_v4.py
-# https://github.com/pyannote/pyannote-audio
-# https://github.com/pyannote/pyannote-audio-hub, use virtual environment
-# https://docs.conda.io/en/latest/miniconda.html
+"""
 
-# $ wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-# $ bash Miniconda3-latest-MacOSX-x86_64.sh
-# $ conda create -n py38phdz python=3.8
-# $ conda init bash
-# $ conda activate py38phdz
-# $ pip install -r ~/Dropbox/D_Filipe_Zabala/thesis/code/praaython/requirements_pyannote-audio.txt
-# $ pip install -r librosa
-# $ pip3 install pyannote.audio==1.1.1
-# $ cd /Users/filipezabala/miniconda3
-# $ conda init
+from ~/D_Filipe_Zabala/thesis/code/praaython/pyannote-audio_v3.py and pyannote-audio_v4.py
+https://github.com/pyannote/pyannote-audio
+https://github.com/pyannote/pyannote-audio-hub, use virtual environment
+https://docs.conda.io/en/latest/miniconda.html
 
+$ wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+$ bash Miniconda3-latest-MacOSX-x86_64.sh
+$ conda create -n py38phdz python=3.8
+$ conda init bash
+$ conda activate py38phdz
+$ pip install -r ~/Dropbox/D_Filipe_Zabala/thesis/code/praaython/requirements_pyannote-audio.txt
+$ pip install -r librosa
+$ pip3 install pyannote.audio==1.1.1
+$ cd /Users/filipezabala/miniconda3
+$ conda init
+"""
 # load packages
+
 import os
 import sys
 import torch
@@ -24,11 +27,19 @@ import warnings
 # ignorar warnings
 warnings.filterwarnings('ignore')
 
-# arquivos
-for root, dirs, files in os.walk(sys.argv[1]):
-    for f in files:
-        if f.lower().endswith(sys.argv[2]):
-            yield root, f
+
+def list_files(path: str, filter: str = '.wav'):
+    """
+    Lista todos os arquivos de um diretório e subdiretórios.
+
+    :param path: diretório a partir do qual se deseja procurar arquivos
+    :param filter: extensão utilizada para filtrar os arquivos. Default: '.wav'.
+    :return: tupla contendo o caminho completo para o arquivo e o nome do arquivo. Ex: ('/home', 'file.wav')
+    """
+    for root, dirs, files in os.walk(path):
+        for f in files:
+            if f.lower().endswith(filter):
+                yield root, f
 
 
 def main():
@@ -51,6 +62,7 @@ def main():
 
     parser = argparse.ArgumentParser(prog='pyannote-audio')
     parser.add_argument('--path', help='Caminho para os arquivos', action='store', required=True)
+
     args = parser.parse_args()
 
     pipeline = torch.hub.load('pyannote/pyannote-audio', 'dia')
