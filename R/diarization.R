@@ -16,7 +16,7 @@ diarization <- function(from, to = paste0(from, '/rttm/'),
   pt0 <- proc.time()
 
   # removing duplicates, using the first directory provided
-  directory <- directory[1]
+  from <- from[1]
 
   # getting python functions - MUST BE A BETTER WAY TO DO THIS!
   unlink(paste0(getwd(),'/temp_libs.py'))
