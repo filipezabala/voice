@@ -1,5 +1,4 @@
 """
-
 from ~/D_Filipe_Zabala/thesis/code/praaython/pyannote-audio_v3.py and pyannote-audio_v4.py
 https://github.com/pyannote/pyannote-audio
 https://github.com/pyannote/pyannote-audio-hub, use virtual environment
@@ -29,13 +28,13 @@ warnings.filterwarnings('ignore')
 
 
 def list_files(path: str, filter: str = '.wav'):
-    """
-    Lista todos os arquivos de um diretório e subdiretórios.
-
-    :param path: diretório a partir do qual se deseja procurar arquivos
-    :param filter: extensão utilizada para filtrar os arquivos. Default: '.wav'.
-    :return: tupla contendo o caminho completo para o arquivo e o nome do arquivo. Ex: ('/home', 'file.wav')
-    """
+    # """
+    # Lista todos os arquivos de um diretório e subdiretórios.
+    #
+    # :param path: diretório a partir do qual se deseja procurar arquivos
+    # :param filter: extensão utilizada para filtrar os arquivos. Default: '.wav'.
+    # :return: tupla contendo o caminho completo para o arquivo e o nome do arquivo. Ex: ('/home', 'file.wav')
+    # """
     for root, dirs, files in os.walk(path):
         for f in files:
             if f.lower().endswith(filter):
@@ -43,22 +42,22 @@ def list_files(path: str, filter: str = '.wav'):
 
 
 def main():
-    """
-    Utiliza-se como boa prática no python uma função main que concentra as chamada para módulos python, principalmente
-    aqueles que serão invocados por linha de comando ou por outros programas.
-
-    A função main() deve ser chamada dentro de um if especial:
-
-    if __name__ == '__main__':
-        main()
-
-    Isso garante que a função main() será chamada apenas quando o código é executado como um módulo por linha de comando.
-    Assim, ao importar o arquivo atual para ser utlizado como biblioteca em outro código, a função main não é executada
-    pois a condição do if não será satisfeita. Entranto, ela estará disponível para uso no código que realizou a importação
-    do módulo.
-
-    :return: None
-    """
+    # """
+    # Utiliza-se como boa prática no python uma função main que concentra as chamada para módulos python, principalmente
+    # aqueles que serão invocados por linha de comando ou por outros programas.
+    #
+    # A função main() deve ser chamada dentro de um if especial:
+    #
+    # if __name__ == '__main__':
+    #     main()
+    #
+    # Isso garante que a função main() será chamada apenas quando o código é executado como um módulo por linha de comando.
+    # Assim, ao importar o arquivo atual para ser utlizado como biblioteca em outro código, a função main não é executada
+    # pois a condição do if não será satisfeita. Entranto, ela estará disponível para uso no código que realizou a importação
+    # do módulo.
+    #
+    # :return: None
+    # """
 
     parser = argparse.ArgumentParser(prog='pyannote-audio')
     parser.add_argument('--path', help='Caminho para os arquivos', action='store', required=True)

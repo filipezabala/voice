@@ -29,7 +29,6 @@ diarization <- function(directory, extension,
 
   condacall = '~/miniconda3/envs/py38phdz/bin/python'
   directory <- dirname(path2wav)[1]
-  extension <- '.wav'
-  cmd <- paste(condacall, './temp_diarization-pyannote.py', directory, extension)
+  cmd <- paste(condacall, '-m temp_diarization-pyannote', directory)
   system(cmd, wait = FALSE, intern = T)
 }
