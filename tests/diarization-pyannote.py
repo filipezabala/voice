@@ -79,7 +79,7 @@ if __name__ == '__main__':
     """
     Do not put any other code here.
     """
-    main(pathto)
+    main()
 
 
 
