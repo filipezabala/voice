@@ -17,16 +17,25 @@ diarization <- function(from, to = from,
   directory <- directory[1]
 
   # getting python functions - MUST BE A BETTER WAY TO DO THIS!
+  unlink(paste0(getwd(),'/temp_libs.py'))
   if(!file.exists(paste0(getwd(),'/temp_libs.py'))){
     utils::download.file('https://raw.githubusercontent.com/filipezabala/voice/master/tests/libs.py',
                          'temp_libs.py')
   }
 
+  unlink(paste0(getwd(),'/temp_diarization-pyannote.py'))
   if(!file.exists(paste0(getwd(),'/temp_diarization-pyannote.py'))){
     utils::download.file('https://raw.githubusercontent.com/filipezabala/voice/master/tests/diarization-pyannote.py',
                          'temp_diarization-pyannote.py')
   }
 
-  cmd <- paste(pycall, '-m temp_diarization-pyannote --path', from, to)
+
+  path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+                         pattern <- glob2rx('*.wav'), full.names = TRUE)
+  pycall = '~/miniconda3/envs/py38phdz/bin/python'
+  from <- dirname(path2wav)[1]
+  to = from
+
+  (cmd <- paste(pycall, '-m temp_diarization-pyannote --pathfrom', from, '.wav', to))
   system(cmd, wait = FALSE, intern = T)
 }

@@ -60,7 +60,7 @@ def main(pathto: str):
     # """
 
     parser = argparse.ArgumentParser(prog='pyannote-audio')
-    parser.add_argument('--pathfrom', help='Path to files', action='store', required=True)
+    parser.add_argument('--path', help='Path to files', action='store', required=True)
 
     args = parser.parse_args()
 
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     """
     Do not put any other code here.
     """
-    main(pathto)
+    main()
 
 
 
