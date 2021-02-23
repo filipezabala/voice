@@ -11,9 +11,11 @@ diarization(
 )
 }
 \arguments{
-\item{directory}{A directory/folder containing WAV files.}
+\item{from}{A directory/folder containing WAV files.}
 
-\item{extension}{The extension of audio files to be extracted. Case sensitive.}
+\item{to}{A directory/folder to write RTTM files.}
+
+\item{pycall}{Python call.}
 }
 \description{
 Diarization (who speaks when?) from WAV audios using Python's pyannote-audio library.
@@ -21,5 +23,6 @@ Diarization (who speaks when?) from WAV audios using Python's pyannote-audio lib
 \examples{
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 pattern <- glob2rx('*.wav'), full.names = TRUE)
-diarization(path2wav, '.wav')
+dir.create(paste0(dirname(path2wav)[1], '/rttm/'))
+diarization(dirname(path2wav)[1])
 }

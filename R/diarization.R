@@ -1,11 +1,13 @@
 #' Diarization (who speaks when?) from WAV audios using Python's pyannote-audio library.
 #'
-#' @param directory A directory/folder containing WAV files.
-#' @param extension The extension of audio files to be extracted. Case sensitive.
+#' @param from A directory/folder containing WAV files.
+#' @param to A directory/folder to write RTTM files.
+#' @param pycall Python call.
 #' @examples
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
-#' diarization(path2wav, '.wav')
+#' dir.create(paste0(dirname(path2wav)[1], '/rttm/'))
+#' diarization(dirname(path2wav)[1])
 #' @export
 diarization <- function(from, to = paste0(from, '/rttm/'),
                         pycall = '~/miniconda3/envs/py38phdz/bin/python'){
