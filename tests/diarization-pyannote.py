@@ -65,7 +65,7 @@ def main():
     args = parser.parse_args()
 
     pipeline = torch.hub.load('pyannote/pyannote-audio', 'dia')
-    for fileroot, filename in list_files(args.pathfrom):
+    for fileroot, filename in list_files(args.path):
         diarization = pipeline({'audio': os.path.join(fileroot, filename)})
         filename_base, filename_ext = os.path.splitext(filename)
         filename_out = '{}.rttm'.format(filename_base)

@@ -27,15 +27,15 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-def list_files(path: str, filter: str = '.wav'):
+def list_files(pathfrom: str, filter: str = '.wav'):
     # """
-    # Lista todos os arquivos de um diretório e subdiretórios.
+    # Lists all files in a directory and subdirectories.
     #
-    # :param path: diretório a partir do qual se deseja procurar arquivos
-    # :param filter: extensão utilizada para filtrar os arquivos. Default: '.wav'.
-    # :return: tupla contendo o caminho completo para o arquivo e o nome do arquivo. Ex: ('/home', 'file.wav')
+    # :param pathfrom: directory from which you want to search for files.
+    # :param filter: extension used to filter files. Default: '.wav'.
+    # :return: tuple containing the full path to the file and the file name. Ex: ('/home', 'file.wav')
     # """
-    for root, dirs, files in os.walk(path):
+    for root, dirs, files in os.walk(pathfrom):
         for f in files:
             if f.lower().endswith(filter):
                 yield root, f
@@ -43,29 +43,29 @@ def list_files(path: str, filter: str = '.wav'):
 
 def main():
     # """
-    # Utiliza-se como boa prática no python uma função main que concentra as chamada para módulos python, principalmente
-    # aqueles que serão invocados por linha de comando ou por outros programas.
+    # An main() function is used as good practice in python, which concentrates calls to python modules,
+    # mainly those that will be invoked by command line or by other programs.
     #
-    # A função main() deve ser chamada dentro de um if especial:
+    # The function main() must be called within a special if:
     #
     # if __name__ == '__main__':
     #     main()
     #
-    # Isso garante que a função main() será chamada apenas quando o código é executado como um módulo por linha de comando.
-    # Assim, ao importar o arquivo atual para ser utlizado como biblioteca em outro código, a função main não é executada
-    # pois a condição do if não será satisfeita. Entranto, ela estará disponível para uso no código que realizou a importação
-    # do módulo.
+    # This ensures that the main() function will be called only when the code is executed as a module
+    # from command line. Thus, when importing the current file to be used as a library in other code,
+    # the main() function is not executed since the if condition will not be satisfied.
+    # However, it will be available for use in the code that imported the module.
     #
     # :return: None
     # """
 
     parser = argparse.ArgumentParser(prog='pyannote-audio')
-    parser.add_argument('--path', help='Caminho para os arquivos', action='store', required=True)
+    parser.add_argument('--path', help='Path to files', action='store', required=True)
 
     args = parser.parse_args()
 
     pipeline = torch.hub.load('pyannote/pyannote-audio', 'dia')
-    for fileroot, filename in list_files(args.path):
+    for fileroot, filename in list_files(args.pathfrom):
         diarization = pipeline({'audio': os.path.join(fileroot, filename)})
         filename_base, filename_ext = os.path.splitext(filename)
         filename_out = '{}.rttm'.format(filename_base)
@@ -75,7 +75,7 @@ def main():
 
 if __name__ == '__main__':
     """
-    Não colocar nenhum outro código aqui.
+    Do not put any other code here.
     """
     main()
 
