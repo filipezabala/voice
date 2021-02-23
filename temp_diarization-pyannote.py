@@ -1,20 +1,22 @@
-# from ~/D_Filipe_Zabala/thesis/code/praaython/pyannote-audio_v3.py and pyannote-audio_v4.py
-# https://github.com/pyannote/pyannote-audio
-# https://github.com/pyannote/pyannote-audio-hub, use virtual environment
-# https://docs.conda.io/en/latest/miniconda.html
+"""
+from ~/D_Filipe_Zabala/thesis/code/praaython/pyannote-audio_v3.py and pyannote-audio_v4.py
+https://github.com/pyannote/pyannote-audio
+https://github.com/pyannote/pyannote-audio-hub, use virtual environment
+https://docs.conda.io/en/latest/miniconda.html
 
-# $ wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-# $ bash Miniconda3-latest-MacOSX-x86_64.sh
-# $ conda create -n py38phdz python=3.8
-# $ conda init bash
-# $ conda activate py38phdz
-# $ pip install -r ~/Dropbox/D_Filipe_Zabala/thesis/code/praaython/requirements_pyannote-audio.txt
-# $ pip install -r librosa
-# $ pip3 install pyannote.audio==1.1.1
-# $ cd /Users/filipezabala/miniconda3
-# $ conda init
-
+$ wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+$ bash Miniconda3-latest-MacOSX-x86_64.sh
+$ conda create -n py38phdz python=3.8
+$ conda init bash
+$ conda activate py38phdz
+$ pip install -r ~/Dropbox/D_Filipe_Zabala/thesis/code/praaython/requirements_pyannote-audio.txt
+$ pip install -r librosa
+$ pip3 install pyannote.audio==1.1.1
+$ cd /Users/filipezabala/miniconda3
+$ conda init
+"""
 # load packages
+
 import os
 import sys
 import torch
@@ -25,44 +27,41 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-# path = sys.argv[0]
-# filter = sys.argv[1]
-# def list_files(path: str, filter: str):
-    """
-    Lista todos os arquivos de um diretório e subdiretórios.
+def list_files(path: str, filter: str = '.wav'):
+    # """
+    # Lista todos os arquivos de um diretório e subdiretórios.
+    #
+    # :param path: diretório a partir do qual se deseja procurar arquivos
+    # :param filter: extensão utilizada para filtrar os arquivos. Default: '.wav'.
+    # :return: tupla contendo o caminho completo para o arquivo e o nome do arquivo. Ex: ('/home', 'file.wav')
+    # """
+    for root, dirs, files in os.walk(path):
+        for f in files:
+            if f.lower().endswith(filter):
+                yield root, f
 
-    :param path: diretório a partir do qual se deseja procurar arquivos
-    :param filter: extensão utilizada para filtrar os arquivos. Default: '.wav'.
-    :return: tupla contendo o caminho completo para o arquivo e o nome do arquivo. Ex: ('/home', 'file.wav')
-    """
-for root, dirs, files in os.walk(sys.argv[1]):
-    for f in files:
-        if f.lower().endswith(sys.argv[2]):
-            yield root, f
-
-# if __name__ == '__main__':
-#     list_files(sys.argv)
 
 def main():
-    """
-    Utiliza-se como boa prática no python uma função main que concentra as chamada para módulos python, principalmente
-    aqueles que serão invocados por linha de comando ou por outros programas.
-
-    A função main() deve ser chamada dentro de um if especial:
-
-    if __name__ == '__main__':
-        main()
-
-    Isso garante que a função main() será chamada apenas quando o código é executado como um módulo por linha de comando.
-    Assim, ao importar o arquivo atual para ser utlizado como biblioteca em outro código, a função main não é executada
-    pois a condição do if não será satisfeita. Entranto, ela estará disponível para uso no código que realizou a importação
-    do módulo.
-
-    :return: None
-    """
+    # """
+    # Utiliza-se como boa prática no python uma função main que concentra as chamada para módulos python, principalmente
+    # aqueles que serão invocados por linha de comando ou por outros programas.
+    #
+    # A função main() deve ser chamada dentro de um if especial:
+    #
+    # if __name__ == '__main__':
+    #     main()
+    #
+    # Isso garante que a função main() será chamada apenas quando o código é executado como um módulo por linha de comando.
+    # Assim, ao importar o arquivo atual para ser utlizado como biblioteca em outro código, a função main não é executada
+    # pois a condição do if não será satisfeita. Entranto, ela estará disponível para uso no código que realizou a importação
+    # do módulo.
+    #
+    # :return: None
+    # """
 
     parser = argparse.ArgumentParser(prog='pyannote-audio')
     parser.add_argument('--path', help='Caminho para os arquivos', action='store', required=True)
+
     args = parser.parse_args()
 
     pipeline = torch.hub.load('pyannote/pyannote-audio', 'dia')

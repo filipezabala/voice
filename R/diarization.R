@@ -7,8 +7,8 @@
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #' diarization(path2wav, '.wav')
 #' @export
-diarization <- function(directory, extension,
-                        condacall = '~/miniconda3/envs/py38phdz/bin/python'){
+diarization <- function(from, to = from,
+                        pycall = '~/miniconda3/envs/py38phdz/bin/python'){
 
   # process time
   pt0 <- proc.time()
@@ -16,7 +16,7 @@ diarization <- function(directory, extension,
   # removing duplicates, using the first directory provided
   directory <- directory[1]
 
-  # # getting python functions - MUST BE A BETTER WAY TO DO THIS!
+  # getting python functions - MUST BE A BETTER WAY TO DO THIS!
   if(!file.exists(paste0(getwd(),'/temp_libs.py'))){
     utils::download.file('https://raw.githubusercontent.com/filipezabala/voice/master/tests/libs.py',
                          'temp_libs.py')
@@ -27,8 +27,9 @@ diarization <- function(directory, extension,
                          'temp_diarization-pyannote.py')
   }
 
-  condacall = '~/miniconda3/envs/py38phdz/bin/python'
-  directory <- dirname(path2wav)[1]
-  cmd <- paste(condacall, '-m temp_diarization-pyannote', directory)
+  pycall <- '~/miniconda3/envs/py38phdz/bin/python'
+  from <- dirname(path2wav)[1]
+  to <- from
+  cmd <- paste(pycall, '-m temp_diarization-pyannote --path', from, to)
   system(cmd, wait = FALSE, intern = T)
 }
