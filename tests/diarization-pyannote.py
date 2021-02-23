@@ -41,7 +41,7 @@ def list_files(pathfrom: str, filter: str = '.wav'):
                 yield root, f
 
 
-def main(pathto):
+def main():
     # """
     # An main() function is used as good practice in python, which concentrates calls to python modules,
     # mainly those that will be invoked by command line or by other programs.
