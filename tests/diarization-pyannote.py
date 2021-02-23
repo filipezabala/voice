@@ -62,6 +62,7 @@ def main(pathto: str):
     parser = argparse.ArgumentParser(prog='pyannote-audio')
     parser.add_argument('--pathfrom', help='Path from (reading .wav)', action='store', required=True)
     parser.add_argument('--pathto', help='Path to (writing .rttm)', action='store', required=True)
+    parser.add_argument('--filter', help='File extension (default: .wav)', action='store', required=False)
 
     args = parser.parse_args()
 
