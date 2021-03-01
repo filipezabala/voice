@@ -5,10 +5,20 @@
 #' @param k Number of additive components.
 #' @return A \code{char} vector containing the expanded models.
 #' @examples
+#' library(voice)
+#'
 #' expand_model('y', LETTERS[1:4], 1)
 #' expand_model('y', LETTERS[1:4], 2)
 #' expand_model('y', LETTERS[1:4], 3)
 #' expand_model('y', LETTERS[1:4], 4)
+#'
+#' # multiple models using apply functions
+#' nx <- 10 # number of X variables to be used
+#' models <- lapply(1:nx, expand_model, y = 'y', x = LETTERS[1:nx])
+#' names(models) <- 1:nx
+#' models
+#' sum(sapply(models, length)) # total of models
+
 #' @export
 expand_model <- function(y, x, k){
 
