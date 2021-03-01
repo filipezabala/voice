@@ -4,6 +4,18 @@ https://github.com/pyannote/pyannote-audio
 https://github.com/pyannote/pyannote-audio-hub, use virtual environment
 https://docs.conda.io/en/latest/miniconda.html
 
+# Linux
+$ wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+$ cd repo.anaconda.com//miniconda
+$ bash Miniconda3-latest-Linux-x86_64.sh
+$ conda create -n py38linux python=3.8
+$ conda init bash
+$ conda activate py38linux
+$ pip install -r ~/Dropbox/D_Filipe_Zabala/thesis/code/praaython/requirements_pyannote-audio.txt
+$ pip3 install pyannote.audio==1.1.1
+$ conda init
+
+# Mac
 $ wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 $ bash Miniconda3-latest-MacOSX-x86_64.sh
 $ conda create -n py38phdz python=3.8
@@ -66,12 +78,15 @@ def main():
     args = parser.parse_args()
 
     pipeline = torch.hub.load('pyannote/pyannote-audio', 'dia')
+    i=0
     for fileroot, filename in list_files(args.pathfrom):
         diarization = pipeline({'audio': os.path.join(fileroot, filename)})
         filename_base, filename_ext = os.path.splitext(filename)
         filename_out = '{}.rttm'.format(filename_base)
         with open(os.path.join(args.pathto, filename_out), 'w') as f:
             diarization.write_rttm(f)
+        i=i+1
+        print(i)
 
 
 if __name__ == '__main__':

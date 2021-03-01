@@ -1,4 +1,4 @@
-#' Diarization (who speaks when?) from WAV audios using Python's pyannote-audio library.
+#'  Who Speaks When? Diarization from WAV audios using Python's pyannote-audio library.
 #'
 #' @param from A directory/folder containing WAV files.
 #' @param to A directory/folder to write RTTM files.
@@ -7,9 +7,9 @@
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #' dir.create(paste0(dirname(path2wav)[1], '/rttm/'))
-#' diarization(dirname(path2wav)[1])
+#' wsw(dirname(path2wav)[1])
 #' @export
-diarization <- function(from, to = paste0(from, '/rttm/'),
+wsw <- function(from, to = paste0(from, '/rttm/'),
                         pycall = '~/miniconda3/envs/py38phdz/bin/python'){
 
   # process time
