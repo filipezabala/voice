@@ -21,6 +21,7 @@ wsw(
 Who Speaks When? Diarization from WAV audios using Python's pyannote-audio library.
 }
 \examples{
+library(voice)
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 pattern <- glob2rx('*.wav'), full.names = TRUE)
 dir.create(paste0(dirname(path2wav)[1], '/rttm/'))

@@ -89,7 +89,7 @@ extract_features <- function(directory, filesRange = NULL,
   directory <- directory[1]
 
   # listing wav files
-  wavFiles <- list.files(directory, pattern = utils::glob2rx('*.wav'),
+  wavFiles <- list.files(directory, pattern = '[[:punct:]][wW][aA][vV]$',
                          full.names = full.names, recursive = recursive)
 
   # filtering by fileRange

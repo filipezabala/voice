@@ -4,13 +4,18 @@
 \alias{write_list}
 \title{Writes a list to a path.}
 \usage{
-write_list(x, directory)
+write_list(x, path)
 }
 \arguments{
 \item{x}{A list.}
 
-\item{directory}{A directory.}
+\item{path}{A full path to file.}
 }
 \description{
 Writes a list to a path.
+}
+\examples{
+library(voice)
+pts <- list(x = cars[,1], y = cars[,2])
+write_list(pts, paste0(getwd(), '/list.txt'))
 }

@@ -4,6 +4,7 @@
 #' @param to A directory/folder to write RTTM files.
 #' @param pycall Python call.
 #' @examples
+#' library(voice)
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #' dir.create(paste0(dirname(path2wav)[1], '/rttm/'))
@@ -14,6 +15,7 @@ wsw <- function(from, to = paste0(from, '/rttm/'),
 
   # process time
   pt0 <- proc.time()
+  st0 <- Sys.time()
 
   # removing duplicates, using the first directory provided
   from <- from[1]
@@ -33,4 +35,5 @@ wsw <- function(from, to = paste0(from, '/rttm/'),
 
   cmd <- paste(pycall, '-m temp_diarization-pyannote --pathfrom', from, '--pathto', to)
   system(cmd, wait = FALSE, intern = T)
+  print(Sys.time()-st0)
 }
