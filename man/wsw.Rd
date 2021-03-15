@@ -4,11 +4,7 @@
 \alias{wsw}
 \title{Who Speaks When? Diarization from WAV audios using Python's pyannote-audio library.}
 \usage{
-wsw(
-  fromWav,
-  to = paste0(fromWav, "/rttm/"),
-  pycall = "~/miniconda3/envs/py38phdz/bin/python"
-)
+wsw(fromWav, to, pycall = "~/miniconda3/envs/py38phdz/bin/python")
 }
 \arguments{
 \item{fromWav}{A directory/folder containing WAV files.}

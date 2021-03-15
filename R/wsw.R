@@ -10,8 +10,7 @@
 #' dir.create(rttm <- paste0(dirname(path2wav)[1], '/rttm/'))
 #' wsw(from = dirname(path2wav)[1], to = rttm)
 #' @export
-wsw <- function(fromWav, to = paste0(fromWav, '/rttm/'),
-                        pycall = '~/miniconda3/envs/py38phdz/bin/python'){
+wsw <- function(fromWav, to, pycall = '~/miniconda3/envs/py38phdz/bin/python'){
 
   # process time
   pt0 <- proc.time()
