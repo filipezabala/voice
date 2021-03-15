@@ -6,7 +6,7 @@
 \usage{
 wsw(
   fromWav,
-  to = paste0(from, "/rttm/"),
+  to = paste0(fromWav, "/rttm/"),
   pycall = "~/miniconda3/envs/py38phdz/bin/python"
 )
 }

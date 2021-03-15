@@ -10,7 +10,7 @@
 #' dir.create(rttm <- paste0(dirname(path2wav)[1], '/rttm/'))
 #' wsw(from = dirname(path2wav)[1], to = rttm)
 #' @export
-wsw <- function(fromWav, to = paste0(from, '/rttm/'),
+wsw <- function(fromWav, to = paste0(fromWav, '/rttm/'),
                         pycall = '~/miniconda3/envs/py38phdz/bin/python'){
 
   # process time
@@ -18,7 +18,7 @@ wsw <- function(fromWav, to = paste0(from, '/rttm/'),
   st0 <- Sys.time()
 
   # removing duplicates, using the first directory provided
-  from <- from[1]
+  fromWav <- fromWav[1]
 
   # getting python functions - MUST BE A BETTER WAY TO DO THIS!
   unlink(paste0(getwd(),'/temp_libs.py'))
