@@ -1,22 +1,23 @@
 #'  Split Wave
 #'
-#' @details Split WAV files in \code{fromWav} folder using (same names) RTTM files as guidance.
+#' @description Split WAV files in \code{fromWav} folder using (same names) RTTM files as guidance.
 #' @param fromWav A directory/folder containing WAV files.
 #' @param fromRttm A directory/folder containing RTTM files.
 #' @param to A directory/folder to write generated files.
-#' @param output character string, the class of the object to return, either "matrix", "Wave", "Sample", "audioSample" or "ts".
+#' @param output character string, the class of the object to return, either 'wave' or 'list'.
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
 #' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
 #' @examples
 #' library(voice)
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-#' pattern <- glob2rx('*.wav'), full.names = TRUE)
+#'                                    pattern <- glob2rx('*.wav'), full.names = TRUE)
 #' dir.create(rttm <- paste0(dirname(path2wav)[1], '/rttm/'))
 #' wsw(from = dirname(path2wav)[1], to = rttm)
+#'
 #' dir.create(split <- paste0(dirname(path2wav)[1], '/split/'))
 #' splitw(fromWav = dirname(path2wav)[1], fromRttm = rttm,
-#' to = split, output = 'wave')
+#'                          to = split, output = 'wave')
 #' @export
 splitw <- function(fromWav, fromRttm, to = NULL, output = 'wave',
                    filesRange = NULL,

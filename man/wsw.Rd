@@ -5,13 +5,13 @@
 \title{Who Speaks When? Diarization from WAV audios using Python's pyannote-audio library.}
 \usage{
 wsw(
-  from,
+  fromWav,
   to = paste0(from, "/rttm/"),
   pycall = "~/miniconda3/envs/py38phdz/bin/python"
 )
 }
 \arguments{
-\item{from}{A directory/folder containing WAV files.}
+\item{fromWav}{A directory/folder containing WAV files.}
 
 \item{to}{A directory/folder to write RTTM files.}
 
@@ -23,7 +23,7 @@ Who Speaks When? Diarization from WAV audios using Python's pyannote-audio libra
 \examples{
 library(voice)
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-pattern <- glob2rx('*.wav'), full.names = TRUE)
-dir.create(paste0(dirname(path2wav)[1], '/rttm/'))
-wsw(dirname(path2wav)[1])
+                                   pattern <- glob2rx('*.wav'), full.names = TRUE)
+dir.create(rttm <- paste0(dirname(path2wav)[1], '/rttm/'))
+wsw(from = dirname(path2wav)[1], to = rttm)
 }

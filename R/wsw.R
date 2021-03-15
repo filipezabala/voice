@@ -1,16 +1,16 @@
 #'  Who Speaks When? Diarization from WAV audios using Python's pyannote-audio library.
 #'
-#' @param from A directory/folder containing WAV files.
+#' @param fromWav A directory/folder containing WAV files.
 #' @param to A directory/folder to write RTTM files.
 #' @param pycall Python call.
 #' @examples
 #' library(voice)
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-#' pattern <- glob2rx('*.wav'), full.names = TRUE)
-#' dir.create(paste0(dirname(path2wav)[1], '/rttm/'))
-#' wsw(dirname(path2wav)[1])
+#'                                    pattern <- glob2rx('*.wav'), full.names = TRUE)
+#' dir.create(rttm <- paste0(dirname(path2wav)[1], '/rttm/'))
+#' wsw(from = dirname(path2wav)[1], to = rttm)
 #' @export
-wsw <- function(from, to = paste0(from, '/rttm/'),
+wsw <- function(fromWav, to = paste0(from, '/rttm/'),
                         pycall = '~/miniconda3/envs/py38phdz/bin/python'){
 
   # process time
@@ -33,7 +33,7 @@ wsw <- function(from, to = paste0(from, '/rttm/'),
                          'temp_diarization-pyannote.py')
   }
 
-  cmd <- paste(pycall, '-m temp_diarization-pyannote --pathfrom', from, '--pathto', to)
+  cmd <- paste(pycall, '-m temp_diarization-pyannote --pathfrom', fromWav, '--pathto', to)
   system(cmd, wait = FALSE, intern = T)
   print(Sys.time()-st0)
 }
