@@ -22,7 +22,8 @@
 splitw <- function(fromWav, fromRttm, to = NULL, output = 'wave',
                    filesRange = NULL,
                    full.names = TRUE,
-                   recursive = FALSE){
+                   recursive = FALSE,
+                   min.time = 0.45){
 
   # listing WAV files
   wavFiles <- list.files(fromWav, pattern = '[[:punct:]][wW][aA][vV]$',
@@ -52,7 +53,7 @@ splitw <- function(fromWav, fromRttm, to = NULL, output = 'wave',
                 'ortho','stype','name','conf','slat')
   rttm <- lapply(rttm, stats::setNames, colnames)
 
-  # useful functions
+  # useful functions (voice::get_...)
   get_tbeg <- function(x){
     return(x$tbeg)
   }
@@ -72,10 +73,15 @@ splitw <- function(fromWav, fromRttm, to = NULL, output = 'wave',
     return(x@bit)
   }
 
-  # time beginning, duration and endind
+  # time beginning, duration and ending
   tbeg <- sapply(rttm, get_tbeg)
   tdur <- sapply(rttm, get_tdur)
   tend <- Map('+', tbeg, tdur)
+
+  # # tests
+  # sapply(tdur, summary)
+  # sapply(tdur, length)
+  # sapply(tdur, quantile, prob = seq(0,1,.01))
 
   # defining break points
   breaks <- Map('c', tbeg, tend)
@@ -115,7 +121,7 @@ splitw <- function(fromWav, fromRttm, to = NULL, output = 'wave',
   if(output == 'list'){
     if(!is.null(to)){
       timest <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
-      write_list(x=sa, path=paste0(to,'/list_', timest, '.txt'))
+      voice::write_list(x=sa, path=paste0(to,'/list_', timest, '.txt'))
     }
     return(sa)
   }
