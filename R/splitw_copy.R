@@ -74,8 +74,8 @@ splitw <- function(fromWav, fromRttm, to = NULL, output = 'wave',
   }
 
   # time beginning, duration and ending
-  tbeg <- lapply(rttm, get_tbeg)
-  tdur <- lapply(rttm, get_tdur)
+  tbeg <- sapply(rttm, get_tbeg)
+  tdur <- sapply(rttm, get_tdur)
   tend <- Map('+', tbeg, tdur)
 
   # # tests
@@ -140,7 +140,7 @@ splitw <- function(fromWav, fromRttm, to = NULL, output = 'wave',
     }
 
     # Save the files
-    pathNameSplit <- lapply(fileNameSplit, function(x) paste0(to, '/', x))
+    pathNameSplit <- sapply(fileNameSplit, function(x) paste0(to, '/', x))
     for(i in 1:length(audio)){
       for(j in 1:length(sa[[i]])){
         tuneR::writeWave(sa[[i]][[j]], filename = pathNameSplit[[i]][j])

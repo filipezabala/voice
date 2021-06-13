@@ -1,4 +1,4 @@
-#'  Who Speaks When? Diarization from WAV audios using Python's pyannote-audio library.
+#'  (Who) Speaks When? Diarization from WAV audios using Python's pyannote-audio library.
 #'
 #' @param fromWav A directory/folder containing WAV files.
 #' @param to A directory/folder to write RTTM files.
@@ -11,6 +11,8 @@
 #' wsw(from = dirname(path2wav)[1], to = rttm)
 #' @export
 wsw <- function(fromWav, to, pycall = '~/miniconda3/envs/py38phdz/bin/python'){
+
+  # Melhoria: ordenar arquivos para extração
 
   # process time
   pt0 <- proc.time()
