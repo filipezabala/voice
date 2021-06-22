@@ -19,7 +19,8 @@
 #' splitw(fromWav = dirname(path2wav)[1], fromRttm = rttm,
 #'                          to = split, output = 'wave')
 #' @export
-splitw <- function(fromWav, fromRttm, to = NULL, output = 'wave',
+splitw <- function(fromWav, fromRttm, to = NULL,
+                   output = 'wave',
                    filesRange = NULL,
                    full.names = TRUE,
                    recursive = FALSE,
@@ -32,6 +33,11 @@ splitw <- function(fromWav, fromRttm, to = NULL, output = 'wave',
   # listing RTTM files
   rttmFiles <- list.files(fromRttm, pattern = '[[:punct:]][rR][tT][tT][mM]$',
                           full.names = full.names, recursive = recursive)
+
+  # # min.time
+  # cols <- c('type','file','chnl','tbeg','tdur','ortho','stype','name','conf','slat')
+  # rttmFiles <- lapply(rttmFiles, read.table, col.names = cols)
+
 
   # filtering by fileRange
   if(!is.null(filesRange)){

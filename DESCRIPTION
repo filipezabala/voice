@@ -11,7 +11,7 @@ BugReports: https://github.com/filipezabala/voice/issues
 Description: General purpose tools for voice analysis, speaker recognition and 
     mood inference. Gathers R and Python tools to solve problems concerning voice.
 Depends: R (>= 4.0.0)
-Imports: R.utils, parallelSVM, reticulate, seewave, tidyr, wrassp, ellipse, ggplot2, ggfortify, RColorBrewer, dplyr, e1071, tibble, tuneR
+Imports: R.utils, parallelSVM, reticulate, seewave, tidyr, wrassp, ellipse, ggplot2, ggfortify, RColorBrewer, dplyr, e1071, tibble, tuneR, VIM
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true

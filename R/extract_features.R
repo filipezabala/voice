@@ -108,7 +108,7 @@ extract_features <- function(directory, filesRange = NULL,
     which.stereo <- which(!mono)
     ns <- length(which.stereo)
     if(sum(which.stereo)){
-      cat('The following', ns,'audio files are stereo and must be converted to mono: \n',
+      cat('The following', ns, 'audio files are stereo and must be converted to mono: \n',
           paste0(names(mono[which.stereo]), sep = '\n'), '\n')
       if(stereo2mono){
         audio <- sapply(wavFiles[which.stereo], tuneR::readWave)
