@@ -8,6 +8,7 @@
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
 #' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
+#' @param min.time Minimum split time in seconds. (default: \code{0.4})
 #' @examples
 #' library(voice)
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
@@ -24,7 +25,7 @@ splitw <- function(fromWav, fromRttm, to = NULL,
                    filesRange = NULL,
                    full.names = TRUE,
                    recursive = FALSE,
-                   min.time = 0.45){
+                   min.time = 0.4){
 
   # listing WAV files
   wavFiles <- list.files(fromWav, pattern = '[[:punct:]][wW][aA][vV]$',
@@ -33,11 +34,6 @@ splitw <- function(fromWav, fromRttm, to = NULL,
   # listing RTTM files
   rttmFiles <- list.files(fromRttm, pattern = '[[:punct:]][rR][tT][tT][mM]$',
                           full.names = full.names, recursive = recursive)
-
-  # # min.time
-  # cols <- c('type','file','chnl','tbeg','tdur','ortho','stype','name','conf','slat')
-  # rttmFiles <- lapply(rttmFiles, read.table, col.names = cols)
-
 
   # filtering by fileRange
   if(!is.null(filesRange)){
@@ -58,6 +54,13 @@ splitw <- function(fromWav, fromRttm, to = NULL,
   colnames <- c('type','file','chnl','tbeg','tdur',
                 'ortho','stype','name','conf','slat')
   rttm <- lapply(rttm, stats::setNames, colnames)
+
+  # min.time
+  drop.row <- function(x){
+    dr <- x[x$tdur >= min.time,]
+    return(dr)
+  }
+  rttm <- lapply(rttm, drop.row)
 
   # useful functions (voice::get_...)
   get_tbeg <- function(x){
