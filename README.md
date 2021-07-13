@@ -78,7 +78,7 @@ mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
  . Tools > Global Options... > Appearance > Merbivore (Restart required)   
 
 ### 9. Install `R` packages
- . Type command + space 'terminal'   
+ . Type `command + space 'terminal'`   
  
 ```bash
 sudo R
