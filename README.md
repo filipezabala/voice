@@ -10,10 +10,10 @@ General tools for voice analysis. The `voice` package is being developed to be a
 The following steps were used to configure gitHub.com/filipezabala/voice in a [MacOS Big Sur](https://www.apple.com/macos/big-sur/). Note the versions during the installation. If the error "The package %@ is missing or invalid" appears during the upgrading from MacOS Catalina to Big Sur, press simultaneously `command + option + p + r` at restart). The processes may be accompanied using command + space 'Activity Monitor'.  
 
 Hardware
- . MacBook Air (13-inch, 2017)
- . Processor 1.8 GHz Dual-Core Intel Core i5
- . Memory 8GB 1600 MHz DDR3
- . Graphics Intel HD Graphics 6000 1536 MB
+ . MacBook Air (13-inch, 2017)  
+ . Processor 1.8 GHz Dual-Core Intel Core i5  
+ . Memory 8GB 1600 MHz DDR3  
+ . Graphics Intel HD Graphics 6000 1536 MB  
 
 ### 1. Install [`Homebrew`](https://brew.sh/)
 Install Homebrew, 'The Missing Package Manager for macOS (or Linux)'. Remember to `brew doctor` eventually. At terminal run:
