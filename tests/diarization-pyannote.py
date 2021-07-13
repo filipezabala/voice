@@ -39,7 +39,7 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-def list_files(pathfrom: str, filter: str = '.[Ww][Aa][Vv]'):
+def list_files(pathfrom: str, filter: str = '.wav'):
     # """
     # Lists all files in a directory and subdirectories.
     #
@@ -47,7 +47,7 @@ def list_files(pathfrom: str, filter: str = '.[Ww][Aa][Vv]'):
     # :param filter: extension used to filter files. Default: '.wav'.
     # :return: tuple containing the full path to the file and the file name. Ex: ('/home', 'file.wav')
     # """
-    for root, dirs, files in os.listdir(pathfrom):
+    for root, dirs, files in os.walk(pathfrom):
         for f in files:
             if f.lower().endswith(filter):
                 yield root, f

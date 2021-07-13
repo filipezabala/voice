@@ -1,0 +1,7 @@
+librosa
+numpy
+pandas
+pyannote.audio==1.1.1
+tensorboard
+torch
+torchvision

@@ -1,0 +1,20 @@
+Version 0.0.0.17
+
+. Solve the recursive issue in diarization-pyannote.py (by Sola):
+
+import os
+import re
+
+file_list = []
+for root, dirs, files in os.walk('./'):
+    file_list = [f for f in files if re.findall(r'[.]wav', f, re.IGNORECASE)]
+    break
+
+print(file_list)
+
+ . os.listdir?
+ . os.walk(pathfrom, level=1)?
+ . os.walk(pathfrom, recursive = FALSE)?
+ . https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below
+
+
