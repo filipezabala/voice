@@ -84,22 +84,21 @@ $ cd repo.anaconda.com/miniconda/
 $ bash Miniconda3-latest-MacOSX-x86_64.sh
 $ conda create -n pyvoice38 python=3.8
 $ conda activate pyvoice38
-$ pip install -r ~/Dropbox/D_Filipe_Zabala/thesis/code/praaython/requirements_pyannote-audio.txt
-$ pip install -r librosa
-$ pip3 install pyannote.audio==1.1.1
-$ cd ~/miniconda3
-$ conda init
+$ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 
-Check your Python version. My is Python 2.7.16, natively installed at Mac and must not be deleted.
-$ python --version
-
-Empty Trash.
+17. Empty Trash.
 
 
 
 
 
 ### OLD
+
+# Miniconda
+$ pip3 install -r librosa
+$ pip3 install pyannote.audio==1.1.1
+$ cd ~/miniconda3
+$ conda init
 
 9. Install tktable
  . download from http://sourceforge.net/projects/tktable/files/. https://sourceforge.net/projects/tktable/files/latest/download

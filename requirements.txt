@@ -2,6 +2,7 @@ librosa
 numpy
 pandas
 pyannote.audio==1.1.1
+praat-parselmouth
 tensorboard
 torch
 torchvision
