@@ -74,7 +74,7 @@ mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
  . Drag RStudio to Applications folder   
  . Will take 768.4 MB of disk space   
  . Unmount RStudio virtual disk and send RStudio-1.4.1717.dmg to Trash   
- . Type command + space 'rstudio'   
+ . Type `command + space 'rstudio'`   
  . Tools > Global Options... > Appearance > Merbivore (Restart required)   
 
 ### 9. Install `R` packages
