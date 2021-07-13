@@ -19,9 +19,11 @@ Hardware
 ### 1. Install Homebrew
 Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' @ https://brew.sh/. Remember to 'brew doctor' eventually. At terminal (indicated by $) run:
 
-`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 sudo chown -R $(whoami) /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5
-chmod u+w /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5`
+chmod u+w /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5
+```
 
 7. Install wget
 $ brew install wget
