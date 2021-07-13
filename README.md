@@ -7,8 +7,7 @@
 General tools for voice analysis. The `voice` package is being developed to be an easy-to-use set of tools to deal with audio analysis in R. It is based on [`tidyverse`](https://www.tidyverse.org/) collection, [`tuneR`](https://cran.r-project.org/web/packages/tuneR/index.html), [`wrassp`](https://cran.r-project.org/web/packages/wrassp/index.html), as well as [Parselmouth](https://github.com/YannickJadoul/Parselmouth) - a Python library for the [Praat](http://www.praat.org/) software - and [pyannote-audio](https://github.com/pyannote/pyannote-audio) - an open-source toolkit written in Python for speaker diarization based on [PyTorch](https://github.com/pytorch/pytorch) machine learning framework. 
 
 ## Installation
-The following steps were used to configure gitHub.com/filipezabala/voice in a [MacOS Big Sur](https://www.apple.com/macos/big-sur/).  
-If the error "The package %@ is missing or invalid" appears during the upgrading from MacOS Catalina to Big Sur, press simultaneously `command + option + p + r` at restart). The processes may be accompanied using command + space 'Activity Monitor'.  
+The following steps were used to configure gitHub.com/filipezabala/voice in a [MacOS Big Sur](https://www.apple.com/macos/big-sur/). Note the versions during the installation. If the error "The package %@ is missing or invalid" appears during the upgrading from MacOS Catalina to Big Sur, press simultaneously `command + option + p + r` at restart). The processes may be accompanied using command + space 'Activity Monitor'.  
 
 Hardware
  . MacBook Air (13-inch, 2017)
@@ -16,8 +15,8 @@ Hardware
  . Memory 8GB 1600 MHz DDR3
  . Graphics Intel HD Graphics 6000 1536 MB
 
-### 1. Install Homebrew
-Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' @ https://brew.sh/. Remember to 'brew doctor' eventually. At terminal (indicated by $) run:
+### 1. Install [`Homebrew`](https://brew.sh/)
+Install Homebrew, 'The Missing Package Manager for macOS (or Linux)'. Remember to `brew doctor` eventually. At terminal run:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -25,86 +24,89 @@ sudo chown -R $(whoami) /usr/local/lib/pkgconfig /usr/local/share/info /usr/loca
 chmod u+w /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5
 ```
 
-7. Install wget
-$ brew install wget
-
-8. Install Python 3.8 and 3.9 and make it consistent (may take several minutes). 
-https://github.com/Homebrew/homebrew-core/issues/62911
-$ brew install python@3.8
-$ brew install python@3.9
-$ brew unlink python@3.9
-$ brew unlink python@3.8
-$ brew link python@3.8
-$ python3 --version 
-$ pip3 --version
-
-9. Install ffmpeg (may take several minutes). 
-$ brew install ffmpeg
-
-10. Install X11/XQuartz from www.xquartz.org. https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg.
- . Double click in XQuartz-2.8.1.dmg
- . Will take 319.2 MB of disk space. Send R-4.1.0.pkg to Trash.
-
-11. Install bwidget
- . download from http://sourceforge.net/projects/tcllib/files/. https://sourceforge.net/projects/tcllib/files/latest/download
- . install to a location where tcl will look (i.e. /usr/local/lib) (messy)
-
-$ cd ~/Downloads
-$ tar -xf bwidget-1.9.14.tar.gz
-$ mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
-
-12. Install R https://www.r-project.org. https://cloud.r-project.org/bin/macosx/base/R-4.1.0.pkg
-Will take 174.8 MB of disk space. Send R-4.1.0.pkg to Trash.
-
-13. Install RStudio. https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg 
-Drag RStudio to Applications folder. Will take 768.4 MB of disk space. Unmount RStudio virtual disk and send RStudio-1.4.1717.dmg to Trash.
-
-14. command + space 'rstudio'.
- . Tools > Global Options... > Appearance > Merbivore (Restart required)
- . Terminal
-   $ sudo R
-
-15. To make full use of the R part of the `voice` package, paste the following code after 'sudo R'.
-
-ini <- Sys.time()
-packs <- c('devtools', 'e1071', 'ellipse', 'ggfortify', 'RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'VIM', 'wrassp')
-install.packages(packs, dep = T); Sys.time()-ini
-update.packages(ask = F); Sys.time()-ini
-devtools::install_github('cran/parallelSVM'); Sys.time()-ini
-devtools::install_github('filipezabala/voice', force = T); Sys.time()-ini
-
-16. Install Miniconda (/Users/filipe/miniconda3). Answer 'yes' to the questions.
-$ cd ~/Downloads
-$ wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-$ cd repo.anaconda.com/miniconda/
-$ bash Miniconda3-latest-MacOSX-x86_64.sh
-$ conda create -n pyvoice38 python=3.8
-$ conda activate pyvoice38
-$ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
-
-
-### The R part
-To make full use of the R part of the `voice` package you may use the following code.
-```r
-ini <- Sys.time()
-packs <- c('devtools', 'e1071', 'ellipse', 'ggfortify', 'RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'VIM', 'wrassp')
-install.packages(packs, dep = T); Sys.time()-ini
-update.packages(ask = F); Sys.time()-ini
-devtools::install_github('cran/parallelSVM'); Sys.time()-ini
-devtools::install_github('filipezabala/voice', force = T); Sys.time()-ini
-```
-### The Python part
-To make use of the Python part of the `voice` package the user must be aware of the increased complexity to manage and maintain simultaneously two systems. 
-#### At R
-```r
-reticulate::py_config()
-R.home()
-```
-#### At command-line
-The following instructions should work on [command-line](https://en.wikipedia.org/wiki/Command-line_interface) of [Unix-like](https://en.wikipedia.org/wiki/Unix-like) systems.
+### 2. Install [`wget`](https://www.gnu.org/software/wget/)
 ```bash
-pip3 install numpy pandas praat-parselmouth
+brew install wget
 ```
+
+### 3. Install [`Python`](https://www.python.org/)
+According to [this](https://github.com/Homebrew/homebrew-core/issues/62911) post, it is recommended to install Python 3.8 and 3.9 and make it consistent. May take several minutes.
+
+```bash
+brew install python@3.8
+brew install python@3.9
+brew unlink python@3.9
+brew unlink python@3.8
+brew link python@3.8
+python3 --version 
+pip3 --version
+```
+
+### 4. Install [`ffmpeg`](http://ffmpeg.org/)
+May take several minutes.
+
+```bash
+brew install ffmpeg
+```
+
+### 5. Install [`XQuartz`](www.xquartz.org).
+ . Download https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg.
+ . Double click XQuartz-2.8.1.dmg
+ . Will take 319.2 MB of disk space. 
+ . Send XQuartz-2.8.1.dmg to Trash.
+
+### 6. Install [`bwidget`](http://sourceforge.net/projects/tcllib/files/)
+ . Download https://sourceforge.net/projects/tcllib/files/latest/download
+
+```bash
+cd ~/Downloads
+tar -xf bwidget-1.9.14.tar.gz
+mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
+```
+
+### 7. Install [`R`](https://www.r-project.org)
+ . Download https://cloud.r-project.org/bin/macosx/base/R-4.1.0.pkg
+ . Will take 174.8 MB of disk space.
+ . Send R-4.1.0.pkg to Trash.
+
+### 8. Install [`RStudio`](https://www.rstudio.com/)
+ . Download https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg
+ . Drag RStudio to Applications folder. 
+ . Will take 768.4 MB of disk space. 
+ . Unmount RStudio virtual disk and send RStudio-1.4.1717.dmg to Trash.
+ . Type command + space 'rstudio'.
+ . Tools > Global Options... > Appearance > Merbivore (Restart required)
+
+### 9. Install `R` packages
+ . Type command + space 'terminal'.
+ 
+```bash
+sudo R
+```
+
+Running R as super user, paste the following:
+```r
+ini <- Sys.time()
+packs <- c('devtools', 'e1071', 'ellipse', 'ggfortify', 'RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'VIM', 'wrassp')
+install.packages(packs, dep = T); Sys.time()-ini
+update.packages(ask = F); Sys.time()-ini
+devtools::install_github('cran/parallelSVM'); Sys.time()-ini
+devtools::install_github('filipezabala/voice', force = T); Sys.time()-ini
+```
+
+### 10. Install [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)
+Miniconda is a free minimal installer for conda.
+
+```bash
+cd ~/Downloads
+wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+cd repo.anaconda.com/miniconda/
+bash Miniconda3-latest-MacOSX-x86_64.sh
+conda create -n pyvoice38 python=3.8
+conda activate pyvoice38
+pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
+```
+
 
 ## Examples
 ### `rm0`
