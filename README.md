@@ -49,14 +49,14 @@ May take several minutes.
 brew install ffmpeg
 ```
 
-### 5. Install [`XQuartz`](www.xquartz.org).
- . Download https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg.
- . Double click XQuartz-2.8.1.dmg
- . Will take 319.2 MB of disk space. 
- . Send XQuartz-2.8.1.dmg to Trash.
+### 5. Install [`XQuartz`](www.xquartz.org)
+ . Download https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg  
+ . Double click XQuartz-2.8.1.dmg   
+ . Will take 319.2 MB of disk space   
+ . Send XQuartz-2.8.1.dmg to Trash    
 
 ### 6. Install [`bwidget`](http://sourceforge.net/projects/tcllib/files/)
- . Download https://sourceforge.net/projects/tcllib/files/latest/download
+ . Download https://sourceforge.net/projects/tcllib/files/latest/download  
 
 ```bash
 cd ~/Downloads
@@ -65,20 +65,20 @@ mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
 ```
 
 ### 7. Install [`R`](https://www.r-project.org)
- . Download https://cloud.r-project.org/bin/macosx/base/R-4.1.0.pkg
- . Will take 174.8 MB of disk space.
- . Send R-4.1.0.pkg to Trash.
+ . Download https://cloud.r-project.org/bin/macosx/base/R-4.1.0.pkg   
+ . Will take 174.8 MB of disk space   
+ . Send R-4.1.0.pkg to Trash   
 
 ### 8. Install [`RStudio`](https://www.rstudio.com/)
- . Download https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg
- . Drag RStudio to Applications folder. 
- . Will take 768.4 MB of disk space. 
- . Unmount RStudio virtual disk and send RStudio-1.4.1717.dmg to Trash.
- . Type command + space 'rstudio'.
- . Tools > Global Options... > Appearance > Merbivore (Restart required)
+ . Download https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg  
+ . Drag RStudio to Applications folder   
+ . Will take 768.4 MB of disk space   
+ . Unmount RStudio virtual disk and send RStudio-1.4.1717.dmg to Trash   
+ . Type command + space 'rstudio'   
+ . Tools > Global Options... > Appearance > Merbivore (Restart required)   
 
 ### 9. Install `R` packages
- . Type command + space 'terminal'.
+ . Type command + space 'terminal'   
  
 ```bash
 sudo R
