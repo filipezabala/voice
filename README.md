@@ -15,7 +15,7 @@ Hardware
  . Memory 8GB 1600 MHz DDR3  
  . Graphics Intel HD Graphics 6000 1536 MB  
 
-### 1. Install [`Homebrew`](https://brew.sh/)
+### 1. [`Homebrew`](https://brew.sh/)
 Install Homebrew, 'The Missing Package Manager for macOS (or Linux)'. Remember to `brew doctor` eventually. At terminal (`command + space 'terminal'`) run:
 
 ```bash
@@ -24,13 +24,13 @@ sudo chown -R $(whoami) /usr/local/lib/pkgconfig /usr/local/share/info /usr/loca
 chmod u+w /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5
 ```
 
-### 2. Install [`wget`](https://www.gnu.org/software/wget/)
+### 2. [`wget`](https://www.gnu.org/software/wget/)
 ```bash
 brew install wget
 ```
 
-### 3. Install [`Python`](https://www.python.org/)
-According to [this](https://github.com/Homebrew/homebrew-core/issues/62911) post, it is recommended to install Python 3.8 and 3.9 and make it consistent. May take several minutes.
+### 3. [`Python`](https://www.python.org/)
+According to [this](https://github.com/Homebrew/homebrew-core/issues/62911) post, it is recommended to install Python 3.8 and 3.9 and make it consistent.
 
 ```bash
 brew install python@3.8
@@ -42,20 +42,20 @@ python3 --version
 pip3 --version
 ```
 
-### 4. Install [`ffmpeg`](http://ffmpeg.org/)
+### 4. [`ffmpeg`](http://ffmpeg.org/)
 May take several minutes.
 
 ```bash
 brew install ffmpeg
 ```
 
-### 5. Install [`XQuartz`](www.xquartz.org)
+### 5. [`XQuartz`](www.xquartz.org)
  . Download https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg  
  . Double click XQuartz-2.8.1.dmg   
  . Will take 319.2 MB of disk space   
  . Send XQuartz-2.8.1.dmg to Trash    
 
-### 6. Install [`bwidget`](http://sourceforge.net/projects/tcllib/files/)
+### 6. [`bwidget`](http://sourceforge.net/projects/tcllib/files/)
  . Download https://sourceforge.net/projects/tcllib/files/latest/download  
 
 ```bash
@@ -64,12 +64,12 @@ tar -xf bwidget-1.9.14.tar.gz
 mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
 ```
 
-### 7. Install [`R`](https://www.r-project.org)
+### 7. [`R`](https://www.r-project.org)
  . Download https://cloud.r-project.org/bin/macosx/base/R-4.1.0.pkg   
  . Will take 174.8 MB of disk space   
  . Send R-4.1.0.pkg to Trash   
 
-### 8. Install [`RStudio`](https://www.rstudio.com/)
+### 8. [`RStudio`](https://www.rstudio.com/)
  . Download https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg  
  . Drag RStudio to Applications folder   
  . Will take 768.4 MB of disk space   
@@ -77,7 +77,7 @@ mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
  . Type `command + space 'rstudio'`   
  . Tools > Global Options... > Appearance > Merbivore (Restart required)   
 
-### 9. Install `R` packages
+### 9. `R` packages
  . Type `command + space 'terminal'`   
  
 ```bash
@@ -94,7 +94,7 @@ devtools::install_github('cran/parallelSVM'); Sys.time()-ini
 devtools::install_github('filipezabala/voice', force = T); Sys.time()-ini
 ```
 
-### 10. Install [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)
+### 10. [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)
 Miniconda is a free minimal installer for conda.
 
 ```bash
