@@ -115,6 +115,7 @@ brew install npm
 ```
 
 ### 12. [`list-github-dir-content`](https://github.com/fregante/list-github-dir-content)
+Lista todos os arquivos em um diretório de repositório GitHub.
 
 ```bash
 npm install list-github-dir-content
