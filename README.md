@@ -108,14 +108,14 @@ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requ
 ```
 
 ### 11. [`npm`](https://docs.npmjs.com/)
-Segundo a documentação oficial, `npm` é o maior registro de software do mundo, e desenvolvedores usam o npm para compartilhar e obter pacotes.
+According to official documentation `npm` is the largest software registry in the world, and developers use `npm` to share and obtain packages.
 
 ```bash
 brew install npm
 ```
 
 ### 12. [`list-github-dir-content`](https://github.com/fregante/list-github-dir-content)
-Lista todos os arquivos em um diretório de repositório GitHub.
+List all the files in a GitHub repo’s directory.
 
 ```bash
 npm install list-github-dir-content
