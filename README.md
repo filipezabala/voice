@@ -107,6 +107,18 @@ conda activate pyvoice38
 pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 ```
 
+### 11. [`npm`](https://docs.npmjs.com/)
+Segundo a documentação oficial, `npm` é o maior registro de software do mundo, e desenvolvedores usam o npm para compartilhar e obter pacotes.
+
+```bash
+brew install npm
+```
+
+### 12. [`list-github-dir-content`](https://github.com/fregante/list-github-dir-content)
+
+```bash
+npm install list-github-dir-content
+```
 
 ## Examples
 ### `rm0`
