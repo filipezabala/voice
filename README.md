@@ -107,20 +107,6 @@ conda activate pyvoice38
 pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 ```
 
-### 11. [`npm`](https://docs.npmjs.com/)
-According to official documentation `npm` is the largest software registry in the world, and developers use `npm` to share and obtain packages.
-
-```bash
-brew install npm
-```
-
-### 12. [`list-github-dir-content`](https://github.com/fregante/list-github-dir-content)
-List all the files in a GitHub repo’s directory.
-
-```bash
-npm install list-github-dir-content
-```
-
 ## Examples
 ### `rm0`
 Transforms `n` sets of `m>n` zeros (alternated with sets of non zeros) into `n` sets of `n` zeros.
