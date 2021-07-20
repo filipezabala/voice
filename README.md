@@ -79,7 +79,7 @@ mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
  . Type `command + space 'rstudio'`   
  . Tools > Global Options... > Appearance > Merbivore (Restart required)   
 
-### 9. `R` packages
+### 9. [`R` packages](https://cran.r-project.org/web/packages/)
  . Type `command + space 'terminal'`   
  
 ```bash
