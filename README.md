@@ -45,7 +45,7 @@ pip3 --version
 ```
 
 ### 4. [ffmpeg](http://ffmpeg.org/)
-May take several minutes.
+ffmpeg is a complete, cross-platform solution to record, convert and stream audio and video. The installation may take several minutes.
 
 ```bash
 brew install ffmpeg
