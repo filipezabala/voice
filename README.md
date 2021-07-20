@@ -95,7 +95,7 @@ devtools::install_github('filipezabala/voice', force = T); Sys.time()-ini
 ```
 
 ### 10. [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)
-Miniconda is a free minimal installer for conda.
+Miniconda is a free minimal installer for [conda](https://docs.conda.io/).
 
 ```bash
 cd ~/Downloads
