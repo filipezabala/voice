@@ -16,7 +16,7 @@ Hardware
  . Graphics Intel HD Graphics 6000 1536 MB  
 
 ### 1. [Homebrew](https://brew.sh/)
-Install Homebrew, 'The Missing Package Manager for macOS (or Linux)'. Remember to `brew doctor` eventually. At terminal (`command + space 'terminal'`) run:
+Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' and remember to `brew doctor` eventually. At terminal (`command + space 'terminal'`) run:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
