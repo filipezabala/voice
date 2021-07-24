@@ -1,4 +1,5 @@
-Steps to configure gitHub.com/filipezabala/voice in a MacOS Big Sur. 
+The following steps were used to configure gitHub.com/filipezabala/voice in a MacOS Big Sur.  
+To upgrade from Catalina to Big Sur, if the error "The package %@ is missing or invalid" appears, press simultaneously option + command + p + r at restart). 
 
 Hardware
  . MacBook Air (13-inch, 2017)
@@ -8,9 +9,8 @@ Hardware
 
 The processes may be accompanied using command + space 'Activity Monitor'.
 
-0. To upgrade from Catalina to Big Sur, if a strange error with symbols like "%?)" appears, press simultaneously option + command + p + r at restart). 
 
-1. 
+1. Setting some preferences
  . Background > Double click > Change Desktop Background > ...
  . command + space, type 'system preferences', return. 
    . System Preferences > Dock & Menu Bar > Clock > "Flash the time separators" and "Display the time with seconds".
@@ -71,10 +71,10 @@ Drag RStudio to Applications folder. Will take 768.4 MB of disk space. Unmount R
 15. To make full use of the R part of the `voice` package, paste the following code after 'sudo R'.
 
 ini <- Sys.time()
-packs <- c('devtools', 'e1071', 'ellipse', 'ggfortify','RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'wrassp')
-install.packages(packs, dep = T); Sys.time()-ini # Time difference of 8.188523 mins
+packs <- c('devtools', 'e1071', 'ellipse', 'ggfortify', 'RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'VIM', 'wrassp')
+install.packages(packs, dep = T); Sys.time()-ini
 update.packages(ask = F); Sys.time()-ini
-devtools::install_github('cran/parallelSVM')
+devtools::install_github('cran/parallelSVM'); Sys.time()-ini
 devtools::install_github('filipezabala/voice', force = T); Sys.time()-ini
 
 16. Install Miniconda (/Users/filipe/miniconda3). Answer 'yes' to the questions.
@@ -89,7 +89,15 @@ $ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/re
 17. Empty Trash.
 
 
+# EXTRA
 
+18. Install git
+$ brew install git
+
+19. Install gdal
+$ brew install gdal
+
+20. 
 
 
 ### OLD
