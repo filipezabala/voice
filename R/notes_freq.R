@@ -120,5 +120,6 @@ notes_freq <- function(){
     'Aß8/Bb8',7458.62,4.63,
     'B8',7902.13,4.37
   )
+  nf$note <- factor(nf$note, ordered = TRUE)
   return(nf)
 }
