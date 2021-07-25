@@ -120,6 +120,15 @@ notes_freq <- function(){
     'Aß8/Bb8',7458.62,4.63,
     'B8',7902.13,4.37
   )
-  nf$note <- factor(nf$note, ordered = TRUE)
+  lev <- c('C0','Cß0/Db0','D0','Dß0/Eb0','E0','F0','Fß0/Gb0','G0','Gß0/Ab0','A0','Aß0/Bb0','B0',
+           'C1','Cß1/Db1','D1','Dß1/Eb1','E1','F1','Fß1/Gb1','G1','Gß1/Ab1','A1','Aß1/Bb1','B1',
+           'C2','Cß2/Db2','D2','Dß2/Eb2','E2','F2','Fß2/Gb2','G2','Gß2/Ab2','A2','Aß2/Bb2','B2',
+           'C3','Cß3/Db3','D3','Dß3/Eb3','E3','F3','Fß3/Gb3','G3','Gß3/Ab3','A3','Aß3/Bb3','B3',
+           'C4','Cß4/Db4','D4','Dß4/Eb4','E4','F4','Fß4/Gb4','G4','Gß4/Ab4','A4','Aß4/Bb4','B4',
+           'C5','Cß5/Db5','D5','Dß5/Eb5','E5','F5','Fß5/Gb5','G5','Gß5/Ab5','A5','Aß5/Bb5','B5',
+           'C6','Cß6/Db6','D6','Dß6/Eb6','E6','F6','Fß6/Gb6','G6','Gß6/Ab6','A6','Aß6/Bb6','B6',
+           'C7','Cß7/Db7','D7','Dß7/Eb7','E7','F7','Fß7/Gb7','G7','Gß7/Ab7','A7','Aß7/Bb7','B7',
+           'C8','Cß8/Db8','D8','Dß8/Eb8','E8','F8','Fß8/Gb8','G8','Gß8/Ab8','A8','Aß8/Bb8','B8')
+  nf$note <- factor(nf$note, levels = lev, ordered = TRUE)
   return(nf)
 }
