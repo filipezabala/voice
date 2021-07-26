@@ -32,7 +32,7 @@ brew install wget
 ```
 
 ### 3. [Python](https://www.python.org/)
-According to [this](https://github.com/Homebrew/homebrew-core/issues/62911) post, it is recommended to install Python 3.8 and 3.9 and make it consistent.
+Python is a programming language that integrate systems. According to [this](https://github.com/Homebrew/homebrew-core/issues/62911) post, it is recommended to install Python 3.8 and 3.9 and make it consistent.
 
 ```bash
 brew install python@3.8
