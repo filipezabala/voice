@@ -10,7 +10,7 @@
 #' dir.create(rttm <- paste0(dirname(path2wav)[1], '/rttm/'))
 #' wsw(from = dirname(path2wav)[1], to = rttm)
 #' @export
-wsw <- function(fromWav, to, pycall = '~/miniconda3/envs/py38phdz/bin/python'){
+wsw <- function(fromWav, to, pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8'){
 
   # Melhoria: ordenar arquivos para extração
 

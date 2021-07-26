@@ -1,8 +1,9 @@
 librosa
 numpy
 pandas
-pyannote.audio==1.1.1
 praat-parselmouth
+pyannote.audio==1.1.1
+pychord
 tensorboard
 torch
 torchvision

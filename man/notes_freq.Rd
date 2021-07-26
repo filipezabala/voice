@@ -2,15 +2,18 @@
 % Please edit documentation in R/notes_freq.R
 \name{notes_freq}
 \alias{notes_freq}
-\title{Returns a tibble with frequencies for equal-tempered scale, A4 = 440 Hz.}
+\title{Returns a tibble of frequencies on Scientific Pitch Notation (SPN) for equal-tempered scale, A4 = 440 Hz.}
 \usage{
 notes_freq()
 }
+\value{
+A tibble with frequencies for equal-tempered scale, A4 = 440 Hz.
+}
 \description{
-Returns a tibble with frequencies for equal-tempered scale, A4 = 440 Hz.
+Returns a tibble of frequencies on Scientific Pitch Notation (SPN) for equal-tempered scale, A4 = 440 Hz.
 }
 \details{
-The symbol 'ß' is being used to represent a sharp note, the higher in pitch by one semitone. The symbol 'b' represents a flat note, the lower in pitch by one semitone.
+The symbol '#' is being used to represent a sharp note, the higher in pitch by one semitone. The SPN is also known as American Standard Pitch Notation (ASPN) or International Pitch Notation (IPN).
 }
 \examples{
 library(voice)
