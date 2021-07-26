@@ -32,7 +32,7 @@ brew install wget
 ```
 
 ### 3. [Python](https://www.python.org/)
-According to [this](https://github.com/Homebrew/homebrew-core/issues/62911) post, it is recommended to install Python 3.8 and 3.9 and make it consistent.
+Python is a programming language that integrate systems. According to [this](https://github.com/Homebrew/homebrew-core/issues/62911) post, it is recommended to install Python 3.8 and 3.9 and make it consistent.
 
 ```bash
 brew install python@3.8
@@ -45,7 +45,7 @@ pip3 --version
 ```
 
 ### 4. [ffmpeg](http://ffmpeg.org/)
-ffmpeg is a complete, cross-platform solution to record, convert and stream audio and video. The installation may take several minutes.
+ffmpeg is a cross-platform solution to record, convert and stream audio and video. The installation may take several minutes.
 
 ```bash
 brew install ffmpeg
@@ -67,11 +67,13 @@ mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
 ```
 
 ### 7. [R](https://www.r-project.org)
+R is a free software environment for statistical computing and graphics.
  . Download https://cloud.r-project.org/bin/macosx/base/R-4.1.0.pkg   
  . Will take 174.8 MB of disk space   
  . Send R-4.1.0.pkg to Trash   
 
 ### 8. [RStudio](https://www.rstudio.com/)
+RStudio is an integrated development environment (IDE) for R.
  . Download https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg  
  . Drag RStudio to Applications folder   
  . Will take 768.4 MB of disk space   
@@ -80,6 +82,7 @@ mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
  . Tools > Global Options... > Appearance > Merbivore (Restart required)   
 
 ### 9. [R packages](https://cran.r-project.org/web/packages/)
+"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/)
  . Type `command + space 'terminal'`   
  
 ```bash
