@@ -13,10 +13,8 @@ Returns a tibble with frequencies for equal-tempered scale, A4 = 440 Hz.
 The symbol 'ß' is being used to represent a sharp note, the higher in pitch by one semitone. The symbol 'b' represents a flat note, the lower in pitch by one semitone.
 }
 \examples{
-\dontrun{
 library(voice)
-memory()
-}
+notes_freq()
 }
 \references{
 https://pages.mtu.edu/~suits/notefreqs.html

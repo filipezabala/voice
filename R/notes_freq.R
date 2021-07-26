@@ -2,10 +2,8 @@
 #' @details The symbol 'ß' is being used to represent a sharp note, the higher in pitch by one semitone. The symbol 'b' represents a flat note, the lower in pitch by one semitone.
 #' @references https://pages.mtu.edu/~suits/notefreqs.html
 #' @examples
-#' \dontrun{
 #' library(voice)
-#' memory()
-#' }
+#' notes_freq()
 #' @export
 notes_freq <- function(){
   nf <- dplyr::tribble(
