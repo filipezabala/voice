@@ -24,4 +24,3 @@ notes <- function(x, method = 'spn'){
     return(octa)
   }
 }
-# notes(220:222, method = 'octave')
