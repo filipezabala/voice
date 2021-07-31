@@ -1,20 +1,20 @@
-#' Gives the duration of sequences in number of lines and miliseconds.
+#' Gives the duration of sequences.
 #' @param x A vector containing symbols and \code{NA}.
-#' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5.0).
-#' @return A tibble with frequencies for equal-tempered scale, A4 = 440 Hz.
+#' @param windowShift Window shift to duration in ms (default: 5.0).
+#' @return A data frame with duration in number of lines (\code{dur_line}) and milliseconds (\code{dur_ms}).
 #' @examples
 #' library(voice)
 #' duration(letters)
 #' duration(c('a','a','a',letters,'z'))
 #'
-#' nts <- c('NA','NA','A3','A3','A3','A3','A#3','B3','B3','C4','C4','C4','C4','
-#' C4','C4','C#4','C4','C4','C4','B3','A#3','NA','NA','NA','NA','NA','NA','NA',
+#' nts <- c('NA','NA','A3','A3','A3','A3','A#3','B3','B3','C4','C4','C4','C4',
+#' 'C4','C4','C#4','C4','C4','C4','B3','A#3','NA','NA','NA','NA','NA','NA','NA',
 #' 'NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','D4','D4','D4','C#4',
 #' 'C#4','C#4','C4','C4','B3','B3','A#3','A#3','A3','A3','G3','G#3','G3','F#3',
 #' 'F#3','G3','NA','F#3','F#3','F#3','F#3','F#3','G3','F#3','F#3','F#3','F#3',
 #' 'F3','F3','F3','F3','E3','E3','E3','D#3','D#3','D#3','D#3','D#3','D3','D3',
-#' 'D#3','D#3','D#3','D#3','D#3','D3','D#3','D3','D3','D3','D#3','D3','D#3','D#3',
-#' 'D#3','D#3')
+#' 'D#3','D#3','D#3','D#3','D#3','D3','D#3','D3','D3','D3','D#3','D3','D#3',
+#' 'D#3','D#3','D#3')
 #' duration(nts)
 #' @export
 duration <- function(x, windowShift = 5){
