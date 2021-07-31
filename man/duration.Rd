@@ -19,6 +19,9 @@ Gives the duration of sequences in number of lines and miliseconds.
 }
 \examples{
 library(voice)
+duration(letters)
+duration(c('a','a','a',letters,'z'))
+
 nts <- c('NA','NA','A3','A3','A3','A3','A#3','B3','B3','C4','C4','C4','C4','
 C4','C4','C#4','C4','C4','C4','B3','A#3','NA','NA','NA','NA','NA','NA','NA',
 'NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','D4','D4','D4','C#4',
