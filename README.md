@@ -82,8 +82,7 @@ RStudio is an integrated development environment (IDE) for R.
  . Tools > Global Options... > Appearance > Merbivore (Restart required)   
 
 ### 9. [R packages](https://cran.r-project.org/web/packages/)
-"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/)
- . Type `command + space 'terminal'`   
+"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). Type `command + space 'terminal'`   
  
 ```bash
 sudo R
