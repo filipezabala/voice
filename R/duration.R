@@ -10,14 +10,13 @@
 #' nts <- c('NA','NA','A3','A3','A3','A3','A#3','B3','B3','C4','C4','C4','C4',
 #' 'C4','C4','C#4','C4','C4','C4','B3','A#3','NA','NA','NA','NA','NA','NA','NA',
 #' 'NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','NA','D4','D4','D4','C#4',
-#' 'C#4','C#4','C4','C4','B3','B3','A#3','A#3','A3','A3','G3','G#3','G3','F#3',
-#' 'F#3','G3','NA','F#3','F#3','F#3','F#3','F#3','G3','F#3','F#3','F#3','F#3',
-#' 'F3','F3','F3','F3','E3','E3','E3','D#3','D#3','D#3','D#3','D#3','D3','D3',
-#' 'D#3','D#3','D#3','D#3','D#3','D3','D#3','D3','D3','D3','D#3','D3','D#3',
-#' 'D#3','D#3','D#3')
+#' 'C#4','C#4','C4','C4','B3','B3','A#3','A#3','A3','A3','G3','G#3','G3','F#3')
 #' duration(nts)
 #' @export
 duration <- function(x, windowShift = 5){
+  if(!is.factor(x)){
+    x <- factor(x, levels = unique(x))
+  }
   if(sum(is.na(x))){
     x <- factor(x, levels = c(levels(x), NA), exclude = NULL)
   }
@@ -33,11 +32,13 @@ duration <- function(x, windowShift = 5){
     }
 
   pos <- m[d != 0]
-  if(sum(d == 0)){
+  if(d[1] == 0){
     pos <- c(pos, n)
   }
 
+  note <- factor(x[pos], levels = levels(x))
   dur_ms <- dur_line*windowShift
-  dur <- data.frame(note = x[pos], dur_line = dur_line, dur_ms = dur_ms)
+  dur <- data.frame(note = note, dur_line = dur_line, dur_ms = dur_ms)
+
   return(dur)
 }
