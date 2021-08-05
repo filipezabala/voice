@@ -1,11 +1,11 @@
-#' Convolute data frames.
+#' Convolute data frames using multicore.
 #'
 #' @param x A data frame.
 #' @param compact.to Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.
 #' @param colnum A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.
 #' @param id The identification column. Default: \code{'id'}.
 #' @param by.filter A \code{char} indicating the column to filter by. If \code{NULL} uses the \code{id} content.
-#' @param drop.x Logical. Drop columns containing .x? Default: \code{'FALSE'}.
+#' @param drop.x Logical. Drop columns containing .x? Default: \code{TRUE}.
 #' @param drop.zeros Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{'FALSE'}.
 #' @param to.data.frame Logical. Should the return be a data frame? If \code{F} returns a list. Default: \code{'TRUE'}.
 #' @param round.off Number of decimal places of the convoluted vector. Default: \code{'NULL'}.
@@ -27,7 +27,7 @@
 #'
 #' \dontrun{
 #' (cef.df <- conv_df(ef, 0.1, id = 'file_name', mc.cores = 1))
-#' (cef.df2 <- conv_df(ef, 0.1, id = 'file_name', drop.x = TRUE, mc.cores = 1))
+#' (cef.df2 <- conv_df(ef, 0.1, id = 'file_name', drop.x = FALSE, mc.cores = 1))
 #'
 #' dim(ef)
 #' dim(cef.df)
@@ -36,9 +36,10 @@
 #' }
 #' @seealso \code{conv}, \code{conv_mc}
 #' @export
-conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id,
-                    drop.x = FALSE, drop.zeros = FALSE, to.data.frame = TRUE,
-                    round.off = NULL, mc.cores = parallel::detectCores()){
+conv_df <- function(x, compact.to, colnum = NULL, id = colnames(x)[1],
+                    by.filter = id, drop.x = TRUE, drop.zeros = FALSE,
+                    to.data.frame = TRUE,round.off = NULL,
+                    mc.cores = parallel::detectCores()){
   ini <- Sys.time()
 
   # numeric columns
@@ -59,7 +60,7 @@ conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id,
   # original lengths by.filter
   lv <- table(x[,by.filter])
 
-  #  vector and length of distinct id's
+  # vector and length of distinct id's
   nlv <- names(lv)
   nid <- length(nlv)
 
@@ -84,6 +85,12 @@ conv_df <- function(x, compact.to, colnum = NULL, id = 'id', by.filter = id,
     index2 <- sort(union(even, even-!drop.x))
     cn.li[[i]] <- dplyr::bind_cols(cn.li[[i]], cn.df[[i]][,index2])
     names(cn.li)[i] <- nlv[i]
+  }
+  if(drop.x){
+    cn <- lapply(cn.li, colnames)[[1]]
+    cn <- base::strsplit(cn, '[.]')
+    cn <- as.data.frame(cn)[1,]
+    cn.li <- lapply(cn.li, stats::setNames, cn)
   }
 
   # compact dataframe

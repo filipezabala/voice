@@ -12,7 +12,7 @@ duration(x, windowShift = 5)
 \item{windowShift}{Window shift to duration in ms (default: 5.0).}
 }
 \value{
-A data frame with duration in number of lines (\code{dur_line}) and milliseconds (\code{dur_ms}).
+A data frame with duration in number of lines/ocurrences (\code{dur_line}), milliseconds (\code{dur_ms}) and proportional (\code{dur_prop}).
 }
 \description{
 Gives the duration of sequences.

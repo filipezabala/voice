@@ -1,10 +1,11 @@
-# wd
-setwd('~/Dropbox/D_Filipe_Zabala/audios/testes/')
-
 # libs
 library(voice)
 library(VIM)
 library(music)
+library(tidyverse)
+
+# wd
+setwd('~/Dropbox/D_Filipe_Zabala/audios/testes/')
 
 # files and directories
 wavDir <- paste0(getwd(), '/wav')
@@ -32,13 +33,17 @@ Sys.time()-ini # Time difference of 4.870748 secs
 
 # extract features
 ini <- Sys.time()
-ef <- voice::extract_features(splitDir, features = c('f0','formants'),
-                              round.to = 6, windowShift = 100)
-Sys.time()-ini # Time difference of 30.30654 secs
-ef # nrow = 49284
+ef <- voice::extract_features(splitDir, features = c('f0','formants','gain'),
+                              round.to = 6, windowShift = 5)
+Sys.time()-ini
+ef
 
-# NA
-na <- aggr(ef, sortVars = T)
+# # NA
+# na <- aggr(ef, sortVars = T)
+
+# comv
+voice::conv_df(ef, .1, id = 'file_name')
+
 
 # assign notes
 note <- lapply(ef[-1], notes)
@@ -66,7 +71,12 @@ nd <- music::noteDistance(as.character(ef$note_F0))
 table(nd)
 
 # duration
-dur <- voice::duration(ef$note_F0, 100)
+dur <- voice::duration(ef$note_F0, 200)
+# dur <- duration(ef$note_F0, 100)
+dur
 
 #playing
-playNote(note = as.character(dur$note))
+music::playNote(note = as.character(dur$note))
+?tuneR::play(dur$note)
+
+playNote(c('C#3', 'C#3', 'C#4', 'A#3'))

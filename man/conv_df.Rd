@@ -2,15 +2,15 @@
 % Please edit documentation in R/conv_df.R
 \name{conv_df}
 \alias{conv_df}
-\title{Convolute data frames.}
+\title{Convolute data frames using multicore.}
 \usage{
 conv_df(
   x,
   compact.to,
   colnum = NULL,
-  id = "id",
+  id = colnames(x)[1],
   by.filter = id,
-  drop.x = FALSE,
+  drop.x = TRUE,
   drop.zeros = FALSE,
   to.data.frame = TRUE,
   round.off = NULL,
@@ -28,7 +28,7 @@ conv_df(
 
 \item{by.filter}{A \code{char} indicating the column to filter by. If \code{NULL} uses the \code{id} content.}
 
-\item{drop.x}{Logical. Drop columns containing .x? Default: \code{'FALSE'}.}
+\item{drop.x}{Logical. Drop columns containing .x? Default: \code{TRUE}.}
 
 \item{drop.zeros}{Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{'FALSE'}.}
 
@@ -42,7 +42,7 @@ conv_df(
 A vector of convoluted values with length near to \code{compact.to*length(x)}.
 }
 \description{
-Convolute data frames.
+Convolute data frames using multicore.
 }
 \examples{
 library(voice)
@@ -58,7 +58,7 @@ mc.cores = 1)
 
 \dontrun{
 (cef.df <- conv_df(ef, 0.1, id = 'file_name', mc.cores = 1))
-(cef.df2 <- conv_df(ef, 0.1, id = 'file_name', drop.x = TRUE, mc.cores = 1))
+(cef.df2 <- conv_df(ef, 0.1, id = 'file_name', drop.x = FALSE, mc.cores = 1))
 
 dim(ef)
 dim(cef.df)

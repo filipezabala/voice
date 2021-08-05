@@ -1,7 +1,7 @@
 #' Gives the duration of sequences.
 #' @param x A vector containing symbols and \code{NA}.
 #' @param windowShift Window shift to duration in ms (default: 5.0).
-#' @return A data frame with duration in number of lines (\code{dur_line}) and milliseconds (\code{dur_ms}).
+#' @return A data frame with duration in number of lines/ocurrences (\code{dur_line}), milliseconds (\code{dur_ms}) and proportional (\code{dur_prop}).
 #' @examples
 #' library(voice)
 #' duration(letters)
@@ -38,7 +38,9 @@ duration <- function(x, windowShift = 5){
 
   note <- factor(x[pos], levels = levels(x))
   dur_ms <- dur_line*windowShift
-  dur <- data.frame(note = note, dur_line = dur_line, dur_ms = dur_ms)
+  dur_prop <- dur_line/sum(dur_line)
+  dur <- data.frame(note = note, dur_line = dur_line,
+                    dur_ms = dur_ms, dur_prop = dur_prop)
 
   return(dur)
 }
