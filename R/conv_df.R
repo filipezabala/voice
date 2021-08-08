@@ -1,14 +1,15 @@
 #' Convolute data frames using multicore.
 #'
 #' @param x A data frame.
-#' @param compact.to Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.
+#' @param compact.to Percentage of remaining points after compaction If equals to 1 and keep.zeros = T, the original vector is presented.
 #' @param colnum A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.
-#' @param id The identification column. Default: \code{'id'}.
+#' @param id The identification column. Default: colname of the first column.
 #' @param by.filter A \code{char} indicating the column to filter by. If \code{NULL} uses the \code{id} content.
 #' @param drop.x Logical. Drop columns containing .x? Default: \code{TRUE}.
-#' @param drop.zeros Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{'FALSE'}.
-#' @param to.data.frame Logical. Should the return be a data frame? If \code{F} returns a list. Default: \code{'TRUE'}.
-#' @param round.off Number of decimal places of the convoluted vector. Default: \code{'NULL'}.
+#' @param drop.zeros Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{FALSE}.
+#' @param to.data.frame Logical. Should the return be a data frame? If \code{FALSE} returns a list. Default: \code{TRUE}.
+#' @param round.off Number of decimal places of the convoluted vector. Default: \code{NULL}.
+#' @param weight Vector of weights with same length of \code{y}. Default: \code{NULL}.
 #' @param mc.cores The number of cores to mclapply. By default uses \code{parallel::detectCores()}.
 #' @return A vector of convoluted values with length near to \code{compact.to*length(x)}.
 #' @importFrom dplyr %>%
@@ -38,7 +39,7 @@
 #' @export
 conv_df <- function(x, compact.to, colnum = NULL, id = colnames(x)[1],
                     by.filter = id, drop.x = TRUE, drop.zeros = FALSE,
-                    to.data.frame = TRUE,round.off = NULL,
+                    to.data.frame = TRUE, round.off = NULL, weight = NULL,
                     mc.cores = parallel::detectCores()){
   ini <- Sys.time()
 
@@ -71,7 +72,7 @@ conv_df <- function(x, compact.to, colnum = NULL, id = colnames(x)[1],
   # convoluting numeric variables
   cn.li <- lapply(snum, voice::conv_mc, compact.to = compact.to,
                   drop.zeros = drop.zeros, to.data.frame = TRUE,
-                  round.off = round.off, mc.cores = mc.cores)
+                  round.off = round.off, weight = weight, mc.cores = mc.cores)
 
   # transforming in dataframe
   cn.df <- lapply(cn.li, as.data.frame)

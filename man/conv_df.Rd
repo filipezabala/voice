@@ -14,27 +14,30 @@ conv_df(
   drop.zeros = FALSE,
   to.data.frame = TRUE,
   round.off = NULL,
+  weight = NULL,
   mc.cores = parallel::detectCores()
 )
 }
 \arguments{
 \item{x}{A data frame.}
 
-\item{compact.to}{Percentage of remaining points after compactation. If equals to 1 and keep.zeros = T, the original vector is presented.}
+\item{compact.to}{Percentage of remaining points after compaction If equals to 1 and keep.zeros = T, the original vector is presented.}
 
 \item{colnum}{A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.}
 
-\item{id}{The identification column. Default: \code{'id'}.}
+\item{id}{The identification column. Default: colname of the first column.}
 
 \item{by.filter}{A \code{char} indicating the column to filter by. If \code{NULL} uses the \code{id} content.}
 
 \item{drop.x}{Logical. Drop columns containing .x? Default: \code{TRUE}.}
 
-\item{drop.zeros}{Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{'FALSE'}.}
+\item{drop.zeros}{Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{FALSE}.}
 
-\item{to.data.frame}{Logical. Should the return be a data frame? If \code{F} returns a list. Default: \code{'TRUE'}.}
+\item{to.data.frame}{Logical. Should the return be a data frame? If \code{FALSE} returns a list. Default: \code{TRUE}.}
 
-\item{round.off}{Number of decimal places of the convoluted vector. Default: \code{'NULL'}.}
+\item{round.off}{Number of decimal places of the convoluted vector. Default: \code{NULL}.}
+
+\item{weight}{Vector of weights with same length of \code{y}. Default: \code{NULL}.}
 
 \item{mc.cores}{The number of cores to mclapply. By default uses \code{parallel::detectCores()}.}
 }

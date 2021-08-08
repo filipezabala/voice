@@ -9,19 +9,22 @@ conv(
   compact.to,
   drop.zeros = FALSE,
   to.data.frame = FALSE,
-  round.off = NULL
+  round.off = NULL,
+  weight = NULL
 )
 }
 \arguments{
 \item{y}{A vector or time series.}
 
-\item{compact.to}{Proportion of remaining points after compactation, between (including) 0 and 1. If equals to 1 and keep.zeros = T, the original vector is presented.}
+\item{compact.to}{Proportion of remaining points after compaction, between (including) 0 and 1. If equals to 1 and keep.zeros = T, the original vector is presented.}
 
-\item{drop.zeros}{Logical. Drop repeated zeros? Default: \code{'FALSE'}.}
+\item{drop.zeros}{Logical. Drop repeated zeros? Default: \code{FALSE}.}
 
-\item{to.data.frame}{Logical. Convert to data frame? Default: \code{'FALSE'}.}
+\item{to.data.frame}{Logical. Convert to data frame? Default: \code{FALSE}.}
 
-\item{round.off}{Number of decimal places of the convoluted vector. Default: \code{'NULL'}.}
+\item{round.off}{Number of decimal places of the convoluted vector. Default: \code{NULL}.}
+
+\item{weight}{Vector of weights with same length of \code{y}. Default: \code{NULL}.}
 }
 \value{
 A list of convoluted \code{x} and \code{y} values with length near to \code{compact.to*length(y)}.
@@ -30,10 +33,16 @@ A list of convoluted \code{x} and \code{y} values with length near to \code{comp
 Convolute vectors.
 }
 \examples{
-(c1 <- conv(1:100, compact.to = 0.2, drop.zeros = TRUE))
+v1 <- 1:100
+(c1 <- conv(v1, compact.to = 0.2))
 length(c1$y)
 plot(1:100, type = 'l')
 points(c1$x, c1$y, col='red')
+
+# with weight
+(c2 <- conv(v1, compact.to = 0.2, weight = rev(v1)))
+plot(c1$y)
+points(c2$y, col = 'red')
 
 (v2 <- c(1:5, rep(0,10), 1:10, rep(0,5), 10:20, rep(0,10)))
 length(v2)

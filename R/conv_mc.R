@@ -2,10 +2,11 @@
 #'
 #' @param y A numeric vector, matrix or data frame.
 #' @param compact.to Percentage of remaining points after compression. If equals to 1 and keep.zeros = T, the original vector is presented.
-#' @param drop.zeros Logical. Drop repeated zeros? Default: \code{'FALSE'}.
-#' @param to.data.frame Logical. Convert to data frame? Default: \code{'FALSE'}.
-#' @param round.off Number of decimal places of the convoluted vector. Default: \code{'NULL'}.
-#' @param mc.cores The number of cores to mclapply. Default: \code{'parallel::detectCores()'}.
+#' @param drop.zeros Logical. Drop repeated zeros? Default: \code{FALSE}.
+#' @param to.data.frame Logical. Convert to data frame? Default: \code{FALSE}.
+#' @param round.off Number of decimal places of the convoluted vector. Default: \code{NULL}.
+#' @param weight Vector of weights with same length of \code{y}. Default: \code{NULL}.
+#' @param mc.cores The number of cores to mclapply. Default: \code{parallel::detectCores()}.
 #' @return A list of x and y convoluted values with length near to \code{compact.to*length(y)}.
 #' @importFrom dplyr select
 #' @importFrom dplyr %>%
@@ -22,7 +23,7 @@
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #'
-#' # getting all the 1092 features
+#' # getting all features
 #' ef <- extract_features(dirname(path2wav), features = c('f0','formants',
 #' 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
 #' mc.cores = 1)
@@ -36,16 +37,19 @@
 #' @seealso \code{rm0}, \code{conv}, \code{conv_df}
 #' @export
 conv_mc <- function(y, compact.to, drop.zeros = FALSE, to.data.frame = FALSE,
-                    round.off = NULL, mc.cores = parallel::detectCores()){
+                    round.off = NULL, weight = NULL,
+                    mc.cores = parallel::detectCores()){
   if(is.vector(y)){
     cm <- voice::conv(y, compact.to = compact.to, drop.zeros = drop.zeros,
-                      to.data.frame = to.data.frame, round.off = round.off)
+                      to.data.frame = to.data.frame, round.off = round.off,
+                      weight = weight)
   }
   if(is.matrix(y) | is.data.frame(y)){
     cm <- parallel::mclapply(y, voice::conv, compact.to = compact.to,
                              drop.zeros = drop.zeros,
                              to.data.frame = to.data.frame,
-                             round.off = round.off, mc.cores = mc.cores)
+                             round.off = round.off, weight = weight,
+                             mc.cores = mc.cores)
   }
   return(cm)
 }

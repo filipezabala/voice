@@ -10,6 +10,7 @@ conv_mc(
   drop.zeros = FALSE,
   to.data.frame = FALSE,
   round.off = NULL,
+  weight = NULL,
   mc.cores = parallel::detectCores()
 )
 }
@@ -18,13 +19,15 @@ conv_mc(
 
 \item{compact.to}{Percentage of remaining points after compression. If equals to 1 and keep.zeros = T, the original vector is presented.}
 
-\item{drop.zeros}{Logical. Drop repeated zeros? Default: \code{'FALSE'}.}
+\item{drop.zeros}{Logical. Drop repeated zeros? Default: \code{FALSE}.}
 
-\item{to.data.frame}{Logical. Convert to data frame? Default: \code{'FALSE'}.}
+\item{to.data.frame}{Logical. Convert to data frame? Default: \code{FALSE}.}
 
-\item{round.off}{Number of decimal places of the convoluted vector. Default: \code{'NULL'}.}
+\item{round.off}{Number of decimal places of the convoluted vector. Default: \code{NULL}.}
 
-\item{mc.cores}{The number of cores to mclapply. Default: \code{'parallel::detectCores()'}.}
+\item{weight}{Vector of weights with same length of \code{y}. Default: \code{NULL}.}
+
+\item{mc.cores}{The number of cores to mclapply. Default: \code{parallel::detectCores()}.}
 }
 \value{
 A list of x and y convoluted values with length near to \code{compact.to*length(y)}.
@@ -45,7 +48,7 @@ conv_mc(1:100, compact.to = 0.1, drop.zeros = TRUE, to.data.frame = TRUE)
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 pattern <- glob2rx('*.wav'), full.names = TRUE)
 
-# getting all the 1092 features
+# getting all features
 ef <- extract_features(dirname(path2wav), features = c('f0','formants',
 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
 mc.cores = 1)
