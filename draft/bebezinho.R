@@ -51,10 +51,14 @@ Sys.time()-ini
 # (ef <- voice::conv_df(ef, .01, weight = ef$GAIN))
 
 # assign notes
-note <- lapply(ef[-c(1,ncol(ef))], notes)
+note <- lapply(ef[-c(1,ncol(ef))], voice::notes)
 note <- bind_rows(note)
 colnames(note) <- paste0('note_', colnames(note))
 ef <- bind_cols(ef, note)
+
+midi <- lapply(ef[colnames(note)], voice::notes, method = 'midi')
+note <- bind_rows(note)
+colnames(note) <- paste0('note_', colnames(note))
 ef
 
 # creating tibble
