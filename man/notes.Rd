@@ -16,7 +16,7 @@ Returns a vector of notes for equal-tempered scale, A4 = 440 Hz.
 }
 \details{
 The symbol '#' is being used to represent a sharp note, the higher
-in pitch by one semitone. on Scientific Pitch Notation (SPN)
+in pitch by one semitone on Scientific Pitch Notation (SPN)
 }
 \examples{
 library(voice)

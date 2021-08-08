@@ -47,8 +47,8 @@ Sys.time()-ini
 # na <- aggr(ef, sortVars = T)
 
 # conv
-# (ef <- voice::conv_df(ef, .01))
-(ef <- voice::conv_df(ef, .01, weight = ef$GAIN))
+(ef <- voice::conv_df(ef, .01))
+# (ef <- voice::conv_df(ef, .01, weight = ef$GAIN))
 
 # assign notes
 note <- lapply(ef[-c(1,ncol(ef))], notes)
@@ -90,7 +90,7 @@ m <- m +
   # add a 4/4 time signature
   Meter(4, 4) +
   # add a musical line of a C5 whole note
-  Line(pitches = list(midi),
+  Line(pitches = list(),
        durations = list(1))
 m
 export(m, '~/Desktop/', "x2", c("musicxml"), "-r 200 -b 520")
