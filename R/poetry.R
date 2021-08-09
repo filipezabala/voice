@@ -1,4 +1,6 @@
-#'  (Who) Speaks When? Diarization from WAV audios using Python's pyannote-audio library.
+#' Poetry. The best words in their best order.
+#'
+#' Diarization from WAV audios using Python's pyannote-audio library.
 #'
 #' @param fromWav A directory/folder containing WAV files.
 #' @param to A directory/folder to write RTTM files.
@@ -10,7 +12,7 @@
 #' dir.create(rttm <- paste0(dirname(path2wav)[1], '/rttm/'))
 #' wsw(from = dirname(path2wav)[1], to = rttm)
 #' @export
-wsw <- function(fromWav, to, pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8'){
+poetry <- function(fromWav, to, pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8'){
 
   # Melhoria: ordenar arquivos para extração
 

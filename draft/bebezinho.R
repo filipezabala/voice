@@ -1,4 +1,4 @@
-# libs
+# packs
 library(voice)
 library(VIM)
 library(music)
@@ -47,46 +47,49 @@ Sys.time()-ini
 # na <- aggr(ef, sortVars = T)
 
 # conv
-(ef <- voice::conv_df(ef, .01))
-# (ef <- voice::conv_df(ef, .01, weight = ef$GAIN))
+(ef01 <- voice::conv_df(ef, .01))
+(ef01w <- voice::conv_df(ef, .01, weight = ef$GAIN))
 
 # assign notes
-note <- lapply(ef[-c(1,ncol(ef))], voice::notes)
-note <- bind_rows(note)
-colnames(note) <- paste0('note_', colnames(note))
-ef <- bind_cols(ef, note)
+spn <- lapply(ef01[2:10], voice::notes)
+spn <- bind_rows(spn)
+colnames(spn) <- paste0('spn_', colnames(spn))
+ef01 <- bind_cols(ef01, spn)
 
-midi <- lapply(ef[colnames(note)], voice::notes, method = 'midi')
-note <- bind_rows(note)
-colnames(note) <- paste0('note_', colnames(note))
-ef
+midi <- lapply(ef01[2:10], voice::notes, method = 'midi')
+midi <- bind_rows(midi)
+colnames(midi) <- paste0('midi_', colnames(midi))
+ef01 <- bind_cols(ef01, midi)
 
-# creating tibble
-spl <- strsplit(ef$file_name, '[_.]')
-names(spl) <- 1:length(spl)
-spl <- bind_cols(spl)
-spl <- t(spl)
-ef$record <- spl[,1]
-ef$name <- unlist(strsplit(ef$record, '[0-9]'))
-ef <- ef %>%
-  dplyr::relocate(file_name, record, name, starts_with('note'), F0:last_col())
-glimpse(ef)
-dim(ef)
+# # creating tibble
+# spl <- strsplit(ef$file_name, '[_.]')
+# names(spl) <- 1:length(spl)
+# spl <- bind_cols(spl)
+# spl <- t(spl)
+# ef$record <- spl[,1]
+# ef$name <- unlist(strsplit(ef$record, '[0-9]'))
+# ef <- ef %>%
+#   dplyr::relocate(file_name, record, name, starts_with('spn'),
+#                   starts_with('midi'), F0:last_col())
+# glimpse(ef)
+# dim(ef)
 
 # distance
-nd <- music::noteDistance(as.character(ef$note_F0))
-table(nd)
+ef01$spn_F0
+nd <- music::noteDistance(as.character(ef01$spn_F0))
+table(nd) # semitones
 
 # duration
-dur <- voice::duration(ef$note_F0)
-# dur <- duration(ef$note_F0, 100)
-dur
+dur.spn <- voice::duration(ef01$spn_F0)
+dur.midi <- voice::duration(ef01$midi_F0)
 
 # play
-music::playNote(note = as.character(dur$note),
-                duration = dur$dur_line)
+music::playNote(note = as.character(dur.spn$note),
+                duration = dur.spn$dur_line)
 
-midi <- c(60,61,62,63)
+# partiture
+dur.midi$note
+dur.midi$dur_line
 
 library(gm)
 m <- Music()
@@ -94,10 +97,15 @@ m <- m +
   # add a 4/4 time signature
   Meter(4, 4) +
   # add a musical line of a C5 whole note
-  Line(pitches = list(),
-       durations = list(1))
+  Line(pitches = list(51, 53, 61, 58),
+       durations = list(1,1,1,1))
+  # Line(pitches = list(50, 49, 61, 58),
+  #      durations = list(1,1,1,2))
+  # Line(pitches=list(51,50,51,54,55,56,57,54,55,54,50,52,49,50),
+  #      durations = list(1,1,1,1,1,1,1,1,2,1,1,1,1,2))
 m
-export(m, '~/Desktop/', "x2", c("musicxml"), "-r 200 -b 520")
+path <- paste0(getwd(), '/musicxml')
+export(m, path, "bebezinho", c("musicxml"), "-r 200 -b 520")
 
 ?music::buildChord()
 
@@ -111,6 +119,13 @@ x[1:10] # show first ten samples
 close(a); rm(a) # you can close the instance at this point
 play(x) # play back the result
 
+
+
+# library(tabr)
+# tabr::chord_is_major(as.character(dur.spn$note))
+# x <- "c cg, ce ce_ ceg ce_gb g,ce g,ce_ e_,g,c e_,g,ce_ e_,g,c"
+# chord_is_major(x)
+# identical(chord_is_major(x), !chord_is_minor(x))
 
 
 
