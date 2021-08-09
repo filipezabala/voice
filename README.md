@@ -70,7 +70,7 @@ mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
 ```
 
 ### 7. [R](https://www.r-project.org)
-R is a free software environment for statistical computing and graphics.
+R is a free software environment for statistical computing and graphics.  
  . Download https://cloud.r-project.org/bin/macosx/base/R-4.1.0.pkg   
  . Will take 174.8 MB of disk space   
  . Send R-4.1.0.pkg to Trash   
