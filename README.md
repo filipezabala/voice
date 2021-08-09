@@ -91,7 +91,7 @@ RStudio is an integrated development environment (IDE) for R.
 sudo R
 ```
 
-Running R as super user, paste the following:
+Running R as super user, paste the following, row by row:
 ```r
 ini <- Sys.time()
 packs <- c('devtools', 'e1071', 'ellipse', 'ggfortify', 'RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'VIM', 'wrassp')
