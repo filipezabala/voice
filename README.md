@@ -114,7 +114,7 @@ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requ
 ```
 
 ### 11. [MuseScore](https://musescore.org/)
-MuseScore is an open source notation software.
+MuseScore is an open source notation software.  
  . Download and run https://musescore.org/en/download/musescore.dmg  
  . Drag MuseScore 3 to Applications folder   
  . Will take 314 MB of disk space   
