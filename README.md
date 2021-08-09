@@ -10,7 +10,7 @@ It is based on [`tidyverse`](https://www.tidyverse.org/) collection, [`tuneR`](h
 ## MacOS Installation
 The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [MacOS Big Sur](https://www.apple.com/macos/big-sur/). Note the software versions during installation, inconsistency reporting is welcome.  
 If the error "The package %@ is missing or invalid" appears during the upgrading from MacOS Catalina to Big Sur, press simultaneously `command + option + p + r` at restart. The processes may be accompanied using the keys `command + space 'Activity Monitor'`.    
-> Without the Python items 3 and 10, you may run all the functions except `poetry`, that uses [pyannote-audio](https://github.com/pyannote/pyannote-audio) and `extract_features_py`, that uses [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
+> Without the Python items 3 and 10, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
 
 Hardware  
  . MacBook Air (13-inch, 2017)  
