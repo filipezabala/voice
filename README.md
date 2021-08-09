@@ -55,8 +55,7 @@ brew install ffmpeg
 ```
 
 ### 5. [XQuartz](www.xquartz.org)
- . Download https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg  
- . Double click XQuartz-2.8.1.dmg   
+ . Download and run https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg  
  . Will take 319.2 MB of disk space   
  . Send XQuartz-2.8.1.dmg to Trash    
 
@@ -71,13 +70,13 @@ mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
 
 ### 7. [R](https://www.r-project.org)
 R is a free software environment for statistical computing and graphics.  
- . Download https://cloud.r-project.org/bin/macosx/base/R-4.1.0.pkg   
+ . Download and run https://cloud.r-project.org/bin/macosx/base/R-4.1.0.pkg   
  . Will take 174.8 MB of disk space   
  . Send R-4.1.0.pkg to Trash   
 
 ### 8. [RStudio](https://www.rstudio.com/)
 RStudio is an integrated development environment (IDE) for R.  
- . Download https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg  
+ . Download and run https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg  
  . Drag RStudio to Applications folder   
  . Will take 768.4 MB of disk space   
  . Unmount RStudio virtual disk and send RStudio-1.4.1717.dmg to Trash   
@@ -113,3 +112,10 @@ conda create -n pyvoice38 python=3.8
 conda activate pyvoice38
 pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 ```
+
+### 11. [MuseScore](https://musescore.org/)
+MuseScore is an open source notation software.
+ . Download and run https://musescore.org/en/download/musescore.dmg  
+ . Drag MuseScore 3 to Applications folder   
+ . Will take 314 MB of disk space   
+ . Unmount MuseScore-3.6.2 virtual disk and send MuseScore-3.6.2.548020600.dmg to Trash   
