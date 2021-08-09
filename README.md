@@ -76,7 +76,7 @@ R is a free software environment for statistical computing and graphics.
  . Send R-4.1.0.pkg to Trash   
 
 ### 8. [RStudio](https://www.rstudio.com/)
-RStudio is an integrated development environment (IDE) for R.
+RStudio is an integrated development environment (IDE) for R.  
  . Download https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg  
  . Drag RStudio to Applications folder   
  . Will take 768.4 MB of disk space   
