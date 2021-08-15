@@ -44,6 +44,7 @@ brew install python@3.9
 brew unlink python@3.9
 brew unlink python@3.8
 brew link python@3.8
+echo 'export PATH="/usr/local/opt/python@3.8/bin:$PATH"' >> ~/.zshrc
 python3 --version 
 pip3 --version
 ```
