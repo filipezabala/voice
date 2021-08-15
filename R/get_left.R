@@ -1,7 +1,7 @@
 #'  Get left channel
 #'
 #' @description Get left channel from WAV file.
-#' @param fromWav A directory/folder containing WAV files.
+#' @param x Wave object from `tuneR::readWave`.
 #' @export
 get_left <- function(x){
   return(x@left)

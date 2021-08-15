@@ -7,7 +7,7 @@
 get_left(x)
 }
 \arguments{
-\item{fromWav}{A directory/folder containing WAV files.}
+\item{x}{Wave object from `tuneR::readWave`.}
 }
 \description{
 Get left channel from WAV file.

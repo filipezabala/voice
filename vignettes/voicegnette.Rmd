@@ -2,10 +2,11 @@
 title: '`voice` vignette'
 author: 'Filipe J. Zabala'
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-
+output:
+  rmarkdown::html_vignette:
+    toc: true
 vignette: >
-  %\VignetteIndexEntry{voicegnette}
+  %\VignetteIndexEntry{`voice` vignette}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -20,7 +21,7 @@ knitr::opts_chunk$set(
 ## Installation
 https://github.com/filipezabala/voice
 
-## Use
+## Example
 ### Load packages
 ```{r, message=FALSE, warning=FALSE}
 # packs
@@ -31,15 +32,12 @@ library(gm)
 ```
 ### Set directories
 ```{r}
-# wd
 vaDir <- '~/Downloads/voiceAudios'
-ifelse(!dir.exists(vaDir), dir.create(vaDir), 'Directory exists!')
-
-# files and directories
 wavDir <- paste0(vaDir, '/wav')
 rttmDir <- paste0(vaDir, '/rttm')
 splitDir <- paste0(vaDir, '/split')
 mxmlDir <- paste0(vaDir, '/musicxml')
+ifelse(!dir.exists(vaDir), dir.create(vaDir), 'Directory exists!')
 ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
 ifelse(!dir.exists(rttmDir), dir.create(rttmDir), 'Directory exists!')
 ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
@@ -95,13 +93,21 @@ m <- gm::Music()
 m <- m +
   # add a 4/4 time signature
   gm::Meter(4, 4) +
-  # add a musical line of a C5 whole note
+  # manually adding midi notes
   gm::Line(pitches = list(51, 53, 61, 58),
        durations = list(1,1,1,1))
 m
 export(m, mxmlDir, 'bebezinho', 'musicxml', '-r 200 -b 520')
 ```
-![Just play it!]('musescore.png')
+![Just play 'bebezinho.musicxml' using MuseScore!](https://raw.githubusercontent.com/filipezabala/voice/master/vignettes/musescore.png){ width=75% }
 
-
-
+## To do
+- Automate argument `compact.to` at `voice::conv_df`
+- Test weighting F0 considering GAIN and other features at `voice::conv_df`
+- Test ZCR to infer BPM
+- Automate `pitches` and `durations` at `gm::Line`
+- Embed `gm::show` function
+- Implement major/minor chords identifier (consider `tabr` functions)
+- Must solve
+  - Error in magick_image_write(image, format, quality, depth, density, comment,  : 
+  rsession: NegativeOrZeroImageSize `' @ error/image.c/CloneImage/794

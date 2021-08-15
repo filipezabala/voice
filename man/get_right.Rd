@@ -7,7 +7,7 @@
 get_right(x)
 }
 \arguments{
-\item{fromWav}{A directory/folder containing WAV files.}
+\item{x}{Wave object from `tuneR::readWave`.}
 }
 \description{
 Get right channel from WAV file.

@@ -13,7 +13,7 @@ na_filter <- function(x, max.loss = 1){
   d <- x$missings
   d.ord <- d[with(d, order(-Count, Variable)), ]
   d.ord$Prop <- d.ord[,'Count']/nrow(x$x)
-  filtro <- d.ord[d.ord$Prop <= perda.max,'Variable']
+  filtro <- d.ord[d.ord$Prop <= max.loss, 'Variable']
   return(filtro)
 }
 #

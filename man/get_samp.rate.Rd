@@ -7,7 +7,7 @@
 get_samp.rate(x)
 }
 \arguments{
-\item{fromWav}{A directory/folder containing WAV files.}
+\item{x}{Wave object from `tuneR::readWave`.}
 }
 \description{
 Get sample rate from WAV file.

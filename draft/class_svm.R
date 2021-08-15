@@ -1,4 +1,4 @@
-#' Fits, forecasts and gets performance from SVM models, serial and parallelized.
+#' Fits, forecasts and gets performance from SVM models.
 #'
 #' @param x A data frame or tibble.
 #' @param model Character containing the model structure. See \code{expand_model}.
@@ -24,7 +24,7 @@ class_svm <- function(x, model,
                       setSeed = 1,
                       # normalize = TRUE,
                       custo = 1, gama = 1,
-                      paralelo = TRUE,
+                      # paralelo = TRUE,
                       print.cm = TRUE){
 
   # counting time
@@ -70,14 +70,14 @@ class_svm <- function(x, model,
   pt2 <- proc.time()
   cat('2#4 START - MODEL', '\n')
 
-  if(paralelo){
-    fit.svm <- parallelSVM::parallelSVM(stats::as.formula(model), data = trainset, cost = 1, gamma = 1)
-    gc()
-  }
-  if(!paralelo){
+  # if(paralelo){
+  #   fit.svm <- parallelSVM::parallelSVM(stats::as.formula(model), data = trainset, cost = 1, gamma = 1)
+  #   gc()
+  # }
+  # if(!paralelo){
     fit.svm <- e1071::svm(stats::as.formula(model), data = trainset, cost = custo, gamma = gama)
     gc()
-  }
+  # }
 
   # model time
   ptd2 <- proc.time()-pt2

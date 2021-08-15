@@ -7,7 +7,7 @@
 get_bit(x)
 }
 \arguments{
-\item{fromWav}{A directory/folder containing WAV files.}
+\item{x}{Wave object from `tuneR::readWave`.}
 }
 \description{
 Get bit from WAV file.
