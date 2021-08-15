@@ -110,6 +110,7 @@ cd ~/Downloads
 wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 cd repo.anaconda.com/miniconda/
 bash Miniconda3-latest-MacOSX-x86_64.sh
+conda update -n base -c defaults conda
 conda create -n pyvoice38 python=3.8
 conda activate pyvoice38
 pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
