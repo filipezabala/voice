@@ -4,12 +4,16 @@
 \alias{notes}
 \title{Returns a vector of notes for equal-tempered scale, A4 = 440 Hz.}
 \usage{
-notes(x, method = "spn")
+notes(x, method = "spn", moving.average = FALSE, k = 11)
 }
 \arguments{
 \item{x}{A vector of frequencies in Hz.}
 
 \item{method}{Method of specifying musical pitch. (default: \code{spn}, i.e., Scientific Pitch Notation).}
+
+\item{moving.average}{Logical. Must apply moving average?}
+
+\item{k}{Integer width of the rolling window used if moving.average is TRUE.}
 }
 \description{
 Returns a vector of notes for equal-tempered scale, A4 = 440 Hz.

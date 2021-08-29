@@ -12,7 +12,7 @@
 
 # packs
 # sudo apt-get install libgit2-dev
-library(devtools)
+# library(devtools)
 
 # session_info
 # session_info()

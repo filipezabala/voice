@@ -4,17 +4,27 @@
 \alias{poetry}
 \title{Poetry. The best words in their best order.}
 \usage{
-poetry(fromWav, to, pycall = "~/miniconda3/envs/pyvoice38/bin/python3.8")
+poetry(
+  fromWav,
+  toRttm = NULL,
+  autoDir = TRUE,
+  pycall = "~/miniconda3/envs/pyvoice38/bin/python3.8"
+)
 }
 \arguments{
 \item{fromWav}{A directory/folder containing WAV files.}
 
-\item{to}{A directory/folder to write RTTM files.}
+\item{toRttm}{A directory/folder to write RTTM files. If the default \code{toRttm = NULL} is used, \code{'./voiceAudios/rttm'} is created and used.}
+
+\item{autoDir}{Logical. Must the directories tree must be created? Default: \code{TRUE}. See 'Details'.}
 
 \item{pycall}{Python call.}
 }
 \description{
 Diarization from WAV audios using Python's pyannote-audio library.
+}
+\details{
+When \code{toRttm = NULL} and \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 }
 \examples{
 library(voice)
