@@ -24,12 +24,12 @@ poetry(
 Diarization from WAV audios using Python's pyannote-audio library.
 }
 \details{
-When \code{toRttm = NULL} and \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
+When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 }
 \examples{
 library(voice)
-path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-                                   pattern <- glob2rx('*.wav'), full.names = TRUE)
-dir.create(rttm <- paste0(dirname(path2wav)[1], '/rttm/'))
-wsw(from = dirname(path2wav)[1], to = rttm)
+wavDir <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
+poetry(dirname(path2wav)) # Mac
+poetry(dirname(path2wav), pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
 }

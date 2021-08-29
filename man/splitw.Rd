@@ -6,8 +6,9 @@
 \usage{
 splitw(
   fromWav,
-  fromRttm,
-  to = NULL,
+  fromRttm = NULL,
+  toSplit = NULL,
+  autoDir = TRUE,
   output = "wave",
   filesRange = NULL,
   full.names = TRUE,
@@ -18,9 +19,11 @@ splitw(
 \arguments{
 \item{fromWav}{A directory/folder containing WAV files.}
 
-\item{fromRttm}{A directory/folder containing RTTM files.}
+\item{fromRttm}{A directory/folder containing RTTM files. Default: \code{NULL}.}
 
-\item{to}{A directory/folder to write generated files.}
+\item{toSplit}{A directory/folder to write generated files. Default: \code{NULL}.}
+
+\item{autoDir}{Logical. Must the directories tree must be created? Default: \code{TRUE}. See 'Details'.}
 
 \item{output}{character string, the class of the object to return, either 'wave' or 'list'.}
 
@@ -30,19 +33,18 @@ splitw(
 
 \item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
 
-\item{min.time}{Minimum split time in seconds. (default: \code{0.4})}
+\item{min.time}{Minimum slice length in seconds. (default: \code{0.4})}
 }
 \description{
 Split WAV files in \code{fromWav} folder using (same names) RTTM files as guidance.
 }
+\details{
+When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
+}
 \examples{
 library(voice)
-path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-                                   pattern <- glob2rx('*.wav'), full.names = TRUE)
-dir.create(rttm <- paste0(dirname(path2wav)[1], '/rttm/'))
-wsw(from = dirname(path2wav)[1], to = rttm)
-
-dir.create(split <- paste0(dirname(path2wav)[1], '/split/'))
-splitw(fromWav = dirname(path2wav)[1], fromRttm = rttm,
-                         to = split, output = 'wave')
+wavDir <- list.files(system.file('extdata', package = 'wrassp'),
+                     pattern <- glob2rx('*.wav'), full.names = TRUE)
+poetry(dirname(path2wav), pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
+splitw(dirname(path2wav))
 }

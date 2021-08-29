@@ -154,7 +154,8 @@ system(cmd)
 ### Poetry
 The best words in their best order. Takes around the audio time at 8CPU and the double of the audio time at 4CPU.
 ```{r}
-voice::poetry(wavDir, to = rttmDir, pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8')
+voice::poetry(wavDir, pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
+# voice::poetry(wavDir, to = rttmDir, pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8') # Mac
 ```
 ![](rttm.png)
 

@@ -2,30 +2,55 @@
 #'
 #' @description Split WAV files in \code{fromWav} folder using (same names) RTTM files as guidance.
 #' @param fromWav A directory/folder containing WAV files.
-#' @param fromRttm A directory/folder containing RTTM files.
-#' @param to A directory/folder to write generated files.
+#' @param fromRttm A directory/folder containing RTTM files. Default: \code{NULL}.
+#' @param toSplit A directory/folder to write generated files. Default: \code{NULL}.
+#' @param autoDir Logical. Must the directories tree must be created? Default: \code{TRUE}. See 'Details'.
 #' @param output character string, the class of the object to return, either 'wave' or 'list'.
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
 #' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
-#' @param min.time Minimum split time in seconds. (default: \code{0.4})
+#' @param min.time Minimum slice length in seconds. (default: \code{0.4})
+#' @details When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 #' @examples
 #' library(voice)
-#' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-#'                                    pattern <- glob2rx('*.wav'), full.names = TRUE)
-#' dir.create(rttm <- paste0(dirname(path2wav)[1], '/rttm/'))
-#' wsw(from = dirname(path2wav)[1], to = rttm)
-#'
-#' dir.create(split <- paste0(dirname(path2wav)[1], '/split/'))
-#' splitw(fromWav = dirname(path2wav)[1], fromRttm = rttm,
-#'                          to = split, output = 'wave')
+#' wavDir <- list.files(system.file('extdata', package = 'wrassp'),
+#'                      pattern <- glob2rx('*.wav'), full.names = TRUE)
+#' poetry(dirname(path2wav), pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
+#' splitw(dirname(path2wav))
 #' @export
-splitw <- function(fromWav, fromRttm, to = NULL,
+splitw <- function(fromWav,
+                   fromRttm = NULL,
+                   toSplit = NULL,
+                   autoDir = TRUE,
                    output = 'wave',
                    filesRange = NULL,
                    full.names = TRUE,
                    recursive = FALSE,
                    min.time = 0.4){
+
+  if(autoDir){
+    wavDir <- fromWav[1]
+    ss <- unlist(strsplit(wavDir, '/'))
+    parDir <- paste0(ss[-length(ss)], collapse ='/')
+    mp3Dir <- paste0(parDir, '/mp3')
+    rttmDir <- paste0(parDir, '/rttm')
+    splitDir <- paste0(parDir, '/split')
+    mxmlDir <- paste0(parDir, '/musicxml')
+    ifelse(!dir.exists(parDir), dir.create(parDir), 'Directory exists!')
+    ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
+    ifelse(!dir.exists(mp3Dir), dir.create(mp3Dir), 'Directory exists!')
+    ifelse(!dir.exists(rttmDir), dir.create(rttmDir), 'Directory exists!')
+    ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
+    ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
+  }
+
+  if(is.null(toRttm)){
+    toRttm <- rttmDir
+  }
+
+  if(is.null(toSplit)){
+    toSplit <- splitDir
+  }
 
   # listing WAV files
   wavFiles <- list.files(fromWav, pattern = '[[:punct:]][wW][aA][vV]$',
@@ -38,7 +63,7 @@ splitw <- function(fromWav, fromRttm, to = NULL,
   # filtering by fileRange
   if(!is.null(filesRange)){
     fullRange <- 1:length(wavFiles)
-    filesRange <- base::intersect(fullRange,filesRange)
+    filesRange <- base::intersect(fullRange, filesRange)
     wavFiles <- wavFiles[filesRange]
     rttmFiles <- rttmFiles[filesRange]
   }
@@ -107,7 +132,7 @@ splitw <- function(fromWav, fromRttm, to = NULL,
   # totsec <- totlen/freq
 
 
-  # split.audio - Do parallel/vectorized!
+  # split.audio - Do parallel/vectorized?
   split.audio <- function(x, index, breaks, freq){
     splaudio <- vector('list', length(x))
     for(i in 1:length(x)){
@@ -128,9 +153,9 @@ splitw <- function(fromWav, fromRttm, to = NULL,
 
   # writing output as a list
   if(output == 'list'){
-    if(!is.null(to)){
+    if(!is.null(toSplit)){
       timest <- format(Sys.time(), "%Y-%m-%d_%H-%M-%S")
-      voice::write_list(x=sa, path=paste0(to,'/list_', timest, '.txt'))
+      voice::write_list(x = sa, path = paste0(toSplit,'/list_', timest, '.txt'))
     }
     return(sa)
   }
@@ -149,7 +174,7 @@ splitw <- function(fromWav, fromRttm, to = NULL,
     }
 
     # Save the files
-    pathNameSplit <- lapply(fileNameSplit, function(x) paste0(to, '/', x))
+    pathNameSplit <- lapply(fileNameSplit, function(x) paste0(toSplit, '/', x))
     for(i in 1:length(audio)){
       for(j in 1:length(sa[[i]])){
         tuneR::writeWave(sa[[i]][[j]], filename = pathNameSplit[[i]][j])
