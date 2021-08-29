@@ -106,7 +106,7 @@ devtools::release()
 
 # installing
 update.packages(ask=F)
-devtools::install_github('filipezabala/voice', force = T)
+devtools::install_github('filipezabala/voice')
 
 # attaching
 library(voice)

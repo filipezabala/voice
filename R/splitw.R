@@ -44,8 +44,8 @@ splitw <- function(fromWav,
     ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
   }
 
-  if(is.null(toRttm)){
-    toRttm <- rttmDir
+  if(is.null(fromRttm)){
+    fromRttm <- rttmDir
   }
 
   if(is.null(toSplit)){
