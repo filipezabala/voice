@@ -9,6 +9,7 @@ splitw(
   fromRttm = NULL,
   toSplit = NULL,
   autoDir = TRUE,
+  subDir = FALSE,
   output = "wave",
   filesRange = NULL,
   full.names = TRUE,
@@ -23,7 +24,9 @@ splitw(
 
 \item{toSplit}{A directory/folder to write generated files. Default: \code{NULL}.}
 
-\item{autoDir}{Logical. Must the directories tree must be created? Default: \code{TRUE}. See 'Details'.}
+\item{autoDir}{Logical. Must the directories tree be created? Default: \code{TRUE}. See 'Details'.}
+
+\item{subDir}{Logical. Must the splitted files be placed in subdirectories? Default: \code{FALSE}.}
 
 \item{output}{character string, the class of the object to return, either 'wave' or 'list'.}
 
@@ -36,7 +39,7 @@ splitw(
 \item{min.time}{Minimum slice length in seconds. (default: \code{0.4})}
 }
 \description{
-Split WAV files in \code{fromWav} folder using (same names) RTTM files as guidance.
+Split WAV files either in \code{fromWav} directory or using (same names) RTTM files/subdirectories as guidance.
 }
 \details{
 When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.

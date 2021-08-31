@@ -1,10 +1,11 @@
 #'  Split Wave
 #'
-#' @description Split WAV files in \code{fromWav} folder using (same names) RTTM files as guidance.
+#' @description Split WAV files either in \code{fromWav} directory or using (same names) RTTM files/subdirectories as guidance.
 #' @param fromWav A directory/folder containing WAV files.
 #' @param fromRttm A directory/folder containing RTTM files. Default: \code{NULL}.
 #' @param toSplit A directory/folder to write generated files. Default: \code{NULL}.
-#' @param autoDir Logical. Must the directories tree must be created? Default: \code{TRUE}. See 'Details'.
+#' @param autoDir Logical. Must the directories tree be created? Default: \code{TRUE}. See 'Details'.
+#' @param subDir Logical. Must the splitted files be placed in subdirectories? Default: \code{FALSE}.
 #' @param output character string, the class of the object to return, either 'wave' or 'list'.
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
@@ -22,6 +23,7 @@ splitw <- function(fromWav,
                    fromRttm = NULL,
                    toSplit = NULL,
                    autoDir = TRUE,
+                   subDir = FALSE,
                    output = 'wave',
                    filesRange = NULL,
                    full.names = TRUE,
@@ -173,8 +175,15 @@ splitw <- function(fromWav,
       }
     }
 
-    # Save the files
-    pathNameSplit <- lapply(fileNameSplit, function(x) paste0(toSplit, '/', x))
+    # save the files
+    if(subDir){
+      temp <- lapply(fileName[,1], function(x) paste0(toSplit, '/', x))
+      dc <- function(x) ifelse(!dir.exists(x), dir.create(x), 'Directory exists!')
+      lapply(temp, dc)
+      pathNameSplit <- lapply(fileNameSplit, function(x) paste0(temp, '/', x))
+    } else{
+      pathNameSplit <- lapply(fileNameSplit, function(x) paste0(toSplit, '/', x))
+    }
     for(i in 1:length(audio)){
       for(j in 1:length(sa[[i]])){
         tuneR::writeWave(sa[[i]][[j]], filename = pathNameSplit[[i]][j])
