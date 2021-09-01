@@ -4,7 +4,7 @@
 #' @param fromWav A directory/folder containing WAV files.
 #' @param fromRttm A directory/folder containing RTTM files. Default: \code{NULL}.
 #' @param toSplit A directory/folder to write generated files. Default: \code{NULL}.
-#' @param autoDir Logical. Must the directories tree be created? Default: \code{TRUE}. See 'Details'.
+#' @param autoDir Logical. Must the directories tree be created? Default: \code{FALSE}. See 'Details'.
 #' @param subDir Logical. Must the splitted files be placed in subdirectories? Default: \code{FALSE}.
 #' @param output character string, the class of the object to return, either 'wave' or 'list'.
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
@@ -22,7 +22,7 @@
 splitw <- function(fromWav,
                    fromRttm = NULL,
                    toSplit = NULL,
-                   autoDir = TRUE,
+                   autoDir = FALSE,
                    subDir = FALSE,
                    output = 'wave',
                    filesRange = NULL,
@@ -175,12 +175,14 @@ splitw <- function(fromWav,
       }
     }
 
-    # save the files
+    # save files
     if(subDir){
-      temp <- lapply(fileName[,1], function(x) paste0(toSplit, '/', x))
+      pathNameSplit <- lapply(fileName[,1], function(x) paste0(toSplit, '/', x))
       dc <- function(x) ifelse(!dir.exists(x), dir.create(x), 'Directory exists!')
-      lapply(temp, dc)
-      pathNameSplit <- lapply(fileNameSplit, function(x) paste0(temp, '/', x))
+      lapply(pathNameSplit, dc)
+      for(i in 1:length(pathNameSplit)){
+        pathNameSplit[[i]] <- paste0(pathNameSplit[[i]], '/', fileNameSplit[[i]])
+      }
     } else{
       pathNameSplit <- lapply(fileNameSplit, function(x) paste0(toSplit, '/', x))
     }

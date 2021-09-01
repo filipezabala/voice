@@ -4,7 +4,7 @@
 #'
 #' @param fromWav A directory/folder containing WAV files.
 #' @param toRttm A directory/folder to write RTTM files. If the default \code{toRttm = NULL} is used, \code{'./voiceAudios/rttm'} is created and used.
-#' @param autoDir Logical. Must the directories tree must be created? Default: \code{TRUE}. See 'Details'.
+#' @param autoDir Logical. Must the directories tree must be created? Default: \code{FALSE}. See 'Details'.
 #' @param pycall Python call.
 #' @details When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 #' @examples
@@ -14,7 +14,7 @@
 #' poetry(dirname(path2wav)) # Mac
 #' poetry(dirname(path2wav), pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
 #' @export
-poetry <- function(fromWav, toRttm = NULL, autoDir = TRUE,
+poetry <- function(fromWav, toRttm = NULL, autoDir = FALSE,
                    pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8'){
 
   if(autoDir){

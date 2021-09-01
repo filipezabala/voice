@@ -8,7 +8,7 @@ splitw(
   fromWav,
   fromRttm = NULL,
   toSplit = NULL,
-  autoDir = TRUE,
+  autoDir = FALSE,
   subDir = FALSE,
   output = "wave",
   filesRange = NULL,
@@ -24,7 +24,7 @@ splitw(
 
 \item{toSplit}{A directory/folder to write generated files. Default: \code{NULL}.}
 
-\item{autoDir}{Logical. Must the directories tree be created? Default: \code{TRUE}. See 'Details'.}
+\item{autoDir}{Logical. Must the directories tree be created? Default: \code{FALSE}. See 'Details'.}
 
 \item{subDir}{Logical. Must the splitted files be placed in subdirectories? Default: \code{FALSE}.}
 
