@@ -246,13 +246,32 @@ Add the line `MUSESCORE_PATH=/usr/bin/mscore` to `/root/.Renviron` file. Save an
 
 
 ### 10. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-Miniconda is a free minimal installer for [conda](https://docs.conda.io/), an open source package, dependency and environment management system for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN and more, that runs on Windows, macOS and Linux.  
-. Follow the instructions at https://docs.conda.io/en/latest/miniconda.html. 
+Miniconda is a free minimal installer for [conda](https://docs.conda.io/), an open source package, dependency and environment management system for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN and more, that runs on Windows, macOS and Linux.   
+Follow the instructions at https://docs.conda.io/en/latest/miniconda.html. 
 
-At the terminal:  
+At terminal:  
+```bash
+cd ~/Downloads/
+wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+cd repo.anaconda.com/miniconda/
+bash Miniconda3-latest-Linux-x86_64.sh
+```
+Do you wish the installer to initialize Miniconda3 by running conda init? `yes`. 
+Close terminal and open a new one. 
+
 ```bash
 conda update -n base -c defaults conda
-conda create -n pyvoice38 python=3.8
-conda activate pyvoice38
-pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 ```
+
+The following packages will be UPDATED/DOWNGRADED:... Proceed ([y]/n)? `y` 
+
+```bash
+conda create -n pyvoice38 python=3.8
+```
+
+The following (NEW) packages will be downloaded/INSTALLED:... Proceed ([y]/n)? `y`   
+```bash
+conda activate pyvoice38
+pip install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
+```
+
