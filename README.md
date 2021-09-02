@@ -120,7 +120,7 @@ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requ
 ```
 
 
-## Ubuntu 20.04 LTS (Focal Fossa) Installation
+## Ubuntu Installation
 The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [Ubuntu 20.04 LTS (Focal Fossa)](https://releases.ubuntu.com/20.04/). Note the software versions during installation, inconsistency reporting is welcome.  
 > Without the following Python items 3 and 12, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
 
