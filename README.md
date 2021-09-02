@@ -176,6 +176,7 @@ sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt update
 sudo apt install python3.8
 python3 --version 
+/home/linuxbrew/.linuxbrew/opt/python@3.9/bin/python3.9 -m pip install --upgrade pip
 pip --version
 ```
 
