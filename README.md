@@ -21,7 +21,6 @@ Hardware
 
 ### 1. [Homebrew](https://brew.sh/)
 Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' and remember to `brew doctor` eventually. At terminal (`command + space 'terminal'`) run:
-
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 sudo chown -R $(whoami) /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5
@@ -30,14 +29,12 @@ chmod u+w /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/ma
 
 ### 2. [wget](https://www.gnu.org/software/wget/)
 GNU Wget is a free software package for retrieving files using HTTP, HTTPS, FTP and FTPS, the most widely used Internet protocols. It is a non-interactive commandline tool, so it may easily be called from scripts, cron jobs, terminals without X-Windows support, etc.
-
 ```bash
 brew install wget
 ```
 
 ### 3. [Python](https://www.python.org/)
 Python is a programming language that integrate systems. According to [this](https://github.com/Homebrew/homebrew-core/issues/62911) post, it is recommended to install Python 3.8 and 3.9 and make it consistent.
-
 ```bash
 brew install python@3.8
 brew install python@3.9
@@ -51,7 +48,6 @@ pip3 --version
 
 ### 4. [ffmpeg](http://ffmpeg.org/)
 ffmpeg is a cross-platform solution to record, convert and stream audio and video. The installation may take several minutes.
-
 ```bash
 brew install ffmpeg
 ```
@@ -94,7 +90,6 @@ RStudio is an integrated development environment (IDE) for R.
 
 ### 10. [R packages](https://cran.r-project.org/web/packages/)
 "Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). Type `command + space 'terminal'`   
- 
 ```bash
 sudo R
 ```
@@ -159,8 +154,7 @@ Hardware via `lspci`:
  . 09:00.0 SATA controller: Marvell Technology Group Ltd. 88SE9172 SATA 6Gb/s Controller (rev 11)  
  
 ### 1. [Homebrew](https://brew.sh/)
-Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' and remember to `brew doctor` eventually. At terminal (`command + space 'terminal'`) run:
-
+Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' and remember to `brew doctor` eventually. At terminal run:
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 sudo chown -R $(whoami) /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5
@@ -169,14 +163,12 @@ chmod u+w /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/ma
 
 ### 2. [wget](https://www.gnu.org/software/wget/)
 GNU Wget is a free software package for retrieving files using HTTP, HTTPS, FTP and FTPS, the most widely used Internet protocols. It is a non-interactive commandline tool, so it may easily be called from scripts, cron jobs, terminals without X-Windows support, etc.
-
 ```bash
 brew install wget
 ```
 
 ### 3. [Python](https://www.python.org/)
 Python is a programming language that integrate systems. According to [this](https://github.com/Homebrew/homebrew-core/issues/62911) post, it is recommended to install Python 3.8 and 3.9 and make it consistent.
-
 ```bash
 brew install python@3.8
 brew install python@3.9
@@ -190,59 +182,48 @@ pip3 --version
 
 ### 4. [ffmpeg](http://ffmpeg.org/)
 ffmpeg is a cross-platform solution to record, convert and stream audio and video. The installation may take several minutes.
-
 ```bash
 brew install ffmpeg
 ```
 
-### 5. [XQuartz](www.xquartz.org)
- . Download and run https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg  
- . Will take 319.2 MB of disk space   
- . Send XQuartz-2.8.1.dmg to Trash    
-
-### 6. [bwidget](http://sourceforge.net/projects/tcllib/files/)
- . Download https://sourceforge.net/projects/tcllib/files/latest/download  
-
-```bash
-cd ~/Downloads
-tar -xf bwidget-1.9.14.tar.gz
-mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
-```
-
-### 7. Audio drivers
+### 5. Audio drivers
 ```bash
 sudo apt-get install portaudio19-dev libasound2-dev
 ```
 
-### 8. [MuseScore](https://musescore.org/)
+### 6. [MuseScore](https://musescore.org/)
 MuseScore is an open source notation software.  
-
 ```bash
 sudo add-apt-repository ppa:mscore-ubuntu/mscore-stable
 sudo apt-get update
 sudo apt-get install musescore
 ```
 
-### 9. [R](https://www.r-project.org)
-R is a free software environment for statistical computing and graphics.  
- . Download and run https://cloud.r-project.org/bin/macosx/base/R-4.1.0.pkg   
- . Will take 174.8 MB of disk space   
- . Send R-4.1.0.pkg to Trash   
+### 7. [R](https://www.r-project.org)
+R is a free software environment for statistical computing and graphics. To find out your Ubuntu distribution use `lsb_release -a` at terminal.    
+```bash
+sudo sh -c 'echo "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" >> /etc/apt/sources.list.d/cran.list'
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9 
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 51716619E084DAB9
+gpg -a --export E084DAB9 | sudo apt-key add -
 
+sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
 
-### 10. [RStudio](https://www.rstudio.com/)
+sudo apt update && sudo apt upgrade
+sudo apt-get install r-base
+sudo apt-get install r-base-dev
+```
+
+### 8. [RStudio](https://www.rstudio.com/)
 RStudio is an integrated development environment (IDE) for R.  
- . Download and run https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg  
- . Drag RStudio to Applications folder   
- . Will take 768.4 MB of disk space   
- . Unmount RStudio virtual disk and send RStudio-1.4.1717.dmg to Trash   
- . Type `command + space 'rstudio'`   
- . Tools > Global Options... > Appearance > Merbivore (Restart required)   
+```bash
+sudo apt-get install gdebi-core
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb
+sudo gdebi rstudio-server-1.4.1717-amd64.deb
+```
 
-
-### 11. [R packages](https://cran.r-project.org/web/packages/)
-"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). Type `command + space 'terminal'`   
- 
+### 9. [R packages](https://cran.r-project.org/web/packages/)
+"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). At terminal run:
 ```bash
 sudo R
 ```
@@ -264,14 +245,13 @@ usethis::edit_r_environ()
 
 Add the line `MUSESCORE_PATH=/usr/bin/mscore` to `/root/.Renviron` file. Save and restart the R/RStudio session.
 
-### 12. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-Miniconda is a free minimal installer for [conda](https://docs.conda.io/), an open source package, dependency and environment management system for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN and more, that runs on Windows, macOS and Linux.
 
+### 10. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+Miniconda is a free minimal installer for [conda](https://docs.conda.io/), an open source package, dependency and environment management system for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN and more, that runs on Windows, macOS and Linux.  
+. Follow the instructions at https://docs.conda.io/en/latest/miniconda.html. 
+
+At the terminal:  
 ```bash
-cd ~/Downloads
-wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
-cd repo.anaconda.com/miniconda/
-bash Miniconda3-latest-MacOSX-x86_64.sh
 conda update -n base -c defaults conda
 conda create -n pyvoice38 python=3.8
 conda activate pyvoice38
