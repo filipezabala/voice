@@ -168,16 +168,15 @@ brew install wget
 ```
 
 ### 3. [Python](https://www.python.org/)
-Python is a programming language that integrate systems. According to [this](https://github.com/Homebrew/homebrew-core/issues/62911) post, it is recommended to install Python 3.8 and 3.9 and make it consistent.
+Python is a programming language that integrate systems.  
 ```bash
-brew install python@3.8
-brew install python@3.9
-brew unlink python@3.9
-brew unlink python@3.8
-brew link python@3.8
-echo 'export PATH="/usr/local/opt/python@3.8/bin:$PATH"' >> ~/.zshrc
+sudo apt update
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+sudo apt install python3.8
 python3 --version 
-pip3 --version
+pip --version
 ```
 
 ### 4. [ffmpeg](http://ffmpeg.org/)
