@@ -257,8 +257,8 @@ wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_6
 cd repo.anaconda.com/miniconda/
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
-Do you wish the installer to initialize Miniconda3 by running conda init? `yes`. 
-Close terminal and open a new one. 
+Do you wish the installer to initialize Miniconda3 by running conda init? `yes`.   
+Close and reopen terminal. 
 
 ```bash
 conda update -n base -c defaults conda
