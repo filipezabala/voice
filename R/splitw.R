@@ -10,7 +10,7 @@
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
 #' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
-#' @param min.time Minimum slice length in seconds. (default: \code{0.4})
+#' @param silence.gap The silence gap (in seconds) between adjacent words in a keyword. Rows with \code{tdur <= silence.gap} are removed. (default: \code{0.5})
 #' @details When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 #' @examples
 #' library(voice)
@@ -28,7 +28,7 @@ splitw <- function(fromWav,
                    filesRange = NULL,
                    full.names = TRUE,
                    recursive = FALSE,
-                   min.time = 0.4){
+                   silence.gap = 0.5){
 
   if(autoDir){
     wavDir <- fromWav[1]
@@ -82,12 +82,12 @@ splitw <- function(fromWav,
                 'ortho','stype','name','conf','slat')
   rttm <- lapply(rttm, stats::setNames, colnames)
 
-  # min.time
-  drop.row <- function(x){
-    dr <- x[x$tdur >= min.time,]
-    return(dr)
+  # silence.gap
+  keep.row <- function(x){
+    kr <- x[x$tdur > silence.gap,]
+    return(kr)
   }
-  rttm <- lapply(rttm, drop.row)
+  rttm <- lapply(rttm, keep.row)
 
   # useful functions (voice::get_...)
   get_tbeg <- function(x){

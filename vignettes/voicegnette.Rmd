@@ -2,7 +2,7 @@
 title: '`voice` vignette'
 subtitle: 'version `r packageVersion("voice")`'
 author: 'Filipe J. Zabala'
-date: "`r Sys.Date()`"
+date: "`r format(Sys.time(), '%Y-%m-%d %H:%M:%S')`"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -22,8 +22,7 @@ knitr::opts_chunk$set(
 ## Installation
 https://github.com/filipezabala/voice
 
-## Example 1
-Find frequencies, notes and durations. Play and get sheet music.  
+## Example 1 - Play and get sheet music
 
 ### Load packages
 ```{r, message=FALSE, warning=FALSE}
@@ -34,7 +33,7 @@ library(music)
 library(gm)
 ```
 ### Set directories
-The `mp3` and `split` directories will be used in Example 2.
+The `/mp3` and `/split` directories will be used in Example 2.
 ```{r}
 vaDir <- '~/Downloads/voiceAudios'
 wavDir <- paste0(vaDir, '/wav')
@@ -50,53 +49,132 @@ ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
 ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
 ```
 
+### Remove old files
+```{r}
+cmd <- paste0('rm ', wavDir, '/*.*')
+system(cmd)
+```
+
+#### To do #10
+Automatize and test `autoDir` argument.
+
 ### Get audios
 ```{r}
-url0 <- 'https://github.com/filipezabala/voiceAudios/raw/main/wav/bebezinho_2.005.wav'
-download.file(url0, paste0(wavDir, '/bebezinho_2.005.wav'), mode = 'wb')
+url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav'
+download.file(url0, paste0(wavDir, '/bebezinho_2005.wav'), mode = 'wb')
 ```
+#### To do #20
+At `url0 <- 'https://github.com/filipezabala/voiceAudios/raw/main/bebezinho_2.005.wav'`, find out why the downloaded file is called `wav_bebezinho_2.005.wav`.
+
 ### Extract features
 ```{r}
 ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
                               round.to = 6, windowShift = 5)
 ef
 ```
-### Pooling
+#### To do #30
+Automatize setereo2mono.
+
+#### To do #40
+Test different windowShift values.  
+
+### Smooth
 ```{r}
-(ef01 <- voice::conv_df(ef, .01)) # 1%
+ef_ma <- lapply(ef[,-c(1,11)], zoo::rollmean, 11)
+ef_ma <- bind_cols(ef_ma)
 ```
+
+<!-- ### Pool -->
+<!-- ```{r} -->
+<!-- (ef01 <- voice::conv_df(ef, .01)) # 1% -->
+<!-- ``` -->
+<!-- #### To do -->
+<!-- 1. Eliminate this step, assigning notes and durations after smooth with moving average.   -->
+<!-- 2. Apply voice::duration over the smoothed data.   -->
+
 
 ### Assign notes
 ```{r}
-spn <- lapply(ef01[2:10], voice::notes)
+spn <- lapply(ef_ma, voice::notes)
 spn <- bind_rows(spn)
 colnames(spn) <- paste0('spn_', colnames(spn))
-ef01 <- bind_cols(ef01, spn)
+ef_ma <- bind_cols(ef_ma, spn)
 
-midi <- lapply(ef01[2:10], voice::notes, method = 'midi')
+midi <- lapply(ef_ma, voice::notes, method = 'midi')
 midi <- bind_rows(midi)
 colnames(midi) <- paste0('midi_', colnames(midi))
-ef01 <- bind_cols(ef01, midi)
-glimpse(ef01)
+ef_ma <- bind_cols(ef_ma, midi)
+
+glimpse(ef_ma)
 ```
+#### To do #50
+Write a function to, given a frequency in Hz, convert in any SPN.  
+
+#### To do #60
+Study chords (major/minor).  
+
+#### To do #70
+Study sequences (scales).  
+
+### Plot
+```{r}
+plot(ef_ma$F0)
+```
+
+#### To do #80
+Build a chart that merges frequency points and assigned notes. ('~/Dropbox/R/lolliplot.R')
+
 
 ### Distance (in semitones)
 ```{r}
-nd.spn <- music::noteDistance(as.character(ef01$spn_F0))
-table(nd.spn) # semitones
+nd.spn <- music::noteDistance(as.character(ef_ma$spn_F0))
+nd.spn # semitones
+table(nd.spn)
+nd.midi <- diff(ef_ma$midi_F0)
+nd.midi # semitones
+table(nd.midi)
 ```
+
+#### To do #90
+Extract and test microtones. (Giuliano's idea.)
+ 
 
 ### Get duration
 ```{r}
-dur.spn <- voice::duration(ef01$spn_F0)
-dur.midi <- voice::duration(ef01$midi_F0)
+dur.spn <- voice::duration(ef_ma$spn_F0)
+dur.spn
+dur.midi <- voice::duration(ef_ma$midi_F0)
+dur.midi
 ```
 
-### Play
-```{r}
-music::playNote(note = as.character(dur.spn$note),
-                duration = dur.spn$dur_line)
-```
+<!-- ### Play -->
+<!-- ```{r} -->
+<!-- music::playNote(note = as.character(dur.spn$note), duration = dur.spn$dur_line) -->
+<!-- ``` -->
+<!-- #### To do -->
+<!-- 1. Check version to play different durations.   -->
+
+<!-- To do:   -->
+<!-- 1. Solve in Linux:   -->
+
+<!-- ```{r} -->
+<!-- # ALSA lib pcm_dmix.c:1089:(snd_pcm_dmix_open) unable to open slave -->
+<!-- # ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear -->
+<!-- # ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe -->
+<!-- # ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.side -->
+<!-- # ALSA lib pcm_route.c:869:(find_matching_chmap) Found no matching channel map -->
+<!-- # ALSA lib pcm_oss.c:377:(_snd_pcm_oss_open) Unknown field port -->
+<!-- # ALSA lib pcm_oss.c:377:(_snd_pcm_oss_open) Unknown field port -->
+<!-- # ALSA lib pulse.c:242:(pulse_connect) PulseAudio: Unable to connect: Connection refused -->
+<!-- #  -->
+<!-- # ALSA lib pulse.c:242:(pulse_connect) PulseAudio: Unable to connect: Connection refused -->
+<!-- #  -->
+<!-- # ALSA lib pcm_usb_stream.c:486:(_snd_pcm_usb_stream_open) Invalid type for card -->
+<!-- # ALSA lib pcm_usb_stream.c:486:(_snd_pcm_usb_stream_open) Invalid type for card -->
+<!-- # ALSA lib pcm_dmix.c:1089:(snd_pcm_dmix_open) unable to open slave -->
+<!-- # ALSA lib pcm_dmix.c:1089:(snd_pcm_dmix_open) unable to open slave -->
+<!-- ``` -->
+
 
 ### Music sheet
 ```{r}
@@ -105,15 +183,23 @@ m <- m +
   # add a 4/4 time signature
   gm::Meter(4, 4) +
   # manually adding midi notes
-  gm::Line(pitches = list(51, 53, 61, 58),
-       durations = list(1,1,1,1))
+  gm::Line(pitches = list(51,50,49,48,47,NA,49,NA,58,59,60, 61,60,59,58,57,58,57,58,NA),
+           durations=list( 2,30, 8, 8, 1,18,43,36, 1, 4, 9,101, 5, 4, 7, 9, 4,51,48,1))
 m
-export(m, mxmlDir, 'bebezinho', 'musicxml')
+show(m, to = c('score', 'audio'))
 ```
-![Just play 'bebezinho.musicxml' using MuseScore!](https://raw.githubusercontent.com/filipezabala/voice/master/vignettes/musescore.png){ width=75% }
+#### To do #100
+Automate adding midi/spn notes pitches at `gm::Line`.
 
-## Example 2
-Cut audios.  
+### Export musicxml file
+```{r}
+gm::export(m, mxmlDir, 'bebezinho', 'musicxml')
+```
+
+
+
+
+## Example 2 - Cut audios
 
 ### Get audios
 ```{r}
@@ -138,18 +224,29 @@ system('cp ~/Downloads/voiceAudios/mp3/github.com/filipezabala/voiceAudios/raw/m
 system('rm -rf ~/Downloads/voiceAudios/mp3/github.com/')
 ```
 
-### Removing old files
+### Remove old files
 ```{r}
 cmd <- paste0('rm ', wavDir, '/*.*')
 system(cmd)
 ```
 
-### Converting mp3 to wav
+### Convert mp3 to wav
 ```{r}
 cmd <- 'cd ~/Downloads/voiceAudios/mp3;
 for i in *.[Mm][Pp]3; do ffmpeg -i "$i" "../wav/${i%.*}.wav"; done'
 system(cmd)
 ```
+#### To do #110
+Automatize and test mp32wav.
+
+#### To do #120
+Test the hypotheses
+H1: multiple mp32wav2mp32wav... conversions reduce the audio quality.
+H2: What is the impact in the decision using 
+ i. original wav
+ ii. original mp3 (that must be converted to wav)
+ iii. H1, if H1 is consistent
+
 
 ### Poetry
 The best words in their best order. Takes around the audio time at 8CPU and the double of the audio time at 4CPU.
@@ -158,6 +255,8 @@ voice::poetry(wavDir, pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Lin
 # voice::poetry(wavDir, to = rttmDir, pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8') # Mac
 ```
 ![](rttm.png)
+#### To do #125
+Automate speaker recognition (who speaks when?).
 
 ### Split wave
 ```{r}
@@ -168,13 +267,28 @@ Sys.time()-ini
 ```
 ![](split.png)
 
-## To do
-- Automate argument `compact.to` at `voice::conv_df`
-- Test weighting F0 considering GAIN and other features at `voice::conv_df`
-- Test ZCR to infer BPM
-- Automate `pitches` and `durations` at `gm::Line`
-- Embed `gm::show` function
-- Implement major/minor chords identifier (consider `tabr` functions)
-- Must solve
+#### To do #130 [DEPRECATED]
+[DEPRECATED] Automate argument `compact.to` at `voice::conv_df`. 
+
+#### To do #140 [TESTED: NO GAINS USING GAIN]
+Test weighting F0 considering GAIN and other features at `voice::conv_df`
+
+#### To do #150
+Test ZCR to infer BPM.
+
+#### To do #160 [WORK IN PROGRESS]
+Automate `pitches` and `durations` at `gm::Line`.
+
+#### To do #170
+Implement major/minor chords identifier (consider `tabr` functions).
+
+#### To do #180
+Embed `gm::show` function at MacOS. Must solve:
   - Error in magick_image_write(image, format, quality, depth, density, comment,  : 
   rsession: NegativeOrZeroImageSize `' @ error/image.c/CloneImage/794
+
+#### To do #190
+Find the 'best' set of variables in different contexts.
+
+#### To do #200
+Automate `min.time` argument at `voice::splitw`.

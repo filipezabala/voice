@@ -14,7 +14,7 @@ splitw(
   filesRange = NULL,
   full.names = TRUE,
   recursive = FALSE,
-  min.time = 0.4
+  silence.gap = 0.5
 )
 }
 \arguments{
@@ -36,7 +36,7 @@ splitw(
 
 \item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
 
-\item{min.time}{Minimum slice length in seconds. (default: \code{0.4})}
+\item{silence.gap}{The silence gap (in seconds) between adjacent words in a keyword. Rows with \code{tdur <= silence.gap} are removed. (default: \code{0.5})}
 }
 \description{
 Split WAV files either in \code{fromWav} directory or using (same names) RTTM files/subdirectories as guidance.
