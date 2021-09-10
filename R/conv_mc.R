@@ -6,7 +6,7 @@
 #' @param to.data.frame Logical. Convert to data frame? Default: \code{FALSE}.
 #' @param round.off Number of decimal places of the convoluted vector. Default: \code{NULL}.
 #' @param weight Vector of weights with same length of \code{y}. Default: \code{NULL}.
-#' @param mc.cores The number of cores to mclapply. Default: \code{parallel::detectCores()}.
+#' @param mc.cores The number of cores to mclapply. Default: \code{1}.
 #' @return A list of x and y convoluted values with length near to \code{compact.to*length(y)}.
 #' @importFrom dplyr select
 #' @importFrom dplyr %>%
@@ -38,7 +38,7 @@
 #' @export
 conv_mc <- function(y, compact.to, drop.zeros = FALSE, to.data.frame = FALSE,
                     round.off = NULL, weight = NULL,
-                    mc.cores = parallel::detectCores()){
+                    mc.cores = 1){
   if(is.vector(y)){
     cm <- voice::conv(y, compact.to = compact.to, drop.zeros = drop.zeros,
                       to.data.frame = to.data.frame, round.off = round.off,

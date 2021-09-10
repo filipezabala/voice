@@ -16,7 +16,7 @@ extract_features(
   fbtype = c("mel", "htkmel", "fcmel", "bark"),
   resolution = 40,
   usecmp = FALSE,
-  mc.cores = parallel::detectCores(),
+  mc.cores = 1,
   full.names = TRUE,
   recursive = FALSE,
   check.mono = TRUE,
@@ -49,7 +49,7 @@ extract_features(
 
 \item{usecmp}{Logical. Apply equal-loudness weighting and cube-root compression (PLP instead of LPC) (default: \code{FALSE}). Used by \code{tuneR::melfcc}.}
 
-\item{mc.cores}{Number of cores to be used in parallel processing. (default: \code{parallel::detectCores()})}
+\item{mc.cores}{Number of cores to be used in parallel processing. (default: \code{1})}
 
 \item{full.names}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.}
 

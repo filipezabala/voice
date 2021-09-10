@@ -10,7 +10,7 @@
 #' @param to.data.frame Logical. Should the return be a data frame? If \code{FALSE} returns a list. Default: \code{TRUE}.
 #' @param round.off Number of decimal places of the convoluted vector. Default: \code{NULL}.
 #' @param weight Vector of weights with same length of \code{y}. Default: \code{NULL}.
-#' @param mc.cores The number of cores to mclapply. By default uses \code{parallel::detectCores()}.
+#' @param mc.cores The number of cores to mclapply. By default uses \code{1}.
 #' @return A vector of convoluted values with length near to \code{compact.to*length(x)}.
 #' @importFrom dplyr %>%
 #' @importFrom dplyr mutate_each
@@ -40,7 +40,7 @@
 conv_df <- function(x, compact.to, colnum = NULL, id = colnames(x)[1],
                     by.filter = id, drop.x = TRUE, drop.zeros = FALSE,
                     to.data.frame = TRUE, round.off = NULL, weight = NULL,
-                    mc.cores = parallel::detectCores()){
+                    mc.cores = 1){
   ini <- Sys.time()
 
   # numeric columns
@@ -76,6 +76,7 @@ conv_df <- function(x, compact.to, colnum = NULL, id = colnames(x)[1],
 
   # transforming in dataframe
   cn.df <- lapply(cn.li, as.data.frame)
+  # cn.df <- bind_cols(cn.li)
 
   # compact list
   li <- vector('list', length = nid)

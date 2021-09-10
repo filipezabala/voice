@@ -11,7 +11,7 @@ conv_mc(
   to.data.frame = FALSE,
   round.off = NULL,
   weight = NULL,
-  mc.cores = parallel::detectCores()
+  mc.cores = 1
 )
 }
 \arguments{
@@ -27,7 +27,7 @@ conv_mc(
 
 \item{weight}{Vector of weights with same length of \code{y}. Default: \code{NULL}.}
 
-\item{mc.cores}{The number of cores to mclapply. Default: \code{parallel::detectCores()}.}
+\item{mc.cores}{The number of cores to mclapply. Default: \code{1}.}
 }
 \value{
 A list of x and y convoluted values with length near to \code{compact.to*length(y)}.

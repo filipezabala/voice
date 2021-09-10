@@ -1,6 +1,23 @@
+To do
+1. Write smooth_df.R.
+. Write examples to read_rttm.R.
+. Write examples to enrich_rttm.R.
+. Write plot_notes.R.
+. Adjust rowProp.R to interval [0,1].
+
+
+Version 0.0.0.9041
+2021-09-10
+
+. Changed mc.cores = parallel::detectCores() to mc.cores = 1 @ conv_df.R, conv_mc.R, extract_features.R.
+. Parameter silence.gap set from 0.4 to 0.5 (universal standard) @ splitw.R, enrich_rttm.R.
+. Changed column name from 'id.min.time' to 'id.split' @ enrich_rttm.R.
+
+
+
 Version 0.0.0.17
 
-. Solve the recursive issue in diarization-pyannote.py (by Sola):
+. Solved the recursive issue in diarization-pyannote.py (by Sola):
 
 import os
 import re

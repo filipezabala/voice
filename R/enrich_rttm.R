@@ -19,7 +19,7 @@ enrich_rttm <- function(listRttm, silence.gap = 0.5){
   rttm <- lapply(listRttm, fltr)
   rttm <- lapply(rttm, function(x){cbind(1:nrow(x), x)})
 
-  colnames <- c('id', 'id.min.time', 'type', 'file', 'chnl', 'tbeg', 'tdur',
+  colnames <- c('id', 'id.split', 'type', 'file', 'chnl', 'tbeg', 'tdur',
                 'ortho', 'stype', 'name', 'conf', 'slat')
   rttm <- lapply(rttm, stats::setNames, colnames)
   return(rttm)

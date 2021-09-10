@@ -15,7 +15,7 @@ conv_df(
   to.data.frame = TRUE,
   round.off = NULL,
   weight = NULL,
-  mc.cores = parallel::detectCores()
+  mc.cores = 1
 )
 }
 \arguments{
@@ -39,7 +39,7 @@ conv_df(
 
 \item{weight}{Vector of weights with same length of \code{y}. Default: \code{NULL}.}
 
-\item{mc.cores}{The number of cores to mclapply. By default uses \code{parallel::detectCores()}.}
+\item{mc.cores}{The number of cores to mclapply. By default uses \code{1}.}
 }
 \value{
 A vector of convoluted values with length near to \code{compact.to*length(x)}.

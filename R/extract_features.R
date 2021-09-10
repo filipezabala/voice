@@ -11,7 +11,7 @@
 #' @param fbtype Auditory frequency scale to use: \code{'mel'}, \code{'bark'}, \code{'htkmel'}, \code{'fcmel'} (default: \code{'mel'}). Used by \code{tuneR::melfcc}.
 #' @param resolution \code{= <freq>} set FFT length to the smallest value which results in a frequency resolution of <freq> Hz or better (default: 40.0). Used by \code{wrassp::cssSpectrum}, \code{wrassp::dftSpectrum} and \code{wrassp::lpsSpectrum}.
 #' @param usecmp Logical. Apply equal-loudness weighting and cube-root compression (PLP instead of LPC) (default: \code{FALSE}). Used by \code{tuneR::melfcc}.
-#' @param mc.cores Number of cores to be used in parallel processing. (default: \code{parallel::detectCores()})
+#' @param mc.cores Number of cores to be used in parallel processing. (default: \code{1})
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
 #' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
 #' @param check.mono Logical. Check if the WAV file is mono. (default: \code{TRUE})
@@ -76,7 +76,7 @@ extract_features <- function(directory, filesRange = NULL,
                              numcep = 12, dcttype = c('t2', 't1', 't3', 't4'),
                              fbtype = c('mel', 'htkmel', 'fcmel', 'bark'),
                              resolution = 40, usecmp = FALSE,
-                             mc.cores = parallel::detectCores(),
+                             mc.cores = 1,
                              full.names = TRUE, recursive = FALSE,
                              check.mono = TRUE, stereo2mono = TRUE,
                              overwrite = FALSE, freq = 44100,

@@ -49,13 +49,13 @@ ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
 ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
 ```
 
-### Remove old files
+### Remove old files (SENSIBLE STEP)
 ```{r}
 cmd <- paste0('rm ', wavDir, '/*.*')
 system(cmd)
 ```
 
-#### To do #10
+#### To do #10 [TESTED: OK]
 Automatize and test `autoDir` argument.
 
 ### Get audios
@@ -73,7 +73,7 @@ ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
 ef
 ```
 #### To do #30
-Automatize setereo2mono.
+Automatize `stereo2mono`.
 
 #### To do #40
 Test different windowShift values.  
@@ -83,6 +83,8 @@ Test different windowShift values.
 ef_ma <- lapply(ef[,-c(1,11)], zoo::rollmean, 11)
 ef_ma <- bind_cols(ef_ma)
 ```
+#### To do #40 [WORK IN PROGRESS]
+Write the function `smooth_df(x,k)`.
 
 <!-- ### Pool -->
 <!-- ```{r} -->
@@ -270,8 +272,9 @@ Sys.time()-ini
 #### To do #130 [DEPRECATED]
 [DEPRECATED] Automate argument `compact.to` at `voice::conv_df`. 
 
-#### To do #140 [TESTED: NO GAINS USING GAIN]
-Test weighting F0 considering GAIN and other features at `voice::conv_df`
+#### To do #140 [TESTED: NOK WITH GAIN]
+No gain testing weighting F0 considering GAIN and other features at `voice::conv_df`.
+[TEST1] No gain testing weighting F0 considering GAIN.
 
 #### To do #150
 Test ZCR to infer BPM.
@@ -292,3 +295,8 @@ Find the 'best' set of variables in different contexts.
 
 #### To do #200
 Automate `min.time` argument at `voice::splitw`.
+
+## GLOSSARY
+- [WORK IN PROGRESS] As it says, support is welcome.
+- [TESTED: OK] During the tests all the problems were solved.
+- [TESTED: NOK] During the tests no gain were obtained.

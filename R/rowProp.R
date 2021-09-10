@@ -10,7 +10,7 @@
 #' x <- matrix(sample(c(NA,0:3), nr*nc, replace = TRUE), nrow = nr)
 #' colnames(x) <- paste0('V', 1:nc)
 #' rowProp(x)
-#' rowProp(x, na.rm = F))
+#' rowProp(x, na.rm = F)
 #' @export
 rowProp <- function(x, pts = NULL, na.rm = TRUE, ...){
   if(is.matrix(x)){
