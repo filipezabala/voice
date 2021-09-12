@@ -7,9 +7,8 @@
 conv_df(
   x,
   compact.to,
-  colnum = NULL,
   id = colnames(x)[1],
-  by.filter = id,
+  colnum = NULL,
   drop.x = TRUE,
   drop.zeros = FALSE,
   to.data.frame = TRUE,
@@ -23,11 +22,9 @@ conv_df(
 
 \item{compact.to}{Percentage of remaining points after compaction If equals to 1 and keep.zeros = T, the original vector is presented.}
 
+\item{id}{The identification column. Default: \code{colname} of the first column of \code{x}.}
+
 \item{colnum}{A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.}
-
-\item{id}{The identification column. Default: colname of the first column.}
-
-\item{by.filter}{A \code{char} indicating the column to filter by. If \code{NULL} uses the \code{id} content.}
 
 \item{drop.x}{Logical. Drop columns containing .x? Default: \code{TRUE}.}
 

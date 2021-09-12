@@ -4,6 +4,20 @@ To do
 . Write examples to enrich_rttm.R.
 . Write plot_notes.R.
 . Adjust rowProp.R to interval [0,1].
+. Vectorize smooth_df.R.
+. Write examples to smooth_df.R.
+
+
+Version 0.0.0.9042
+2021-09-10
+
+. Changed column name from 'id.split' to 'id_split @ enrich_rttm.R.
+. is.num <- unlist(lapply(x, class)) == 'numeric' changed to is.num <- sapply(x, class) %in% c('integer', 'numeric') @ conv_df.
+. Added smooth_df.R.
+. Drop by.filter parameter @ conv_df.R.
+. id and colnum shifted @ conv_df.R.
+. 
+
 
 
 Version 0.0.0.9041

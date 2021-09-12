@@ -80,10 +80,9 @@ Test different windowShift values.
 
 ### Smooth
 ```{r}
-ef_ma <- lapply(ef[,-c(1,11)], zoo::rollmean, 11)
-ef_ma <- bind_cols(ef_ma)
+ef_sm <- smooth_df(ef)
 ```
-#### To do #40 [WORK IN PROGRESS]
+#### To do #40 [DONE. VERSION 0.0.0.9042]
 Write the function `smooth_df(x,k)`.
 
 <!-- ### Pool -->

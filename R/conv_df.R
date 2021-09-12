@@ -2,9 +2,8 @@
 #'
 #' @param x A data frame.
 #' @param compact.to Percentage of remaining points after compaction If equals to 1 and keep.zeros = T, the original vector is presented.
+#' @param id The identification column. Default: \code{colname} of the first column of \code{x}.
 #' @param colnum A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.
-#' @param id The identification column. Default: colname of the first column.
-#' @param by.filter A \code{char} indicating the column to filter by. If \code{NULL} uses the \code{id} content.
 #' @param drop.x Logical. Drop columns containing .x? Default: \code{TRUE}.
 #' @param drop.zeros Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{FALSE}.
 #' @param to.data.frame Logical. Should the return be a data frame? If \code{FALSE} returns a list. Default: \code{TRUE}.
@@ -37,8 +36,8 @@
 #' }
 #' @seealso \code{conv}, \code{conv_mc}
 #' @export
-conv_df <- function(x, compact.to, colnum = NULL, id = colnames(x)[1],
-                    by.filter = id, drop.x = TRUE, drop.zeros = FALSE,
+conv_df <- function(x, compact.to, id = colnames(x)[1], colnum = NULL,
+                    drop.x = TRUE, drop.zeros = FALSE,
                     to.data.frame = TRUE, round.off = NULL, weight = NULL,
                     mc.cores = 1){
   ini <- Sys.time()
@@ -52,20 +51,20 @@ conv_df <- function(x, compact.to, colnum = NULL, id = colnames(x)[1],
   # non-numeric columns
   colnon <- setdiff(colnames(x), colnum)
 
-  # split numeric columns by.filter
-  snum <- split(x[,colnum], x[,by.filter])
+  # split numeric columns by id
+  snum <- split(x[,colnum], x[,id])
 
-  # split non-numeric columns by.filter
-  snon <- split(x[,colnon], x[,by.filter])
+  # split non-numeric columns id
+  snon <- split(x[,colnon], x[,id])
 
-  # original lengths by.filter
-  lv <- table(x[,by.filter])
+  # original lengths by id
+  lv <- table(x[,id])
 
   # vector and length of distinct id's
   nlv <- names(lv)
   nid <- length(nlv)
 
-  # compact lengths by.filter
+  # compact lengths by id
   n <- ceiling(compact.to*lv)
   cs <- c(0, cumsum(n))
 
