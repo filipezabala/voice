@@ -18,9 +18,9 @@ splitw(
 )
 }
 \arguments{
-\item{fromWav}{A directory/folder containing WAV files.}
+\item{fromWav}{Either WAV file or directory/folder containing WAV files.}
 
-\item{fromRttm}{A directory/folder containing RTTM files. Default: \code{NULL}.}
+\item{fromRttm}{Either RTTM file or directory/folder containing RTTM files. Default: \code{NULL}.}
 
 \item{toSplit}{A directory/folder to write generated files. Default: \code{NULL}.}
 
@@ -30,11 +30,11 @@ splitw(
 
 \item{output}{character string, the class of the object to return, either 'wave' or 'list'.}
 
-\item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files).}
+\item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files). Must be TRUE only if \code{fromWav} is a directory.}
 
 \item{full.names}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.}
 
-\item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
+\item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}. Inactive if \code{fromWav} is a file.}
 
 \item{silence.gap}{The silence gap (in seconds) between adjacent words in a keyword. Rows with \code{tdur <= silence.gap} are removed. (default: \code{0.5})}
 }

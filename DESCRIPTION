@@ -1,7 +1,7 @@
 Package: voice
 Type: Package
 Title: General Tools for Voice Analysis, Speaker Recognition and Mood Inference
-Version: 0.0.0.9043
+Version: 0.0.0.9044
 Date: 2021-09-12
 Authors@R: c(person("Zabala", "Filipe J.", email = "filipe.zabala@gmail.com", role = c("cre","aut")), 
             person("Salum Jr.", "Giovanni A.", email = "gsalumjr@gmail.com", role = "aut"))

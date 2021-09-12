@@ -1,15 +1,15 @@
 #'  Split Wave
 #'
 #' @description Split WAV files either in \code{fromWav} directory or using (same names) RTTM files/subdirectories as guidance.
-#' @param fromWav A directory/folder containing WAV files.
-#' @param fromRttm A directory/folder containing RTTM files. Default: \code{NULL}.
+#' @param fromWav Either WAV file or directory/folder containing WAV files.
+#' @param fromRttm Either RTTM file or directory/folder containing RTTM files. Default: \code{NULL}.
 #' @param toSplit A directory/folder to write generated files. Default: \code{NULL}.
 #' @param autoDir Logical. Must the directories tree be created? Default: \code{FALSE}. See 'Details'.
 #' @param subDir Logical. Must the splitted files be placed in subdirectories? Default: \code{FALSE}.
 #' @param output character string, the class of the object to return, either 'wave' or 'list'.
-#' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
+#' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files). Must be TRUE only if \code{fromWav} is a directory.
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
-#' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
+#' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}. Inactive if \code{fromWav} is a file.
 #' @param silence.gap The silence gap (in seconds) between adjacent words in a keyword. Rows with \code{tdur <= silence.gap} are removed. (default: \code{0.5})
 #' @details When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 #' @examples
@@ -30,16 +30,22 @@ splitw <- function(fromWav,
                    recursive = FALSE,
                    silence.gap = 0.5){
 
+  if(file_test('-f', fromWav)){
+    wavDir <- dirname(fromWav)
+    wavFiles <- fromWav
+  } else{
+    wavDir <- fromWav
+  }
+
   if(autoDir){
-    wavDir <- fromWav[1]
     ss <- unlist(strsplit(wavDir, '/'))
     parDir <- paste0(ss[-length(ss)], collapse ='/')
     mp3Dir <- paste0(parDir, '/mp3')
     rttmDir <- paste0(parDir, '/rttm')
     splitDir <- paste0(parDir, '/split')
     mxmlDir <- paste0(parDir, '/musicxml')
-    ifelse(!dir.exists(parDir), dir.create(parDir), 'Directory exists!')
-    ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
+    # ifelse(!dir.exists(parDir), dir.create(parDir), 'Directory exists!')
+    # ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
     ifelse(!dir.exists(mp3Dir), dir.create(mp3Dir), 'Directory exists!')
     ifelse(!dir.exists(rttmDir), dir.create(rttmDir), 'Directory exists!')
     ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
@@ -50,24 +56,38 @@ splitw <- function(fromWav,
     fromRttm <- rttmDir
   }
 
+  # rttm
+  if(file_test('-f', fromRttm)){
+    rttmDir <- dirname(fromRttm)
+    rttmFiles <- fromRttm
+  } else{
+    rttmDir <- fromRttm
+    rttmFiles <- list.files(fromRttm, pattern = '[[:punct:]][rR][tT][tT][mM]$',
+                            full.names = full.names, recursive = recursive)
+  }
+
+  # split
   if(is.null(toSplit)){
     toSplit <- splitDir
   }
 
-  # listing WAV files
-  wavFiles <- list.files(fromWav, pattern = '[[:punct:]][wW][aA][vV]$',
-                         full.names = full.names, recursive = recursive)
-
-  # listing RTTM files
-  rttmFiles <- list.files(fromRttm, pattern = '[[:punct:]][rR][tT][tT][mM]$',
-                          full.names = full.names, recursive = recursive)
+  # wav
+  if(file_test('-d', fromWav)){
+    wavFiles <- list.files(fromWav, pattern = '[[:punct:]][wW][aA][vV]$',
+                           full.names = full.names, recursive = recursive)
+  }
 
   # filtering by fileRange
   if(!is.null(filesRange)){
     fullRange <- 1:length(wavFiles)
     filesRange <- base::intersect(fullRange, filesRange)
     wavFiles <- wavFiles[filesRange]
-    rttmFiles <- rttmFiles[filesRange]
+    get1 <- function(x){x[1]}
+    splunctWav <- strsplit(basename(wavFiles), '[.]')
+    splunctRttm <- strsplit(basename(rttmFiles), '[.]')
+    nameWav <- sapply(splunctWav, get1)
+    nameRttm <- sapply(splunctRttm, get1)
+    rttmFiles <- rttmFiles[nameWav == nameRttm]
   }
 
   # number of WAV files to be extracted
@@ -192,5 +212,4 @@ splitw <- function(fromWav,
       }
     }
   }
-
 }

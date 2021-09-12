@@ -20,6 +20,8 @@
 # updating and creating manual
 devtools::document(setwd('~/Dropbox/D_Filipe_Zabala/pacotes/voice/'))
 
+devtools::install_github('filipezabala/voice')
+
 # # loading
 # devtools::load_all()
 

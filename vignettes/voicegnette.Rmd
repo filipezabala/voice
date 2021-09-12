@@ -55,8 +55,9 @@ cmd <- paste0('rm ', wavDir, '/*.*')
 system(cmd)
 ```
 
-#### To do #10 [SOLVED @ 2021-08-16 VERSION 0.0.0.9035]
-Automatize and test `autoDir` argument.
+#### To do #10 [WORK IN PROGRESS @ 2021-09-12 VERSION 0.0.0.9044]
+Automatize and test `autoDir` argument @ splitw.R.  
+Parameters fromWav, fromRttm admits either file or directory @ splitw.R.
 
 ### Get audios
 ```{r}

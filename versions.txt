@@ -11,6 +11,11 @@ To do
 
 
 
+Version 0.0.0.9044
+2021-09-12
+
+. Parameters fromWav, fromRttm admits either file or directory @ splitw.R.
+
 
 Version 0.0.0.9043
 2021-09-12
@@ -29,14 +34,12 @@ Version 0.0.0.9042
 . Added parameter as.tibble = TRUE @ enrich_rttm.R.
 
 
-
 Version 0.0.0.9041
 2021-09-10
 
 . Changed mc.cores = parallel::detectCores() to mc.cores = 1 @ conv_df.R, conv_mc.R, extract_features.R.
 . Parameter silence.gap set from 0.4 to 0.5 (universal standard) @ splitw.R, enrich_rttm.R.
 . Changed column name from 'id.min.time' to 'id.split' @ enrich_rttm.R.
-
 
 
 Version 0.0.0.17
@@ -57,5 +60,3 @@ print(file_list)
  . os.walk(pathfrom, level=1)?
  . os.walk(pathfrom, recursive = FALSE)?
  . https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below
-
-
