@@ -4,7 +4,7 @@
 \alias{enrich_rttm}
 \title{Enrich RTTM files}
 \usage{
-enrich_rttm(listRttm, silence.gap = 0.5)
+enrich_rttm(listRttm, silence.gap = 0.5, as.tibble = TRUE)
 }
 \arguments{
 \item{listRttm}{A list containing RTTM files.}
