@@ -9,7 +9,14 @@
 #' library(voice)
 #' download.file...
 #' @export
-enrich_rttm <- function(listRttm, silence.gap = 0.5){
+
+
+listRttm = voice::read_rttm('~/Dropbox/D_Filipe_Zabala/thesis/rttm2/')
+
+silence.gap = 0.5
+as.tibble = TRUE
+
+enrich_rttm <- function(listRttm, silence.gap = 0.5, as.tibble = TRUE){
   fltr <- function(x){
     f <- cumsum(x$tdur > silence.gap)
     f[x$tdur <= silence.gap] <- NA
@@ -22,5 +29,8 @@ enrich_rttm <- function(listRttm, silence.gap = 0.5){
   colnames <- c('id', 'id_split', 'type', 'file', 'chnl', 'tbeg', 'tdur',
                 'ortho', 'stype', 'name', 'conf', 'slat')
   rttm <- lapply(rttm, stats::setNames, colnames)
+  if(as.tibble){
+    rttm <- lapply(rttm, dplyr::as_tibble)
+  }
   return(rttm)
 }

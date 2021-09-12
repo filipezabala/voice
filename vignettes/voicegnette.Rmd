@@ -55,7 +55,7 @@ cmd <- paste0('rm ', wavDir, '/*.*')
 system(cmd)
 ```
 
-#### To do #10 [TESTED: OK]
+#### To do #10 [SOLVED @ 2021-08-16 VERSION 0.0.0.9035]
 Automatize and test `autoDir` argument.
 
 ### Get audios
@@ -80,10 +80,25 @@ Test different windowShift values.
 
 ### Smooth
 ```{r}
-ef_sm <- smooth_df(ef)
+for(i in seq(1,11,2)){
+  name <- paste0('ef_sm_', i)
+  assign(name, voice::smooth_df(ef, k = i))
+}
 ```
-#### To do #40 [DONE. VERSION 0.0.0.9042]
+#### To do #50 [DONE @ 2021-09-12 VERSION 0.0.0.9042]
 Write the function `smooth_df(x,k)`.
+
+### Plot F0 smoothing
+```{r}
+par(mfrow = c(2,3))
+plot(ef_sm_1$F0, main = 'k = 1 (Original data)')
+plot(ef_sm_3$F0, main = 'k = 3')
+plot(ef_sm_5$F0, main = 'k = 5')
+plot(ef_sm_7$F0, main = 'k = 7')
+plot(ef_sm_9$F0, main = 'k = 9')
+plot(ef_sm_11$F0, main = 'k = 11')
+```
+
 
 <!-- ### Pool -->
 <!-- ```{r} -->
@@ -108,13 +123,17 @@ ef_ma <- bind_cols(ef_ma, midi)
 
 glimpse(ef_ma)
 ```
-#### To do #50
-Write a function to, given a frequency in Hz, convert in any SPN.  
 
 #### To do #60
-Study chords (major/minor).  
+Write plot function to show both frequency and notes in spn ana midi formats. Other formats?
 
 #### To do #70
+Write a function to, given a frequency in Hz, convert in any SPN.  
+
+#### To do #80
+Study chords (major/minor).  
+
+#### To do #90
 Study sequences (scales).  
 
 ### Plot
@@ -122,7 +141,7 @@ Study sequences (scales).
 plot(ef_ma$F0)
 ```
 
-#### To do #80
+#### To do #100
 Build a chart that merges frequency points and assigned notes. ('~/Dropbox/R/lolliplot.R')
 
 
@@ -136,7 +155,7 @@ nd.midi # semitones
 table(nd.midi)
 ```
 
-#### To do #90
+#### To do #110
 Extract and test microtones. (Giuliano's idea.)
  
 
@@ -189,7 +208,7 @@ m <- m +
 m
 show(m, to = c('score', 'audio'))
 ```
-#### To do #100
+#### To do #120
 Automate adding midi/spn notes pitches at `gm::Line`.
 
 ### Export musicxml file
@@ -237,10 +256,10 @@ cmd <- 'cd ~/Downloads/voiceAudios/mp3;
 for i in *.[Mm][Pp]3; do ffmpeg -i "$i" "../wav/${i%.*}.wav"; done'
 system(cmd)
 ```
-#### To do #110
+#### To do #130
 Automatize and test mp32wav.
 
-#### To do #120
+#### To do #140
 Test the hypotheses
 H1: multiple mp32wav2mp32wav... conversions reduce the audio quality.
 H2: What is the impact in the decision using 
@@ -256,7 +275,7 @@ voice::poetry(wavDir, pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Lin
 # voice::poetry(wavDir, to = rttmDir, pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8') # Mac
 ```
 ![](rttm.png)
-#### To do #125
+#### To do #150
 Automate speaker recognition (who speaks when?).
 
 ### Split wave
@@ -268,34 +287,34 @@ Sys.time()-ini
 ```
 ![](split.png)
 
-#### To do #130 [DEPRECATED]
-[DEPRECATED] Automate argument `compact.to` at `voice::conv_df`. 
+#### To do #160 [SOLVED @ 2021-08-16 VERSION 0.0.0.35]
+Automate argument `compact.to` at `voice::conv_df`. 
 
-#### To do #140 [TESTED: NOK WITH GAIN]
+#### To do #170 [TESTED: NOK WITH GAIN]
 No gain testing weighting F0 considering GAIN and other features at `voice::conv_df`.
 [TEST1] No gain testing weighting F0 considering GAIN.
 
-#### To do #150
+#### To do #180
 Test ZCR to infer BPM.
 
-#### To do #160 [WORK IN PROGRESS]
+#### To do #190 [WORK IN PROGRESS]
 Automate `pitches` and `durations` at `gm::Line`.
 
-#### To do #170
+#### To do #200
 Implement major/minor chords identifier (consider `tabr` functions).
 
-#### To do #180
+#### To do #210
 Embed `gm::show` function at MacOS. Must solve:
   - Error in magick_image_write(image, format, quality, depth, density, comment,  : 
   rsession: NegativeOrZeroImageSize `' @ error/image.c/CloneImage/794
 
-#### To do #190
+#### To do #220
 Find the 'best' set of variables in different contexts.
 
-#### To do #200
+#### To do #230
 Automate `min.time` argument at `voice::splitw`.
 
 ## GLOSSARY
-- [WORK IN PROGRESS] As it says, support is welcome.
-- [TESTED: OK] During the tests all the problems were solved.
-- [TESTED: NOK] During the tests no gain were obtained.
+. [WORK IN PROGRESS] As it says, support is welcome.
+. [SOLVED @ '%Y-%m-%d' VERSION major.minor.subminor]
+. [TESTED: NOK] During the tests no gain were obtained.

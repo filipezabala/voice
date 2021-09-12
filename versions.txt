@@ -6,17 +6,27 @@ To do
 . Adjust rowProp.R to interval [0,1].
 . Vectorize smooth_df.R.
 . Write examples to smooth_df.R.
+. Build a 'rttm' object.
+. Conte até três! um, dois três! Gif guiando o tempo para induzir o falante e ter um ponto conhecido para parar a gravação.
+
+
+
+
+Version 0.0.0.9043
+2021-09-12
+
+. Added parameter as.tibble = TRUE @ enrich_rttm.R.
 
 
 Version 0.0.0.9042
-2021-09-10
+2021-09-12
 
 . Changed column name from 'id.split' to 'id_split @ enrich_rttm.R.
 . is.num <- unlist(lapply(x, class)) == 'numeric' changed to is.num <- sapply(x, class) %in% c('integer', 'numeric') @ conv_df.
 . Added smooth_df.R.
 . Drop by.filter parameter @ conv_df.R.
-. id and colnum shifted @ conv_df.R.
-. 
+. id and colnum shifted @ conv_df.R documentation.
+. Added parameter as.tibble = TRUE @ enrich_rttm.R.
 
 
 
