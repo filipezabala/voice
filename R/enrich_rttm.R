@@ -22,6 +22,11 @@ enrich_rttm <- function(listRttm, silence.gap = 0.5, as.tibble = TRUE){
   colnames <- c('id', 'id_split', 'type', 'file', 'chnl', 'tbeg', 'tdur',
                 'ortho', 'stype', 'name', 'conf', 'slat')
   rttm <- lapply(rttm, stats::setNames, colnames)
+
+  # speakProp <- function(x,y){
+  #   sp <- x/y
+  # }
+
   if(as.tibble){
     rttm <- lapply(rttm, dplyr::as_tibble)
   }

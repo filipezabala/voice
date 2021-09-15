@@ -63,9 +63,13 @@ Parameters fromWav, fromRttm admits either file or directory @ splitw.R.
 ```{r}
 url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav'
 download.file(url0, paste0(wavDir, '/bebezinho_2005.wav'), mode = 'wb')
+# music::playWave(paste0(wavDir, '/bebezinho_2005.wav'))
 ```
 #### To do #20
 At `url0 <- 'https://github.com/filipezabala/voiceAudios/raw/main/bebezinho_2.005.wav'`, find out why the downloaded file is called `wav_bebezinho_2.005.wav`.
+
+#### To do #30
+Insert a button to play bebezinho_2005.wav.
 
 ### Extract features
 ```{r}
@@ -73,10 +77,10 @@ ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
                               round.to = 6, windowShift = 5)
 ef
 ```
-#### To do #30
+#### To do #40
 Automatize `stereo2mono`.
 
-#### To do #40
+#### To do #50
 Test different windowShift values.  
 
 ### Smooth
@@ -86,7 +90,7 @@ for(i in seq(1,11,2)){
   assign(name, voice::smooth_df(ef, k = i))
 }
 ```
-#### To do #50 [DONE @ 2021-09-12 VERSION 0.0.0.9042]
+#### To do #60 [DONE @ 2021-09-12 VERSION 0.0.0.9042]
 Write the function `smooth_df(x,k)`.
 
 ### Plot F0 smoothing

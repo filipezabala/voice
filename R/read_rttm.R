@@ -29,6 +29,8 @@ read_rttm <- function(fromRttm){
     colnames <- c('type', 'file', 'chnl', 'tbeg', 'tdur',
                   'ortho', 'stype', 'name', 'conf', 'slat')
     rttm <- lapply(rttm, stats::setNames, colnames)
+    names(rttm) <- basename(rttmFiles)
+
     return(rttm)
   }
 }

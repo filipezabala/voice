@@ -22,7 +22,7 @@ smooth_df <- function(x, k = 11, id = colnames(x)[1], colnum = NULL,
   # n smoothed
   ns_fun <- function(x,k) {return(x-k+1)}
   ns_by_id <- sapply(n_by_id, ns_fun, k=k)
-  ns <- sum(ns_by_id)
+  ns <- sum(ns_by_id) # generalize
 
   # vector and length of distinct id's
   id_names <- names(n_by_id)
@@ -50,25 +50,25 @@ smooth_df <- function(x, k = 11, id = colnames(x)[1], colnum = NULL,
 
   # split non-numeric columns by id
   snon <- split(x[,colnon], x[,id])
-  snon_df <- as_tibble(do.call(rbind, snon))
+  snon_df <- tibble::as_tibble(do.call(rbind, snon))
 
   # smooth
-  xs_li <- parallel::mclapply(snum, zoo::rollmean, k,
+  snum_li <- parallel::mclapply(snum, zoo::rollmean, k,
                      mc.cores = mc.cores)
-  xs_df <- as_tibble(do.call(rbind, xs_li))
+  snum_df <- tibble::as_tibble(do.call(rbind, snum_li))
 
-  # binding non numeric columns
-  xs_final <- as_tibble(matrix(NA, nrow = ns, ncol = ncol(snon_df)+ncol(xs_df)))
-  colnames(xs_final) <- c(colnames(snon_df), colnames(xs_df))
+  # binding non numeric columns to *x* *s*moothed
+  xs <- as_tibble(matrix(NA, nrow = ns, ncol = ncol(snon_df)+ncol(snum_df)))
+  colnames(xs) <- c(colnames(snon_df), colnames(snum_df))
   for(i in 1:n_id){
     fltr0 <- beg0[i]:end0[i]
     fltr1 <- beg1[i]:end1[i]
-    xs_final[fltr1, ] <- dplyr::bind_cols(snon_df[fltr0,], xs_df[fltr1,])
+    xs[fltr1, ] <- dplyr::bind_cols(snon_df[fltr0,], snum_df[fltr1,])
   }
 
   # reordering columns
-  xs_final <- xs_final %>%
+  xs <- xs %>%
     dplyr::select(colnames(x))
 
-  return(xs_final)
+  return(xs)
 }

@@ -8,6 +8,26 @@ To do
 . Write examples to smooth_df.R.
 . Build a 'rttm' object.
 . Conte até três! um, dois três! Gif guiando o tempo para induzir o falante e ter um ponto conhecido para parar a gravação.
+. Solve max(richRttm[[1]]$id_split, na.rm = T) - 1 @ enrich_rttm.R.
+. Write speakProp function @ enrich_rttm.R.
+
+
+
+Version 0.0.0.9045
+2021-09-15
+
+. names(rttm) <- basename(rttmFiles), or file/base names inserted as names in list @ read_rttm.R.
+. Added columns ~black and ~Black to notes_freq.R.
+. Added method == 'black' and method == 'Black' @ notes.R.
+. Added distance <- diff(freq) @ notes.R.
+. method set to measure @ notes.R.
+. frequency set to freq @ notes_freq.R.
+. New col order @ notes_freq.R: freq, spn.lo, spn.hi, spn, midi, black, Black, wavelength
+. as_tibble set to tibble::as_tibble @ smooth_df.R. This solved the Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0. Using compatibility `.name_repair`.
+. xs_li set to snum_li @ smooth_df.R.
+. xs_df set to snum_df @ smooth_df.R.
+. xs_final set to xs @ smooth_df.R.
+. Ordered Imports: dplyr, e1071, ellipse, ggfortify, ggplot2, R.utils, RColorBrewer, reticulate, seewave, tibble, tidyr, tuneR, VIM, wrassp, zoo
 
 
 
