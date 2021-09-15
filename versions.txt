@@ -13,6 +13,15 @@ To do
 
 
 
+
+
+Version 0.0.0.9046
+2021-09-15
+
+. Added .name_repair = 'unique' to tibble::as_tibble @ smooth_df.R.
+This solved the Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0. Using compatibility `.name_repair`.
+
+
 Version 0.0.0.9045
 2021-09-15
 
@@ -23,7 +32,7 @@ Version 0.0.0.9045
 . method set to measure @ notes.R.
 . frequency set to freq @ notes_freq.R.
 . New col order @ notes_freq.R: freq, spn.lo, spn.hi, spn, midi, black, Black, wavelength
-. as_tibble set to tibble::as_tibble @ smooth_df.R. This solved the Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0. Using compatibility `.name_repair`.
+. as_tibble set to tibble::as_tibble @ smooth_df.R. 
 . xs_li set to snum_li @ smooth_df.R.
 . xs_df set to snum_df @ smooth_df.R.
 . xs_final set to xs @ smooth_df.R.

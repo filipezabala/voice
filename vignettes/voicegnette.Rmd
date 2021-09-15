@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 ## Installation
 https://github.com/filipezabala/voice
 
-## Example 1 - Play and get sheet music
+## Example 1 - Extract features and get sheet music
 
 ### Load packages
 ```{r, message=FALSE, warning=FALSE}

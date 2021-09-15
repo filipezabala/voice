@@ -50,15 +50,15 @@ smooth_df <- function(x, k = 11, id = colnames(x)[1], colnum = NULL,
 
   # split non-numeric columns by id
   snon <- split(x[,colnon], x[,id])
-  snon_df <- tibble::as_tibble(do.call(rbind, snon))
+  snon_df <- tibble::as_tibble(do.call(rbind, snon), .name_repair = 'unique')
 
   # smooth
   snum_li <- parallel::mclapply(snum, zoo::rollmean, k,
                      mc.cores = mc.cores)
-  snum_df <- tibble::as_tibble(do.call(rbind, snum_li))
+  snum_df <- tibble::as_tibble(do.call(rbind, snum_li), .name_repair = 'unique')
 
   # binding non numeric columns to *x* *s*moothed
-  xs <- as_tibble(matrix(NA, nrow = ns, ncol = ncol(snon_df)+ncol(snum_df)))
+  xs <- tibble::as_tibble(matrix(NA, nrow = ns, ncol = ncol(snon_df)+ncol(snum_df)))
   colnames(xs) <- c(colnames(snon_df), colnames(snum_df))
   for(i in 1:n_id){
     fltr0 <- beg0[i]:end0[i]
