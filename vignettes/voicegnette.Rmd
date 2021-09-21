@@ -17,13 +17,13 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+ini0 <- Sys.time()
 ```
 
-## Installation
+## 0. Installation
 https://github.com/filipezabala/voice
 
-## Example 1 - Extract features and get sheet music
-
+## 1. Extract features
 ### Load packages
 ```{r, message=FALSE, warning=FALSE}
 # packs
@@ -33,7 +33,7 @@ library(music)
 library(gm)
 ```
 ### Set directories
-The `/mp3` and `/split` directories will be used in Example 2.
+The `/mp3` and `/split` directories will be used in Example 7.
 ```{r}
 vaDir <- '~/Downloads/voiceAudios'
 wavDir <- paste0(vaDir, '/wav')
@@ -49,15 +49,17 @@ ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
 ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
 ```
 
-### Remove old files (SENSIBLE STEP)
+### Remove old files (¡sensible step!)
 ```{r}
 cmd <- paste0('rm ', wavDir, '/*.*')
 system(cmd)
 ```
 
-#### To do #10 [WORK IN PROGRESS @ 2021-09-12 VERSION 0.0.0.9044]
-Automatize and test `autoDir` argument @ splitw.R.  
-Parameters fromWav, fromRttm admits either file or directory @ splitw.R.
+#### >>> To do #10 [SOLVED @ VERSION 0.0.0.9044 2021-09-12]
+Automatize and test `autoDir` argument @ splitw.R.  <<<
+
+#### >>> To do #20 [SOLVED @ VERSION 0.0.0.9044 2021-09-12]
+Parameters fromWav, fromRttm admits either file or directory @ splitw.R. <<<
 
 ### Get audios
 ```{r}
@@ -65,11 +67,11 @@ url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav'
 download.file(url0, paste0(wavDir, '/bebezinho_2005.wav'), mode = 'wb')
 # music::playWave(paste0(wavDir, '/bebezinho_2005.wav'))
 ```
-#### To do #20
-At `url0 <- 'https://github.com/filipezabala/voiceAudios/raw/main/bebezinho_2.005.wav'`, find out why the downloaded file is called `wav_bebezinho_2.005.wav`.
+#### >>> To do #30
+At `url0 <- 'https://github.com/filipezabala/voiceAudios/raw/main/bebezinho_2.005.wav'`, find out why the downloaded file is called `wav_bebezinho_2.005.wav`. <<<
 
-#### To do #30
-Insert a button to play bebezinho_2005.wav.
+#### >>> To do #40
+Insert a button to play audio files. <<<
 
 ### Extract features
 ```{r}
@@ -77,31 +79,33 @@ ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
                               round.to = 6, windowShift = 5)
 ef
 ```
-#### To do #40
-Automatize `stereo2mono`.
+#### >>> To do #50
+Automatize and test `stereo2mono`. <<<
 
-#### To do #50
-Test different windowShift values.  
+#### >>> To do #60
+Test different windowShift values.  <<<
 
-### Smooth
-```{r}
-for(i in seq(1,11,2)){
-  name <- paste0('ef_sm_', i)
-  assign(name, voice::smooth_df(ef, k = i))
+
+## 2. Smooth
+#### >>> To do #70 [SOLVED @ VERSION 0.0.0.9042 2021-09-12]
+Write the function `smooth_df(x,k)`. <<<
+
+```{r, warning=FALSE}
+odd <- seq(1,11,2)
+ef_sm <- vector('list', length = length(odd))
+names(ef_sm) <- paste0('k=', odd)
+for(i in 1:length(ef_sm)){
+  ef_sm[[i]] <- voice::smooth_df(ef, k = i)
 }
+sapply(ef_sm, dim)
 ```
-#### To do #60 [DONE @ 2021-09-12 VERSION 0.0.0.9042]
-Write the function `smooth_df(x,k)`.
 
 ### Plot F0 smoothing
-```{r}
+```{r, fig.height=6, fig.width=8}
 par(mfrow = c(2,3))
-plot(ef_sm_1$F0, main = 'k = 1 (Original data)')
-plot(ef_sm_3$F0, main = 'k = 3')
-plot(ef_sm_5$F0, main = 'k = 5')
-plot(ef_sm_7$F0, main = 'k = 7')
-plot(ef_sm_9$F0, main = 'k = 9')
-plot(ef_sm_11$F0, main = 'k = 11')
+for(i in 1:length(ef_sm)){
+  plot(ef_sm[[i]]$F0, main = paste0('k = ', odd[i]))
+}
 ```
 
 
@@ -109,74 +113,69 @@ plot(ef_sm_11$F0, main = 'k = 11')
 <!-- ```{r} -->
 <!-- (ef01 <- voice::conv_df(ef, .01)) # 1% -->
 <!-- ``` -->
-<!-- #### To do -->
+<!-- #### >>> To do -->
 <!-- 1. Eliminate this step, assigning notes and durations after smooth with moving average.   -->
 <!-- 2. Apply voice::duration over the smoothed data.   -->
 
-
-### Assign notes
+## 3. Assign notes
+Assign notes to F0.
 ```{r}
-spn <- lapply(ef_ma, voice::notes)
-spn <- bind_rows(spn)
-colnames(spn) <- paste0('spn_', colnames(spn))
-ef_ma <- bind_cols(ef_ma, spn)
-
-midi <- lapply(ef_ma, voice::notes, method = 'midi')
-midi <- bind_rows(midi)
-colnames(midi) <- paste0('midi_', colnames(midi))
-ef_ma <- bind_cols(ef_ma, midi)
-
-glimpse(ef_ma)
+for(i in 1:length(ef_sm)){
+  ef_sm[[i]]$F0_spn <- voice::notes(ef_sm[[i]]$F0)
+  ef_sm[[i]]$F0_midi <- voice::notes(ef_sm[[i]]$F0, measure = 'midi')
+  ef_sm[[i]]$F0_octave <- voice::notes(ef_sm[[i]]$F0, measure = 'octave')
+  ef_sm[[i]]$F0_black <- voice::notes(ef_sm[[i]]$F0, measure = 'black')
+}
+lapply(ef_sm, head)
 ```
 
-#### To do #60
-Write plot function to show both frequency and notes in spn ana midi formats. Other formats?
+#### >>> To do #80 [WORK IN PROGRESS]
+Write plot_note function to show both frequency and notes in spn, midi and black formats. <<<
 
-#### To do #70
-Write a function to, given a frequency in Hz, convert in any SPN.  
+#### >>> To do #90
+Write a function to, given a frequency in Hz, convert in any SPN. <<<
 
-#### To do #80
-Study chords (major/minor).  
+#### >>> To do #100
+Implement and study major/minor chords identifier (consider `tabr` functions). <<<
 
-#### To do #90
-Study sequences (scales).  
+#### >>> To do #110
+Study sequences (scales and arpeggios). <<<
 
-### Plot
+
+## 4. Duration
 ```{r}
-plot(ef_ma$F0)
+dur_spn <- vector('list', length(ef_sm)); names(dur_spn) <- paste0('k=', odd)
+dur_midi <- vector('list', length(ef_sm)); names(dur_midi) <- paste0('k=', odd)
+dur_octave <- vector('list', length(ef_sm)); names(dur_octave) <- paste0('k=', odd)
+dur_black <- vector('list', length(ef_sm)); names(dur_black) <- paste0('k=', odd)
+for(i in 1:length(ef_sm)){
+  dur_spn[[i]] <- voice::duration(ef_sm[[i]]$F0_spn) 
+  dur_midi[[i]] <- voice::duration(ef_sm[[i]]$F0_midi) 
+  dur_octave[[i]] <- voice::duration(ef_sm[[i]]$F0_octave) 
+  dur_black[[i]] <- voice::duration(ef_sm[[i]]$F0_black) 
+}
+dur_spn[[1]]
 ```
 
-#### To do #100
-Build a chart that merges frequency points and assigned notes. ('~/Dropbox/R/lolliplot.R')
-
-
-### Distance (in semitones)
+## 5. Distance
+Distance in semitones
 ```{r}
-nd.spn <- music::noteDistance(as.character(ef_ma$spn_F0))
-nd.spn # semitones
-table(nd.spn)
-nd.midi <- diff(ef_ma$midi_F0)
-nd.midi # semitones
-table(nd.midi)
+nd <- vector('list', length(ef_sm))
+for(i in 1:length(ef_sm)){
+  nd[[i]] <- music::noteDistance(as.character(dur_spn[[i]]$note))
+  print(summary(nd[[i]]))
+}
+nd[[1]]
 ```
 
-#### To do #110
-Extract and test microtones. (Giuliano's idea.)
+#### >>> To do #120
+Extract and test microtones. (Giuliano's idea.) <<<
  
-
-### Get duration
-```{r}
-dur.spn <- voice::duration(ef_ma$spn_F0)
-dur.spn
-dur.midi <- voice::duration(ef_ma$midi_F0)
-dur.midi
-```
-
 <!-- ### Play -->
 <!-- ```{r} -->
 <!-- music::playNote(note = as.character(dur.spn$note), duration = dur.spn$dur_line) -->
 <!-- ``` -->
-<!-- #### To do -->
+<!-- #### >>> To do -->
 <!-- 1. Check version to play different durations.   -->
 
 <!-- To do:   -->
@@ -200,32 +199,69 @@ dur.midi
 <!-- # ALSA lib pcm_dmix.c:1089:(snd_pcm_dmix_open) unable to open slave -->
 <!-- ``` -->
 
-
-### Music sheet
+## 6. Music sheet
+### Compress to 1%
 ```{r}
-m <- gm::Music()
-m <- m +
+# compress
+ef_01 <- conv_df(ef, 0.01)
+# assign notes
+ef_01$F0_spn <- voice::notes(ef_01$F0, measure = 'spn')
+# duration
+nd_01 <- voice::duration(ef_01$F0_spn)
+# still manual!!
+li <- list('D#3','F3','C#4','A#3')
+length(li)
+# gm tool
+m01 <- gm::Music()
+m01 <- m01 +
   # add a 4/4 time signature
   gm::Meter(4, 4) +
-  # manually adding midi notes
-  gm::Line(pitches = list(51,50,49,48,47,NA,49,NA,58,59,60, 61,60,59,58,57,58,57,58,NA),
-           durations=list( 2,30, 8, 8, 1,18,43,36, 1, 4, 9,101, 5, 4, 7, 9, 4,51,48,1))
-m
-show(m, to = c('score', 'audio'))
+  # MANUALLY adding notes
+  gm::Line(pitches = li,
+           durations = list(1,1,1,1)) +
+  # tempo
+  Tempo(170)
+m01
+show(m01, to = c('score', 'audio'))
 ```
-#### To do #120
-Automate adding midi/spn notes pitches at `gm::Line`.
+
+### Smooth using window k=21
+```{r}
+# smooth
+ef_sm_21 <- voice::smooth_df(ef, k = 21)
+# assign notes
+ef_sm_21$F0_spn <- voice::notes(ef_sm_21$F0, measure = 'spn')
+# duration
+nd_21 <- voice::duration(ef_sm_21$F0_spn)
+# still manual!!
+li <- list('D3','C#3','C3',NA,'C#3',NA,'B3','C4','C#4','C4','B3','A#3','A3','A#3',NA)
+length(li)
+# gm tool
+m21 <- gm::Music()
+m21 <- m21 +
+  # add a 4/4 time signature
+  gm::Meter(4, 4) +
+  # MANUALLY adding notes
+  gm::Line(pitches = li,
+           durations = list(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)) +
+  # tempo
+  Tempo(999)
+m21
+show(m21, to = c('score', 'audio'))
+```
+
+#### >>> To do #130
+Automate `pitches` and `durations` at `gm::Line` to capture spn/midi from `duration` data frame. <<<
+
 
 ### Export musicxml file
 ```{r}
-gm::export(m, mxmlDir, 'bebezinho', 'musicxml')
+gm::export(m01, mxmlDir, 'bebezinho_01', 'musicxml')
+gm::export(m21, mxmlDir, 'bebezinho_21', 'musicxml')
 ```
 
 
-
-
-## Example 2 - Cut audios
-
+## 7. Cut audios
 ### Get audios
 ```{r}
 # font url
@@ -261,27 +297,28 @@ cmd <- 'cd ~/Downloads/voiceAudios/mp3;
 for i in *.[Mm][Pp]3; do ffmpeg -i "$i" "../wav/${i%.*}.wav"; done'
 system(cmd)
 ```
-#### To do #130
-Automatize and test mp32wav.
+#### >>> To do #140
+Automatize and test mp32wav. <<<
 
-#### To do #140
-Test the hypotheses
-H1: multiple mp32wav2mp32wav... conversions reduce the audio quality.
-H2: What is the impact in the decision using 
- i. original wav
- ii. original mp3 (that must be converted to wav)
- iii. H1, if H1 is consistent
+#### >>> To do #150
+Test the hypotheses  
+H1: multiple mp32wav2mp32wav... conversions reduce the audio quality.   
+H2: What is the impact in the decision using   
+ i. original wav   
+ ii. original mp3 (that must be converted to wav)    
+ iii. H1, if H1 is consistent <<<
 
 
 ### Poetry
 The best words in their best order. Takes around the audio time at 8CPU and the double of the audio time at 4CPU.
 ```{r}
 voice::poetry(wavDir, pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
-# voice::poetry(wavDir, to = rttmDir, pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8') # Mac
 ```
 ![](rttm.png)
-#### To do #150
-Automate speaker recognition (who speaks when?).
+
+
+#### >>> To do #160 [WORK IN PROGRESS]
+Automate speaker recognition (who speaks when?) @ poetry.R. <<<
 
 ### Split wave
 ```{r}
@@ -292,34 +329,34 @@ Sys.time()-ini
 ```
 ![](split.png)
 
-#### To do #160 [SOLVED @ 2021-08-16 VERSION 0.0.0.35]
-Automate argument `compact.to` at `voice::conv_df`. 
+#### >>> To do #170 [SOLVED @ VERSION 0.0.0.35 2021-08-16]
+Automate argument `compact.to` at `voice::conv_df`. <<<
 
-#### To do #170 [TESTED: NOK WITH GAIN]
-No gain testing weighting F0 considering GAIN and other features at `voice::conv_df`.
-[TEST1] No gain testing weighting F0 considering GAIN.
+#### >>> To do #180 [TESTED: NOT OK WITH GAIN]
+No gain testing weighting F0 considering GAIN and other features at `voice::conv_df`.  
+[TEST1] No gain testing weighting F0 considering GAIN. <<<
 
-#### To do #180
-Test ZCR to infer BPM.
+#### >>> To do #190
+Test ZCR to infer BPM. <<<
 
-#### To do #190 [WORK IN PROGRESS]
-Automate `pitches` and `durations` at `gm::Line`.
-
-#### To do #200
-Implement major/minor chords identifier (consider `tabr` functions).
-
-#### To do #210
+#### >>> To do #200
 Embed `gm::show` function at MacOS. Must solve:
   - Error in magick_image_write(image, format, quality, depth, density, comment,  : 
-  rsession: NegativeOrZeroImageSize `' @ error/image.c/CloneImage/794
+  rsession: NegativeOrZeroImageSize `' @ error/image.c/CloneImage/794 <<<
 
-#### To do #220
-Find the 'best' set of variables in different contexts.
+#### >>> To do #210
+Find the 'best' set of variables in different contexts. <<<
 
-#### To do #230
-Automate `min.time` argument at `voice::splitw`.
+#### >>> To do #220 [SOLVED @ VERSION 0.0.0.9041 2021-09-10]
+Standardize `silence.gap` argument at `voice::splitw` considering NIST (National Institute of Standards and Technology) documentation. <<<
 
-## GLOSSARY
-. [WORK IN PROGRESS] As it says, support is welcome.
-. [SOLVED @ '%Y-%m-%d' VERSION major.minor.subminor]
-. [TESTED: NOK] During the tests no gain were obtained.
+## Glossary
+. [WORK IN PROGRESS] As it says, support is welcome.     
+. [SOLVED @ VERSION major.minor.subminor '%Y-%m-%d'].  
+. [TESTED] During the tests no gain were obtained.   
+
+
+```{r}
+Sys.time()-ini0
+```
+

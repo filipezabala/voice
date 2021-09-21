@@ -8,6 +8,7 @@ extract_features(
   directory,
   filesRange = NULL,
   features = c("f0", "formants", "zcr", "mhs", "rms", "gain", "rfc", "ac", "mfcc"),
+  extraFeatures = FALSE,
   gender = "u",
   windowShift = 5,
   numFormants = 8,
@@ -32,6 +33,8 @@ extract_features(
 \item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files).}
 
 \item{features}{Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
+
+\item{extraFeatures}{Logical. Should extra features must be calculated? (default: \code{FALSE}) See details.}
 
 \item{gender}{\code{= <code>} set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.}
 
@@ -68,6 +71,9 @@ extract_features(
 \description{
 Extracts features from WAV audio files.
 }
+\details{
+When \code{extraFeatures = TRUE}, the \code{features} 'f0' and 'formants' must be selected. The 7+8+8+8+8 = 39 extra features are 'formant dispersion' (Df2:Df8) by Fitch (1997), 'formant position' (Pf1:Pf8) by Puts, Apicella & Cárdena (2011), 'formant removal' (Rf1:Rf8) by Zabala (2021/2022), 'formant nested removal' (RNf1:RNf8) by Zabala (2021/2022) and 'formant position removal' (RPf1:RPf8) by Zabala (2021/2022).
+}
 \examples{
 library(voice)
 library(RColorBrewer)
@@ -80,7 +86,7 @@ library(ggfortify)
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 pattern <- glob2rx('*.wav'), full.names = TRUE)
 
-# getting all the 1092 features
+# getting all the features (the total may vary)
 ef <- extract_features(dirname(path2wav), features = c('f0','formants',
 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
 mc.cores = 1)
@@ -117,4 +123,9 @@ stats::screeplot(pc, type = 'lines')
 
 autoplot(pc, data = na.omit(ef2), colour = 'file_name',
 loadings = TRUE, loadings.label = TRUE)
+}
+\references{
+Fitch, W. T. 1997 Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (doi:10.1121/1.421048)
+Puts, D.A., Apicella, C.L., Cardenas, R.A., 2012. Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (https://doi.org/10.1098/rspb.2011.0829)
+Zabala (2021/2022) ...
 }

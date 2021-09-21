@@ -3,6 +3,7 @@
 #' @param directory A directory containing audio file(s) in WAV format. If more than one directory is provided, only the first one is used.
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
 #' @param features Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
+#' @param extraFeatures Logical. Should extra features must be calculated? (default: \code{FALSE}) See details.
 #' @param gender \code{= <code>} set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
 #' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
 #' @param numFormants \code{= <num>} <num>ber of formants (default: 8). Used by \code{wrassp::forest}.
@@ -19,6 +20,10 @@
 #' @param overwrite Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})
 #' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
 #' @param round.to Number of decimal places to round to. (default: \code{NULL})
+#' @details When \code{extraFeatures = TRUE}, the \code{features} 'f0' and 'formants' must be selected. The 7+8+8+8+8 = 39 extra features are 'formant dispersion' (Df2:Df8) by Fitch (1997), 'formant position' (Pf1:Pf8) by Puts, Apicella & Cárdena (2011), 'formant removal' (Rf1:Rf8) by Zabala (2021/2022), 'formant nested removal' (RNf1:RNf8) by Zabala (2021/2022) and 'formant position removal' (RPf1:RPf8) by Zabala (2021/2022).
+#' @references Fitch, W. T. 1997 Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (doi:10.1121/1.421048)
+#' Puts, D.A., Apicella, C.L., Cardenas, R.A., 2012. Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (https://doi.org/10.1098/rspb.2011.0829)
+#' Zabala (2021/2022) ...
 #' @examples
 #' library(voice)
 #' library(RColorBrewer)
@@ -31,7 +36,7 @@
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #'
-#' # getting all the 1092 features
+#' # getting all the features (the total may vary)
 #' ef <- extract_features(dirname(path2wav), features = c('f0','formants',
 #' 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
 #' mc.cores = 1)
@@ -72,6 +77,7 @@
 extract_features <- function(directory, filesRange = NULL,
                              features = c('f0','formants','zcr','mhs','rms',
                                           'gain','rfc','ac','mfcc'),
+                             extraFeatures = FALSE,
                              gender = 'u', windowShift = 5, numFormants = 8,
                              numcep = 12, dcttype = c('t2', 't1', 't3', 't4'),
                              fbtype = c('mel', 'htkmel', 'fcmel', 'bark'),
@@ -152,13 +158,13 @@ extract_features <- function(directory, filesRange = NULL,
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::ksvF0,
                                                        gender = gender,
-                                                       toFile = F,
+                                                       toFile = FALSE,
                                                        windowShift = windowShift,
                                                        mc.cores = mc.cores)
     names(features.list.temp)[i.temp] <- 'f0'
     names(features.list)[i] <- 'f0'
     names(length.list)[i] <- 'f0'
-    features.list[[i]] <- dplyr::tibble()
+    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -170,17 +176,28 @@ extract_features <- function(directory, filesRange = NULL,
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::forest,
                                                        gender = gender,
-                                                       toFile = F,
+                                                       toFile = FALSE,
                                                        windowShift = windowShift,
                                                        numFormants = numFormants,
                                                        mc.cores = mc.cores)
     names(features.list.temp)[i.temp] <- 'formants'
     names(features.list)[i] <- 'formants'
     names(length.list)[i] <- 'formants'
-    features.list[[i]] <- dplyr::tibble()
+    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
+
+  # # 2.5 Extra features (only list names)
+  # if(extraFeatures & 'f0' %in% features & 'formants' %in% features){
+  #   nms <- c(paste0('Df', 2:8), paste0('Pf', 1:8), paste0('Rf', 1:8),
+  #            paste0('RNf', 1:8), paste0('RPf', 1:8))
+  #   names(features.list)[(i+1):(i+39)] <- nms
+  #   names(length.list)[(i+1):(i+39)] <- nms
+  #
+  #   i.temp <- i.temp+39
+  #   i <- i+39
+  # }
 
   # 3. Analysis of the averages of the short-term positive and negative (Z)ero-(C)rossing (R)ates
   if('zcr' %in% features){
@@ -188,13 +205,13 @@ extract_features <- function(directory, filesRange = NULL,
     i <- i+1
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::zcrana,
-                                                       toFile = F,
+                                                       toFile = FALSE,
                                                        windowShift = windowShift,
                                                        mc.cores = mc.cores)
     names(features.list.temp)[i.temp] <- 'zcr'
     names(features.list)[i] <- 'zcr'
     names(length.list)[i] <- 'zcr'
-    features.list[[i]] <- dplyr::tibble()
+    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -205,14 +222,14 @@ extract_features <- function(directory, filesRange = NULL,
     i <- i+1
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::mhsF0,
-                                                       toFile = F,
+                                                       toFile = FALSE,
                                                        gender = gender,
                                                        windowShift = windowShift,
                                                        mc.cores = mc.cores)
     names(features.list.temp)[i.temp] <- 'mhs'
     names(features.list)[i] <- 'mhs'
     names(length.list)[i] <- 'mhs'
-    features.list[[i]] <- dplyr::tibble()
+    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -222,7 +239,7 @@ extract_features <- function(directory, filesRange = NULL,
     i.temp <- i.temp+1
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::rfcana,
-                                                       toFile = F,
+                                                       toFile = FALSE,
                                                        windowShift = windowShift,
                                                        mc.cores = mc.cores)
     names(features.list.temp)[i.temp] <- 'lpa'
@@ -231,7 +248,7 @@ extract_features <- function(directory, filesRange = NULL,
       i <- i+1
       names(features.list)[i] <- 'rms'
       names(length.list)[i] <- 'rms'
-      features.list[[i]] <- dplyr::tibble()
+      # features.list[[i]] <- dplyr::tibble()
       length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                         wrassp::numRecs.AsspDataObj))
     }
@@ -240,7 +257,7 @@ extract_features <- function(directory, filesRange = NULL,
       i <- i+1
       names(features.list)[i] <- 'gain'
       names(length.list)[i] <- 'gain'
-      features.list[[i]] <- dplyr::tibble()
+      # features.list[[i]] <- dplyr::tibble()
       length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                         wrassp::numRecs.AsspDataObj))
     }
@@ -249,7 +266,7 @@ extract_features <- function(directory, filesRange = NULL,
       i <- i+1
       names(features.list)[i] <- 'rfc'
       names(length.list)[i] <- 'rfc'
-      features.list[[i]] <- dplyr::tibble()
+      # features.list[[i]] <- dplyr::tibble()
       length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                         wrassp::numRecs.AsspDataObj))
     }
@@ -261,13 +278,13 @@ extract_features <- function(directory, filesRange = NULL,
     i <- i+1
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::acfana,
-                                                       toFile = F,
+                                                       toFile = FALSE,
                                                        windowShift = windowShift,
                                                        mc.cores = mc.cores)
     names(features.list.temp)[i.temp] <- 'ac'
     names(features.list)[i] <- 'ac'
     names(length.list)[i] <- 'ac'
-    features.list[[i]] <- dplyr::tibble()
+    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -278,13 +295,13 @@ extract_features <- function(directory, filesRange = NULL,
     i <- i+1
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::cepstrum,
-                                                       toFile = F,
+                                                       toFile = FALSE,
                                                        windowShift = windowShift,
                                                        mc.cores = mc.cores)
     names(features.list.temp)[i.temp] <- 'cep'
     names(features.list)[i] <- 'cep'
     names(length.list)[i] <- 'cep'
-    features.list[[i]] <- dplyr::tibble()
+    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -295,14 +312,14 @@ extract_features <- function(directory, filesRange = NULL,
     i <- i+1
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::dftSpectrum,
-                                                       toFile = F,
+                                                       toFile = FALSE,
                                                        resolution = resolution,
                                                        windowShift = windowShift,
                                                        mc.cores = mc.cores)
     names(features.list.temp)[i.temp] <- 'dft'
     names(features.list)[i] <- 'dft'
     names(length.list)[i] <- 'dft'
-    features.list[[i]] <- dplyr::tibble()
+    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -313,14 +330,14 @@ extract_features <- function(directory, filesRange = NULL,
     i <- i+1
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::cssSpectrum,
-                                                       toFile = F,
+                                                       toFile = FALSE,
                                                        resolution = resolution,
                                                        windowShift = windowShift,
                                                        mc.cores = mc.cores)
     names(features.list.temp)[i.temp] <- 'css'
     names(features.list)[i] <- 'css'
     names(length.list)[i] <- 'css'
-    features.list[[i]] <- dplyr::tibble()
+    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -331,14 +348,14 @@ extract_features <- function(directory, filesRange = NULL,
     i <- i+1
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::lpsSpectrum,
-                                                       toFile = F,
+                                                       toFile = FALSE,
                                                        resolution = resolution,
                                                        windowShift = windowShift,
                                                        mc.cores = mc.cores)
     names(features.list.temp)[i.temp] <- 'lps'
     names(features.list)[i] <- 'lps'
     names(length.list)[i] <- 'lps'
-    features.list[[i]] <- dplyr::tibble()
+    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -359,10 +376,13 @@ extract_features <- function(directory, filesRange = NULL,
   if('mfcc' %in% features){
     i <- i+1
     names(features.list)[i] <- 'mfcc'
-    features.list[[i]] <- dplyr::tibble()
+    # features.list[[i]] <- dplyr::tibble()
     names(length.list)[i] <- 'mfcc'
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]], nrow))
   }
+
+  # creating tibbles at features.list
+  features.list <- lapply(features.list, dplyr::tibble)
 
   # minimum length
   n_min <- apply(dplyr::bind_rows(length.list), 1, min)
@@ -511,7 +531,7 @@ extract_features <- function(directory, filesRange = NULL,
     colnames(features.list$mfcc) <- paste0('MFCC', 1:ncol(features.list$mfcc))
   }
 
-  # final data frame
+  # as data frame
   dat <- dplyr::bind_cols(id, features.list)
 
   # rounding
@@ -521,6 +541,61 @@ extract_features <- function(directory, filesRange = NULL,
 
   # replacing 0 by NA
   dat[-1][sapply(dat[-1], R.utils::isZero)] <- NA
+
+  if(extraFeatures & 'f0' %in% features & 'formants' %in% features){
+    # Df - Formant Dispersion by Fitch (1997)
+    dat$Df2 <- dat$F2-dat$F1
+    dat$Df3 <- dat$F3-dat$F1
+    dat$Df4 <- dat$F4-dat$F1
+    dat$Df5 <- dat$F5-dat$F1
+    dat$Df6 <- dat$F6-dat$F1
+    dat$Df7 <- dat$F7-dat$F1
+    dat$Df8 <- dat$F8-dat$F1
+
+    # Scaling
+    cn <- paste0('F', 0:8)
+    F_sc <- sapply(dat[,cn], scale)
+
+    # Pf - Formant Position by Puts, Apicella & Cárdenas (2011)
+    dat$Pf1 <- F_sc[,'F1']
+    dat$Pf2 <- rowMeans(F_sc[,c('F1','F2')], na.rm = TRUE)
+    dat$Pf3 <- rowMeans(F_sc[,c('F1','F2','F3')], na.rm = TRUE)
+    dat$Pf4 <- rowMeans(F_sc[,c('F1','F2','F3','F4')], na.rm = TRUE)
+    dat$Pf5 <- rowMeans(F_sc[,c('F1','F2','F3','F4','F5')], na.rm = TRUE)
+    dat$Pf6 <- rowMeans(F_sc[,c('F1','F2','F3','F4','F5','F6')], na.rm = TRUE)
+    dat$Pf7 <- rowMeans(F_sc[,c('F1','F2','F3','F4','F5','F6','F7')], na.rm = TRUE)
+    dat$Pf8 <- rowMeans(F_sc[,c('F1','F2','F3','F4','F5','F6','F7','F8')], na.rm = TRUE)
+
+    # Rf - Formant Removal by Zabala (2021/2022)
+    dat$Rf1 <- F_sc[,'F0']-F_sc[,'F1']
+    dat$Rf2 <- F_sc[,'F0']-F_sc[,'F2']
+    dat$Rf3 <- F_sc[,'F0']-F_sc[,'F3']
+    dat$Rf4 <- F_sc[,'F0']-F_sc[,'F4']
+    dat$Rf5 <- F_sc[,'F0']-F_sc[,'F5']
+    dat$Rf6 <- F_sc[,'F0']-F_sc[,'F6']
+    dat$Rf7 <- F_sc[,'F0']-F_sc[,'F7']
+    dat$Rf8 <- F_sc[,'F0']-F_sc[,'F8']
+
+    # RNf - Formant Nested Removal by Zabala (2021/2022)
+    dat$RNf1 <- F_sc[,'F0']-F_sc[,'F1']
+    dat$RNf2 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2')], na.rm = TRUE)
+    dat$RNf3 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3')], na.rm = TRUE)
+    dat$RNf4 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4')], na.rm = TRUE)
+    dat$RNf5 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5')], na.rm = TRUE)
+    dat$RNf6 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6')], na.rm = TRUE)
+    dat$RNf7 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6','F7')], na.rm = TRUE)
+    dat$RNf8 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6','F7','F8')], na.rm = TRUE)
+
+    # RPf - Formant Position Removal by Zabala (2021/2022)
+    dat$RPf1 <- F_sc[,'F0']-dat$Pf1
+    dat$RPf2 <- F_sc[,'F0']-dat$Pf2
+    dat$RPf3 <- F_sc[,'F0']-dat$Pf3
+    dat$RPf4 <- F_sc[,'F0']-dat$Pf4
+    dat$RPf5 <- F_sc[,'F0']-dat$Pf5
+    dat$RPf6 <- F_sc[,'F0']-dat$Pf6
+    dat$RPf7 <- F_sc[,'F0']-dat$Pf7
+    dat$RPf8 <- F_sc[,'F0']-dat$Pf8
+  }
 
   # total time
   t0 <- proc.time()-pt0

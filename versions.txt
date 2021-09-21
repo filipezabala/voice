@@ -1,17 +1,40 @@
+Legend
+. done
+* to do
+
+
 To do
-1. Write smooth_df.R.
-. Write examples to read_rttm.R.
-. Write examples to enrich_rttm.R.
-. Write plot_notes.R.
-. Adjust rowProp.R to interval [0,1].
-. Vectorize smooth_df.R.
-. Write examples to smooth_df.R.
-. Build a 'rttm' object.
-. Conte até três! um, dois três! Gif guiando o tempo para induzir o falante e ter um ponto conhecido para parar a gravação.
-. Solve max(richRttm[[1]]$id_split, na.rm = T) - 1 @ enrich_rttm.R.
-. Write speakProp function @ enrich_rttm.R.
+1. Write smooth_df.R. [SOLVED @ Version 0.0.0.9042 2021-09-12]
+* Write examples to read_rttm.R.
+* Write examples to enrich_rttm.R.
+* Write examples to audio_id.R.
+* Write plot_notes.R.
+* Adjust rowProp.R to interval [0,1].
+* Vectorize smooth_df.R.
+* Write examples to smooth_df.R.
+* Build a 'rttm' object.
+* Conte até três! um, dois três! Gif guiando o tempo para induzir o falante e ter um ponto conhecido para parar a gravação.
+* Solve max(richRttm[[1]]$id_split, na.rm = T) - 1 @ enrich_rttm.R.
+* Write speakProp function @ enrich_rttm.R.
+* Standardize columns and rows @ extract_features.R and extract_features_py.R. 
+* Indicate NO WAV FILES FOUND when: Error in names(length.list) <- `*vtmp*` : 'names' attribute [2] must be the same length as the vector [1]
+* Run 391-402 rows only inside if('mfcc' %in% features) the '11. Mel-Frequency Cepstral Coefficients (MFCC)' @ extract_features.R.
+* Add Pf, Df and Rf @ extract_features_py.R.
+* tag.R calculates mean, median, sd, QA, variation coefficient of the considered features.
 
 
+Version 0.0.0.9047
+2021-09-21
+
+. audio_id.R function created.
+. Exported voice_ex1.rda and data.R.
+. toFile = F set to toFile = FALSE @ extract_features.R.
+. features.list[[i]] <- dplyr::tibble() set to lapply(features.list, dplyr::tibble) @ extract_features.R.
+. Added 'formant dispersion' (Df) by Fitch (1997) (doi:10.1121/1.421048)
+. Added 'formant position' (Pf) by Puts, Apicella & Cárdenas (2011) (https://doi.org/10.1098/rspb.2011.0829)
+. Added 'formant removal' (Rf) by Zabala (2021/2022) @ extract_features.R.
+. Added 'formant nested removal' (RNf) by Zabala (2021/2022) @ extract_features.R.
+. Added 'formant position removal' (RPf) by Zabala (2021/2022) @ extract_features.R.
 
 
 
@@ -89,3 +112,4 @@ print(file_list)
  . os.walk(pathfrom, level=1)?
  . os.walk(pathfrom, recursive = FALSE)?
  . https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below
+
