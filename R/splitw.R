@@ -30,6 +30,9 @@ splitw <- function(fromWav,
                    recursive = FALSE,
                    silence.gap = 0.5){
 
+  # time processing
+  pt0 <- proc.time()
+
   if(file_test('-f', fromWav)){
     wavDir <- dirname(fromWav)
     wavFiles <- fromWav
@@ -212,4 +215,8 @@ splitw <- function(fromWav,
       }
     }
   }
+
+  # total time
+  t0 <- proc.time()-pt0
+  cat('TOTAL TIME', t0[3], 'SECONDS\n\n')
 }

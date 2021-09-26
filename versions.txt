@@ -4,12 +4,10 @@ Legend
 
 
 To do
-1. Write smooth_df.R. [SOLVED @ Version 0.0.0.9042 2021-09-12]
 * Write examples to read_rttm.R.
 * Write examples to enrich_rttm.R.
 * Write examples to audio_id.R.
 * Write plot_notes.R.
-* Adjust rowProp.R to interval [0,1].
 * Vectorize smooth_df.R.
 * Write examples to smooth_df.R.
 * Build a 'rttm' object.
@@ -19,8 +17,28 @@ To do
 * Standardize columns and rows @ extract_features.R and extract_features_py.R. 
 * Indicate NO WAV FILES FOUND when: Error in names(length.list) <- `*vtmp*` : 'names' attribute [2] must be the same length as the vector [1]
 * Run 391-402 rows only inside if('mfcc' %in% features) the '11. Mel-Frequency Cepstral Coefficients (MFCC)' @ extract_features.R.
-* Add Pf, Df and Rf @ extract_features_py.R.
+* Add Pf, Df, Rf, RPf, RDf @ extract_features_py.R.
 * tag.R calculates mean, median, sd, QA, variation coefficient of the considered features.
+
+
+
+
+Version 0.2.0
+2021-MM-DD
+
+* Add Variability Index by Oppliger Pinto (2017)
+* Adjust rowProp.R to interval [0,1].
+
+
+Version 0.1.0
+2021-09-26
+
+. extract_features creates a general id and an id_file, counting by file.
+. 'formant nested removal' (RNf) set to 'formant dispersion removal' (RDf) by Zabala (2021/2022) @ extract_features.R and @ data.R.
+. Removed person("Salum Jr.", "Giovanni A.", email = "gsalumjr@gmail.com", role = "aut").
+. splitw must show the elapsed time
+. drop_fn = TRUE set to drop_fn = FALSE
+
 
 
 Version 0.0.0.9047
@@ -113,3 +131,9 @@ print(file_list)
  . os.walk(pathfrom, recursive = FALSE)?
  . https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below
 
+
+Contacts
+. Trecenti
+. Musmath
+. gm
+. JF

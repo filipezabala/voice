@@ -21,8 +21,8 @@
 #' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
 #' @param round.to Number of decimal places to round to. (default: \code{NULL})
 #' @details When \code{extraFeatures = TRUE}, the \code{features} 'f0' and 'formants' must be selected. The 7+8+8+8+8 = 39 extra features are 'formant dispersion' (Df2:Df8) by Fitch (1997), 'formant position' (Pf1:Pf8) by Puts, Apicella & Cárdena (2011), 'formant removal' (Rf1:Rf8) by Zabala (2021/2022), 'formant nested removal' (RNf1:RNf8) by Zabala (2021/2022) and 'formant position removal' (RPf1:RPf8) by Zabala (2021/2022).
-#' @references Fitch, W. T. 1997 Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (doi:10.1121/1.421048)
-#' Puts, D.A., Apicella, C.L., Cardenas, R.A., 2012. Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (https://doi.org/10.1098/rspb.2011.0829)
+#' @references Fitch, W.T. 1997 Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (doi:10.1121/1.421048) \n
+#' Puts, D.A., Apicella, C.L., Cardenas, R.A., 2012. Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (https://doi.org/10.1098/rspb.2011.0829) \n
 #' Zabala (2021/2022) ...
 #' @examples
 #' library(voice)
@@ -576,15 +576,15 @@ extract_features <- function(directory, filesRange = NULL,
     dat$Rf7 <- F_sc[,'F0']-F_sc[,'F7']
     dat$Rf8 <- F_sc[,'F0']-F_sc[,'F8']
 
-    # RNf - Formant Nested Removal by Zabala (2021/2022)
-    dat$RNf1 <- F_sc[,'F0']-F_sc[,'F1']
-    dat$RNf2 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2')], na.rm = TRUE)
-    dat$RNf3 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3')], na.rm = TRUE)
-    dat$RNf4 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4')], na.rm = TRUE)
-    dat$RNf5 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5')], na.rm = TRUE)
-    dat$RNf6 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6')], na.rm = TRUE)
-    dat$RNf7 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6','F7')], na.rm = TRUE)
-    dat$RNf8 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6','F7','F8')], na.rm = TRUE)
+    # RDf - Formant Dispersion Removal by Zabala (2021/2022)
+    dat$RDf1 <- F_sc[,'F0']-F_sc[,'F1']
+    dat$RDf2 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2')], na.rm = TRUE)
+    dat$RDf3 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3')], na.rm = TRUE)
+    dat$RDf4 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4')], na.rm = TRUE)
+    dat$RDf5 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5')], na.rm = TRUE)
+    dat$RDf6 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6')], na.rm = TRUE)
+    dat$RDf7 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6','F7')], na.rm = TRUE)
+    dat$RDf8 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6','F7','F8')], na.rm = TRUE)
 
     # RPf - Formant Position Removal by Zabala (2021/2022)
     dat$RPf1 <- F_sc[,'F0']-dat$Pf1
@@ -596,6 +596,10 @@ extract_features <- function(directory, filesRange = NULL,
     dat$RPf7 <- F_sc[,'F0']-dat$Pf7
     dat$RPf8 <- F_sc[,'F0']-dat$Pf8
   }
+
+  # creating ids
+  idf <- lapply(n_min, seq, 1)
+  dat <- bind_cols(id = 1:nrow(dat), id_file = unlist(lapply(idf, rev)), dat)
 
   # total time
   t0 <- proc.time()-pt0

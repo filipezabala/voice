@@ -4,7 +4,7 @@
 \alias{audio_id}
 \title{Create an audio id by row at data frame.}
 \usage{
-audio_id(x, i = 5, drop_fn = TRUE)
+audio_id(x, i = 5, drop_fn = FALSE)
 }
 \arguments{
 \item{x}{A data frame.}

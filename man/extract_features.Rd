@@ -125,7 +125,7 @@ autoplot(pc, data = na.omit(ef2), colour = 'file_name',
 loadings = TRUE, loadings.label = TRUE)
 }
 \references{
-Fitch, W. T. 1997 Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (doi:10.1121/1.421048)
-Puts, D.A., Apicella, C.L., Cardenas, R.A., 2012. Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (https://doi.org/10.1098/rspb.2011.0829)
+Fitch, W.T. 1997 Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (doi:10.1121/1.421048) \n
+Puts, D.A., Apicella, C.L., Cardenas, R.A., 2012. Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (https://doi.org/10.1098/rspb.2011.0829) \n
 Zabala (2021/2022) ...
 }

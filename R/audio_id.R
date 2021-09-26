@@ -2,7 +2,7 @@
 #'
 #' @param x A data frame.
 #' @export
-audio_id <- function(x, i=5, drop_fn = TRUE){
+audio_id <- function(x, i=5, drop_fn = FALSE){
   ini <- Sys.time()
   ss <- strsplit(x$file_name, '[_.]')
   geti <- function(x){ as.integer(x[i]) }
