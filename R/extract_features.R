@@ -599,7 +599,8 @@ extract_features <- function(directory, filesRange = NULL,
 
   # creating ids
   idf <- lapply(n_min, seq, 1)
-  dat <- bind_cols(id = 1:nrow(dat), id_file = unlist(lapply(idf, rev)), dat)
+  dat <- bind_cols(id_seq = 1:nrow(dat),
+                   id_seq_file = unlist(lapply(idf, rev)), dat)
 
   # total time
   t0 <- proc.time()-pt0

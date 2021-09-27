@@ -22,13 +22,18 @@ To do
 
 
 
-
-Version 0.2.0
+Version 0.1.1
 2021-MM-DD
 
 * Add Variability Index by Oppliger Pinto (2017)
 * Adjust rowProp.R to interval [0,1].
 
+
+Version 0.1.1
+2021-09-27
+
+. audio_id.R set to id_file.R. audio_id(x, i = 5, drop_fn = FALSE) set to id_file(x, col = NULL, pattern = '[_.]', i = 5, drop_col = FALSE)
+. id set to id_seq, id_file set to id_seq_file @ extract_features.R.
 
 Version 0.1.0
 2021-09-26
