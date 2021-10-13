@@ -23,8 +23,7 @@ tag <- function(x, mediaDir, subj.id = NULL, media.id = NULL,
   x <- dplyr::as_tibble(x)
 
   # voice::feat_summary
-  # fs <- voice::feat_summary(mediaDir, mc.cores = mc.cores)
-  fs <- feat_summary2(mediaDir, mc.cores = mc.cores)
+  fs <- voice::feat_summary(mediaDir, mc.cores = mc.cores)
   x <- dplyr::left_join(x, fs, by = 'file_name')
 
   return(x)
