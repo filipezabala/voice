@@ -63,7 +63,7 @@ tag <- function(x, mediaDir, subj.id = NULL, media.id = NULL,
   x <- dplyr::left_join(x, fs, by = 'file_name')
 
   if(subj.id.simplify){
-    x[,subj.id] <- cumsum(!duplicated(x[,subj.id]))
+    x[,subj.id] <- as.character(cumsum(!duplicated(x[,subj.id])))
   }
 
   return(x)
