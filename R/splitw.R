@@ -33,6 +33,7 @@ splitw <- function(fromWav,
   # time processing
   pt0 <- proc.time()
 
+  # checking if is either a file or a directory
   if(file_test('-f', fromWav)){
     wavDir <- dirname(fromWav)
     wavFiles <- fromWav

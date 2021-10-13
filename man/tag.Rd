@@ -2,13 +2,19 @@
 % Please edit documentation in R/tag.R
 \name{tag}
 \alias{tag}
-\title{Tag voice at data frame.}
+\title{Tag a data frame with media information.}
 \usage{
-tag(x)
+tag(x, mediaDir, subj.id = NULL, media.id = NULL, i = 4)
 }
 \arguments{
-\item{x}{A data frame.}
+\item{x}{A data frame to be tagged with media information.}
+
+\item{mediaDir}{Directory containing media files. Currently accepts audio files.}
+
+\item{i}{ID position in \code{col}. Default: \code{4}.}
+
+\item{id}{Column containing the ID to be searched in mediaDir file names. Default: \coe{NULL}, i.e., uses the first column.}
 }
 \description{
-Tag voice at data frame.
+Tag a data frame with media information.
 }

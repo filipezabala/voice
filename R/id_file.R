@@ -21,6 +21,7 @@ id_file <- function(x, col = NULL, pattern = '[_.]', i = 5, drop_col = FALSE){
   ss <- strsplit(x[,col], '[_.]')
   geti <- function(x){ as.integer(x[i]) }
   aid <- sapply(ss, geti)
+  sprintf('%1.0f', aid)
 
   x <- bind_cols(id_file = aid, x) %>%
     arrange(id_file) %>%

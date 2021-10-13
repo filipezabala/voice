@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract_features.R
 \name{extract_features}
 \alias{extract_features}
-\title{Extracts features from WAV audio files.}
+\title{Extracts features from WAV audio files}
 \usage{
 extract_features(
   directory,
@@ -97,13 +97,13 @@ ef
 ef2 <- extract_features(dirname(path2wav), mc.cores = 1)
 dim(ef2)
 ef2
-table(ef2$file_name)
+table(ef2$file_name_ext)
 
 # limiting filesRange
 ef3 <- extract_features(dirname(path2wav), filesRange = 3:6, mc.cores = 1)
 dim(ef3)
 ef3
-table(ef3$file_name)
+table(ef3$file_name_ext)
 
 # calculating correlation of ef2
 data <- cor(ef2[-1])
@@ -121,7 +121,7 @@ plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
 (pc <- prcomp(na.omit(ef2[-1]), scale = TRUE))
 stats::screeplot(pc, type = 'lines')
 
-autoplot(pc, data = na.omit(ef2), colour = 'file_name',
+autoplot(pc, data = na.omit(ef2), colour = 'file_name_ext',
 loadings = TRUE, loadings.label = TRUE)
 }
 \references{

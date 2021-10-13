@@ -22,11 +22,24 @@ To do
 
 
 
-Version 0.1.1
-2021-MM-DD
+Version 0.3.0
+2021-10-DD
 
-* Add Variability Index by Oppliger Pinto (2017)
 * Adjust rowProp.R to interval [0,1].
+* At rowProp.R indicate inverted questions.
+* Add Variability Index by Oppliger Pinto (2017)
+* Stop criteria @ poetry.R: time, but recording and resuming.
+
+
+Version 0.2.0
+2021-10-DD
+
+. Write has_audio.R.
+. Write audio_time.R.
+. Write spoken_time.R
+* Write notes_summary
+* Write tag.R.
+* Skip poetry if rttm exists.
 
 
 Version 0.1.1
@@ -34,6 +47,7 @@ Version 0.1.1
 
 . audio_id.R set to id_file.R. audio_id(x, i = 5, drop_fn = FALSE) set to id_file(x, col = NULL, pattern = '[_.]', i = 5, drop_col = FALSE)
 . id set to id_seq, id_file set to id_seq_file @ extract_features.R.
+
 
 Version 0.1.0
 2021-09-26
@@ -43,7 +57,6 @@ Version 0.1.0
 . Removed person("Salum Jr.", "Giovanni A.", email = "gsalumjr@gmail.com", role = "aut").
 . splitw must show the elapsed time
 . drop_fn = TRUE set to drop_fn = FALSE
-
 
 
 Version 0.0.0.9047
@@ -58,7 +71,6 @@ Version 0.0.0.9047
 . Added 'formant removal' (Rf) by Zabala (2021/2022) @ extract_features.R.
 . Added 'formant nested removal' (RNf) by Zabala (2021/2022) @ extract_features.R.
 . Added 'formant position removal' (RPf) by Zabala (2021/2022) @ extract_features.R.
-
 
 
 Version 0.0.0.9046
@@ -83,7 +95,6 @@ Version 0.0.0.9045
 . xs_df set to snum_df @ smooth_df.R.
 . xs_final set to xs @ smooth_df.R.
 . Ordered Imports: dplyr, e1071, ellipse, ggfortify, ggplot2, R.utils, RColorBrewer, reticulate, seewave, tibble, tidyr, tuneR, VIM, wrassp, zoo
-
 
 
 Version 0.0.0.9044
@@ -137,8 +148,26 @@ print(file_list)
  . https://stackoverflow.com/questions/229186/os-walk-without-digging-into-directories-below
 
 
+Version 0.0.0.1
+2018-11-21 08:30:00 GMT-3
+
+6577. 2018-11-21 08:30:00 O pacote voice começou!
+https://stat.ethz.ch/mailman/options/r-package-devel
+RP
+https://rviews.rstudio.com/
+http://dirk.eddelbuettel.com/cranberries/
+https://github.com/ropensci/webservices/wiki/ToDo
+
+
+
+
+
 Contacts
 . Trecenti
 . Musmath
 . gm
 . JF
+. Kolberg
+
+
+

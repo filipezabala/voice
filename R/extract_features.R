@@ -1,4 +1,4 @@
-#' Extracts features from WAV audio files.
+#' Extracts features from WAV audio files
 #' @description Extracts features from WAV audio files.
 #' @param directory A directory containing audio file(s) in WAV format. If more than one directory is provided, only the first one is used.
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
@@ -47,13 +47,13 @@
 #' ef2 <- extract_features(dirname(path2wav), mc.cores = 1)
 #' dim(ef2)
 #' ef2
-#' table(ef2$file_name)
+#' table(ef2$file_name_ext)
 #'
 #' # limiting filesRange
 #' ef3 <- extract_features(dirname(path2wav), filesRange = 3:6, mc.cores = 1)
 #' dim(ef3)
 #' ef3
-#' table(ef3$file_name)
+#' table(ef3$file_name_ext)
 #'
 #' # calculating correlation of ef2
 #' data <- cor(ef2[-1])
@@ -71,7 +71,7 @@
 #' (pc <- prcomp(na.omit(ef2[-1]), scale = TRUE))
 #' stats::screeplot(pc, type = 'lines')
 #'
-#' autoplot(pc, data = na.omit(ef2), colour = 'file_name',
+#' autoplot(pc, data = na.omit(ef2), colour = 'file_name_ext',
 #' loadings = TRUE, loadings.label = TRUE)
 #' @export
 extract_features <- function(directory, filesRange = NULL,
@@ -475,7 +475,7 @@ extract_features <- function(directory, filesRange = NULL,
   }
 
   # id, using smaller length: n_min
-  id <- tibble::enframe(rep(basename(wavFiles), n_min), value = 'file_name',
+  id <- tibble::enframe(rep(basename(wavFiles), n_min), value = 'file_name_ext',
                         name = NULL)
 
   # colnames
