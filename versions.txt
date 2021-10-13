@@ -19,6 +19,11 @@ To do
 * Run 391-402 rows only inside if('mfcc' %in% features) the '11. Mel-Frequency Cepstral Coefficients (MFCC)' @ extract_features.R.
 * Add Pf, Df, Rf, RPf, RDf @ extract_features_py.R.
 * tag.R calculates mean, median, sd, QA, variation coefficient of the considered features.
+* Adjust rowProp.R to interval [0,1].
+* At rowProp.R indicate inverted questions.
+* Add Variability Index by Oppliger Pinto (2017)
+* Stop criteria @ poetry.R: time, but recording and resuming.
+* Skip poetry if rttm exists.
 
 
 
@@ -26,7 +31,10 @@ To do
 Version 0.2.2
 2021-10-13
 
-. set tag.R from feat_summary2 to feat_summary at line 26.
+. Added parameter subj.id.simplify and all voice::extract_features parameters @ tag.R.
+
+
+
 
 
 Version 0.2.1
@@ -37,11 +45,6 @@ Version 0.2.1
 . feat_summary.R running voice::extract_features instead of extract_features.
 . feat_summary.R return(M_summ) instead of return(M).
 
-* Adjust rowProp.R to interval [0,1].
-* At rowProp.R indicate inverted questions.
-* Add Variability Index by Oppliger Pinto (2017)
-* Stop criteria @ poetry.R: time, but recording and resuming.
-* Skip poetry if rttm exists.
 
 
 Version 0.2.0

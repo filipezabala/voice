@@ -4,16 +4,43 @@
 \alias{tag}
 \title{Tag a data frame with media information.}
 \usage{
-tag(x, mediaDir, subj.id = NULL, media.id = NULL, mc.cores = 1)
+tag(
+  x,
+  mediaDir,
+  subj.id = NULL,
+  media.id = NULL,
+  mc.cores = 1,
+  subj.id.simplify = FALSE,
+  filesRange = NULL,
+  features = "f0",
+  extraFeatures = FALSE,
+  gender = "u",
+  windowShift = 5,
+  numFormants = 8,
+  numcep = 12,
+  dcttype = c("t2", "t1", "t3", "t4"),
+  fbtype = c("mel", "htkmel", "fcmel", "bark"),
+  resolution = 40,
+  usecmp = FALSE,
+  full.names = TRUE,
+  recursive = FALSE,
+  check.mono = TRUE,
+  stereo2mono = TRUE,
+  overwrite = FALSE,
+  freq = 44100,
+  round.to = 4
+)
 }
 \arguments{
 \item{x}{A data frame to be tagged with media information.}
 
 \item{mediaDir}{Directory containing media files. Currently accepts audio files.}
 
-\item{id}{Column containing the ID to be searched in mediaDir file names. Default: \coe{NULL}, i.e., uses the first column.}
+\item{subj.id}{Column containing the subject ID to be searched in mediaDir file names. Default: \coe{NULL}, i.e., uses the first column.}
 
-\item{i}{ID position in \code{col}. Default: \code{4}.}
+\item{media.id}{Column containing the media ID. Default: \coe{NULL}, i.e., uses the first column.}
+
+\item{mc.cores}{Number of cores to be used}
 }
 \description{
 Tag a data frame with media information.
