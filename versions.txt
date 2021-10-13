@@ -22,10 +22,18 @@ To do
 
 
 
+
+Version 0.2.2
+2021-10-13
+
+. set tag.R from feat_summary2 to feat_summary at line 26.
+
+
 Version 0.2.1
-2021-10-DD
+2021-10-13
 
 . tag.R incorporates parameter mc.cores = 1 and dropped i = 4.
+. set tag.R from feat_summary2 to feat_summary at line 26.
 . feat_summary.R running voice::extract_features instead of extract_features.
 . feat_summary.R return(M_summ) instead of return(M).
 
