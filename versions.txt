@@ -22,24 +22,29 @@ To do
 
 
 
-Version 0.3.0
+Version 0.2.1
 2021-10-DD
+
+. tag.R incorporates parameter mc.cores = 1 and dropped i = 4.
+. feat_summary.R running voice::extract_features instead of extract_features.
+. feat_summary.R return(M_summ) instead of return(M).
 
 * Adjust rowProp.R to interval [0,1].
 * At rowProp.R indicate inverted questions.
 * Add Variability Index by Oppliger Pinto (2017)
 * Stop criteria @ poetry.R: time, but recording and resuming.
+* Skip poetry if rttm exists.
 
 
 Version 0.2.0
-2021-10-DD
+2021-10-13
 
-. Write has_audio.R.
-. Write audio_time.R.
-. Write spoken_time.R
-* Write notes_summary
-* Write tag.R.
-* Skip poetry if rttm exists.
+. Added has_audio.R.
+. Added audio_time.R.
+. Added spoken_time.R
+. Added feat_summary.R
+. Added tag.R.
+
 
 
 Version 0.1.1

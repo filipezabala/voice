@@ -17,7 +17,7 @@ feat_summary(
   fbtype = c("mel", "htkmel", "fcmel", "bark"),
   resolution = 40,
   usecmp = FALSE,
-  mc.cores = 8,
+  mc.cores = 1,
   full.names = TRUE,
   recursive = FALSE,
   check.mono = TRUE,

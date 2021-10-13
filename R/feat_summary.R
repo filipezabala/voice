@@ -14,7 +14,7 @@ feat_summary <- function(x, filesRange = NULL, features = 'f0',
                          fbtype = c("mel", "htkmel", "fcmel", "bark"),
                          resolution = 40,
                          usecmp = FALSE,
-                         mc.cores = 8,
+                         mc.cores = 1,
                          full.names = TRUE,
                          recursive = FALSE,
                          check.mono = TRUE,
@@ -23,25 +23,25 @@ feat_summary <- function(x, filesRange = NULL, features = 'f0',
                          freq = 44100,
                          round.to = 4,
                          get.id = FALSE, i = 4){
-  M <- extract_features(x, filesRange = filesRange,
-                        features = features,
-                        extraFeatures = extraFeatures,
-                        gender = gender,
-                        windowShift = windowShift,
-                        numFormants = numFormants,
-                        numcep = numcep,
-                        dcttype = dcttype,
-                        fbtype = fbtype,
-                        resolution = resolution,
-                        usecmp = usecmp,
-                        mc.cores = mc.cores,
-                        full.names = full.names,
-                        recursive = recursive,
-                        check.mono = check.mono,
-                        stereo2mono = stereo2mono,
-                        overwrite = overwrite,
-                        freq = freq,
-                        round.to = round.to)
+  M <- voice::extract_features(x, filesRange = filesRange,
+                               features = features,
+                               extraFeatures = extraFeatures,
+                               gender = gender,
+                               windowShift = windowShift,
+                               numFormants = numFormants,
+                               numcep = numcep,
+                               dcttype = dcttype,
+                               fbtype = fbtype,
+                               resolution = resolution,
+                               usecmp = usecmp,
+                               mc.cores = mc.cores,
+                               full.names = full.names,
+                               recursive = recursive,
+                               check.mono = check.mono,
+                               stereo2mono = stereo2mono,
+                               overwrite = overwrite,
+                               freq = freq,
+                               round.to = round.to)
   M$file_name <- unlist(strsplit(M$file_name_ext, '.[Ww][Aa][Vv]$')) # add this functionality to extract_features!
   M <- dplyr::select(M, id_seq:file_name_ext, file_name, F0:dplyr::last_col())
   M_summ <- M %>%
@@ -50,8 +50,8 @@ feat_summary <- function(x, filesRange = NULL, features = 'f0',
                      tag_F0_median = median(F0, na.rm = TRUE),
                      tag_F0_sd = sd(F0, na.rm = TRUE),
                      tag_F0_vc = tag_F0_sd/tag_F0_mean)
-  M <- dplyr::left_join(M, M_summ, by = 'file_name')
-  return(M)
+  return(M_summ)
+  # M <- dplyr::left_join(M, M_summ, by = 'file_name')
   # M$spn <- voice::notes(M$F0, measure = 'spn')
   # dur <- by(ef$spn, ef$id_file, voice::duration)
   # get_note <- function(x){ as.character(x[,'note']) }

@@ -4,16 +4,16 @@
 \alias{tag}
 \title{Tag a data frame with media information.}
 \usage{
-tag(x, mediaDir, subj.id = NULL, media.id = NULL, i = 4)
+tag(x, mediaDir, subj.id = NULL, media.id = NULL, mc.cores = 1)
 }
 \arguments{
 \item{x}{A data frame to be tagged with media information.}
 
 \item{mediaDir}{Directory containing media files. Currently accepts audio files.}
 
-\item{i}{ID position in \code{col}. Default: \code{4}.}
-
 \item{id}{Column containing the ID to be searched in mediaDir file names. Default: \coe{NULL}, i.e., uses the first column.}
+
+\item{i}{ID position in \code{col}. Default: \code{4}.}
 }
 \description{
 Tag a data frame with media information.

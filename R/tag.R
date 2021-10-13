@@ -5,7 +5,8 @@
 #' @param id Column containing the ID to be searched in mediaDir file names. Default: \coe{NULL}, i.e., uses the first column.
 #' @param i ID position in \code{col}. Default: \code{4}.
 #' @export
-tag <- function(x, mediaDir, subj.id = NULL, media.id = NULL, i = 4){
+tag <- function(x, mediaDir, subj.id = NULL, media.id = NULL,
+                mc.cores = 1){
 
   if(is.null(subj.id)){
     subj.id <- 1
@@ -15,14 +16,15 @@ tag <- function(x, mediaDir, subj.id = NULL, media.id = NULL, i = 4){
     media.id <- 2
   }
 
-  # filename without
+  # filename without extension (analyze df>tbl>df. strsplit via tidyverse?)
   x <- as.data.frame(x)
   ss <- unlist(strsplit(x[,media.id], '.[Mm][Pp]3$|.[Ww][Aa][Vv]$'))
   x <- dplyr::bind_cols(x, file_name = ss)
   x <- dplyr::as_tibble(x)
 
   # voice::feat_summary
-  fs <- voice::feat_summary(mediaDir)
+  # fs <- voice::feat_summary(mediaDir, mc.cores = mc.cores)
+  fs <- feat_summary2(mediaDir, mc.cores = mc.cores)
   x <- dplyr::left_join(x, fs, by = 'file_name')
 
   return(x)
