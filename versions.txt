@@ -24,32 +24,36 @@ To do
 * Add Variability Index by Oppliger Pinto (2017)
 * Stop criteria @ poetry.R: time, but recording and resuming.
 * Skip poetry if rttm exists.
+* random selector of MP3 files
 
 
+
+Version 0.2.4
+2021-10-14
+. Added tag_F0_iqr = IQR(F0, na.rm = TRUE) @ feat_summary.R.
+. Added tag_F0_mad = mad(F0, na.rm = TRUE) @ feat_summary.R.
+
+
+Version 0.2.3
+2021-10-13
+. Set x[,subj.id] <- as.character(cumsum(!duplicated(x[,subj.id]))) @ tag.R.
 
 
 Version 0.2.2
 2021-10-13
-
 . Added parameter subj.id.simplify and all voice::extract_features parameters @ tag.R.
-
-
-
 
 
 Version 0.2.1
 2021-10-13
-
 . tag.R incorporates parameter mc.cores = 1 and dropped i = 4.
 . set tag.R from feat_summary2 to feat_summary at line 26.
 . feat_summary.R running voice::extract_features instead of extract_features.
 . feat_summary.R return(M_summ) instead of return(M).
 
 
-
 Version 0.2.0
 2021-10-13
-
 . Added has_audio.R.
 . Added audio_time.R.
 . Added spoken_time.R
@@ -57,17 +61,14 @@ Version 0.2.0
 . Added tag.R.
 
 
-
 Version 0.1.1
 2021-09-27
-
 . audio_id.R set to id_file.R. audio_id(x, i = 5, drop_fn = FALSE) set to id_file(x, col = NULL, pattern = '[_.]', i = 5, drop_col = FALSE)
 . id set to id_seq, id_file set to id_seq_file @ extract_features.R.
 
 
 Version 0.1.0
 2021-09-26
-
 . extract_features creates a general id and an id_file, counting by file.
 . 'formant nested removal' (RNf) set to 'formant dispersion removal' (RDf) by Zabala (2021/2022) @ extract_features.R and @ data.R.
 . Removed person("Salum Jr.", "Giovanni A.", email = "gsalumjr@gmail.com", role = "aut").
@@ -77,7 +78,6 @@ Version 0.1.0
 
 Version 0.0.0.9047
 2021-09-21
-
 . audio_id.R function created.
 . Exported voice_ex1.rda and data.R.
 . toFile = F set to toFile = FALSE @ extract_features.R.
@@ -91,14 +91,12 @@ Version 0.0.0.9047
 
 Version 0.0.0.9046
 2021-09-15
-
 . Added .name_repair = 'unique' to tibble::as_tibble @ smooth_df.R.
 This solved the Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0. Using compatibility `.name_repair`.
 
 
 Version 0.0.0.9045
 2021-09-15
-
 . names(rttm) <- basename(rttmFiles), or file/base names inserted as names in list @ read_rttm.R.
 . Added columns ~black and ~Black to notes_freq.R.
 . Added method == 'black' and method == 'Black' @ notes.R.
@@ -115,19 +113,16 @@ Version 0.0.0.9045
 
 Version 0.0.0.9044
 2021-09-12
-
 . Parameters fromWav, fromRttm admits either file or directory @ splitw.R.
 
 
 Version 0.0.0.9043
 2021-09-12
-
 . Added parameter as.tibble = TRUE @ enrich_rttm.R.
 
 
 Version 0.0.0.9042
 2021-09-12
-
 . Changed column name from 'id.split' to 'id_split @ enrich_rttm.R.
 . is.num <- unlist(lapply(x, class)) == 'numeric' changed to is.num <- sapply(x, class) %in% c('integer', 'numeric') @ conv_df.
 . Added smooth_df.R.
@@ -138,14 +133,12 @@ Version 0.0.0.9042
 
 Version 0.0.0.9041
 2021-09-10
-
 . Changed mc.cores = parallel::detectCores() to mc.cores = 1 @ conv_df.R, conv_mc.R, extract_features.R.
 . Parameter silence.gap set from 0.4 to 0.5 (universal standard) @ splitw.R, enrich_rttm.R.
 . Changed column name from 'id.min.time' to 'id.split' @ enrich_rttm.R.
 
 
 Version 0.0.0.17
-
 . Solved the recursive issue in diarization-pyannote.py (by Sola):
 
 import os

@@ -46,10 +46,12 @@ feat_summary <- function(x, filesRange = NULL, features = 'f0',
   M <- dplyr::select(M, id_seq:file_name_ext, file_name, F0:dplyr::last_col())
   M_summ <- M %>%
     dplyr::group_by(file_name) %>%
-    dplyr::summarise(tag_F0_mean = mean(F0, na.rm = TRUE),
-                     tag_F0_median = median(F0, na.rm = TRUE),
-                     tag_F0_sd = sd(F0, na.rm = TRUE),
-                     tag_F0_vc = tag_F0_sd/tag_F0_mean)
+    dplyr::summarise(tag_F0_mean = mean(F0, na.rm = TRUE), # Mean
+                     tag_F0_median = median(F0, na.rm = TRUE), # Median
+                     tag_F0_sd = sd(F0, na.rm = TRUE), # Standard Deviation
+                     tag_F0_vc = tag_F0_sd/tag_F0_mean, # Variation Coefficient
+                     tag_F0_iqr = IQR(F0, na.rm = TRUE), # InterQuartile Range
+                     tag_F0_mad = mad(F0, na.rm = TRUE)) # Median Absolute Deviation
   return(M_summ)
   # M <- dplyr::left_join(M, M_summ, by = 'file_name')
   # M$spn <- voice::notes(M$F0, measure = 'spn')
