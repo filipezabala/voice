@@ -1,11 +1,11 @@
 #' Returns the total time of audio files in seconds
 #'
 #' @param x Either a WAV file or a directory containing WAV files.
-#' @param get.id Logical. Should the ID must be extracted from file name? Default: \code{FALSE}.
+#' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
 #' @param recursive Logical.
-#' @param i ID position in file name. Default: \code{4}.
 #' @export
-audio_time <- function(x, get.id = FALSE, recursive = FALSE, i = 4){
+audio_time <- function(x, filesRange = NULL, recursive = FALSE){
+
   # checking if x is a file or directory
   if(file_test('-f', x)){
     wavDir <- dirname(x)
@@ -15,6 +15,17 @@ audio_time <- function(x, get.id = FALSE, recursive = FALSE, i = 4){
     wavFiles <- dir(wavDir, pattern = '.[Ww][Aa][Vv]$', full.names = TRUE,
                     recursive = recursive)
   }
+
+  # filtering by filesRange
+  if(!is.null(filesRange)){
+    fullRange <- 1:length(wavFiles)
+    filesRange <- base::intersect(fullRange, filesRange)
+    wavFiles <- wavFiles[filesRange]
+  }
+
+  # file_name (no extension)
+  fn <- unlist(strsplit(basename(wavFiles), '.[Ww][Aa][Vv]$'))
+
   # calculating
   if(length(wavFiles) > 0){
     a <- lapply(wavFiles, tuneR::readWave)
@@ -22,19 +33,10 @@ audio_time <- function(x, get.id = FALSE, recursive = FALSE, i = 4){
     sr <- lapply(a, voice::get_samp.rate)
     le <- lapply(gl, length)
     at <- unlist(Map('/', le, sr))
-    if(get.id){
-      ss <- unlist(strsplit(wavFiles, '.[Ww][Aa][Vv]$'))
-      # ss <- sapply(ss, strsplit, '[_]')
-      # geti <- function(x){
-      #   as.integer(x[i])
-      # }
-      # id.label <- sapply(ss, geti)
-      at <- bind_cols(filename = basename(ss), tag_audio_time = at)
-      return(at)
-    } else{
-      return(at)
+    at <- bind_cols(file_name = fn, tag_audio_time = at)
+    return(at)
     }
-  } else{
+  else{
     cat('NO WAV FILES IN DIRECTORY!')
   }
 }

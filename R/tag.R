@@ -1,13 +1,18 @@
 #' Tag a data frame with media information.
 #'
-#' @param x A data frame to be tagged with media information.
+#' @param x An Extended data frame to be tagged with media information. See details.
 #' @param mediaDir Directory containing media files. Currently accepts audio files.
-#' @param subj.id Column containing the subject ID to be searched in mediaDir file names. Default: \coe{NULL}, i.e., uses the first column.
-#' @param media.id Column containing the media ID. Default: \coe{NULL}, i.e., uses the first column.
-#' @param mc.cores Number of cores to be used
+#' @param tags Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.
+#' @param subj.id Column containing the subject ID to be searched in mediaDir file names. Default: \code{NULL}, i.e., uses the first column.
+#' @param media.id Column containing the media ID. Default: \code{NULL}, i.e., uses the first column.
+#' @param subj.id.simplify Logical. Should subject id must be simplified? Default: \code{FALSE}.
+#' @param ... See \code{?voice::extract_features}.
+#' @detail Parameter \code{tags} admits c('feat_summary', 'audio_time'). An Extended data frame E must contain subject and media data. See references.
+#' @references Zabala (2021) voice: a tag approach.
 #' @export
-tag <- function(x, mediaDir, subj.id = NULL, media.id = NULL,
-                mc.cores = 1, subj.id.simplify = FALSE,
+tag <- function(x, mediaDir, tags = c('feat_summary'),
+                subj.id = NULL, media.id = NULL,
+                subj.id.simplify = FALSE, mc.cores = 1,
                 filesRange = NULL, features = 'f0',
                 extraFeatures = FALSE,
                 gender = "u",
@@ -26,10 +31,12 @@ tag <- function(x, mediaDir, subj.id = NULL, media.id = NULL,
                 freq = 44100,
                 round.to = 4){
 
+  # checking subj.id
   if(is.null(subj.id)){
     subj.id <- 1
   }
 
+  # checking media.id
   if(is.null(media.id)){
     media.id <- 2
   }
@@ -40,38 +47,44 @@ tag <- function(x, mediaDir, subj.id = NULL, media.id = NULL,
   x <- dplyr::bind_cols(x, file_name = ss)
   x <- dplyr::as_tibble(x)
 
-  # voice::feat_summary
-  fs <- voice::feat_summary(mediaDir, mc.cores = mc.cores,
-                            filesRange = filesRange,
-                            features = features,
-                            extraFeatures = extraFeatures,
-                            gender = gender,
-                            windowShift = windowShift,
-                            numFormants = numFormants,
-                            numcep = numcep,
-                            dcttype = dcttype,
-                            fbtype = fbtype,
-                            resolution = resolution,
-                            usecmp = usecmp,
-                            full.names = full.names,
-                            recursive = recursive,
-                            check.mono = check.mono,
-                            stereo2mono = stereo2mono,
-                            overwrite = overwrite,
-                            freq = freq,
-                            round.to = round.to)
-  x <- dplyr::left_join(x, fs, by = 'file_name')
-
+  # subj.id.simplify
   if(subj.id.simplify){
     x[,subj.id] <- as.character(cumsum(!duplicated(x[,subj.id])))
   }
 
+  # voice::feat_summary
+  if('feat_summary' %in% tags){
+    fs <- voice::feat_summary(mediaDir, mc.cores = mc.cores,
+                              filesRange = filesRange,
+                              features = features,
+                              extraFeatures = extraFeatures,
+                              gender = gender,
+                              windowShift = windowShift,
+                              numFormants = numFormants,
+                              numcep = numcep,
+                              dcttype = dcttype,
+                              fbtype = fbtype,
+                              resolution = resolution,
+                              usecmp = usecmp,
+                              full.names = full.names,
+                              recursive = recursive,
+                              check.mono = check.mono,
+                              stereo2mono = stereo2mono,
+                              overwrite = overwrite,
+                              freq = freq,
+                              round.to = round.to)
+    x <- dplyr::left_join(x, fs, by = 'file_name')
+  }
+
+  # voice::audio_time
+  if('audio_time' %in% tags){
+    at <- voice::audio_time(mediaDir, filesRange = filesRange,
+                            recursive = recursive)
+    x <- dplyr::left_join(x, at, by = 'file_name')
+  }
+
   return(x)
 
-  # # voice::audio_time
-  # at <- audio_time(mediaDir, get.id = TRUE)
-  # x <- left_join(x, at, by = 'filename')
-  #
   # # voice::spoken_prop
   # st <- spoken_time(mediaDir, get.id = TRUE, recursive = TRUE)
   # x <- left_join(x, st, by = 'filename')

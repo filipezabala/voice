@@ -1,8 +1,7 @@
 #' Returns summary measures of voice::extract_features
 #'
 #' @param x Either a WAV file or a directory containing WAV files.
-#' @param get.id Logical. Should the ID must be extracted from file name? Default: \code{FALSE}.
-#' @param i ID position in file name. Default: \code{4}.
+#' @details Except for \code{x}, all the parameters are shared with \code{voice::extract_features}.
 #' @export
 feat_summary <- function(x, filesRange = NULL, features = 'f0',
                          extraFeatures = FALSE,
@@ -21,8 +20,8 @@ feat_summary <- function(x, filesRange = NULL, features = 'f0',
                          stereo2mono = TRUE,
                          overwrite = FALSE,
                          freq = 44100,
-                         round.to = 4,
-                         get.id = FALSE, i = 4){
+                         round.to = 4){
+
   M <- voice::extract_features(x, filesRange = filesRange,
                                features = features,
                                extraFeatures = extraFeatures,
@@ -47,9 +46,9 @@ feat_summary <- function(x, filesRange = NULL, features = 'f0',
   M_summ <- M %>%
     dplyr::group_by(file_name) %>%
     dplyr::summarise(tag_F0_mean = mean(F0, na.rm = TRUE), # Mean
+                     tag_F0_sd = sd(F0, na.rm = TRUE), # (Sample) Standard Deviation
+                     tag_F0_vc = tag_F0_sd/tag_F0_mean, # (Sample) Variation Coefficient
                      tag_F0_median = median(F0, na.rm = TRUE), # Median
-                     tag_F0_sd = sd(F0, na.rm = TRUE), # Standard Deviation
-                     tag_F0_vc = tag_F0_sd/tag_F0_mean, # Variation Coefficient
                      tag_F0_iqr = IQR(F0, na.rm = TRUE), # InterQuartile Range
                      tag_F0_mad = mad(F0, na.rm = TRUE)) # Median Absolute Deviation
   return(M_summ)

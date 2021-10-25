@@ -98,10 +98,10 @@ extract_features <- function(directory, filesRange = NULL,
   wavFiles <- list.files(directory, pattern = '[[:punct:]][wW][aA][vV]$',
                          full.names = full.names, recursive = recursive)
 
-  # filtering by fileRange
+  # filtering by filesRange
   if(!is.null(filesRange)){
     fullRange <- 1:length(wavFiles)
-    filesRange <- base::intersect(fullRange,filesRange)
+    filesRange <- base::intersect(fullRange, filesRange)
     wavFiles <- wavFiles[filesRange]
   }
 
