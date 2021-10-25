@@ -7,10 +7,11 @@
 tag(
   x,
   mediaDir,
+  tags = c("feat_summary"),
   subj.id = NULL,
   media.id = NULL,
-  mc.cores = 1,
   subj.id.simplify = FALSE,
+  mc.cores = 1,
   filesRange = NULL,
   features = "f0",
   extraFeatures = FALSE,
@@ -32,16 +33,26 @@ tag(
 )
 }
 \arguments{
-\item{x}{A data frame to be tagged with media information.}
+\item{x}{An Extended data frame to be tagged with media information. See details.}
 
 \item{mediaDir}{Directory containing media files. Currently accepts audio files.}
 
-\item{subj.id}{Column containing the subject ID to be searched in mediaDir file names. Default: \coe{NULL}, i.e., uses the first column.}
+\item{tags}{Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.}
 
-\item{media.id}{Column containing the media ID. Default: \coe{NULL}, i.e., uses the first column.}
+\item{subj.id}{Column containing the subject ID to be searched in mediaDir file names. Default: \code{NULL}, i.e., uses the first column.}
 
-\item{mc.cores}{Number of cores to be used}
+\item{media.id}{Column containing the media ID. Default: \code{NULL}, i.e., uses the first column.}
+
+\item{subj.id.simplify}{Logical. Should subject id must be simplified? Default: \code{FALSE}.}
+
+\item{...}{See \code{?voice::extract_features}.}
 }
 \description{
 Tag a data frame with media information.
+}
+\details{
+Parameter \code{tags} admits c('feat_summary', 'audio_time'). An Extended data frame E must contain subject and media data. See references.
+}
+\references{
+Zabala (2021) voice: a tag approach.
 }

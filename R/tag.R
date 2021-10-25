@@ -7,7 +7,7 @@
 #' @param media.id Column containing the media ID. Default: \code{NULL}, i.e., uses the first column.
 #' @param subj.id.simplify Logical. Should subject id must be simplified? Default: \code{FALSE}.
 #' @param ... See \code{?voice::extract_features}.
-#' @detail Parameter \code{tags} admits c('feat_summary', 'audio_time'). An Extended data frame E must contain subject and media data. See references.
+#' @details Parameter \code{tags} admits c('feat_summary', 'audio_time'). An Extended data frame E must contain subject and media data. See references.
 #' @references Zabala (2021) voice: a tag approach.
 #' @export
 tag <- function(x, mediaDir, tags = c('feat_summary'),

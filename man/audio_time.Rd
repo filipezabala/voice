@@ -4,16 +4,14 @@
 \alias{audio_time}
 \title{Returns the total time of audio files in seconds}
 \usage{
-audio_time(x, get.id = FALSE, recursive = FALSE, i = 4)
+audio_time(x, filesRange = NULL, recursive = FALSE)
 }
 \arguments{
 \item{x}{Either a WAV file or a directory containing WAV files.}
 
-\item{get.id}{Logical. Should the ID must be extracted from file name? Default: \code{FALSE}.}
+\item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files).}
 
 \item{recursive}{Logical.}
-
-\item{i}{ID position in file name. Default: \code{4}.}
 }
 \description{
 Returns the total time of audio files in seconds

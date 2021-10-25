@@ -24,18 +24,15 @@ feat_summary(
   stereo2mono = TRUE,
   overwrite = FALSE,
   freq = 44100,
-  round.to = 4,
-  get.id = FALSE,
-  i = 4
+  round.to = 4
 )
 }
 \arguments{
 \item{x}{Either a WAV file or a directory containing WAV files.}
-
-\item{get.id}{Logical. Should the ID must be extracted from file name? Default: \code{FALSE}.}
-
-\item{i}{ID position in file name. Default: \code{4}.}
 }
 \description{
 Returns summary measures of voice::extract_features
+}
+\details{
+Except for \code{x}, all the parameters are shared with \code{voice::extract_features}.
 }
