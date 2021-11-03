@@ -125,36 +125,13 @@ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requ
 The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [Ubuntu 20.04 LTS (Focal Fossa)](https://releases.ubuntu.com/20.04/). Note the software versions during installation, inconsistency reporting is welcome.  
 > Without the following Python items 3 and 12, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
 
-Hardware via `lspci`:    
- . 00:00.0 Host bridge: Intel Corporation 2nd Generation Core Processor Family DRAM Controller (rev 09)  
- . 00:01.0 PCI bridge: Intel Corporation Xeon E3-1200/2nd Generation Core Processor Family PCI Express Root Port (rev 09)  
- . 00:16.0 Communication controller: Intel Corporation 6 Series/C200 Series Chipset Family MEI Controller #1 (rev 04)  
- . 00:19.0 Ethernet controller: Intel Corporation 82579V Gigabit Network Connection (rev 05)  
- . 00:1a.0 USB controller: Intel Corporation 6 Series/C200 Series Chipset Family USB Enhanced Host Controller #2 (rev 05)  
- . 00:1b.0 Audio device: Intel Corporation 6 Series/C200 Series Chipset Family High Definition Audio Controller (rev 05)  
- . 00:1c.0 PCI bridge: Intel Corporation 6 Series/C200 Series Chipset Family PCI Express Root Port 1 (rev b5)  
- . 00:1c.1 PCI bridge: Intel Corporation 6 Series/C200 Series Chipset Family PCI Express Root Port 2 (rev b5)  
- . 00:1c.2 PCI bridge: Intel Corporation 6 Series/C200 Series Chipset Family PCI Express Root Port 3 (rev b5)  
- . 00:1c.3 PCI bridge: Intel Corporation 6 Series/C200 Series Chipset Family PCI Express Root Port 4 (rev b5)  
- . 00:1c.4 PCI bridge: Intel Corporation 6 Series/C200 Series Chipset Family PCI Express Root Port 5 (rev b5)  
- . 00:1c.6 PCI bridge: Intel Corporation 82801 PCI Bridge (rev b5)  
- . 00:1c.7 PCI bridge: Intel Corporation 6 Series/C200 Series Chipset Family PCI Express Root Port 8 (rev b5)  
- . 00:1d.0 USB controller: Intel Corporation 6 Series/C200 Series Chipset Family USB Enhanced Host Controller #1 (rev 05)  
- . 00:1f.0 ISA bridge: Intel Corporation P67 Express Chipset LPC Controller (rev 05)  
- . 00:1f.2 SATA controller: Intel Corporation 6 Series/C200 Series Chipset Family 6 port Desktop SATA AHCI Controller (rev 05)  
- . 00:1f.3 SMBus: Intel Corporation 6 Series/C200 Series Chipset Family SMBus Controller (rev 05)  
- . 01:00.0 VGA compatible controller: NVIDIA Corporation GK208B [GeForce GT 730] (rev a1)  
- . 01:00.1 Audio device: NVIDIA Corporation GK208 HDMI/DP Audio Controller (rev a1)  
- . 03:00.0 USB controller: NEC Corporation uPD720200 USB 3.0 Host Controller (rev 04)  
- . 05:00.0 SATA controller: JMicron Technology Corp. JMB362 SATA Controller (rev 10)  
- . 06:00.0 USB controller: NEC Corporation uPD720200 USB 3.0 Host Controller (rev 04)  
- . 07:00.0 PCI bridge: ASMedia Technology Inc. ASM1083/1085 PCIe to PCI Bridge (rev 01)  
- . 08:01.0 Multimedia controller: Philips Semiconductors SAA7130 Video Broadcast Decoder (rev 01)  
- . 08:02.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL-8110SC/8169SC Gigabit Ethernet (rev 10)  
- . 08:03.0 FireWire (IEEE 1394): VIA Technologies, Inc. VT6306/7/8 [Fire II(M)] IEEE 1394 OHCI Controller (rev c0)  
- . 09:00.0 SATA controller: Marvell Technology Group Ltd. 88SE9172 SATA 6Gb/s Controller (rev 11)  
- 
-### 1. [Homebrew](https://brew.sh/)
+### 1. [Curl](https://curl.se/)
+Cmmand line tool and library for transferring data with URLs.
+```bash
+sudo snap install curl
+```
+
+### 2 [Homebrew](https://brew.sh/)
 Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' and remember to `brew doctor` eventually. At terminal run:
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
