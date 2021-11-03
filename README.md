@@ -126,14 +126,25 @@ The following steps were used to configure [github.com/filipezabala/voice](https
 > Without the following Python items 3 and 12, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
 
 ### 1. [Curl](https://curl.se/)
-Cmmand line tool and library for transferring data with URLs.
+Command line tool and library for transferring data with URLs.
 ```bash
-sudo snap install curl
+apt remove curl
+apt purge curl
 ```
 
-### 2 [Homebrew](https://brew.sh/)
+### 2. [Git]()
+```bash
+sudo apt-get install git-all
+```
+
+### 3. [Homebrew](https://brew.sh/)
 Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' and remember to `brew doctor` eventually. At terminal run:
 ```bash
+git clone https://github.com/Homebrew/brew homebrew
+eval "$(homebrew/bin/brew shellenv)"
+brew update --force --quiet
+chmod -R go-w "$(brew --prefix)/share/zsh"
+
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 sudo chown -R $(whoami) /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5
 chmod u+w /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5
