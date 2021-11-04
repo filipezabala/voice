@@ -98,7 +98,7 @@ sudo gdebi rstudio-server-2021.09.0-351-amd64.deb
 ```
 
 ### 9. [R packages](https://cran.r-project.org/web/packages/)
-"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). The installation may take several minutes. At terminal run:
+"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). The installation may take several minutes. The time difference on the first run was 27.23066 mins. At terminal run:
 ```bash
 sudo R
 ```
