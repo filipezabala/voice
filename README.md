@@ -9,6 +9,158 @@ It is based on [`tidyverse`](https://www.tidyverse.org/) collection, [`tuneR`](h
 
 A vignette may be found at http://filipezabala.com/voicegnette/.  
 
+## Ubuntu Installation
+The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [Ubuntu 20.04 LTS (Focal Fossa)](https://releases.ubuntu.com/20.04/). Note the software versions during installation, inconsistency reporting is welcome.  
+> Without the following Python items 3 and 12, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
+
+### 1. [Curl](https://curl.se/)
+Command line tool and library for transferring data with URLs. Find the latest version at https://curl.se/download.html.
+```bash
+# removing (if necessary) old curl installation
+sudo apt remove curl
+sudo apt purge curl
+# removing (if necessary) the /cdrom folder
+sudo sed -i '/cdrom/d' /etc/apt/sources.list
+# installing dependencies
+sudo apt-get update
+sudo apt-get install -y libssl-dev autoconf libtool make
+cd /usr/local/src
+rm -rf curl*
+# downloading latest version (check before install!)
+sudo wget https://curl.se/download/curl-7.79.1.zip
+sudo unzip curl-7.79.1.zip
+cd curl-7.79.1
+sudo apt-get install autoconf
+sudo autoreconf -fi
+sudo ./configure --with-ssl 
+sudo make
+sudo make install
+# update the system’s binaries and symbol lookup
+sudo cp /usr/local/bin/curl /usr/bin/curl
+curl -V
+```
+If you have a message like `WARNING: curl and libcurl versions do not match. Functionality may be affected.`, you may take a look at [this](https://serverfault.com/questions/503555/libcurl-reporting-different-version-between-commands) post.
+
+### 2. [Git](https://git-scm.com/)
+Git is a free and open source distributed version control system.
+```bash
+sudo apt-get install git-all
+```
+
+### 3. [pip](https://pypi.org/project/pip/)
+pip is the package installer for Python. 
+```bash
+sudo apt install python3-pip
+pip3 --version
+```
+
+### 4. [Homebrew](https://brew.sh/)
+Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' and remember to `brew doctor` eventually. At terminal run:
+```bash
+sudo git clone https://github.com/Homebrew/brew homebrew
+eval "$(homebrew/bin/brew shellenv)"
+sudo chown -R $(whoami) /usr/local/src/curl-7.79.1/homebrew
+brew update --force --quiet
+chmod -R go-w "$(brew --prefix)/share/zsh"
+```
+
+### 5. [ffmpeg](http://ffmpeg.org/)
+ffmpeg is a cross-platform solution to record, convert and stream audio and video. The installation may take several minutes.
+```bash
+brew install ffmpeg
+```
+
+### 6. Audio drivers
+```bash
+sudo apt-get install portaudio19-dev libasound2-dev
+```
+
+### 7. [MuseScore](https://musescore.org/)
+MuseScore is an open source notation software.  
+```bash
+sudo add-apt-repository ppa:mscore-ubuntu/mscore-stable
+sudo apt-get update
+sudo apt-get install musescore
+```
+
+### 8. [R](https://www.r-project.org)
+R is a free software environment for statistical computing and graphics. To find out your Ubuntu distribution use `lsb_release -a` at terminal.    
+```bash
+sudo sh -c 'echo "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" >> /etc/apt/sources.list.d/cran.list'
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9 
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 51716619E084DAB9
+gpg -a --export E084DAB9 | sudo apt-key add -
+
+sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
+
+sudo apt update && sudo apt upgrade
+sudo apt-get install r-base
+sudo apt-get install r-base-dev
+```
+
+### 9. [RStudio](https://www.rstudio.com/)
+RStudio is an Integrated Development Environment (IDE) for R.  
+```bash
+sudo apt-get install gdebi-core
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb
+sudo gdebi rstudio-server-1.4.1717-amd64.deb
+```
+
+### 10. [R packages](https://cran.r-project.org/web/packages/)
+"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). At terminal run:
+```bash
+sudo R
+```
+
+Running R as super user paste the following, row by row:
+```r
+ini <- Sys.time()
+packs <- c('audio', 'devtools', 'e1071', 'ellipse', 'ggfortify', 'gm', 'RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'VIM', 'wrassp')
+install.packages(packs, dep = T); Sys.time()-ini
+update.packages(ask = F); Sys.time()-ini
+devtools::install_github('egenn/music'); Sys.time()-ini
+devtools::install_github('filipezabala/voice', force = T); Sys.time()-ini
+devtools::install_github('flujoo/gm'); Sys.time()-ini
+```
+To configure the `gm` package.
+```r
+usethis::edit_r_environ()
+```
+
+Add the line `MUSESCORE_PATH=/usr/bin/mscore` to `/root/.Renviron` file. Save and restart the R/RStudio session.
+
+
+### 11. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+Miniconda is a free minimal installer for [conda](https://docs.conda.io/), an open source package, dependency and environment management system for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN and more, that runs on Windows, macOS and Linux.   
+Follow the instructions at https://docs.conda.io/en/latest/miniconda.html. 
+
+At terminal:  
+```bash
+cd ~/Downloads/
+wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+cd repo.anaconda.com/miniconda/
+bash Miniconda3-latest-Linux-x86_64.sh
+```
+Do you wish the installer to initialize Miniconda3 by running conda init? `yes`.   
+Close and reopen terminal. 
+
+```bash
+conda update -n base -c defaults conda
+```
+
+The following packages will be UPDATED/DOWNGRADED:... Proceed ([y]/n)? `y` 
+
+```bash
+conda create -n pyvoice38 python=3.8
+```
+
+The following (NEW) packages will be downloaded/INSTALLED:... Proceed ([y]/n)? `y`   
+```bash
+conda activate pyvoice38
+pip install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
+```
+
+
 ## MacOS Installation
 The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [MacOS Big Sur](https://www.apple.com/macos/big-sur/). Note the software versions during installation, inconsistency reporting is welcome.  
 If the error "The package %@ is missing or invalid" appears during the upgrading from MacOS Catalina to Big Sur, press simultaneously `command + option + p + r` at restart. The processes may be accompanied using the keys `command + space 'Activity Monitor'`.    
@@ -81,7 +233,7 @@ R is a free software environment for statistical computing and graphics.
  . Send R-4.1.0.pkg to Trash   
 
 ### 9. [RStudio](https://www.rstudio.com/)
-RStudio is an integrated development environment (IDE) for R.  
+RStudio is an Integrated Development Environment (IDE) for R.  
  . Download and run https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg  
  . Drag RStudio to Applications folder   
  . Will take 768.4 MB of disk space   
@@ -118,152 +270,5 @@ conda update -n base -c defaults conda
 conda create -n pyvoice38 python=3.8
 conda activate pyvoice38
 pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
-```
-
-
-## Ubuntu Installation
-The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [Ubuntu 20.04 LTS (Focal Fossa)](https://releases.ubuntu.com/20.04/). Note the software versions during installation, inconsistency reporting is welcome.  
-> Without the following Python items 3 and 12, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
-
-### 1. [Curl](https://curl.se/)
-Command line tool and library for transferring data with URLs.
-```bash
-apt remove curl
-apt purge curl
-sudo apt-get update
-sudo apt-get install -y libssl-dev autoconf libtool make
-```
-
-### 2. [Git]()
-```bash
-sudo apt-get install git-all
-```
-
-### 3. [Homebrew](https://brew.sh/)
-Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' and remember to `brew doctor` eventually. At terminal run:
-```bash
-git clone https://github.com/Homebrew/brew homebrew
-eval "$(homebrew/bin/brew shellenv)"
-brew update --force --quiet
-chmod -R go-w "$(brew --prefix)/share/zsh"
-
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-sudo chown -R $(whoami) /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5
-chmod u+w /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5
-```
-
-### 2. [wget](https://www.gnu.org/software/wget/)
-GNU Wget is a free software package for retrieving files using HTTP, HTTPS, FTP and FTPS, the most widely used Internet protocols. It is a non-interactive commandline tool, so it may easily be called from scripts, cron jobs, terminals without X-Windows support, etc.
-```bash
-brew install wget
-```
-
-### 3. [Python](https://www.python.org/)
-Python is a programming language that integrate systems.  
-```bash
-sudo apt update
-sudo apt install software-properties-common
-sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt update
-sudo apt install python3.8
-python3 --version 
-/home/linuxbrew/.linuxbrew/opt/python@3.9/bin/python3.9 -m pip install --upgrade pip
-pip --version
-```
-
-### 4. [ffmpeg](http://ffmpeg.org/)
-ffmpeg is a cross-platform solution to record, convert and stream audio and video. The installation may take several minutes.
-```bash
-brew install ffmpeg
-```
-
-### 5. Audio drivers
-```bash
-sudo apt-get install portaudio19-dev libasound2-dev
-```
-
-### 6. [MuseScore](https://musescore.org/)
-MuseScore is an open source notation software.  
-```bash
-sudo add-apt-repository ppa:mscore-ubuntu/mscore-stable
-sudo apt-get update
-sudo apt-get install musescore
-```
-
-### 7. [R](https://www.r-project.org)
-R is a free software environment for statistical computing and graphics. To find out your Ubuntu distribution use `lsb_release -a` at terminal.    
-```bash
-sudo sh -c 'echo "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" >> /etc/apt/sources.list.d/cran.list'
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9 
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 51716619E084DAB9
-gpg -a --export E084DAB9 | sudo apt-key add -
-
-sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
-
-sudo apt update && sudo apt upgrade
-sudo apt-get install r-base
-sudo apt-get install r-base-dev
-```
-
-### 8. [RStudio](https://www.rstudio.com/)
-RStudio is an integrated development environment (IDE) for R.  
-```bash
-sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb
-sudo gdebi rstudio-server-1.4.1717-amd64.deb
-```
-
-### 9. [R packages](https://cran.r-project.org/web/packages/)
-"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). At terminal run:
-```bash
-sudo R
-```
-
-Running R as super user paste the following, row by row:
-```r
-ini <- Sys.time()
-packs <- c('audio', 'devtools', 'e1071', 'ellipse', 'ggfortify', 'gm', 'RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'VIM', 'wrassp')
-install.packages(packs, dep = T); Sys.time()-ini
-update.packages(ask = F); Sys.time()-ini
-devtools::install_github('egenn/music'); Sys.time()-ini
-devtools::install_github('filipezabala/voice', force = T); Sys.time()-ini
-devtools::install_github('flujoo/gm'); Sys.time()-ini
-```
-To configure the `gm` package.
-```r
-usethis::edit_r_environ()
-```
-
-Add the line `MUSESCORE_PATH=/usr/bin/mscore` to `/root/.Renviron` file. Save and restart the R/RStudio session.
-
-
-### 10. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-Miniconda is a free minimal installer for [conda](https://docs.conda.io/), an open source package, dependency and environment management system for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN and more, that runs on Windows, macOS and Linux.   
-Follow the instructions at https://docs.conda.io/en/latest/miniconda.html. 
-
-At terminal:  
-```bash
-cd ~/Downloads/
-wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-cd repo.anaconda.com/miniconda/
-bash Miniconda3-latest-Linux-x86_64.sh
-```
-Do you wish the installer to initialize Miniconda3 by running conda init? `yes`.   
-Close and reopen terminal. 
-
-```bash
-conda update -n base -c defaults conda
-```
-
-The following packages will be UPDATED/DOWNGRADED:... Proceed ([y]/n)? `y` 
-
-```bash
-conda create -n pyvoice38 python=3.8
-```
-
-The following (NEW) packages will be downloaded/INSTALLED:... Proceed ([y]/n)? `y`   
-```bash
-conda activate pyvoice38
-pip install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 ```
 
