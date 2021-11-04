@@ -55,7 +55,7 @@ pip3 --version
 ```
 
 ### 4. [ffmpeg](http://ffmpeg.org/)
-ffmpeg is a cross-platform solution to record, convert and stream audio and video. The installation may take several minutes.
+ffmpeg is a cross-platform solution to record, convert and stream audio and video.
 ```bash
 sudo apt update
 sudo apt install ffmpeg
@@ -98,7 +98,7 @@ sudo gdebi rstudio-server-2021.09.0-351-amd64.deb
 ```
 
 ### 9. [R packages](https://cran.r-project.org/web/packages/)
-"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). At terminal run:
+"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). The installation may take several minutes. At terminal run:
 ```bash
 sudo R
 ```
