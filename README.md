@@ -93,8 +93,8 @@ sudo apt-get install r-base-dev
 RStudio is an Integrated Development Environment (IDE) for R.  
 ```bash
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-amd64.deb
-sudo gdebi rstudio-server-1.4.1717-amd64.deb
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.0-351-amd64.deb
+sudo gdebi rstudio-server-2021.09.0-351-amd64.deb
 ```
 
 ### 9. [R packages](https://cran.r-project.org/web/packages/)
