@@ -130,6 +130,8 @@ Command line tool and library for transferring data with URLs.
 ```bash
 apt remove curl
 apt purge curl
+sudo apt-get update
+sudo apt-get install -y libssl-dev autoconf libtool make
 ```
 
 ### 2. [Git]()
