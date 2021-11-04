@@ -39,7 +39,7 @@ sudo make install
 sudo cp /usr/local/bin/curl /usr/bin/curl
 curl -V
 ```
-If you have a message like `WARNING: curl and libcurl versions do not match. Functionality may be affected.`, you may take a look at [this](https://serverfault.com/questions/503555/libcurl-reporting-different-version-between-commands) post.
+You may take a look at [this](https://serverfault.com/questions/503555/libcurl-reporting-different-version-between-commands) post if you have a message like `WARNING: curl and libcurl versions do not match. Functionality may be affected.`
 
 ### 2. [Git](https://git-scm.com/)
 Git is a free and open source distributed version control system.
@@ -54,28 +54,19 @@ sudo apt install python3-pip
 pip3 --version
 ```
 
-### 4. [Homebrew](https://brew.sh/)
-Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' and remember to `brew doctor` eventually. At terminal run:
-```bash
-sudo git clone https://github.com/Homebrew/brew homebrew
-eval "$(homebrew/bin/brew shellenv)"
-sudo chown -R $(whoami) /usr/local/src/curl-7.79.1/homebrew
-brew update --force --quiet
-chmod -R go-w "$(brew --prefix)/share/zsh"
-```
-
-### 5. [ffmpeg](http://ffmpeg.org/)
+### 4. [ffmpeg](http://ffmpeg.org/)
 ffmpeg is a cross-platform solution to record, convert and stream audio and video. The installation may take several minutes.
 ```bash
-brew install ffmpeg
+sudo apt update
+sudo apt install ffmpeg
 ```
 
-### 6. Audio drivers
+### 5. Audio drivers
 ```bash
 sudo apt-get install portaudio19-dev libasound2-dev
 ```
 
-### 7. [MuseScore](https://musescore.org/)
+### 6. [MuseScore](https://musescore.org/)
 MuseScore is an open source notation software.  
 ```bash
 sudo add-apt-repository ppa:mscore-ubuntu/mscore-stable
@@ -83,7 +74,7 @@ sudo apt-get update
 sudo apt-get install musescore
 ```
 
-### 8. [R](https://www.r-project.org)
+### 7. [R](https://www.r-project.org)
 R is a free software environment for statistical computing and graphics. To find out your Ubuntu distribution use `lsb_release -a` at terminal.    
 ```bash
 sudo sh -c 'echo "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" >> /etc/apt/sources.list.d/cran.list'
@@ -98,7 +89,7 @@ sudo apt-get install r-base
 sudo apt-get install r-base-dev
 ```
 
-### 9. [RStudio](https://www.rstudio.com/)
+### 8. [RStudio](https://www.rstudio.com/)
 RStudio is an Integrated Development Environment (IDE) for R.  
 ```bash
 sudo apt-get install gdebi-core
@@ -106,7 +97,7 @@ wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-1.4.1717-a
 sudo gdebi rstudio-server-1.4.1717-amd64.deb
 ```
 
-### 10. [R packages](https://cran.r-project.org/web/packages/)
+### 9. [R packages](https://cran.r-project.org/web/packages/)
 "Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). At terminal run:
 ```bash
 sudo R
@@ -130,7 +121,7 @@ usethis::edit_r_environ()
 Add the line `MUSESCORE_PATH=/usr/bin/mscore` to `/root/.Renviron` file. Save and restart the R/RStudio session.
 
 
-### 11. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
+### 10. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
 Miniconda is a free minimal installer for [conda](https://docs.conda.io/), an open source package, dependency and environment management system for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN and more, that runs on Windows, macOS and Linux.   
 Follow the instructions at https://docs.conda.io/en/latest/miniconda.html. 
 
