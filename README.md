@@ -119,7 +119,7 @@ To configure the `gm` package.
 usethis::edit_r_environ()
 ```
 
-Add the line `MUSESCORE_PATH=/usr/bin/mscore` to `/root/.Renviron` file. Use `:wq` at VI. Save and restart the R/RStudio session.
+Add the line `MUSESCORE_PATH=/usr/bin/mscore` to `/root/.Renviron` file. To exit use `:wq` at VI. Save and restart the R/RStudio session.
 
 
 ### 10. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
