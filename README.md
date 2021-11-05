@@ -61,9 +61,9 @@ sudo apt update
 sudo apt install ffmpeg
 ```
 
-### 5. Audio drivers
+### 5. Audio drivers and extra packages
 ```bash
-sudo apt-get install portaudio19-dev libasound2-dev
+sudo apt-get install portaudio19-dev libasound2-dev libfontconfig1-dev libmagick++-dev libxml2-dev
 ```
 
 ### 6. [MuseScore](https://musescore.org/)
