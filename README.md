@@ -119,7 +119,7 @@ To configure the `gm` package.
 usethis::edit_r_environ()
 ```
 
-Add the line `MUSESCORE_PATH=/usr/bin/mscore` to `/root/.Renviron` file. Save and restart the R/RStudio session.
+Add the line `MUSESCORE_PATH=/usr/bin/mscore` to `/root/.Renviron` file. Use `:wq` at VI. Save and restart the R/RStudio session.
 
 
 ### 10. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
@@ -133,6 +133,10 @@ wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_6
 cd repo.anaconda.com/miniconda/
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
+Do you accept the license terms? [yes|no] `yes`.
+
+Miniconda3 will now be installed into this location: /home/user/miniconda3 [ENTER]
+
 Do you wish the installer to initialize Miniconda3 by running conda init? `yes`.   
 Close and reopen terminal. 
 
