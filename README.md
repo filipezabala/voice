@@ -151,9 +151,10 @@ conda create -n pyvoice38 python=3.8
 ```
 
 The following (NEW) packages will be downloaded/INSTALLED:... Proceed ([y]/n)? `y`   
+
 ```bash
 conda activate pyvoice38
-pip install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
+pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 ```
 
 
