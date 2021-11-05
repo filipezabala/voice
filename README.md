@@ -144,7 +144,7 @@ Close and reopen terminal.
 conda update -n base -c defaults conda
 ```
 
-The following packages will be UPDATED/DOWNGRADED:... Proceed ([y]/n)? `y` 
+The following packages will be INSTALLED/REMOVED/UPDATED/DOWNGRADED:... Proceed ([y]/n)? `y` 
 
 ```bash
 conda create -n pyvoice38 python=3.8
