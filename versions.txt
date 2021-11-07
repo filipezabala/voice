@@ -38,7 +38,6 @@ To do
 Version 0.2.6
 2021-11-07
 . Added 'rule = 2' @ line 52 @ conv.R.
-. 
 
 
 Version 0.2.5
