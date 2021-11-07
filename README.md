@@ -14,7 +14,7 @@ The following steps were used to configure [github.com/filipezabala/voice](https
 > Without the following Python items 3 and 10, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
 
 ### 1. [Curl](https://curl.se/)
-Command line tool and library for transferring data with URLs. Find the latest version at https://curl.se/download.html.
+Command line tool and library for transferring data with URLs. Find the latest version at https://curl.se/download.html. At terminal run:
 ```bash
 # removing (if necessary) old curl installation
 sudo apt remove curl
@@ -103,7 +103,7 @@ sudo gdebi rstudio-server-2021.09.0-351-amd64.deb
 ```
 
 ### 9. [R packages](https://cran.r-project.org/web/packages/)
-"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). The installation may take several minutes. The time difference on the first run was 27.23066 mins. At terminal run:
+"Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). The installation may take several minutes. At terminal run:
 ```bash
 sudo R
 ```
