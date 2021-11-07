@@ -11,7 +11,7 @@ A vignette may be found at http://filipezabala.com/voicegnette/.
 
 ## Ubuntu Installation
 The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [Ubuntu 20.04 LTS (Focal Fossa)](https://releases.ubuntu.com/20.04/). Note the software versions during installation, inconsistency reporting is welcome.  
-> Without the following Python items 3 and 12, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
+> Without the following Python items 3 and 10, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
 
 ### 1. [Curl](https://curl.se/)
 Command line tool and library for transferring data with URLs. Find the latest version at https://curl.se/download.html.
@@ -44,12 +44,14 @@ You may take a look at [this](https://serverfault.com/questions/503555/libcurl-r
 ### 2. [Git](https://git-scm.com/)
 Git is a free and open source distributed version control system.
 ```bash
+sudo apt-get update
 sudo apt-get install git-all
 ```
 
 ### 3. [pip](https://pypi.org/project/pip/)
 pip is the package installer for Python. 
 ```bash
+sudo apt update
 sudo apt install python3-pip
 pip3 --version
 ```
@@ -63,6 +65,7 @@ sudo apt install ffmpeg
 
 ### 5. Audio drivers, extra packages and some cleaning
 ```bash
+sudo apt-get update
 sudo apt-get install portaudio19-dev libasound2-dev libfontconfig1-dev libmagick++-dev libxml2-dev libharfbuzz-dev libfribidi-dev libgdal-dev
 sudo rm -Rf /usr/local/lib/R/site-library/00LOCK-digest
 ```
@@ -93,6 +96,7 @@ sudo apt-get install r-base-dev
 ### 8. [RStudio](https://www.rstudio.com/)
 RStudio is an Integrated Development Environment (IDE) for R. Check for updates [here](https://www.rstudio.com/products/rstudio/download-server/debian-ubuntu/).
 ```bash
+sudo apt-get update
 sudo apt-get install gdebi-core
 wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.0-351-amd64.deb
 sudo gdebi rstudio-server-2021.09.0-351-amd64.deb
