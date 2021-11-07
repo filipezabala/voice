@@ -1,0 +1,512 @@
+download.file(url0, paste0(wavDir, '/bebezinho.wav'), mode = 'wb')
+ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+round.to = 6, windowShift = 5)
+ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+round.to = 6, windowShift = 5)
+ef
+(ef01 <- voice::conv_df(ef, .01)) # 1%
+spn <- lapply(ef01[2:10], voice::notes)
+spn <- bind_rows(spn)
+colnames(spn) <- paste0('spn_', colnames(spn))
+ef01 <- bind_cols(ef01, spn)
+midi <- lapply(ef01[2:10], voice::notes, method = 'midi')
+midi <- bind_rows(midi)
+colnames(midi) <- paste0('midi_', colnames(midi))
+ef01 <- bind_cols(ef01, midi)
+glimpse(ef01)
+nd.spn <- music::noteDistance(as.character(ef01$spn_F0))
+table(nd.spn) # semitones
+dur.spn <- voice::duration(ef01$spn_F0)
+dur.midi <- voice::duration(ef01$midi_F0)
+music::playNote(note = as.character(dur.spn$note),
+duration = dur.spn$dur_line)
+m <- gm::Music()
+m <- m +
+# add a 4/4 time signature
+gm::Meter(4, 4) +
+# manually adding midi notes
+gm::Line(pitches = list(51, 53, 61, 58),
+durations = list(1,1,1,1))
+m
+show(m, to = c('score', 'audio'))
+mxmlDir
+# show(m, to = c('score', 'audio'))
+export(m, mxmlDir, 'bebezinho', 'musicxml')
+usethis::edit_r_environ()
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+music::playNote(note = as.character(dur.spn$note),
+duration = dur.spn$dur_line)
+# packs
+library(voice)
+library(tidyverse)
+library(tidyverse)
+library(music)
+library(gm)
+vaDir <- '~/Downloads/voiceAudios'
+wavDir <- paste0(vaDir, '/wav')
+mp3Dir <- paste0(vaDir, '/mp3')
+rttmDir <- paste0(vaDir, '/rttm')
+splitDir <- paste0(vaDir, '/split')
+mxmlDir <- paste0(vaDir, '/musicxml')
+ifelse(!dir.exists(vaDir), dir.create(vaDir), 'Directory exists!')
+ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
+ifelse(!dir.exists(mp3Dir), dir.create(mp3Dir), 'Directory exists!')
+ifelse(!dir.exists(rttmDir), dir.create(rttmDir), 'Directory exists!')
+ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
+ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
+url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav' # why wav_bebezinho_2.005.wav?
+download.file(url0, paste0(wavDir, '/bebezinho.wav'), mode = 'wb')
+ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+round.to = 6, windowShift = 5)
+(ef01 <- voice::conv_df(ef, .01)) # 1%
+spn <- lapply(ef01[2:10], voice::notes)
+spn <- bind_rows(spn)
+colnames(spn) <- paste0('spn_', colnames(spn))
+midi <- lapply(ef01[2:10], voice::notes, method = 'midi')
+midi <- lapply(ef01[2:10], voice::notes, method = 'midi')
+midi <- bind_rows(midi)
+ef01 <- bind_cols(ef01, midi)
+glimpse(ef01)
+spn
+spn
+colnames(spn)
+ef01
+ef01
+spn <- lapply(ef01[2:10], voice::notes)
+spn <- bind_rows(spn)
+colnames(spn) <- paste0('spn_', colnames(spn))
+ef01 <- bind_cols(ef01, spn)
+midi <- lapply(ef01[2:10], voice::notes, method = 'midi')
+midi <- bind_rows(midi)
+colnames(midi) <- paste0('midi_', colnames(midi))
+ef01 <- bind_cols(ef01, midi)
+glimpse(ef01)
+rm(ef01)
+spn <- lapply(ef01[2:10], voice::notes)
+(ef01 <- voice::conv_df(ef, .01)) # 1%
+spn <- lapply(ef01[2:10], voice::notes)
+spn <- bind_rows(spn)
+colnames(spn) <- paste0('spn_', colnames(spn))
+ef01 <- bind_cols(ef01, spn)
+midi <- lapply(ef01[2:10], voice::notes, method = 'midi')
+midi <- bind_rows(midi)
+colnames(midi) <- paste0('midi_', colnames(midi))
+ef01 <- bind_cols(ef01, midi)
+glimpse(ef01)
+nd.spn <- music::noteDistance(as.character(ef01$spn_F0))
+table(nd.spn) # semitones
+dur.spn <- voice::duration(ef01$spn_F0)
+dur.midi <- voice::duration(ef01$midi_F0)
+music::playNote(note = as.character(dur.spn$note),
+duration = dur.spn$dur_line)
+remove.packages("audio", lib="/usr/local/lib/R/site-library")
+music::playNote(note = as.character(dur.spn$note),
+duration = dur.spn$dur_line)
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+library(voice)
+library(tidyverse)
+library(music)
+library(gm)
+vaDir <- '~/Downloads/voiceAudios'
+wavDir <- paste0(vaDir, '/wav')
+mp3Dir <- paste0(vaDir, '/mp3')
+rttmDir <- paste0(vaDir, '/rttm')
+splitDir <- paste0(vaDir, '/split')
+mxmlDir <- paste0(vaDir, '/musicxml')
+ifelse(!dir.exists(vaDir), dir.create(vaDir), 'Directory exists!')
+ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
+ifelse(!dir.exists(mp3Dir), dir.create(mp3Dir), 'Directory exists!')
+ifelse(!dir.exists(rttmDir), dir.create(rttmDir), 'Directory exists!')
+ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
+ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
+url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav' # why wav_bebezinho_2.005.wav?
+download.file(url0, paste0(wavDir, '/bebezinho.wav'), mode = 'wb')
+ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+round.to = 6, windowShift = 5)
+(ef01 <- voice::conv_df(ef, .01)) # 1%
+spn <- lapply(ef01[2:10], voice::notes)
+spn <- bind_rows(spn)
+colnames(spn) <- paste0('spn_', colnames(spn))
+ef01 <- bind_cols(ef01, spn)
+midi <- lapply(ef01[2:10], voice::notes, method = 'midi')
+midi <- bind_rows(midi)
+colnames(midi) <- paste0('midi_', colnames(midi))
+ef01 <- bind_cols(ef01, midi)
+glimpse(ef01)
+nd.spn <- music::noteDistance(as.character(ef01$spn_F0))
+table(nd.spn) # semitones
+dur.spn <- voice::duration(ef01$spn_F0)
+dur.midi <- voice::duration(ef01$midi_F0)
+dur.spn
+dur.midi
+music::playNote(note = as.character(dur.spn$note),
+duration = dur.spn$dur_line)
+library(audio)
+audio.drivers()
+play(sin((1:10000)/5),10000)
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+# packs
+library(voice)
+library(tidyverse)
+library(music)
+library(gm)
+vaDir <- '~/Downloads/voiceAudios'
+wavDir <- paste0(vaDir, '/wav')
+mp3Dir <- paste0(vaDir, '/mp3')
+rttmDir <- paste0(vaDir, '/rttm')
+splitDir <- paste0(vaDir, '/split')
+mxmlDir <- paste0(vaDir, '/musicxml')
+ifelse(!dir.exists(vaDir), dir.create(vaDir), 'Directory exists!')
+ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
+ifelse(!dir.exists(mp3Dir), dir.create(mp3Dir), 'Directory exists!')
+ifelse(!dir.exists(rttmDir), dir.create(rttmDir), 'Directory exists!')
+ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
+ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
+url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav' # why wav_bebezinho_2.005.wav?
+download.file(url0, paste0(wavDir, '/bebezinho.wav'), mode = 'wb')
+ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+round.to = 6, windowShift = 5)
+ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+round.to = 6, windowShift = 5)
+ef
+(ef01 <- voice::conv_df(ef, .01)) # 1%
+spn <- lapply(ef01[2:10], voice::notes)
+spn <- bind_rows(spn)
+colnames(spn) <- paste0('spn_', colnames(spn))
+ef01 <- bind_cols(ef01, spn)
+midi <- lapply(ef01[2:10], voice::notes, method = 'midi')
+midi <- bind_rows(midi)
+colnames(midi) <- paste0('midi_', colnames(midi))
+ef01 <- bind_cols(ef01, midi)
+glimpse(ef01)
+nd.spn <- music::noteDistance(as.character(ef01$spn_F0))
+table(nd.spn) # semitones
+dur.spn <- voice::duration(ef01$spn_F0)
+dur.midi <- voice::duration(ef01$midi_F0)
+music::playNote(note = as.character(dur.spn$note),
+duration = dur.spn$dur_line)
+m <- gm::Music()
+m <- m +
+# add a 4/4 time signature
+gm::Meter(4, 4) +
+# manually adding midi notes
+gm::Line(pitches = list(51, 53, 61, 58),
+durations = list(1,1,1,1))
+m
+show(m, to = c('score', 'audio'))
+show(m, to = c('score', 'audio'))
+usethis::edit_r_environ() # MUSESCORE_PATH=/home/filipe/Music/MuseScore-3.6.2.548021370-x86_64.AppImage
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+# packs
+library(voice)
+library(tidyverse)
+library(tidyverse)
+library(music)
+library(gm)
+vaDir <- '~/Downloads/voiceAudios'
+wavDir <- paste0(vaDir, '/wav')
+mp3Dir <- paste0(vaDir, '/mp3')
+rttmDir <- paste0(vaDir, '/rttm')
+splitDir <- paste0(vaDir, '/split')
+mxmlDir <- paste0(vaDir, '/musicxml')
+ifelse(!dir.exists(vaDir), dir.create(vaDir), 'Directory exists!')
+ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
+ifelse(!dir.exists(mp3Dir), dir.create(mp3Dir), 'Directory exists!')
+ifelse(!dir.exists(rttmDir), dir.create(rttmDir), 'Directory exists!')
+url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav' # why wav_bebezinho_2.005.wav?
+download.file(url0, paste0(wavDir, '/bebezinho.wav'), mode = 'wb')
+ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+round.to = 6, windowShift = 5)
+ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+round.to = 6, windowShift = 5)
+ef
+(ef01 <- voice::conv_df(ef, .01)) # 1%
+spn <- lapply(ef01[2:10], voice::notes)
+spn <- bind_rows(spn)
+colnames(spn) <- paste0('spn_', colnames(spn))
+ef01 <- bind_cols(ef01, spn)
+midi <- lapply(ef01[2:10], voice::notes, method = 'midi')
+midi <- bind_rows(midi)
+colnames(midi) <- paste0('midi_', colnames(midi))
+ef01 <- bind_cols(ef01, midi)
+glimpse(ef01)
+nd.spn <- music::noteDistance(as.character(ef01$spn_F0))
+table(nd.spn) # semitones
+dur.spn <- voice::duration(ef01$spn_F0)
+dur.midi <- voice::duration(ef01$midi_F0)
+music::playNote(note = as.character(dur.spn$note),
+duration = dur.spn$dur_line)
+m <- gm::Music()
+m <- m +
+# add a 4/4 time signature
+gm::Meter(4, 4) +
+# manually adding midi notes
+gm::Line(pitches = list(51, 53, 61, 58),
+durations = list(1,1,1,1))
+m
+show(m, to = c('score', 'audio'))
+usethis::edit_r_environ() # MUSESCORE_PATH=/usr/bin/mscore # MUSESCORE_PATH=/home/filipe/Music/MuseScore-3.6.2.548021370-x86_64.AppImage
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+library(voice)
+library(tidyverse)
+library(music)
+library(gm)
+vaDir <- '~/Downloads/voiceAudios'
+wavDir <- paste0(vaDir, '/wav')
+mp3Dir <- paste0(vaDir, '/mp3')
+rttmDir <- paste0(vaDir, '/rttm')
+splitDir <- paste0(vaDir, '/split')
+mxmlDir <- paste0(vaDir, '/musicxml')
+ifelse(!dir.exists(vaDir), dir.create(vaDir), 'Directory exists!')
+ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
+ifelse(!dir.exists(mp3Dir), dir.create(mp3Dir), 'Directory exists!')
+ifelse(!dir.exists(rttmDir), dir.create(rttmDir), 'Directory exists!')
+ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
+ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
+cmd <- paste0('rm ', wavDir, '/*.*')
+system(cmd)
+url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav'
+download.file(url0, paste0(wavDir, '/bebezinho_2005.wav'), mode = 'wb')
+ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+round.to = 6, windowShift = 5)
+ef
+(ef01 <- voice::conv_df(ef, .01)) # 1%
+spn <- lapply(ef01[2:10], voice::notes)
+spn <- bind_rows(spn)
+colnames(spn) <- paste0('spn_', colnames(spn))
+ef01 <- bind_cols(ef01, spn)
+midi <- lapply(ef01[2:10], voice::notes, method = 'midi')
+midi <- bind_rows(midi)
+colnames(midi) <- paste0('midi_', colnames(midi))
+ef01 <- bind_cols(ef01, midi)
+glimpse(ef01)
+nd.spn <- music::noteDistance(as.character(ef01$spn_F0))
+table(nd.spn) # semitones
+nd.midi <- diff(ef01$midi_F0)
+nd.midi
+nd.spn
+nd.midi <- diff(ef01$midi_F0)
+nd.midi
+Sys.Date()
+Sys.time()
+?Sys.time()
+format(Sys.time(), "%a %b %d %X %Y")
+system.time()
+Sys.timezone(location = TRUE)
+Sys.timezone()
+format(Sys.time(), '%Y-%m-%d'
+)
+format(Sys.time(), '%Y-%m-%d %H:%M:%s')
+format(Sys.time(), '%Y-%m-%d %H:%M:%S')
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+library(voice)
+library(tidyverse)
+library(music)
+library(gm)
+vaDir <- '~/Downloads/voiceAudios'
+wavDir <- paste0(vaDir, '/wav')
+mp3Dir <- paste0(vaDir, '/mp3')
+rttmDir <- paste0(vaDir, '/rttm')
+splitDir <- paste0(vaDir, '/split')
+mxmlDir <- paste0(vaDir, '/musicxml')
+ifelse(!dir.exists(vaDir), dir.create(vaDir), 'Directory exists!')
+ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
+ifelse(!dir.exists(mp3Dir), dir.create(mp3Dir), 'Directory exists!')
+ifelse(!dir.exists(rttmDir), dir.create(rttmDir), 'Directory exists!')
+ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
+ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
+cmd <- paste0('rm ', wavDir, '/*.*')
+system(cmd)
+url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav'
+download.file(url0, paste0(wavDir, '/bebezinho_2005.wav'), mode = 'wb')
+ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+round.to = 6, windowShift = 5)
+ef
+ef
+ef
+ef
+ef
+dur.spn <- voice::duration(ef_ma$spn_F0)
+dur.spn <- voice::duration(ef_ma$spn_F0)
+# packs
+library(voice)
+library(tidyverse)
+library(music)
+library(gm)
+vaDir <- '~/Downloads/voiceAudios'
+wavDir <- paste0(vaDir, '/wav')
+mp3Dir <- paste0(vaDir, '/mp3')
+rttmDir <- paste0(vaDir, '/rttm')
+splitDir <- paste0(vaDir, '/split')
+mxmlDir <- paste0(vaDir, '/musicxml')
+ifelse(!dir.exists(vaDir), dir.create(vaDir), 'Directory exists!')
+ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
+ifelse(!dir.exists(mp3Dir), dir.create(mp3Dir), 'Directory exists!')
+ifelse(!dir.exists(rttmDir), dir.create(rttmDir), 'Directory exists!')
+ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
+ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
+cmd <- paste0('rm ', wavDir, '/*.*')
+system(cmd)
+url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav'
+download.file(url0, paste0(wavDir, '/bebezinho_2005.wav'), mode = 'wb')
+ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+round.to = 6, windowShift = 5)
+ef_ma <- lapply(ef[,-c(1,11)], zoo::rollmean, 11)
+ef_ma <- bind_cols(ef_ma)
+ef_ma
+spn <- lapply(ef_ma, voice::notes)
+spn <- bind_rows(spn)
+colnames(spn) <- paste0('spn_', colnames(spn))
+ef_ma <- bind_cols(ef_ma, spn)
+midi <- lapply(ef_ma, voice::notes, method = 'midi')
+midi <- bind_rows(midi)
+colnames(midi) <- paste0('midi_', colnames(midi))
+ef_ma <- bind_cols(ef_ma, midi)
+ef_ma <- lapply(ef[,-c(1,11)], zoo::rollmean, 11)
+ef_ma <- bind_cols(ef_ma)
+# updating and creating manual
+devtools::document(setwd('~/Dropbox/D_Filipe_Zabala/pacotes/voice/'))
+library(voice)
+?extract_features
+# erros <- read.table('C:/Users/gabri/OneDrive - PUCRS - BR/ProbEst/erros.txt', header = T)
+erros <- read.table('~/Dropbox/PUC/@Semestres/2021-2/11PE/2021-08-25_A1/correcao/Gabriel da Silva Silverio/alugueis.txt',
+header = T)
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+# packs
+library(voice)
+library(tidyverse)
+library(tidyverse)
+library(music)
+library(gm)
+vaDir <- '~/Downloads/voiceAudios'
+wavDir <- paste0(vaDir, '/wav')
+mp3Dir <- paste0(vaDir, '/mp3')
+rttmDir <- paste0(vaDir, '/rttm')
+splitDir <- paste0(vaDir, '/split')
+mxmlDir <- paste0(vaDir, '/musicxml')
+ifelse(!dir.exists(vaDir), dir.create(vaDir), 'Directory exists!')
+ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
+ifelse(!dir.exists(mp3Dir), dir.create(mp3Dir), 'Directory exists!')
+ifelse(!dir.exists(rttmDir), dir.create(rttmDir), 'Directory exists!')
+ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
+ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
+wavDir
+cmd <- paste0('rm ', wavDir, '/*.*')
+system(cmd)
+url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav'
+download.file(url0, paste0(wavDir, '/bebezinho_2005.wav'), mode = 'wb')
+ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+round.to = 6, windowShift = 5)
+ef
+ef_ma <- lapply(ef[,-c(1,11)], zoo::rollmean, 11)
+ef_ma
+ef_ma <- bind_cols(ef_ma)
+ef_ma
+ef[,-c(1,11)], zoo::rollmean, 11
+ef
+x = ef
+ef
+# n smoothed
+ns <- x-k+1
+# n smoothed
+n <- nrow(x)
+ns <- n-k+1
+x = ef
+k = 7
+# n smoothed
+n <- nrow(x)
+ns <- n-k+1
+ns
+# numeric columns
+if(is.null(colnum)){
+is.num <- unlist(lapply(x, class)) == 'numeric'
+colnum <- colnames(x[,is.num])
+}
+colnum = NULL
+id = colnames(x)[1]
+by.filter = id
+# numeric columns
+if(is.null(colnum)){
+is.num <- unlist(lapply(x, class)) == 'numeric'
+colnum <- colnames(x[,is.num])
+}
+is.num
+colnum
+# non-numeric columns
+colnon <- setdiff(colnames(x), colnum)
+colnon
+by.filter
+# split numeric columns by.filter
+snum <- split(x[,colnum], x[,by.filter])
+snum
+# split non-numeric columns by.filter
+snon <- split(x[,colnon], x[,by.filter])
+# split non-numeric columns by.filter
+snon <- split(x[,colnon], x[,by.filter])
+snon
+# original lengths by.filter
+lv <- table(x[,by.filter])
+lv
+# vector and length of distinct id's
+nlv <- names(lv)
+nid <- length(nlv)
+mlv
+nlv
+nid
+# result lengths by.filter
+cs <- c(0, cumsum(ns))
+cs
+ef_ma <- lapply(x[,colnum], zoo::rollmean, k)
+x_ma <- lapply(x[,colnum], zoo::rollmean, k)
+x_ma
+x_ma <- bind_cols(x_ma)
+x_ma
+# compact list
+li <- vector('list', length = nid)
+li
+nid
+ns[i]
+i=1
+ns[i]
+ns
+index <- 1:ns[i]
+index
+snon[[i]][index,]
+snon[[i]][index,]
+snon[[i]]
+snon
+snon[[i]]
+snon[[i]][index,]
+View(x_ma)
+x_ma <- bind_cols(x_ma)
+snon[[i]][index,]
+x_li <- lapply(x[,colnum], zoo::rollmean, k)
+x_df <- bind_cols(x_li)
+x_li
+index <- 1:ns[i]
+index
+x_li[[i]]
+snon[[i]][index,]
+x_li[[i]] <- snon[[i]][index,]
+x_li

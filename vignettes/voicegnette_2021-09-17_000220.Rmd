@@ -35,12 +35,18 @@ library(gm)
 ### Set directories
 The `/mp3` and `/split` directories will be used in Example 7.
 ```{r}
-dirs <- c('vaDir', 'wavDir', 'mp3Dir', 'rttmDir', 'splitDir', 'musicxmlDir')
 vaDir <- '~/Downloads/voiceAudios'
-for(i in 1:length(dirs)){
-  if(i>1){ assign(dirs[i], paste0(get(dirs[1]), '/', dirs[i])) }
-  ifelse(!dir.exists(get(dirs[i])), dir.create(get(dirs[i])), 'Directory exists!')
-}
+wavDir <- paste0(vaDir, '/wav')
+mp3Dir <- paste0(vaDir, '/mp3')
+rttmDir <- paste0(vaDir, '/rttm')
+splitDir <- paste0(vaDir, '/split')
+mxmlDir <- paste0(vaDir, '/musicxml')
+ifelse(!dir.exists(vaDir), dir.create(vaDir), 'Directory exists!')
+ifelse(!dir.exists(wavDir), dir.create(wavDir), 'Directory exists!')
+ifelse(!dir.exists(mp3Dir), dir.create(mp3Dir), 'Directory exists!')
+ifelse(!dir.exists(rttmDir), dir.create(rttmDir), 'Directory exists!')
+ifelse(!dir.exists(splitDir), dir.create(splitDir), 'Directory exists!')
+ifelse(!dir.exists(mxmlDir), dir.create(mxmlDir), 'Directory exists!')
 ```
 
 ### Remove old files (¡sensible step!)
@@ -49,31 +55,23 @@ cmd <- paste0('rm ', wavDir, '/*.*')
 system(cmd)
 ```
 
-<!-- #### >>> To do #10 [SOLVED @ VERSION 0.0.0.9044 2021-09-12] -->
-<!-- Automatize and test `autoDir` argument @ splitw.R.  <<< -->
+#### >>> To do #10 [SOLVED @ VERSION 0.0.0.9044 2021-09-12]
+Automatize and test `autoDir` argument @ splitw.R.  <<<
 
-<!-- #### >>> To do #20 [SOLVED @ VERSION 0.0.0.9044 2021-09-12] -->
-<!-- Parameters fromWav, fromRttm admits either file or directory @ splitw.R. <<< -->
+#### >>> To do #20 [SOLVED @ VERSION 0.0.0.9044 2021-09-12]
+Parameters fromWav, fromRttm admits either file or directory @ splitw.R. <<<
 
 ### Get audios
 ```{r}
 url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav'
 download.file(url0, paste0(wavDir, '/bebezinho_2005.wav'), mode = 'wb')
+# music::playWave(paste0(wavDir, '/bebezinho_2005.wav'))
 ```
+#### >>> To do #30
+At `url0 <- 'https://github.com/filipezabala/voiceAudios/raw/main/bebezinho_2.005.wav'`, find out why the downloaded file is called `wav_bebezinho_2.005.wav`. <<<
 
-```{r}
-library(embedr)
-
-# embed .mp3 file
-audio <- "https://michaelmccarthy.netlify.app/files/embedr/audio-vignette.mp3"
-embed_audio(audio)
-```
-
-<!-- #### >>> To do #30 [SOLVED in 2021-11-07] -->
-<!-- Insert a button to play audio files. <<< -->
-
-<!-- #### >>> To do #40 -->
-<!-- At `url0 <- 'https://github.com/filipezabala/voiceAudios/raw/main/bebezinho_2.005.wav'`, find out why the downloaded file is called `wav_bebezinho_2.005.wav`. <<< -->
+#### >>> To do #40
+Insert a button to play audio files. <<<
 
 ### Extract features
 ```{r}
@@ -81,23 +79,23 @@ ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
                               round.to = 6, windowShift = 5)
 ef
 ```
-<!-- #### >>> To do #50 -->
-<!-- Automatize and test `stereo2mono`. <<< -->
+#### >>> To do #50
+Automatize and test `stereo2mono`. <<<
 
-<!-- #### >>> To do #60 -->
-<!-- Test different windowShift values.  <<< -->
+#### >>> To do #60
+Test different windowShift values.  <<<
 
 
 ## 2. Smooth
-<!-- #### >>> To do #70 [SOLVED @ VERSION 0.0.0.9042 2021-09-12] -->
-<!-- Write the function `smooth_df(x,k)`. <<< -->
+#### >>> To do #70 [SOLVED @ VERSION 0.0.0.9042 2021-09-12]
+Write the function `smooth_df(x,k)`. <<<
 
 ```{r, warning=FALSE}
 odd <- seq(1,11,2)
-ef_sm <- vector('list', length(odd))
+ef_sm <- vector('list', length = length(odd))
 names(ef_sm) <- paste0('k=', odd)
 for(i in 1:length(ef_sm)){
-  ef_sm[[i]] <- voice::smooth_df(ef, id = 3, k = i)
+  ef_sm[[i]] <- voice::smooth_df(ef, k = i)
 }
 sapply(ef_sm, dim)
 ```
@@ -205,7 +203,7 @@ Extract and test microtones. (Giuliano's idea.) <<<
 ### Compress to 1%
 ```{r}
 # compress
-ef_01 <- voice::conv_df(ef, 0.01)
+ef_01 <- conv_df(ef, 0.01)
 # assign notes
 ef_01$F0_spn <- voice::notes(ef_01$F0, measure = 'spn')
 # duration

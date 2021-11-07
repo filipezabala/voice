@@ -49,7 +49,7 @@ conv <- function(y, compact.to, drop.zeros = FALSE, to.data.frame = FALSE,
   }
 
   # interpolating
-  cv <- stats::approx(v, n = ceiling(compact.to*lv))
+  cv <- stats::approx(v, n = ceiling(compact.to*lv), rule = 2)
 
   # round.off
   if(!is.null(round.off)){
