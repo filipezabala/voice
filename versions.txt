@@ -31,13 +31,19 @@ To do
 * Stop criteria @ poetry.R: time, but recording and resuming.
 * Skip poetry if rttm exists.
 * random selector of MP3 files
-* create function to store files in directories of n (1000?) files.
+* create function to store files in directories of n (1000?) files. ZIP?
 
+
+
+Version 0.2.7
+2021-11-10
+. Added suppressMessages to line 61 @ smooth_df.R.
+. Summary generalized to all features obtained from voice::extract_features @ voice::feat_summary.
 
 
 Version 0.2.6
 2021-11-07
-. Added 'rule = 2' @ line 52 @ conv.R.
+. Added 'rule = 2' to line 52 @ conv.R.
 
 
 Version 0.2.5

@@ -41,22 +41,93 @@ feat_summary <- function(x, filesRange = NULL, features = 'f0',
                                overwrite = overwrite,
                                freq = freq,
                                round.to = round.to)
+
+  if('f0' %in% features & 'formants' %in% features){
+    moreFeat <- toupper(dplyr::setdiff(features, c('f0', 'formants')))
+    f <- paste0('F',0:8)
+    featFull <- c(f, moreFeat)
+    if(extraFeatures){
+      Df <- paste0('Df', 2:8) # Df - Formant Dispersion by Fitch (1997)
+      Pf <- paste0('Pf', 1:8) # Pf - Formant Position by Puts, Apicella & Cárdenas (2011)
+      Rf <- paste0('Rf', 1:8) # Rf - Formant Removal by Zabala (2021/2022)
+      RDf <- paste0('RDf', 1:8) # RDf - Formant Dispersion Removal by Zabala (2021/2022)
+      RPf <- paste0('RPf', 1:8) # RPf - Formant Position Removal by Zabala (2021/2022)
+      featFull <- c(featFull, Df, Pf, Rf, RDf, RPf)
+    }
+  }
+
+  # Variation Coefficient function
+  vc <- function(x, na.rm = TRUE){
+    return(sd(x, na.rm = na.rm)/mean(x, na.rm = na.rm))
+  }
+
+  # get file_name and reorder columns
   M$file_name <- unlist(strsplit(M$file_name_ext, '.[Ww][Aa][Vv]$')) # add this functionality to extract_features!
-  M <- dplyr::select(M, id_seq:file_name_ext, file_name, F0:dplyr::last_col())
-  M_summ <- M %>%
-    dplyr::group_by(file_name) %>%
-    dplyr::summarise(tag_F0_mean = mean(F0, na.rm = TRUE), # Mean
-                     tag_F0_sd = sd(F0, na.rm = TRUE), # (Sample) Standard Deviation
-                     tag_F0_vc = tag_F0_sd/tag_F0_mean, # (Sample) Variation Coefficient
-                     tag_F0_median = median(F0, na.rm = TRUE), # Median
-                     tag_F0_iqr = IQR(F0, na.rm = TRUE), # InterQuartile Range
-                     tag_F0_mad = mad(F0, na.rm = TRUE)) # Median Absolute Deviation
+  M <- dplyr::select(M, id_seq:file_name_ext, file_name, all_of(featFull))
+
+  # group by file_name
+  Mg <- M %>%
+    dplyr::group_by(file_name)
+
+  # Mean
+  M_mean <- Mg %>%
+    dplyr::summarise_at(vars(featFull), mean, na.rm = TRUE)
+  colnames(M_mean)[-1] <- paste0(colnames(M_mean)[-1], '_tag_mean')
+
+  # (Sample) Standard Deviation
+  M_sd <- Mg %>%
+    dplyr::summarise_at(vars(featFull), sd, na.rm = TRUE)
+  colnames(M_sd)[-1] <- paste0(colnames(M_sd)[-1], '_tag_sd')
+
+  # (Sample) Variation Coefficient
+  M_vc <- Mg %>%
+    dplyr::summarise_at(vars(featFull), vc, na.rm = TRUE)
+  colnames(M_vc)[-1] <- paste0(colnames(M_vc)[-1], '_tag_vc')
+
+  # Median
+  M_median <- Mg %>%
+    dplyr::summarise_at(vars(featFull), median, na.rm = TRUE)
+  colnames(M_median)[-1] <- paste0(colnames(M_median)[-1], '_tag_median')
+
+  # InterQuartile Range
+  M_iqr <- Mg %>%
+    dplyr::summarise_at(vars(featFull), IQR, na.rm = TRUE)
+  colnames(M_iqr)[-1] <- paste0(colnames(M_iqr)[-1], '_tag_iqr')
+
+  # Median Absolute Deviation
+  M_mad <- Mg %>%
+    dplyr::summarise_at(vars(featFull), mad, na.rm = TRUE)
+  colnames(M_mad)[-1] <- paste0(colnames(M_mad)[-1], '_tag_mad')
+
+  # left_join
+  M_summ <- dplyr::left_join(M_mean, M_sd, by = 'file_name')
+  M_summ <- dplyr::left_join(M_summ, M_vc, by = 'file_name')
+  M_summ <- dplyr::left_join(M_summ, M_median, by = 'file_name')
+  M_summ <- dplyr::left_join(M_summ, M_iqr, by = 'file_name')
+  M_summ <- dplyr::left_join(M_summ, M_mad, by = 'file_name')
+
   return(M_summ)
-  # M <- dplyr::left_join(M, M_summ, by = 'file_name')
-  # M$spn <- voice::notes(M$F0, measure = 'spn')
-  # dur <- by(ef$spn, ef$id_file, voice::duration)
-  # get_note <- function(x){ as.character(x[,'note']) }
-  # note <- lapply(dur, get_note)
-  # nd <- lapply(dur, music::noteDistance)
-  # lapply(nd, summary)
 }
+
+
+# # TEST
+# x = wavDir
+# filesRange = 1:10
+# features = c('f0','formants', 'gain')
+# extraFeatures = T
+# gender = "u"
+# windowShift = 5
+# numFormants = 8
+# numcep = 12
+# dcttype = c("t2", "t1", "t3", "t4")
+# fbtype = c("mel", "htkmel", "fcmel", "bark")
+# resolution = 40
+# usecmp = FALSE
+# mc.cores = 8
+# full.names = TRUE
+# recursive = FALSE
+# check.mono = TRUE
+# stereo2mono = TRUE
+# overwrite = FALSE
+# freq = 44100
+# round.to = 4

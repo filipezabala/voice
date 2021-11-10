@@ -13,7 +13,7 @@
 tag <- function(x, mediaDir, tags = c('feat_summary'),
                 subj.id = NULL, media.id = NULL,
                 subj.id.simplify = FALSE, mc.cores = 1,
-                filesRange = NULL, features = 'f0',
+                filesRange = NULL, features = c('f0'),
                 extraFeatures = FALSE,
                 gender = "u",
                 windowShift = 5,

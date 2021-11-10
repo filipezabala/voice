@@ -20,6 +20,7 @@
 # updating and creating manual
 devtools::document(setwd('~/Dropbox/D_Filipe_Zabala/pacotes/voice/'))
 
+remove.packages("voice", lib="/usr/local/lib/R/site-library")
 devtools::install_github('filipezabala/voice')
 
 # # loading

@@ -1,5 +1,5 @@
 ---
-title: '`voice` vignette'
+title: '`voice` vignette - The Python part'
 subtitle: 'version `r packageVersion("voice")`'
 author: 'Filipe J. Zabala'
 date: "`r format(Sys.time(), '%Y-%m-%d %H:%M:%S')`"
@@ -32,22 +32,18 @@ library(tidyverse)
 library(music)
 library(gm)
 ```
-### Set directories
-The `/mp3` and `/split` directories will be used in Example 7.
+### Setting directories and removing old ones
 ```{r}
-dirs <- c('vaDir', 'wavDir', 'mp3Dir', 'rttmDir', 'splitDir', 'musicxmlDir')
+dirs <- c('vaDir', 'wavDir', 'mp3Dir', 'musicxmlDir')
 vaDir <- '~/Downloads/voiceAudios'
 for(i in 1:length(dirs)){
   if(i>1){ assign(dirs[i], paste0(get(dirs[1]), '/', dirs[i])) }
   ifelse(!dir.exists(get(dirs[i])), dir.create(get(dirs[i])), 'Directory exists!')
 }
-```
-
-### Remove old files (¡sensible step!)
-```{r}
-cmd <- paste0('rm ', wavDir, '/*.*')
+cmd <- paste0('rm ', wavDir, '/*.*; ', 'rm ', mp3Dir, '/*.*')
 system(cmd)
 ```
+
 
 <!-- #### >>> To do #10 [SOLVED @ VERSION 0.0.0.9044 2021-09-12] -->
 <!-- Automatize and test `autoDir` argument @ splitw.R.  <<< -->
@@ -55,18 +51,11 @@ system(cmd)
 <!-- #### >>> To do #20 [SOLVED @ VERSION 0.0.0.9044 2021-09-12] -->
 <!-- Parameters fromWav, fromRttm admits either file or directory @ splitw.R. <<< -->
 
-### Get audios
+### Get audio
 ```{r}
-url0 <- 'http://www.filipezabala.com/audio/bebezinho_2005.wav'
-download.file(url0, paste0(wavDir, '/bebezinho_2005.wav'), mode = 'wb')
-```
-
-```{r}
-library(embedr)
-
-# embed .mp3 file
-audio <- "https://michaelmccarthy.netlify.app/files/embedr/audio-vignette.mp3"
-embed_audio(audio)
+url0 <- 'https://github.com/filipezabala/voiceAudios/blob/main/mp3/doremi.mp3?raw=true'
+download.file(url0, paste0(mp3Dir, '/doremi.mp3'), mode = 'wb')
+embedr::embed_audio(url0, attribute = c("controls"))
 ```
 
 <!-- #### >>> To do #30 [SOLVED in 2021-11-07] -->
@@ -75,9 +64,16 @@ embed_audio(audio)
 <!-- #### >>> To do #40 -->
 <!-- At `url0 <- 'https://github.com/filipezabala/voiceAudios/raw/main/bebezinho_2.005.wav'`, find out why the downloaded file is called `wav_bebezinho_2.005.wav`. <<< -->
 
+### Convert mp3 to wav mono
+```{r}
+cmd <- 'cd ~/Downloads/voiceAudios/mp3Dir;
+for i in *.[Mm][Pp]3; do ffmpeg -i "$i" -ac 1 "../wavDir/${i%.*}.wav"; done'
+system(cmd)
+```
+
 ### Extract features
 ```{r}
-ef <- voice::extract_features(wavDir, features = c('f0','formants','gain'),
+ef <- voice::extract_features(wavDir, features = c('f0','gain'),
                               round.to = 6, windowShift = 5)
 ef
 ```
@@ -92,7 +88,7 @@ ef
 <!-- #### >>> To do #70 [SOLVED @ VERSION 0.0.0.9042 2021-09-12] -->
 <!-- Write the function `smooth_df(x,k)`. <<< -->
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, message=FALSE}
 odd <- seq(1,11,2)
 ef_sm <- vector('list', length(odd))
 names(ef_sm) <- paste0('k=', odd)
@@ -124,55 +120,46 @@ Assign notes to F0.
 ```{r}
 for(i in 1:length(ef_sm)){
   ef_sm[[i]]$F0_spn <- voice::notes(ef_sm[[i]]$F0)
-  ef_sm[[i]]$F0_midi <- voice::notes(ef_sm[[i]]$F0, measure = 'midi')
-  ef_sm[[i]]$F0_octave <- voice::notes(ef_sm[[i]]$F0, measure = 'octave')
-  ef_sm[[i]]$F0_black <- voice::notes(ef_sm[[i]]$F0, measure = 'black')
 }
-lapply(ef_sm, head)
+lapply(ef_sm, dim)
 ```
 
-#### >>> To do #80 [WORK IN PROGRESS]
-Write plot_note function to show both frequency and notes in spn, midi and black formats. <<<
+<!-- #### >>> To do #80 [WORK IN PROGRESS] -->
+<!-- Write plot_note function to show both frequency and notes in spn, midi and black formats. <<< -->
 
-#### >>> To do #90
-Write a function to, given a frequency in Hz, convert in any SPN. <<<
+<!-- #### >>> To do #90 -->
+<!-- Write a function to, given a frequency in Hz, convert in any SPN. <<< -->
 
-#### >>> To do #100
-Implement and study major/minor chords identifier (consider `tabr` functions). <<<
+<!-- #### >>> To do #100 -->
+<!-- Implement and study major/minor chords identifier (consider `tabr` functions). <<< -->
 
-#### >>> To do #110
-Study sequences (scales and arpeggios). <<<
+<!-- #### >>> To do #110 -->
+<!-- Study sequences (scales and arpeggios). <<< -->
 
 
 ## 4. Duration
 ```{r}
 dur_spn <- vector('list', length(ef_sm)); names(dur_spn) <- paste0('k=', odd)
-dur_midi <- vector('list', length(ef_sm)); names(dur_midi) <- paste0('k=', odd)
-dur_octave <- vector('list', length(ef_sm)); names(dur_octave) <- paste0('k=', odd)
-dur_black <- vector('list', length(ef_sm)); names(dur_black) <- paste0('k=', odd)
 for(i in 1:length(ef_sm)){
   dur_spn[[i]] <- voice::duration(ef_sm[[i]]$F0_spn) 
-  dur_midi[[i]] <- voice::duration(ef_sm[[i]]$F0_midi) 
-  dur_octave[[i]] <- voice::duration(ef_sm[[i]]$F0_octave) 
-  dur_black[[i]] <- voice::duration(ef_sm[[i]]$F0_black) 
 }
 dur_spn[[1]]
 ```
 
-## 5. Distance
-Distance in semitones
-```{r}
-nd <- vector('list', length(ef_sm))
-for(i in 1:length(ef_sm)){
-  nd[[i]] <- music::noteDistance(as.character(dur_spn[[i]]$note))
-  print(summary(nd[[i]]))
-}
-nd[[1]]
-```
+<!-- ## 5. Distance -->
+<!-- Distance in semitones -->
+<!-- ```{r} -->
+<!-- nd <- vector('list', length(ef_sm)) -->
+<!-- for(i in 1:length(ef_sm)){ -->
+<!--   nd[[i]] <- music::noteDistance(as.character(dur_spn[[i]]$note)) -->
+<!--   print(summary(nd[[i]])) -->
+<!-- } -->
+<!-- nd[[1]] -->
+<!-- ``` -->
 
-#### >>> To do #120
-Extract and test microtones. (Giuliano's idea.) <<<
- 
+<!-- #### >>> To do #120 -->
+<!-- Extract and test microtones. (Giuliano's idea.) <<< -->
+
 <!-- ### Play -->
 <!-- ```{r} -->
 <!-- music::playNote(note = as.character(dur.spn$note), duration = dur.spn$dur_line) -->
@@ -201,11 +188,11 @@ Extract and test microtones. (Giuliano's idea.) <<<
 <!-- # ALSA lib pcm_dmix.c:1089:(snd_pcm_dmix_open) unable to open slave -->
 <!-- ``` -->
 
-## 6. Music sheet
+## 5. Music sheet
 ### Compress to 1%
 ```{r}
 # compress
-ef_01 <- voice::conv_df(ef, 0.01)
+ef_01 <- voice::conv_df(ef, 0.01, id = 3)
 # assign notes
 ef_01$F0_spn <- voice::notes(ef_01$F0, measure = 'spn')
 # duration
@@ -230,7 +217,7 @@ show(m01, to = c('score', 'audio'))
 ### Smooth using window k=21
 ```{r}
 # smooth
-ef_sm_21 <- voice::smooth_df(ef, k = 21)
+ef_sm_21 <- voice::smooth_df(ef, k = 21, id = 3)
 # assign notes
 ef_sm_21$F0_spn <- voice::notes(ef_sm_21$F0, measure = 'spn')
 # duration
@@ -258,8 +245,8 @@ Automate `pitches` and `durations` at `gm::Line` to capture spn/midi from `durat
 
 ### Export musicxml file
 ```{r}
-gm::export(m01, mxmlDir, 'bebezinho_01', 'musicxml')
-gm::export(m21, mxmlDir, 'bebezinho_21', 'musicxml')
+gm::export(m01, musicxmlDir, 'bebezinho_01', 'musicxml')
+gm::export(m21, musicxmlDir, 'bebezinho_21', 'musicxml')
 ```
 
 
@@ -279,12 +266,12 @@ mp3Files <- c('anthem0.mp3', 'anthem1.mp3', 'anthem2.mp3',
 
 # downloading just the first mp3 file (remove [1] to download all)
 for(i in mp3Files[1]){
-  system(paste0('wget -r -np -k ', url0, i, ' -P ~/Downloads/voiceAudios/mp3'))
+  system(paste0('wget -r -np -k ', url0, i, ' -P ~/Downloads/voiceAudios/mp3Dir'))
 }
 
 # tidying up files and directories
-system('cp ~/Downloads/voiceAudios/mp3/github.com/filipezabala/voiceAudios/raw/main/mp3/*.* ~/Downloads/voiceAudios/mp3')
-system('rm -rf ~/Downloads/voiceAudios/mp3/github.com/')
+system('cp ~/Downloads/voiceAudios/mp3Dir/github.com/filipezabala/voiceAudios/raw/main/mp3/*.* ~/Downloads/voiceAudios/mp3Dir')
+system('rm -rf ~/Downloads/voiceAudios/mp3Dir/github.com/')
 ```
 
 ### Remove old files
@@ -295,67 +282,68 @@ system(cmd)
 
 ### Convert mp3 to wav
 ```{r}
-cmd <- 'cd ~/Downloads/voiceAudios/mp3;
-for i in *.[Mm][Pp]3; do ffmpeg -i "$i" "../wav/${i%.*}.wav"; done'
+cmd <- 'cd ~/Downloads/voiceAudios/mp3Dir;
+for i in *.[Mm][Pp]3; do ffmpeg -i "$i" "../wavDir/${i%.*}.wav"; done'
 system(cmd)
 ```
-#### >>> To do #140
-Automatize and test mp32wav. <<<
 
-#### >>> To do #150
-Test the hypotheses  
-H1: multiple mp32wav2mp32wav... conversions reduce the audio quality.   
-H2: What is the impact in the decision using   
- i. original wav   
- ii. original mp3 (that must be converted to wav)    
- iii. H1, if H1 is consistent <<<
+<!-- #### >>> To do #140 -->
+<!-- Automatize and test mp32wav. <<< -->
+
+<!-- #### >>> To do #150 -->
+<!-- Test the hypotheses   -->
+<!-- H1: multiple mp32wav2mp32wav... conversions reduce the audio quality.    -->
+<!-- H2: What is the impact in the decision using    -->
+<!--  i. original wav    -->
+<!--  ii. original mp3 (that must be converted to wav)     -->
+<!--  iii. H1, if H1 is consistent <<< -->
 
 
 ### Poetry
 The best words in their best order. Takes around the audio time at 8CPU and the double of the audio time at 4CPU.
 ```{r}
-voice::poetry(wavDir, pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
+# voice::poetry(wavDir)
 ```
 ![](rttm.png)
 
 
-#### >>> To do #160 [WORK IN PROGRESS]
-Automate speaker recognition (who speaks when?) @ poetry.R. <<<
+<!-- #### >>> To do #160 [WORK IN PROGRESS] -->
+<!-- Automate speaker recognition (who speaks when?) @ poetry.R. <<< -->
 
 ### Split wave
 ```{r}
 # split wave
-ini <- Sys.time()
-voice::splitw(wavDir, fromRttm = rttmDir, to = splitDir)
-Sys.time()-ini
+# ini <- Sys.time()
+# voice::splitw(wavDir, fromRttm = rttmDir, to = splitDir)
+# Sys.time()-ini
 ```
 ![](split.png)
 
-#### >>> To do #170 [SOLVED @ VERSION 0.0.0.35 2021-08-16]
-Automate argument `compact.to` at `voice::conv_df`. <<<
+<!-- #### >>> To do #170 [SOLVED @ VERSION 0.0.0.35 2021-08-16] -->
+<!-- Automate argument `compact.to` at `voice::conv_df`. <<< -->
 
-#### >>> To do #180 [TESTED: NOT OK WITH GAIN]
-No gain testing weighting F0 considering GAIN and other features at `voice::conv_df`.  
-[TEST1] No gain testing weighting F0 considering GAIN. <<<
+<!-- #### >>> To do #180 [TESTED: NOT OK WITH GAIN] -->
+<!-- No gain testing weighting F0 considering GAIN and other features at `voice::conv_df`.   -->
+<!-- [TEST1] No gain testing weighting F0 considering GAIN. <<< -->
 
-#### >>> To do #190
-Test ZCR to infer BPM. <<<
+<!-- #### >>> To do #190 -->
+<!-- Test ZCR to infer BPM. <<< -->
 
-#### >>> To do #200
-Embed `gm::show` function at MacOS. Must solve:
-  - Error in magick_image_write(image, format, quality, depth, density, comment,  : 
-  rsession: NegativeOrZeroImageSize `' @ error/image.c/CloneImage/794 <<<
+<!-- #### >>> To do #200 -->
+<!-- Embed `gm::show` function at MacOS. Must solve: -->
+<!--   - Error in magick_image_write(image, format, quality, depth, density, comment,  :  -->
+<!--   rsession: NegativeOrZeroImageSize `' @ error/image.c/CloneImage/794 <<< -->
 
-#### >>> To do #210
-Find the 'best' set of variables in different contexts. <<<
+<!-- #### >>> To do #210 -->
+<!-- Find the 'best' set of variables in different contexts. <<< -->
 
-#### >>> To do #220 [SOLVED @ VERSION 0.0.0.9041 2021-09-10]
-Standardize `silence.gap` argument at `voice::splitw` considering NIST (National Institute of Standards and Technology) documentation. <<<
+<!-- #### >>> To do #220 [SOLVED @ VERSION 0.0.0.9041 2021-09-10] -->
+<!-- Standardize `silence.gap` argument at `voice::splitw` considering NIST (National Institute of Standards and Technology) documentation. <<< -->
 
-## Glossary
-. [WORK IN PROGRESS] As it says, support is welcome.     
-. [SOLVED @ VERSION major.minor.subminor '%Y-%m-%d'].  
-. [TESTED] During the tests no gain were obtained.   
+<!-- ## Glossary -->
+<!-- . [WORK IN PROGRESS] As it says, support is welcome.      -->
+<!-- . [SOLVED @ VERSION major.minor.subminor '%Y-%m-%d'].   -->
+<!-- . [TESTED] During the tests no gain were obtained.    -->
 
 
 ```{r}

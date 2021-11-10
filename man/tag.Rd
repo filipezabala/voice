@@ -13,7 +13,7 @@ tag(
   subj.id.simplify = FALSE,
   mc.cores = 1,
   filesRange = NULL,
-  features = "f0",
+  features = c("f0"),
   extraFeatures = FALSE,
   gender = "u",
   windowShift = 5,
