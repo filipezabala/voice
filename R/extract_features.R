@@ -576,15 +576,15 @@ extract_features <- function(directory, filesRange = NULL,
     dat$Rf7 <- F_sc[,'F0']-F_sc[,'F7']
     dat$Rf8 <- F_sc[,'F0']-F_sc[,'F8']
 
-    # RDf - Formant Dispersion Removal by Zabala (2021/2022)
-    dat$RDf1 <- F_sc[,'F0']-F_sc[,'F1']
-    dat$RDf2 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2')], na.rm = TRUE)
-    dat$RDf3 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3')], na.rm = TRUE)
-    dat$RDf4 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4')], na.rm = TRUE)
-    dat$RDf5 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5')], na.rm = TRUE)
-    dat$RDf6 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6')], na.rm = TRUE)
-    dat$RDf7 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6','F7')], na.rm = TRUE)
-    dat$RDf8 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6','F7','F8')], na.rm = TRUE)
+    # RCf - Formant Cumulated Removal by Zabala (2021/2022)
+    # dat$RCf1 <- F_sc[,'F0']-F_sc[,'F1']
+    dat$RCf2 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2')], na.rm = TRUE)
+    dat$RCf3 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3')], na.rm = TRUE)
+    dat$RCf4 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4')], na.rm = TRUE)
+    dat$RCf5 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5')], na.rm = TRUE)
+    dat$RCf6 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6')], na.rm = TRUE)
+    dat$RCf7 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6','F7')], na.rm = TRUE)
+    dat$RCf8 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6','F7','F8')], na.rm = TRUE)
 
     # RPf - Formant Position Removal by Zabala (2021/2022)
     dat$RPf1 <- F_sc[,'F0']-dat$Pf1

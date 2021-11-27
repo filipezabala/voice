@@ -32,8 +32,14 @@ To do
 * Skip poetry if rttm exists.
 * random selector of MP3 files
 * create function to store files in directories of n (1000?) files. ZIP?
+* Save log @ extract_features. 
 
 
+
+Version 0.2.8
+2021-11-27
+. Formant Dispersion Removal (RDf) set to Formant Cumulated Removal (RCf).
+. RCf set from i=1,...,8 to i=2,...,8.
 
 Version 0.2.7
 2021-11-10
