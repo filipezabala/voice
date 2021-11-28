@@ -36,7 +36,7 @@ To do
 
 
 
-Version 0.2.11
+Version 0.2.
 2021-
 * Deprecate extra_features.
 * Add voice::Df
@@ -45,6 +45,10 @@ Version 0.2.11
 * Add voice::RCf
 * Add voice::RPf
 
+
+Version 0.2.11
+2021-11-27
+. Added dplyr::bind_cols to line 602 @ extract_features.R.
 
 Version 0.2.10
 2021-11-27
