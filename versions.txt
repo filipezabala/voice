@@ -36,7 +36,7 @@ To do
 
 
 
-Version 0.2.10
+Version 0.2.11
 2021-
 * Deprecate extra_features.
 * Add voice::Df
@@ -44,6 +44,12 @@ Version 0.2.10
 * Add voice::Rf
 * Add voice::RCf
 * Add voice::RPf
+
+
+Version 0.2.10
+2021-11-27
+. RCf <- paste0('RCf', 2:8)
+. RPf <- paste0('RPf', 2:8)
 
 
 Version 0.2.9
