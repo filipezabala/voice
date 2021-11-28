@@ -50,9 +50,9 @@ feat_summary <- function(x, filesRange = NULL, features = 'f0',
       Df <- paste0('Df', 2:8) # Df - Formant Dispersion by Fitch (1997)
       Pf <- paste0('Pf', 1:8) # Pf - Formant Position by Puts, Apicella & Cárdenas (2011)
       Rf <- paste0('Rf', 1:8) # Rf - Formant Removal by Zabala (2021/2022)
-      RDf <- paste0('RDf', 1:8) # RDf - Formant Dispersion Removal by Zabala (2021/2022)
+      RCf <- paste0('RCf', 1:8) # RCf - Formant Cumulated Removal by Zabala (2021/2022)
       RPf <- paste0('RPf', 1:8) # RPf - Formant Position Removal by Zabala (2021/2022)
-      featFull <- c(featFull, Df, Pf, Rf, RDf, RPf)
+      featFull <- c(featFull, Df, Pf, Rf, RCf, RPf)
     }
   }
 

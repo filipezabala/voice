@@ -36,10 +36,27 @@ To do
 
 
 
+Version 0.2.10
+2021-
+* Deprecate extra_features.
+* Add voice::Df
+* Add voice::Pf
+* Add voice::Rf
+* Add voice::RCf
+* Add voice::RPf
+
+
+Version 0.2.9
+2021-11-27
+. Formant Dispersion Removal (RDf) set to Formant Cumulated Removal (RCf), line 53 @ feat_summary.R
+. dat$Dfn <- dat$Fn-dat$F1 set to dat$Dfn <- (dat$Fn-dat$F1)/(n-1) @ Df - Formant Dispersion by Fitch (1997) @ extract_features.
+
+
 Version 0.2.8
 2021-11-27
 . Formant Dispersion Removal (RDf) set to Formant Cumulated Removal (RCf).
 . RCf set from i=1,...,8 to i=2,...,8.
+
 
 Version 0.2.7
 2021-11-10
@@ -211,3 +228,6 @@ Contacts
 
 papel contact
 
+
+
+Wasson Donaldson Speech amplitude and zero crossings for automated identification of human speakers. IEEE Transactions on Audio, Speech and Signal Processing 23(4), 390– 392 (1975)
