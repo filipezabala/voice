@@ -41,6 +41,10 @@ To do
 * Add voice::RPf.R
 
 
+Version 0.3.1
+2021-12-03
+. extract_features2 set to voice::extract_features @ line 24 @ feat_summary.R.
+
 
 Version 0.3.0
 2021-12-03

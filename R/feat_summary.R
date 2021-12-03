@@ -21,7 +21,7 @@ feat_summary <- function(x, filesRange = NULL, features = 'f0',
                          freq = 44100,
                          round.to = 4){
 
-  M <- extract_features2(x, filesRange = filesRange,
+  M <- voice::extract_features(x, filesRange = filesRange,
                                features = features,
                                gender = gender,
                                windowShift = windowShift,
