@@ -14,7 +14,6 @@ tag(
   mc.cores = 1,
   filesRange = NULL,
   features = c("f0"),
-  extraFeatures = FALSE,
   gender = "u",
   windowShift = 5,
   numFormants = 8,

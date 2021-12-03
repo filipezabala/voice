@@ -8,7 +8,6 @@ feat_summary(
   x,
   filesRange = NULL,
   features = "f0",
-  extraFeatures = FALSE,
   gender = "u",
   windowShift = 5,
   numFormants = 8,

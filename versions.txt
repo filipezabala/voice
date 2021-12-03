@@ -33,22 +33,28 @@ To do
 * random selector of MP3 files
 * create function to store files in directories of n (1000?) files. ZIP?
 * Save log @ extract_features. 
+* Add voice::yule.R
+* Add voice::Df.R
+* Add voice::Pf.R
+* Add voice::Rf.R
+* Add voice::RCf.R
+* Add voice::RPf.R
 
 
 
-Version 0.2.
-2021-
-* Deprecate extra_features.
-* Add voice::Df
-* Add voice::Pf
-* Add voice::Rf
-* Add voice::RCf
-* Add voice::RPf
+Version 0.3.0
+2021-12-03
+. Set argument 'directory' to 'x' @ extract_features.R.
+. Set features colnames to lowercase @ extract_features.R.
+. Added df, pf, rf, rcf and rpf as argument of 'features' @ extract_features.R.
+. Deprecate argument 'extraFeatures' @ extract_features.R and, feat_summary.R and tag.R.
+* Contemplate `ZCR`, `RFC`, `AC`, and `MFCC` (numbers) @ feat_summary.R.
 
 
 Version 0.2.11
 2021-11-27
 . Added dplyr::bind_cols to line 602 @ extract_features.R.
+
 
 Version 0.2.10
 2021-11-27
@@ -234,10 +240,3 @@ Contacts
 . Kolberg
 
 
-
-
-papel contact
-
-
-
-Wasson Donaldson Speech amplitude and zero crossings for automated identification of human speakers. IEEE Transactions on Audio, Speech and Signal Processing 23(4), 390– 392 (1975)

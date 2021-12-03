@@ -5,10 +5,10 @@
 \title{Extracts features from WAV audio files}
 \usage{
 extract_features(
-  directory,
+  x,
   filesRange = NULL,
-  features = c("f0", "formants", "zcr", "mhs", "rms", "gain", "rfc", "ac", "mfcc"),
-  extraFeatures = FALSE,
+  features = c("f0", "formants", "df", "pf", "rf", "rcf", "rpf", "zcr", "mhs", "rms",
+    "gain", "rfc", "ac", "mfcc"),
   gender = "u",
   windowShift = 5,
   numFormants = 8,
@@ -28,13 +28,11 @@ extract_features(
 )
 }
 \arguments{
-\item{directory}{A directory containing audio file(s) in WAV format. If more than one directory is provided, only the first one is used.}
+\item{x}{A directory containing audio file(s) in WAV format. If more than one directory is provided, only the first one is used.}
 
 \item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files).}
 
 \item{features}{Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
-
-\item{extraFeatures}{Logical. Should extra features must be calculated? (default: \code{FALSE}) See details.}
 
 \item{gender}{\code{= <code>} set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.}
 
@@ -72,7 +70,7 @@ extract_features(
 Extracts features from WAV audio files.
 }
 \details{
-When \code{extraFeatures = TRUE}, the \code{features} 'f0' and 'formants' must be selected. The 7+8+8+7+8 = 38 extra features are 'formant dispersion' (Df2:Df8) by Fitch (1997), 'formant position' (Pf1:Pf8) by Puts, Apicella & Cárdena (2011), 'formant removal' (Rf1:Rf8) by Zabala (2021/2022), 'formant cumulated removal' (RCf2:RCf8) by Zabala (2021/2022) and 'formant position removal' (RPf1:RPf8) by Zabala (2021/2022).
+When \code{features} 'df', 'pf', 'rf', 'rcf' or 'rpf' are selected, 'f0' and 'formants' must be selected. The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2022), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2022) and 'rpf' to 'formant position removal' (rpf1:rpf8) by Zabala (2022).
 }
 \examples{
 library(voice)
@@ -88,12 +86,13 @@ pattern <- glob2rx('*.wav'), full.names = TRUE)
 
 # getting all the features (the total may vary)
 ef <- extract_features(dirname(path2wav), features = c('f0','formants',
-'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
+'df','pf','rf','rcf','rpf','zcr','mhs','rms','gain','rfc','ac','cep','dft',
+'css','lps','mfcc'),
 mc.cores = 1)
 dim(ef)
 ef
 
-# using the default, i.e., not using 'cep','dft','css' and 'lps' (4*257 = 1028 columns)
+# using the default, i.e., not using 'cep','dft','css' and 'lps' (hundreds of columns)
 ef2 <- extract_features(dirname(path2wav), mc.cores = 1)
 dim(ef2)
 ef2
@@ -125,7 +124,9 @@ autoplot(pc, data = na.omit(ef2), colour = 'file_name_ext',
 loadings = TRUE, loadings.label = TRUE)
 }
 \references{
-Fitch, W.T. 1997 Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (doi:10.1121/1.421048) \n
+Fitch, W.T. 1997 Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (doi:10.1121/1.421048)
+
 Puts, D.A., Apicella, C.L., Cardenas, R.A., 2012. Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (https://doi.org/10.1098/rspb.2011.0829) \n
-Zabala (2021/2022) ...
+
+Zabala (2022) ...
 }

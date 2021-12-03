@@ -1,9 +1,8 @@
 #' Extracts features from WAV audio files
 #' @description Extracts features from WAV audio files.
-#' @param directory A directory containing audio file(s) in WAV format. If more than one directory is provided, only the first one is used.
+#' @param x A directory containing audio file(s) in WAV format. If more than one directory is provided, only the first one is used.
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
 #' @param features Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
-#' @param extraFeatures Logical. Should extra features must be calculated? (default: \code{FALSE}) See details.
 #' @param gender \code{= <code>} set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
 #' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
 #' @param numFormants \code{= <num>} <num>ber of formants (default: 8). Used by \code{wrassp::forest}.
@@ -20,10 +19,12 @@
 #' @param overwrite Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})
 #' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
 #' @param round.to Number of decimal places to round to. (default: \code{NULL})
-#' @details When \code{extraFeatures = TRUE}, the \code{features} 'f0' and 'formants' must be selected. The 7+8+8+7+8 = 38 extra features are 'formant dispersion' (Df2:Df8) by Fitch (1997), 'formant position' (Pf1:Pf8) by Puts, Apicella & Cárdena (2011), 'formant removal' (Rf1:Rf8) by Zabala (2021/2022), 'formant cumulated removal' (RCf2:RCf8) by Zabala (2021/2022) and 'formant position removal' (RPf1:RPf8) by Zabala (2021/2022).
-#' @references Fitch, W.T. 1997 Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (doi:10.1121/1.421048) \n
+#' @details When \code{features} 'df', 'pf', 'rf', 'rcf' or 'rpf' are selected, 'f0' and 'formants' must be selected. The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2022), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2022) and 'rpf' to 'formant position removal' (rpf1:rpf8) by Zabala (2022).
+#' @references Fitch, W.T. 1997 Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (doi:10.1121/1.421048)
+#'
 #' Puts, D.A., Apicella, C.L., Cardenas, R.A., 2012. Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (https://doi.org/10.1098/rspb.2011.0829) \n
-#' Zabala (2021/2022) ...
+#'
+#' Zabala (2022) ...
 #' @examples
 #' library(voice)
 #' library(tidyverse)
@@ -38,12 +39,13 @@
 #'
 #' # getting all the features (the total may vary)
 #' ef <- extract_features(dirname(path2wav), features = c('f0','formants',
-#' 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
+#' 'df','pf','rf','rcf','rpf','zcr','mhs','rms','gain','rfc','ac','cep','dft',
+#' 'css','lps','mfcc'),
 #' mc.cores = 1)
 #' dim(ef)
 #' ef
 #'
-#' # using the default, i.e., not using 'cep','dft','css' and 'lps' (4*257 = 1028 columns)
+#' # using the default, i.e., not using 'cep','dft','css' and 'lps' (hundreds of columns)
 #' ef2 <- extract_features(dirname(path2wav), mc.cores = 1)
 #' dim(ef2)
 #' ef2
@@ -74,10 +76,11 @@
 #' autoplot(pc, data = na.omit(ef2), colour = 'file_name_ext',
 #' loadings = TRUE, loadings.label = TRUE)
 #' @export
-extract_features <- function(directory, filesRange = NULL,
-                             features = c('f0','formants','zcr','mhs','rms',
+extract_features <- function(x, filesRange = NULL,
+                             features = c('f0','formants',
+                                          'df','pf','rf','rcf','rpf',
+                                          'zcr','mhs','rms',
                                           'gain','rfc','ac','mfcc'),
-                             extraFeatures = FALSE,
                              gender = 'u', windowShift = 5, numFormants = 8,
                              numcep = 12, dcttype = c('t2', 't1', 't3', 't4'),
                              fbtype = c('mel', 'htkmel', 'fcmel', 'bark'),
@@ -92,10 +95,10 @@ extract_features <- function(directory, filesRange = NULL,
   pt0 <- proc.time()
 
   # removing duplicates, using the first directory provided
-  directory <- directory[1]
+  x <- x[1]
 
   # listing wav files
-  wavFiles <- list.files(directory, pattern = '[[:punct:]][wW][aA][vV]$',
+  wavFiles <- list.files(x, pattern = '[[:punct:]][wW][aA][vV]$',
                          full.names = full.names, recursive = recursive)
 
   # filtering by filesRange
@@ -142,7 +145,8 @@ extract_features <- function(directory, filesRange = NULL,
   f[3] <- sum(features == 'rfc')
 
   # list of features
-  nFe <- length(features)
+  features2 <- base::setdiff(features, c('df','pf','rf','rcf','rpf'))
+  nFe <- length(features2)
   ifelse(sum(f) == 0, ind1 <- 0, ind1 <- 1)
   ifelse(sum(features == 'mfcc'), ind2 <- 0, ind2 <- 1)
   features.list.temp <- vector('list', nFe-sum(f)+ind1+ind2)
@@ -151,7 +155,7 @@ extract_features <- function(directory, filesRange = NULL,
   i.temp <- 0
   i <- 0
 
-  # 1. F0 analysis of the signal
+  # 1. f0 analysis of the signal
   if('f0' %in% features){
     i.temp <- i.temp+1
     i <- i+1
@@ -169,7 +173,7 @@ extract_features <- function(directory, filesRange = NULL,
                                       wrassp::numRecs.AsspDataObj))
   }
 
-  # 2. Formant estimation (F1:F8)
+  # 2. Formant estimation (f1:f8)
   if('formants' %in% features){
     i.temp <- i.temp+1
     i <- i+1
@@ -187,17 +191,6 @@ extract_features <- function(directory, filesRange = NULL,
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
-
-  # # 2.5 Extra features (only list names)
-  # if(extraFeatures & 'f0' %in% features & 'formants' %in% features){
-  #   nms <- c(paste0('Df', 2:8), paste0('Pf', 1:8), paste0('Rf', 1:8),
-  #            paste0('RNf', 1:8), paste0('RPf', 1:8))
-  #   names(features.list)[(i+1):(i+39)] <- nms
-  #   names(length.list)[(i+1):(i+39)] <- nms
-  #
-  #   i.temp <- i.temp+39
-  #   i <- i+39
-  # }
 
   # 3. Analysis of the averages of the short-term positive and negative (Z)ero-(C)rossing (R)ates
   if('zcr' %in% features){
@@ -480,55 +473,55 @@ extract_features <- function(directory, filesRange = NULL,
 
   # colnames
   if('f0' %in% features){
-    colnames(features.list$f0) <- 'F0'
+    colnames(features.list$f0) <- 'f0'
     }
 
   if('formants' %in% features){
-    colnames(features.list$formants) <- paste0('F', 1:ncol(features.list$formants))
+    colnames(features.list$formants) <- paste0('f', 1:ncol(features.list$formants))
     }
 
   if('zcr' %in% features){
-    colnames(features.list$zcr) <- paste0('ZCR', 1:ncol(features.list$zcr))
+    colnames(features.list$zcr) <- paste0('zcr', 1:ncol(features.list$zcr))
     }
 
   if('mhs' %in% features){
-    colnames(features.list$mhs) <- paste0('MHS')
+    colnames(features.list$mhs) <- paste0('mhs')
   }
 
   if('rms' %in% features){
-    colnames(features.list$rms) <- paste0('RMS')
+    colnames(features.list$rms) <- paste0('rms')
   }
 
   if('gain' %in% features){
-    colnames(features.list$gain) <- paste0('GAIN')
+    colnames(features.list$gain) <- paste0('gain')
   }
 
   if('rfc' %in% features){
-    colnames(features.list$rfc) <- paste0('RFC', 1:ncol(features.list$rfc))
+    colnames(features.list$rfc) <- paste0('rfc', 1:ncol(features.list$rfc))
   }
 
   if('ac' %in% features){
-    colnames(features.list$ac) <- paste0('ACF', 1:ncol(features.list$ac))
+    colnames(features.list$ac) <- paste0('acf', 1:ncol(features.list$ac))
   }
 
   if('cep' %in% features){
-    colnames(features.list$cep) <- paste0('CEP', 1:ncol(features.list$cep))
+    colnames(features.list$cep) <- paste0('cep', 1:ncol(features.list$cep))
   }
 
   if('dft' %in% features){
-    colnames(features.list$dft) <- paste0('DFT', 1:ncol(features.list$dft))
+    colnames(features.list$dft) <- paste0('dft', 1:ncol(features.list$dft))
   }
 
   if('css' %in% features){
-    colnames(features.list$css) <- paste0('CSS', 1:ncol(features.list$css))
+    colnames(features.list$css) <- paste0('css', 1:ncol(features.list$css))
   }
 
   if('lps' %in% features){
-    colnames(features.list$lps) <- paste0('LPS', 1:ncol(features.list$lps))
+    colnames(features.list$lps) <- paste0('lps', 1:ncol(features.list$lps))
   }
 
   if('mfcc' %in% features){
-    colnames(features.list$mfcc) <- paste0('MFCC', 1:ncol(features.list$mfcc))
+    colnames(features.list$mfcc) <- paste0('mfcc', 1:ncol(features.list$mfcc))
   }
 
   # as data frame
@@ -542,59 +535,71 @@ extract_features <- function(directory, filesRange = NULL,
   # replacing 0 by NA
   dat[-1][sapply(dat[-1], R.utils::isZero)] <- NA
 
-  if(extraFeatures & 'f0' %in% features & 'formants' %in% features){
-    # Df - Formant Dispersion by Fitch (1997)
-    dat$Df2 <- (dat$F2-dat$F1)/1
-    dat$Df3 <- (dat$F3-dat$F1)/2
-    dat$Df4 <- (dat$F4-dat$F1)/3
-    dat$Df5 <- (dat$F5-dat$F1)/4
-    dat$Df6 <- (dat$F6-dat$F1)/5
-    dat$Df7 <- (dat$F7-dat$F1)/6
-    dat$Df8 <- (dat$F8-dat$F1)/7
+  # 12. Df - Formant Dispersion by Fitch (1997)
+  if('f0' %in% features & 'formants' %in% features & 'df' %in% features){
+    if(numFormants >= 2) {dat$df2 <- (dat$f2-dat$f1)/1}
+    if(numFormants >= 3) {dat$df3 <- (dat$f3-dat$f1)/2}
+    if(numFormants >= 4) {dat$df4 <- (dat$f4-dat$f1)/3}
+    if(numFormants >= 5) {dat$df5 <- (dat$f5-dat$f1)/4}
+    if(numFormants >= 6) {dat$df6 <- (dat$f6-dat$f1)/5}
+    if(numFormants >= 7) {dat$df7 <- (dat$f7-dat$f1)/6}
+    if(numFormants >= 8) {dat$df8 <- (dat$f8-dat$f1)/7}
+  }
 
-    # Scaling
-    cn <- paste0('F', 0:8)
-    F_sc <- sapply(dat[,cn], scale)
+  # Scaling
+  if('f0' %in% features & 'formants' %in% features &
+     ('pf' %in% features | 'rf' %in% features |
+      'rcf' %in% features | 'rpf' %in% features)){
+    cn <- paste0('f', 0:numFormants)
+    f_sc <- sapply(dat[,cn], scale)
+  }
 
-    # Pf - Formant Position by Puts, Apicella & Cárdenas (2011)
-    dat$Pf1 <- F_sc[,'F1']
-    dat$Pf2 <- rowMeans(F_sc[,c('F1','F2')], na.rm = TRUE)
-    dat$Pf3 <- rowMeans(F_sc[,c('F1','F2','F3')], na.rm = TRUE)
-    dat$Pf4 <- rowMeans(F_sc[,c('F1','F2','F3','F4')], na.rm = TRUE)
-    dat$Pf5 <- rowMeans(F_sc[,c('F1','F2','F3','F4','F5')], na.rm = TRUE)
-    dat$Pf6 <- rowMeans(F_sc[,c('F1','F2','F3','F4','F5','F6')], na.rm = TRUE)
-    dat$Pf7 <- rowMeans(F_sc[,c('F1','F2','F3','F4','F5','F6','F7')], na.rm = TRUE)
-    dat$Pf8 <- rowMeans(F_sc[,c('F1','F2','F3','F4','F5','F6','F7','F8')], na.rm = TRUE)
+  # 13. Pf - Formant Position by puts, Apicella & Cárdenas (2011)
+  if('f0' %in% features & 'formants' %in% features & 'pf' %in% features){
+    if(numFormants >= 1) {dat$pf1 <- f_sc[,'f1']}
+    if(numFormants >= 2) {dat$pf2 <- rowMeans(f_sc[,c('f1','f2')], na.rm = TRUE)}
+    if(numFormants >= 3) {dat$pf3 <- rowMeans(f_sc[,c('f1','f2','f3')], na.rm = TRUE)}
+    if(numFormants >= 4) {dat$pf4 <- rowMeans(f_sc[,c('f1','f2','f3','f4')], na.rm = TRUE)}
+    if(numFormants >= 5) {dat$pf5 <- rowMeans(f_sc[,c('f1','f2','f3','f4','f5')], na.rm = TRUE)}
+    if(numFormants >= 6) {dat$pf6 <- rowMeans(f_sc[,c('f1','f2','f3','f4','f5','f6')], na.rm = TRUE)}
+    if(numFormants >= 7) {dat$pf7 <- rowMeans(f_sc[,c('f1','f2','f3','f4','f5','f6','f7')], na.rm = TRUE)}
+    if(numFormants >= 8) {dat$pf8 <- rowMeans(f_sc[,c('f1','f2','f3','f4','f5','f6','f7','f8')], na.rm = TRUE)}
+  }
 
-    # Rf - Formant Removal by Zabala (2021/2022)
-    dat$Rf1 <- F_sc[,'F0']-F_sc[,'F1']
-    dat$Rf2 <- F_sc[,'F0']-F_sc[,'F2']
-    dat$Rf3 <- F_sc[,'F0']-F_sc[,'F3']
-    dat$Rf4 <- F_sc[,'F0']-F_sc[,'F4']
-    dat$Rf5 <- F_sc[,'F0']-F_sc[,'F5']
-    dat$Rf6 <- F_sc[,'F0']-F_sc[,'F6']
-    dat$Rf7 <- F_sc[,'F0']-F_sc[,'F7']
-    dat$Rf8 <- F_sc[,'F0']-F_sc[,'F8']
+  # 14. Rf - Formant Removal by Zabala (2022)
+  if('f0' %in% features & 'formants' %in% features & 'rf' %in% features){
+    if(numFormants >= 1) {dat$rf1 <- f_sc[,'f0']-f_sc[,'f1']}
+    if(numFormants >= 2) {dat$rf2 <- f_sc[,'f0']-f_sc[,'f2']}
+    if(numFormants >= 3) {dat$rf3 <- f_sc[,'f0']-f_sc[,'f3']}
+    if(numFormants >= 4) {dat$rf4 <- f_sc[,'f0']-f_sc[,'f4']}
+    if(numFormants >= 5) {dat$rf5 <- f_sc[,'f0']-f_sc[,'f5']}
+    if(numFormants >= 6) {dat$rf6 <- f_sc[,'f0']-f_sc[,'f6']}
+    if(numFormants >= 7) {dat$rf7 <- f_sc[,'f0']-f_sc[,'f7']}
+    if(numFormants >= 8) {dat$rf8 <- f_sc[,'f0']-f_sc[,'f8']}
+  }
 
-    # RCf - Formant Cumulated Removal by Zabala (2021/2022)
-    # dat$RCf1 <- F_sc[,'F0']-F_sc[,'F1'] # equivalent to Rf1 and RPf1
-    dat$RCf2 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2')], na.rm = TRUE)
-    dat$RCf3 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3')], na.rm = TRUE)
-    dat$RCf4 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4')], na.rm = TRUE)
-    dat$RCf5 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5')], na.rm = TRUE)
-    dat$RCf6 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6')], na.rm = TRUE)
-    dat$RCf7 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6','F7')], na.rm = TRUE)
-    dat$RCf8 <- F_sc[,'F0']-rowSums(F_sc[,c('F1','F2','F3','F4','F5','F6','F7','F8')], na.rm = TRUE)
+  # 15. RCf - Formant Cumulated Removal by Zabala (2022)
+  if('f0' %in% features & 'formants' %in% features & 'rcf' %in% features){
+    # if(numFormants >= 1) {dat$rcf1 <- f_sc[,'f0']-f_sc[,'f1']} # equivalent to Rf1 and RPf1
+    if(numFormants >= 2) {dat$rcf2 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2')], na.rm = TRUE)}
+    if(numFormants >= 3) {dat$rcf3 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2','f3')], na.rm = TRUE)}
+    if(numFormants >= 4) {dat$rcf4 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2','f3','f4')], na.rm = TRUE)}
+    if(numFormants >= 5) {dat$rcf5 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2','f3','f4','f5')], na.rm = TRUE)}
+    if(numFormants >= 6) {dat$rcf6 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2','f3','f4','f5','f6')], na.rm = TRUE)}
+    if(numFormants >= 7) {dat$rcf7 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2','f3','f4','f5','f6','f7')], na.rm = TRUE)}
+    if(numFormants >= 8) {dat$rcf8 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2','f3','f4','f5','f6','f7','f8')], na.rm = TRUE)}
+  }
 
-    # RPf - Formant Position Removal by Zabala (2021/2022)
-    # dat$RPf1 <- F_sc[,'F0']-dat$Pf1 # equivalent to Rf1 and RCf1
-    dat$RPf2 <- F_sc[,'F0']-dat$Pf2
-    dat$RPf3 <- F_sc[,'F0']-dat$Pf3
-    dat$RPf4 <- F_sc[,'F0']-dat$Pf4
-    dat$RPf5 <- F_sc[,'F0']-dat$Pf5
-    dat$RPf6 <- F_sc[,'F0']-dat$Pf6
-    dat$RPf7 <- F_sc[,'F0']-dat$Pf7
-    dat$RPf8 <- F_sc[,'F0']-dat$Pf8
+  # 16. RPf - Formant position removal by Zabala (2022)
+  if('f0' %in% features & 'formants' %in% features & 'rpf' %in% features){
+    # if(numFormants >= 1) {dat$rpf1 <- f_sc[,'f0']-dat$pf1} # equivalent to Rf1 and RCf1
+    if(numFormants >= 2) {dat$rpf2 <- f_sc[,'f0']-dat$pf2}
+    if(numFormants >= 3) {dat$rpf3 <- f_sc[,'f0']-dat$pf3}
+    if(numFormants >= 4) {dat$rpf4 <- f_sc[,'f0']-dat$pf4}
+    if(numFormants >= 5) {dat$rpf5 <- f_sc[,'f0']-dat$pf5}
+    if(numFormants >= 6) {dat$rpf6 <- f_sc[,'f0']-dat$pf6}
+    if(numFormants >= 7) {dat$rpf7 <- f_sc[,'f0']-dat$pf7}
+    if(numFormants >= 8) {dat$rpf8 <- f_sc[,'f0']-dat$pf8}
   }
 
   # creating ids
@@ -609,3 +614,25 @@ extract_features <- function(directory, filesRange = NULL,
   # return dat
   return(dat)
 }
+
+
+# # TEST
+# x = wavDir
+# filesRange = 1:10
+# features = c('f0','formants','df','pf','rf','rcf','rpf','zcr','mhs','rms','gain','rfc','ac','mfcc','cep','dft','css','lps')
+# gender = "u"
+# windowShift = 5
+# numFormants = 8
+# numcep = 12
+# dcttype = c("t2", "t1", "t3", "t4")
+# fbtype = c("mel", "htkmel", "fcmel", "bark")
+# resolution = 40
+# usecmp = FALSE
+# mc.cores = 8
+# full.names = TRUE
+# recursive = FALSE
+# check.mono = TRUE
+# stereo2mono = TRUE
+# overwrite = FALSE
+# freq = 44100
+# round.to = 4
