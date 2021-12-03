@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+</head>
+
+<body>
+<audio id="player" controls></audio>
+<iframe id="recordingFrame" src="https://gitcdn.link/cdn/filipezabala/voice/master/tests/recording.html" style="border:none;"></iframe>
+<script>
+window.addEventListener('message', function(e) {
+  player.src = e.data;
+  //debug.log(e);
+  downloadBlob(URL.createObjectURL(e.data), 'recording.webm');
+});
+function downloadBlob(blobUrl, name) {
+  const link = document.createElement("a");
+  link.href = blobUrl;
+  link.download = name;
+  document.body.appendChild(link);
+  link.dispatchEvent(
+    new MouseEvent('click', { 
+      bubbles: true, 
+      cancelable: true, 
+      view: window 
+    })
+  );
+  document.body.removeChild(link);
+}
+</script>
+</body>
+</html>
