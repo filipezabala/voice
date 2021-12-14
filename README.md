@@ -218,8 +218,8 @@ The XQuartz project is an open-source effort to develop a version of the [X.Org 
 
 ```bash
 cd ~/Downloads
-tar -xf bwidget-1.9.14.tar.gz
-mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
+tar -xf BWidget-1.9.15.zip
+mv bwidget-1.9.15 /usr/local/lib/bwidget-1.9.15
 ```
 
 ### 7. [MuseScore](https://musescore.org/)
