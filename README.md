@@ -207,7 +207,8 @@ brew install ffmpeg
 ```
 
 ### 5. [XQuartz](www.xquartz.org)
-The XQuartz project is an open-source effort to develop a version of the X.Org X Window System that runs on macOS. Together with supporting libraries and applications, it forms the X11.app that Apple shipped with OS X versions 10.5 through 10.7.  
+The XQuartz project is an open-source effort to develop a version of the [X.Org X Window System](https://www.x.org/wiki/) that runs on macOS.
+
  . Download and run https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg  
  . Will take 319.2 MB of disk space   
  . Send XQuartz-2.8.1.dmg to Trash    
