@@ -269,9 +269,27 @@ cd ~/Downloads
 wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 cd repo.anaconda.com/miniconda/
 bash Miniconda3-latest-MacOSX-x86_64.sh
+```
+Do you accept the license terms? [yes|no] `yes`.
+
+Miniconda3 will now be installed into this location: /Users/[your_user]/miniconda3 [ENTER]
+
+Do you wish the installer to initialize Miniconda3 by running conda init? `yes`.   
+
+```bash
 export PATH="~/miniconda3/bin:$PATH"
 conda update -n base -c defaults conda
+```
+
+The following packages will be INSTALLED/REMOVED/UPDATED/DOWNGRADED:... Proceed ([y]/n)? `y` 
+
+```bash
 conda create -n pyvoice38 python=3.8
+```
+
+The following (NEW) packages will be downloaded/INSTALLED:... Proceed ([y]/n)? `y`   
+
+```bash
 conda activate pyvoice38
 pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 ```
