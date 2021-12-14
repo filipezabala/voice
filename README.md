@@ -286,8 +286,9 @@ The following packages will be INSTALLED/REMOVED/UPDATED/DOWNGRADED:... Proceed 
 ```bash
 conda create -n pyvoice38 python=3.8
 ```
-
 The following (NEW) packages will be downloaded/INSTALLED:... Proceed ([y]/n)? `y`   
+
+Close and reopen terminal.
 
 ```bash
 conda activate pyvoice38
