@@ -163,7 +163,7 @@ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requ
 
 
 ## MacOS Installation
-The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [MacOS Big Sur](https://www.apple.com/macos/big-sur/). Note the software versions during installation, inconsistency reporting is welcome.  
+The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [MacOS Big Sur](https://www.apple.com/macos/big-sur/) and [MacOS Monterey](https://www.apple.com/macos/monterey/). Note the software versions during installation, inconsistency reporting is welcome.  
 If the error "The package %@ is missing or invalid" appears during the upgrading from MacOS Catalina to Big Sur, press simultaneously `command + option + p + r` at restart. The processes may be accompanied using the keys `command + space 'Activity Monitor'`.    
 > Without the following Python items 3 and 11, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
 
