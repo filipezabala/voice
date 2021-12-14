@@ -257,7 +257,7 @@ packs <- c('devtools', 'e1071', 'ellipse', 'ggfortify', 'RColorBrewer', 'reticul
 install.packages(packs, dep = T); Sys.time()-ini
 update.packages(ask = F); Sys.time()-ini
 devtools::install_github('egenn/music'); Sys.time()-ini
-devtools::install_github('filipezabala/voice', force = T); Sys.time()-ini
+devtools::install_github('filipezabala/voice'); Sys.time()-ini
 devtools::install_github('flujoo/gm'); Sys.time()-ini
 ```
 
