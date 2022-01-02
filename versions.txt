@@ -41,9 +41,17 @@ To do
 * Add voice::RPf.R
 
 
+Version 0.3.6
+2021-01-02
+. Added @references Ardila et al (2019).
+. Added voice::plot_q.R, a plot_q[uality] function.
+. Imports magrittr at DESCRIPTION file.
+
+
+
 Version 0.3.5
 2021-01-02
-. Removed voice_ex1.rda.
+. Removed voice_ex1.rda, 7.5MB.
 . Deleted NAMESPACE.
 
 Version 0.3.4
