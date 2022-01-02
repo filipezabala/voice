@@ -5,7 +5,7 @@
 <!-- badges: end -->
 
 General tools for voice analysis. The `voice` package is being developed to be an easy-to-use set of tools to deal with audio analysis in R.  
-It is based on [`tuneR`](https://cran.r-project.org/web/packages/tuneR/index.html), [`wrassp`](https://cran.r-project.org/web/packages/wrassp/index.html), [`gm`](https://cran.r-project.org/web/packages/gm/index.html), [`tidyverse`](https://www.tidyverse.org/), as well as [Parselmouth](https://github.com/YannickJadoul/Parselmouth) - a Python library for the [Praat](http://www.praat.org/) software - and [pyannote-audio](https://github.com/pyannote/pyannote-audio) - an open-source toolkit written in Python for speaker diarization based on [PyTorch](https://github.com/pytorch/pytorch) machine learning framework.   
+It is based on [`wrassp`](https://cran.r-project.org/web/packages/wrassp/index.html), [`tuneR`](https://cran.r-project.org/web/packages/tuneR/index.html), [`seewave`](https://cran.r-project.org/web/packages/seewave/index.html), [`gm`](https://cran.r-project.org/web/packages/gm/index.html), as well as [Parselmouth](https://github.com/YannickJadoul/Parselmouth) - a Python library for the [Praat](http://www.praat.org/) software - and [pyannote-audio](https://github.com/pyannote/pyannote-audio) - an open-source toolkit written in Python for speaker diarization based on [PyTorch](https://github.com/pytorch/pytorch) machine learning framework.   
 
 A vignette may be found at http://filipezabala.com/voicegnette/.  
 
@@ -163,7 +163,7 @@ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requ
 
 
 ## MacOS Installation
-The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [MacOS Big Sur](https://www.apple.com/macos/big-sur/). Note the software versions during installation, inconsistency reporting is welcome.  
+The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [MacOS Big Sur](https://www.apple.com/macos/big-sur/) and [MacOS Monterey](https://www.apple.com/macos/monterey/). Note the software versions during installation, inconsistency reporting is welcome.  
 If the error "The package %@ is missing or invalid" appears during the upgrading from MacOS Catalina to Big Sur, press simultaneously `command + option + p + r` at restart. The processes may be accompanied using the keys `command + space 'Activity Monitor'`.    
 > Without the following Python items 3 and 11, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
 
@@ -207,6 +207,8 @@ brew install ffmpeg
 ```
 
 ### 5. [XQuartz](www.xquartz.org)
+The XQuartz project is an open-source effort to develop a version of the [X.Org X Window System](https://www.x.org/wiki/) that runs on macOS.
+
  . Download and run https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg  
  . Will take 319.2 MB of disk space   
  . Send XQuartz-2.8.1.dmg to Trash    
@@ -216,8 +218,8 @@ brew install ffmpeg
 
 ```bash
 cd ~/Downloads
-tar -xf bwidget-1.9.14.tar.gz
-mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
+tar -xf BWidget-1.9.15.zip
+mv bwidget-1.9.15 /usr/local/lib/bwidget-1.9.15
 ```
 
 ### 7. [MuseScore](https://musescore.org/)
@@ -255,7 +257,7 @@ packs <- c('devtools', 'e1071', 'ellipse', 'ggfortify', 'RColorBrewer', 'reticul
 install.packages(packs, dep = T); Sys.time()-ini
 update.packages(ask = F); Sys.time()-ini
 devtools::install_github('egenn/music'); Sys.time()-ini
-devtools::install_github('filipezabala/voice', force = T); Sys.time()-ini
+devtools::install_github('filipezabala/voice'); Sys.time()-ini
 devtools::install_github('flujoo/gm'); Sys.time()-ini
 ```
 
@@ -267,8 +269,28 @@ cd ~/Downloads
 wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 cd repo.anaconda.com/miniconda/
 bash Miniconda3-latest-MacOSX-x86_64.sh
+```
+Do you accept the license terms? [yes|no] `yes`.
+
+Miniconda3 will now be installed into this location: /Users/[your_user]/miniconda3 [ENTER]
+
+Do you wish the installer to initialize Miniconda3 by running conda init? `yes`.   
+
+```bash
+export PATH="~/miniconda3/bin:$PATH"
 conda update -n base -c defaults conda
+```
+
+The following packages will be INSTALLED/REMOVED/UPDATED/DOWNGRADED:... Proceed ([y]/n)? `y` 
+
+```bash
 conda create -n pyvoice38 python=3.8
+```
+The following (NEW) packages will be downloaded/INSTALLED:... Proceed ([y]/n)? `y`   
+
+Close and reopen terminal.
+
+```bash
 conda activate pyvoice38
 pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 ```
