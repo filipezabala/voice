@@ -13,7 +13,7 @@
 #'   \item{Dfi}{ith Formant Dispersion by Fitch (1997), i=2,...,8.}
 #'   \item{Pfi}{Formant Position by Puts, Apicella & Cárdenas (2011), i=1,...,8.}
 #'   \item{Rfi}{Formant Removal by Zabala (2021/2022), i=1,...,8.}
-#'   \item{RNfi}{Formant Dispersion Removal by Zabala (2021/2022), i=1,...,8.}
-#'   \item{RPfi}{Formant Position Removal by Zabala (2021/2022), i=1,...,8.}
+#'   \item{RNfi}{Formant Dispersion Removal by Zabala (2022), i=1,...,8.}
+#'   \item{RPfi}{Formant Position Removal by Zabala (2022), i=1,...,8.}
 #' }
 'voice_ex1'

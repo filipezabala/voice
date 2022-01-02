@@ -41,6 +41,16 @@ To do
 * Add voice::RPf.R
 
 
+Version 0.3.4
+2021-01-01
+. id_path <- E %>% 
+  select(client_id:path)
+ save(id_path, file = '~/Dropbox/D_Filipe_Zabala/pacotes/voice/data/id_path.rda',
+     compress = 'xz')
+ voice::id_path
+. Removed voice_ex1.rda.
+
+
 Version 0.3.3
 2021-01-01
 . Eid <- E %>% 
