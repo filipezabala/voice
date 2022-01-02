@@ -41,6 +41,11 @@ To do
 * Add voice::RPf.R
 
 
+Version 0.3.5
+2021-01-02
+. Removed voice_ex1.rda.
+. Deleted NAMESPACE.
+
 Version 0.3.4
 2021-01-01
 . id_path <- E %>% 
@@ -48,7 +53,6 @@ Version 0.3.4
  save(id_path, file = '~/Dropbox/D_Filipe_Zabala/pacotes/voice/data/id_path.rda',
      compress = 'xz')
  voice::id_path
-. Removed voice_ex1.rda.
 
 
 Version 0.3.3
