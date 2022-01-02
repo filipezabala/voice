@@ -128,5 +128,5 @@ Fitch, W.T. 1997 Vocal tract length and formant frequency dispersion correlate w
 
 Puts, D.A., Apicella, C.L., Cardenas, R.A., 2012. Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (https://doi.org/10.1098/rspb.2011.0829) \n
 
-Zabala (2022) ...
+Zabala (2022) to appear in...
 }

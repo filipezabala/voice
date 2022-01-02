@@ -11,7 +11,6 @@ tag(
   subj.id = NULL,
   media.id = NULL,
   subj.id.simplify = FALSE,
-  mc.cores = 1,
   filesRange = NULL,
   features = c("f0"),
   gender = "u",
@@ -22,6 +21,7 @@ tag(
   fbtype = c("mel", "htkmel", "fcmel", "bark"),
   resolution = 40,
   usecmp = FALSE,
+  mc.cores = 1,
   full.names = TRUE,
   recursive = FALSE,
   check.mono = TRUE,
@@ -53,5 +53,5 @@ Tag a data frame with media information.
 Parameter \code{tags} admits c('feat_summary', 'audio_time'). An Extended data frame E must contain subject and media data. See references.
 }
 \references{
-Zabala (2021) voice: a tag approach.
+Zabala (2022) to appear in...
 }

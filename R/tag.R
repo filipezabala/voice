@@ -8,20 +8,24 @@
 #' @param subj.id.simplify Logical. Should subject id must be simplified? Default: \code{FALSE}.
 #' @param ... See \code{?voice::extract_features}.
 #' @details Parameter \code{tags} admits c('feat_summary', 'audio_time'). An Extended data frame E must contain subject and media data. See references.
-#' @references Zabala (2021) voice: a tag approach.
+#' @references Zabala (2022) to appear in...
 #' @export
-tag <- function(x, mediaDir, tags = c('feat_summary'),
-                subj.id = NULL, media.id = NULL,
-                subj.id.simplify = FALSE, mc.cores = 1,
-                filesRange = NULL, features = c('f0'),
-                gender = "u",
+tag <- function(x, mediaDir,
+                tags = c('feat_summary'),
+                subj.id = NULL,
+                media.id = NULL,
+                subj.id.simplify = FALSE,
+                filesRange = NULL,
+                features = c('f0'),
+                gender = 'u',
                 windowShift = 5,
                 numFormants = 8,
                 numcep = 12,
-                dcttype = c("t2", "t1", "t3", "t4"),
-                fbtype = c("mel", "htkmel", "fcmel", "bark"),
+                dcttype = c('t2', 't1', 't3', 't4'),
+                fbtype = c('mel', 'htkmel', 'fcmel', 'bark'),
                 resolution = 40,
                 usecmp = FALSE,
+                mc.cores = 1,
                 full.names = TRUE,
                 recursive = FALSE,
                 check.mono = TRUE,

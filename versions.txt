@@ -41,6 +41,20 @@ To do
 * Add voice::RPf.R
 
 
+Version 0.3.3
+2021-01-01
+. Eid <- E %>% 
+  select(client_id:path)
+ save(Eid, file = '~/Dropbox/D_Filipe_Zabala/pacotes/voice/data/id_path.rda',
+     compress = TRUE)
+ data(voice::id_path)
+
+
+Version 0.3.2
+2021-12-15
+. Harmonize voice::extract_features.R and voice::tag.R arguments.
+
+
 Version 0.3.1
 2021-12-03
 . extract_features2 set to voice::extract_features @ line 24 @ feat_summary.R.
@@ -52,7 +66,7 @@ Version 0.3.0
 . Set features colnames to lowercase @ extract_features.R.
 . Added df, pf, rf, rcf and rpf as argument of 'features' @ extract_features.R.
 . Deprecate argument 'extraFeatures' @ extract_features.R and, feat_summary.R and tag.R.
-* Contemplate `ZCR`, `RFC`, `AC`, and `MFCC` (numbers) @ feat_summary.R.
+. Contemplate `ZCR`, `RFC`, `AC`, and `MFCC` (numbers) @ feat_summary.R.
 
 
 Version 0.2.11
@@ -243,4 +257,18 @@ Contacts
 . JF
 . Kolberg
 
+
+
+
+3 cursos Tecnólogo, 100% EAD
+banco de dados (analytics/ciência de dados) disciplinas da matemática p/ pegar o cara q trabalha. ML
+segurança (cristina nunes/avelino)
+TI (análise de sistemas / alessandra/bernardo)
+
+8 específicas
+10 disciplinas em comum, 20 disciplinas
+22/12 - objetivos, perfil egresso
+jan - disciplinas
+ppc pronto em 20/02
+ppc na câmara 20/03
 

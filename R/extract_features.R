@@ -24,7 +24,7 @@
 #'
 #' Puts, D.A., Apicella, C.L., Cardenas, R.A., 2012. Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (https://doi.org/10.1098/rspb.2011.0829) \n
 #'
-#' Zabala (2022) ...
+#' Zabala (2022) to appear in...
 #' @examples
 #' library(voice)
 #' library(tidyverse)
@@ -81,14 +81,21 @@ extract_features <- function(x, filesRange = NULL,
                                           'df','pf','rf','rcf','rpf',
                                           'zcr','mhs','rms',
                                           'gain','rfc','ac','mfcc'),
-                             gender = 'u', windowShift = 5, numFormants = 8,
-                             numcep = 12, dcttype = c('t2', 't1', 't3', 't4'),
+                             gender = 'u',
+                             windowShift = 5,
+                             numFormants = 8,
+                             numcep = 12,
+                             dcttype = c('t2', 't1', 't3', 't4'),
                              fbtype = c('mel', 'htkmel', 'fcmel', 'bark'),
-                             resolution = 40, usecmp = FALSE,
+                             resolution = 40,
+                             usecmp = FALSE,
                              mc.cores = 1,
-                             full.names = TRUE, recursive = FALSE,
-                             check.mono = TRUE, stereo2mono = TRUE,
-                             overwrite = FALSE, freq = 44100,
+                             full.names = TRUE,
+                             recursive = FALSE,
+                             check.mono = TRUE,
+                             stereo2mono = TRUE,
+                             overwrite = FALSE,
+                             freq = 44100,
                              round.to = NULL){
 
   # time processing
@@ -168,7 +175,6 @@ extract_features <- function(x, filesRange = NULL,
     names(features.list.temp)[i.temp] <- 'f0'
     names(features.list)[i] <- 'f0'
     names(length.list)[i] <- 'f0'
-    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -187,7 +193,6 @@ extract_features <- function(x, filesRange = NULL,
     names(features.list.temp)[i.temp] <- 'formants'
     names(features.list)[i] <- 'formants'
     names(length.list)[i] <- 'formants'
-    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -204,7 +209,6 @@ extract_features <- function(x, filesRange = NULL,
     names(features.list.temp)[i.temp] <- 'zcr'
     names(features.list)[i] <- 'zcr'
     names(length.list)[i] <- 'zcr'
-    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -222,7 +226,6 @@ extract_features <- function(x, filesRange = NULL,
     names(features.list.temp)[i.temp] <- 'mhs'
     names(features.list)[i] <- 'mhs'
     names(length.list)[i] <- 'mhs'
-    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -241,7 +244,6 @@ extract_features <- function(x, filesRange = NULL,
       i <- i+1
       names(features.list)[i] <- 'rms'
       names(length.list)[i] <- 'rms'
-      # features.list[[i]] <- dplyr::tibble()
       length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                         wrassp::numRecs.AsspDataObj))
     }
@@ -259,7 +261,6 @@ extract_features <- function(x, filesRange = NULL,
       i <- i+1
       names(features.list)[i] <- 'rfc'
       names(length.list)[i] <- 'rfc'
-      # features.list[[i]] <- dplyr::tibble()
       length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                         wrassp::numRecs.AsspDataObj))
     }
@@ -277,7 +278,6 @@ extract_features <- function(x, filesRange = NULL,
     names(features.list.temp)[i.temp] <- 'ac'
     names(features.list)[i] <- 'ac'
     names(length.list)[i] <- 'ac'
-    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -294,7 +294,6 @@ extract_features <- function(x, filesRange = NULL,
     names(features.list.temp)[i.temp] <- 'cep'
     names(features.list)[i] <- 'cep'
     names(length.list)[i] <- 'cep'
-    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -312,7 +311,6 @@ extract_features <- function(x, filesRange = NULL,
     names(features.list.temp)[i.temp] <- 'dft'
     names(features.list)[i] <- 'dft'
     names(length.list)[i] <- 'dft'
-    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -330,7 +328,6 @@ extract_features <- function(x, filesRange = NULL,
     names(features.list.temp)[i.temp] <- 'css'
     names(features.list)[i] <- 'css'
     names(length.list)[i] <- 'css'
-    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -348,7 +345,6 @@ extract_features <- function(x, filesRange = NULL,
     names(features.list.temp)[i.temp] <- 'lps'
     names(features.list)[i] <- 'lps'
     names(length.list)[i] <- 'lps'
-    # features.list[[i]] <- dplyr::tibble()
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -369,7 +365,6 @@ extract_features <- function(x, filesRange = NULL,
   if('mfcc' %in% features){
     i <- i+1
     names(features.list)[i] <- 'mfcc'
-    # features.list[[i]] <- dplyr::tibble()
     names(length.list)[i] <- 'mfcc'
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]], nrow))
   }
@@ -554,7 +549,7 @@ extract_features <- function(x, filesRange = NULL,
     f_sc <- sapply(dat[,cn], scale)
   }
 
-  # 13. Pf - Formant Position by puts, Apicella & Cárdenas (2011)
+  # 13. Pf - Formant Position by Puts, Apicella & Cárdenas (2011)
   if('f0' %in% features & 'formants' %in% features & 'pf' %in% features){
     if(numFormants >= 1) {dat$pf1 <- f_sc[,'f1']}
     if(numFormants >= 2) {dat$pf2 <- rowMeans(f_sc[,c('f1','f2')], na.rm = TRUE)}
@@ -590,7 +585,7 @@ extract_features <- function(x, filesRange = NULL,
     if(numFormants >= 8) {dat$rcf8 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2','f3','f4','f5','f6','f7','f8')], na.rm = TRUE)}
   }
 
-  # 16. RPf - Formant position removal by Zabala (2022)
+  # 16. RPf - Formant Position Removal by Zabala (2022)
   if('f0' %in% features & 'formants' %in% features & 'rpf' %in% features){
     # if(numFormants >= 1) {dat$rpf1 <- f_sc[,'f0']-dat$pf1} # equivalent to Rf1 and RCf1
     if(numFormants >= 2) {dat$rpf2 <- f_sc[,'f0']-dat$pf2}
@@ -614,25 +609,3 @@ extract_features <- function(x, filesRange = NULL,
   # return dat
   return(dat)
 }
-
-
-# # TEST
-# x = wavDir
-# filesRange = 1:10
-# features = c('f0','formants','df','pf','rf','rcf','rpf','zcr','mhs','rms','gain','rfc','ac','mfcc','cep','dft','css','lps')
-# gender = "u"
-# windowShift = 5
-# numFormants = 8
-# numcep = 12
-# dcttype = c("t2", "t1", "t3", "t4")
-# fbtype = c("mel", "htkmel", "fcmel", "bark")
-# resolution = 40
-# usecmp = FALSE
-# mc.cores = 8
-# full.names = TRUE
-# recursive = FALSE
-# check.mono = TRUE
-# stereo2mono = TRUE
-# overwrite = FALSE
-# freq = 44100
-# round.to = 4

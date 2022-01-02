@@ -40,20 +40,8 @@ feat_summary <- function(x, filesRange = NULL, features = 'f0',
                                freq = freq,
                                round.to = round.to)
 
+  # full vector of features
   featFull <- colnames(M[,-(1:3)])
-  # if('f0' %in% features & 'formants' %in% features){
-  #   moreFeat <- toupper(dplyr::setdiff(features, c('f0', 'formants')))
-  #   f <- paste0('F',0:8)
-  #   featFull <- c(f, moreFeat)
-  #   if(extraFeatures){
-  #     Df <- paste0('Df', 2:8) # Df - Formant Dispersion by Fitch (1997)
-  #     Pf <- paste0('Pf', 1:8) # Pf - Formant Position by Puts, Apicella & Cárdenas (2011)
-  #     Rf <- paste0('Rf', 1:8) # Rf - Formant Removal by Zabala (2021/2022)
-  #     RCf <- paste0('RCf', 2:8) # RCf - Formant Cumulated Removal by Zabala (2021/2022)
-  #     RPf <- paste0('RPf', 2:8) # RPf - Formant Position Removal by Zabala (2021/2022)
-  #     featFull <- c(featFull, Df, Pf, Rf, RCf, RPf)
-  #   }
-  # }
 
   # Variation Coefficient function
   vc <- function(x, na.rm = TRUE){
