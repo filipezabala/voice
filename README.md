@@ -114,12 +114,15 @@ sudo R
 Running R as super user paste the following, row by row:
 ```r
 ini <- Sys.time()
-packs <- c('audio', 'BART', 'devtools', 'e1071', 'ellipse', 'foreach','ggfortify', 'RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'VIM', 'wrassp')
+packs <- c('audio','BART','devtools','e1071','ellipse','foreach','ggfortify','RColorBrewer','reticulate','R.utils','seewave','tidyverse','tuneR','VIM','wrassp')
 install.packages(packs, dep = T); Sys.time()-ini
 update.packages(ask = F); Sys.time()-ini
 devtools::install_github('egenn/music'); Sys.time()-ini
 devtools::install_github('filipezabala/voice'); Sys.time()-ini
 devtools::install_github('flujoo/gm'); Sys.time()-ini
+url <- 'http://www.rob-mcculloch.org/chm/nonlinvarsel_0.0.1.9001.tar.gz'
+download.file(url, destfile = 'temp')
+install.packages('temp', repos = NULL, type='source')
 ```
 To configure the `gm` package.
 ```r
@@ -256,12 +259,15 @@ sudo R
 Running R as super user paste the following, row by row:
 ```r
 ini <- Sys.time()
-packs <- c('audio', 'BART', 'devtools', 'e1071', 'ellipse', 'foreach','ggfortify', 'RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'VIM', 'wrassp')
+packs <- c('audio','BART','devtools','e1071','ellipse','foreach','ggfortify','RColorBrewer','reticulate','R.utils','seewave','tidyverse','tuneR','VIM','wrassp')
 install.packages(packs, dep = T); Sys.time()-ini
 update.packages(ask = F); Sys.time()-ini
 devtools::install_github('egenn/music'); Sys.time()-ini
 devtools::install_github('filipezabala/voice'); Sys.time()-ini
 devtools::install_github('flujoo/gm'); Sys.time()-ini
+url <- 'http://www.rob-mcculloch.org/chm/nonlinvarsel_0.0.1.9001.tar.gz'
+download.file(url, destfile = 'temp')
+install.packages('temp', repos = NULL, type='source')
 ```
 
 ### 11. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
