@@ -68,6 +68,9 @@ sudo apt install ffmpeg
 sudo apt-get update
 sudo apt-get install portaudio19-dev libasound2-dev libfontconfig1-dev libmagick++-dev libxml2-dev libharfbuzz-dev libfribidi-dev libgdal-dev
 sudo rm -Rf /usr/local/lib/R/site-library/00LOCK-digest
+
+sudo apt update
+sudo apt install cmake cmake-doc ninja-build
 ```
 
 ### 6. [MuseScore](https://musescore.org/)
