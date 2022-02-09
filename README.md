@@ -27,9 +27,9 @@ sudo apt-get install -y libssl-dev autoconf libtool make
 cd /usr/local/src
 rm -rf curl*
 # downloading latest version (check before install!)
-sudo wget https://curl.se/download/curl-7.79.1.zip
-sudo unzip curl-7.79.1.zip
-cd curl-7.79.1
+sudo wget https://curl.se/download/curl-7.81.0.zip
+sudo unzip curl-7.81.0.zip
+cd curl-7.81.0
 sudo apt-get install autoconf
 sudo autoreconf -fi
 sudo ./configure --with-ssl 
@@ -68,6 +68,9 @@ sudo apt install ffmpeg
 sudo apt-get update
 sudo apt-get install portaudio19-dev libasound2-dev libfontconfig1-dev libmagick++-dev libxml2-dev libharfbuzz-dev libfribidi-dev libgdal-dev
 sudo rm -Rf /usr/local/lib/R/site-library/00LOCK-digest
+
+sudo apt update
+sudo apt install cmake cmake-doc ninja-build
 ```
 
 ### 6. [MuseScore](https://musescore.org/)
@@ -93,13 +96,13 @@ sudo apt-get install r-base
 sudo apt-get install r-base-dev
 ```
 
-### 8. [RStudio](https://www.rstudio.com/)
+### 8. [RStudio Server](https://www.rstudio.com/)
 RStudio is an Integrated Development Environment (IDE) for R. Check for updates [here](https://www.rstudio.com/products/rstudio/download-server/debian-ubuntu/).
 ```bash
 sudo apt-get update
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.0-351-amd64.deb
-sudo gdebi rstudio-server-2021.09.0-351-amd64.deb
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.2-382-amd64.deb
+sudo gdebi rstudio-server-2021.09.2-382-amd64.deb
 ```
 
 ### 9. [R packages](https://cran.r-project.org/web/packages/)
@@ -111,12 +114,15 @@ sudo R
 Running R as super user paste the following, row by row:
 ```r
 ini <- Sys.time()
-packs <- c('audio', 'devtools', 'e1071', 'ellipse', 'ggfortify', 'RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'VIM', 'wrassp')
+packs <- c('audio','BART','devtools','e1071','ellipse','foreach','ggfortify','RColorBrewer','reticulate','R.utils','seewave','tidyverse','tuneR','VIM','wrassp')
 install.packages(packs, dep = T); Sys.time()-ini
 update.packages(ask = F); Sys.time()-ini
 devtools::install_github('egenn/music'); Sys.time()-ini
 devtools::install_github('filipezabala/voice'); Sys.time()-ini
 devtools::install_github('flujoo/gm'); Sys.time()-ini
+url <- 'http://www.rob-mcculloch.org/chm/nonlinvarsel_0.0.1.9001.tar.gz'
+download.file(url, destfile = 'temp')
+install.packages('temp', repos = NULL, type='source')
 ```
 To configure the `gm` package.
 ```r
@@ -253,12 +259,15 @@ sudo R
 Running R as super user paste the following, row by row:
 ```r
 ini <- Sys.time()
-packs <- c('devtools', 'e1071', 'ellipse', 'ggfortify', 'RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'VIM', 'wrassp')
+packs <- c('audio','BART','devtools','e1071','ellipse','foreach','ggfortify','RColorBrewer','reticulate','R.utils','seewave','tidyverse','tuneR','VIM','wrassp')
 install.packages(packs, dep = T); Sys.time()-ini
 update.packages(ask = F); Sys.time()-ini
 devtools::install_github('egenn/music'); Sys.time()-ini
 devtools::install_github('filipezabala/voice'); Sys.time()-ini
 devtools::install_github('flujoo/gm'); Sys.time()-ini
+url <- 'http://www.rob-mcculloch.org/chm/nonlinvarsel_0.0.1.9001.tar.gz'
+download.file(url, destfile = 'temp')
+install.packages('temp', repos = NULL, type='source')
 ```
 
 ### 11. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
