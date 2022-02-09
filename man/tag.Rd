@@ -6,13 +6,11 @@
 \usage{
 tag(
   x,
-  mediaDir,
+  groupBy = "wav_path",
+  wavPath = unique(x$wav_path),
   tags = c("feat_summary"),
-  subj.id = NULL,
-  media.id = NULL,
-  subj.id.simplify = FALSE,
   filesRange = NULL,
-  features = c("f0"),
+  features = "f0",
   gender = "u",
   windowShift = 5,
   numFormants = 8,
@@ -34,9 +32,11 @@ tag(
 \arguments{
 \item{x}{An Extended data frame to be tagged with media information. See details.}
 
-\item{mediaDir}{Directory containing media files. Currently accepts audio files.}
+\item{groupBy}{A variable to group the summary measures. Default: \code{groupBy = 1}, the first column.}
 
 \item{tags}{Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.}
+
+\item{mediaDir}{Directory containing media files. Currently accepts audio files.}
 
 \item{subj.id}{Column containing the subject ID to be searched in mediaDir file names. Default: \code{NULL}, i.e., uses the first column.}
 
@@ -50,8 +50,22 @@ tag(
 Tag a data frame with media information.
 }
 \details{
-Parameter \code{tags} admits c('feat_summary', 'audio_time'). An Extended data frame E must contain subject and media data. See references.
+Except by \code{groupBy} and \code{wavPath}, all the parameters are shared with \code{voice::extract_features} and \code{voice::feat_summary}.
+}
+\examples{
+library(voice)
+
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
+
+# Extended dataset
+E <- tibble(subject_id = c(1,1,1,2,2,2,3,3,3),
+wav_path = path2wav)
+
+tag(E)
+tag(E, 'subject_id')
 }
 \references{
-Zabala (2022) to appear in...
+Zabala, F.J. (2022) to appear in...
 }

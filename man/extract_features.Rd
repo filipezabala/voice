@@ -7,8 +7,7 @@
 extract_features(
   x,
   filesRange = NULL,
-  features = c("f0", "formants", "df", "pf", "rf", "rcf", "rpf", "zcr", "mhs", "rms",
-    "gain", "rfc", "ac", "mfcc"),
+  features = c("f0", "formants", "df", "pf", "rf", "rcf", "rpf"),
   gender = "u",
   windowShift = 5,
   numFormants = 8,
@@ -28,7 +27,7 @@ extract_features(
 )
 }
 \arguments{
-\item{x}{A directory containing audio file(s) in WAV format. If more than one directory is provided, only the first one is used.}
+\item{x}{A vector containing either files or directories of audio files in WAV format.}
 
 \item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files).}
 
@@ -74,59 +73,25 @@ When \code{features} 'df', 'pf', 'rf', 'rcf' or 'rpf' are selected, 'f0' and 'fo
 }
 \examples{
 library(voice)
-library(tidyverse)
-library(RColorBrewer)
-library(ellipse)
-library(grDevices)
-library(ggfortify)
 
 # get path to audio file
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 pattern <- glob2rx('*.wav'), full.names = TRUE)
 
-# getting all the features (the total may vary)
-ef <- extract_features(dirname(path2wav), features = c('f0','formants',
-'df','pf','rf','rcf','rpf','zcr','mhs','rms','gain','rfc','ac','cep','dft',
-'css','lps','mfcc'),
-mc.cores = 1)
-dim(ef)
-ef
-
-# using the default, i.e., not using 'cep','dft','css' and 'lps' (hundreds of columns)
-ef2 <- extract_features(dirname(path2wav), mc.cores = 1)
-dim(ef2)
-ef2
-table(ef2$file_name_ext)
+# minimal usage
+M1 <- extract_features(path2wav)
+M2 <- extract_features(dirname(path2wav))
+identical(M1,M2)
+table(basename(M1$wav_path))
 
 # limiting filesRange
-ef3 <- extract_features(dirname(path2wav), filesRange = 3:6, mc.cores = 1)
-dim(ef3)
-ef3
-table(ef3$file_name_ext)
-
-# calculating correlation of ef2
-data <- cor(ef2[-1])
-
-# pane with 100 colors using RcolorBrewer
-my_colors <- brewer.pal(5, 'Spectral')
-my_colors <- colorRampPalette(my_colors)(100)
-
-# ordering the correlation matrix
-ord <- order(data[1, ])
-data_ord <- data[ord, ord]
-plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
-
-# Principal Component Analysis (PCA)
-(pc <- prcomp(na.omit(ef2[-1]), scale = TRUE))
-stats::screeplot(pc, type = 'lines')
-
-autoplot(pc, data = na.omit(ef2), colour = 'file_name_ext',
-loadings = TRUE, loadings.label = TRUE)
+M3 <- extract_features(path2wav, filesRange = 3:6)
+table(basename(M3$wav_path))
 }
 \references{
-Fitch, W.T. 1997 Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (doi:10.1121/1.421048)
+Fitch, W.T. (1997) Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (\url{https://doi.org/10.1121/1.421048})
 
-Puts, D.A., Apicella, C.L., Cardenas, R.A., 2012. Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (https://doi.org/10.1098/rspb.2011.0829) \n
+Puts, D.A., Apicella, C.L., Cardenas, R.A. (2012) Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (\url{https://doi.org/10.1098/rspb.2011.0829})
 
-Zabala (2022) to appear in...
+Zabala, F.J. (2022) to appear in...
 }

@@ -6,6 +6,8 @@
 \usage{
 feat_summary(
   x,
+  groupBy = "wav_path",
+  wavPath = unique(x$wav_path),
   filesRange = NULL,
   features = "f0",
   gender = "u",
@@ -27,11 +29,30 @@ feat_summary(
 )
 }
 \arguments{
-\item{x}{Either a WAV file or a directory containing WAV files.}
+\item{x}{An Extended data frame to be tagged with media information. See details.}
+
+\item{groupBy}{A variable to group the summary measures. The argument must be a character vector. Default: \code{groupBy = 'wav_path'}.}
 }
 \description{
 Returns summary measures of voice::extract_features
 }
 \details{
-Except for \code{x}, all the parameters are shared with \code{voice::extract_features}.
+Except by \code{groupBy} and \code{wavPath}, all the parameters are shared with \code{voice::extract_features}.
+}
+\examples{
+library(voice)
+
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
+
+# creating Extended synthetic data
+E <- tibble(subject_id = c(1,1,1,2,2,2,3,3,3),
+wav_path = path2wav)
+
+# minimal usage
+feat_summary(E)
+
+# canonical data
+feat_summary(E, 'subject_id')
 }
