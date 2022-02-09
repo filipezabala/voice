@@ -87,27 +87,27 @@ feat_summary <- function(x,
 
   # (Sample) Standard Deviation
   M_sd <- Mg %>%
-    dplyr::summarise_at(vars(all_of(featFull)), sd, na.rm = TRUE)
+    dplyr::summarise_at(dplyr::vars(all_of(featFull)), sd, na.rm = TRUE)
   colnames(M_sd)[-1] <- paste0(colnames(M_sd)[-1], '_tag_sd')
 
   # (Sample) Variation Coefficient
   M_vc <- Mg %>%
-    dplyr::summarise_at(vars(all_of(featFull)), vc, na.rm = TRUE)
+    dplyr::summarise_at(dplyr::vars(all_of(featFull)), vc, na.rm = TRUE)
   colnames(M_vc)[-1] <- paste0(colnames(M_vc)[-1], '_tag_vc')
 
   # Median
   M_median <- Mg %>%
-    dplyr::summarise_at(vars(all_of(featFull)), median, na.rm = TRUE)
+    dplyr::summarise_at(dplyr::vars(all_of(featFull)), median, na.rm = TRUE)
   colnames(M_median)[-1] <- paste0(colnames(M_median)[-1], '_tag_median')
 
   # InterQuartile Range
   M_iqr <- Mg %>%
-    dplyr::summarise_at(vars(all_of(featFull)), IQR, na.rm = TRUE)
+    dplyr::summarise_at(dplyr::vars(all_of(featFull)), IQR, na.rm = TRUE)
   colnames(M_iqr)[-1] <- paste0(colnames(M_iqr)[-1], '_tag_iqr')
 
   # Median Absolute Deviation
   M_mad <- Mg %>%
-    dplyr::summarise_at(vars(all_of(featFull)), mad, na.rm = TRUE)
+    dplyr::summarise_at(dplyr::vars(all_of(featFull)), mad, na.rm = TRUE)
   colnames(M_mad)[-1] <- paste0(colnames(M_mad)[-1], '_tag_mad')
 
   # left_join

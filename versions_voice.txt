@@ -41,6 +41,9 @@ To do
 * Add voice::RPf.R
 
 
+Version 0.3.7
+2022-02-09
+. dplyr::vars @ feat_summary.R
 
 
 Version 0.3.7
