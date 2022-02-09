@@ -17,11 +17,14 @@
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #'
-#' # Extended dataset
+#' # creating Extended synthetic data
 #' E <- dplyr::tibble(subject_id = c(1,1,1,2,2,2,3,3,3),
 #' wav_path = path2wav)
 #'
+#' # minimal usage
 #' tag(E)
+#'
+#' # canonical data
 #' tag(E, 'subject_id')
 #' @export
 tag <- function(x,
