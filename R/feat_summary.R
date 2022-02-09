@@ -63,7 +63,7 @@ feat_summary <- function(x,
                                round.to = round.to)
 
   # full vector of features
-  # featFull <- colnames(M[,-(1:3)])
+  featFull <- colnames(M[,-(1:3)])
 
   # Variation Coefficient function
   vc <- function(x, na.rm = TRUE){
@@ -82,7 +82,7 @@ feat_summary <- function(x,
 
   # Mean
   M_mean <- Mg %>%
-    dplyr::summarise_at(vars(all_of(featFull)), mean, na.rm = TRUE)
+    dplyr::summarise_at(dplyr::vars(all_of(featFull)), mean, na.rm = TRUE)
   colnames(M_mean)[-1] <- paste0(colnames(M_mean)[-1], '_tag_mean')
 
   # (Sample) Standard Deviation
