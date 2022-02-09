@@ -41,21 +41,43 @@ To do
 * Add voice::RPf.R
 
 
+
+
+Version 0.3.7
+2022-02-09
+. Make Media and Extended datasets consistent in documentation.
+. extract_features.R 
+  . Drop 'file_name_ext' column @ output.
+  . Add 'wavPath' as the third column @ extract_features.R output. 
+  . Admit directories or files in the main argument x.
+. feat_summary.R
+  . path > wav_path, id_seq > slice_seq, id_seq_file > slice_seq_file
+  . Added 'groupBy' argument
+  * Automatically found folder pattern in tag.R.
+  . Check tag.R applied on Canonical data
+. tag.R
+  . Create examples
+  . Remove arguments subj.id, media.id and subj.id.simplify
+  . Disable audio_time
+* Create an anonymous list to be ignored by tag.R?
+
+
+
 Version 0.3.6
-2021-01-02
+2022-01-02
 . Added @references Ardila et al (2019).
 . Added voice::plot_q.R, a plot_q[uality] function.
 . Imports magrittr at DESCRIPTION file.
 
 
-
 Version 0.3.5
-2021-01-02
+2022-01-02
 . Removed voice_ex1.rda, 7.5MB.
 . Deleted NAMESPACE.
 
+
 Version 0.3.4
-2021-01-01
+2022-01-01
 . id_path <- E %>% 
   select(client_id:path)
  save(id_path, file = '~/Dropbox/D_Filipe_Zabala/pacotes/voice/data/id_path.rda',
@@ -64,7 +86,7 @@ Version 0.3.4
 
 
 Version 0.3.3
-2021-01-01
+2022-01-01
 . Eid <- E %>% 
   select(client_id:path)
  save(Eid, file = '~/Dropbox/D_Filipe_Zabala/pacotes/voice/data/id_path.rda',
@@ -293,4 +315,7 @@ TI (análise de sistemas / alessandra/bernardo)
 jan - disciplinas
 ppc pronto em 20/02
 ppc na câmara 20/03
+
+
+
 

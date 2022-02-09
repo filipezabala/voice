@@ -1,6 +1,6 @@
 #' Extracts features from WAV audio files
 #' @description Extracts features from WAV audio files.
-#' @param x A directory containing audio file(s) in WAV format. If more than one directory is provided, only the first one is used.
+#' @param x A vector containing either files or directories of audio files in WAV format.
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
 #' @param features Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
 #' @param gender \code{= <code>} set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
@@ -20,67 +20,32 @@
 #' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
 #' @param round.to Number of decimal places to round to. (default: \code{NULL})
 #' @details When \code{features} 'df', 'pf', 'rf', 'rcf' or 'rpf' are selected, 'f0' and 'formants' must be selected. The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2022), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2022) and 'rpf' to 'formant position removal' (rpf1:rpf8) by Zabala (2022).
-#' @references Fitch, W.T. 1997 Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (doi:10.1121/1.421048)
+#' @references Fitch, W.T. (1997) Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (\url{https://doi.org/10.1121/1.421048})
 #'
-#' Puts, D.A., Apicella, C.L., Cardenas, R.A., 2012. Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (https://doi.org/10.1098/rspb.2011.0829) \n
+#' Puts, D.A., Apicella, C.L., Cardenas, R.A. (2012) Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (\url{https://doi.org/10.1098/rspb.2011.0829})
 #'
-#' Zabala (2022) to appear in...
+#' Zabala, F.J. (2022) to appear in...
 #' @examples
 #' library(voice)
-#' library(tidyverse)
-#' library(RColorBrewer)
-#' library(ellipse)
-#' library(grDevices)
-#' library(ggfortify)
 #'
 #' # get path to audio file
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #'
-#' # getting all the features (the total may vary)
-#' ef <- extract_features(dirname(path2wav), features = c('f0','formants',
-#' 'df','pf','rf','rcf','rpf','zcr','mhs','rms','gain','rfc','ac','cep','dft',
-#' 'css','lps','mfcc'),
-#' mc.cores = 1)
-#' dim(ef)
-#' ef
-#'
-#' # using the default, i.e., not using 'cep','dft','css' and 'lps' (hundreds of columns)
-#' ef2 <- extract_features(dirname(path2wav), mc.cores = 1)
-#' dim(ef2)
-#' ef2
-#' table(ef2$file_name_ext)
+#' # minimal usage
+#' M1 <- extract_features(path2wav)
+#' M2 <- extract_features(dirname(path2wav))
+#' identical(M1,M2)
+#' table(basename(M1$wav_path))
 #'
 #' # limiting filesRange
-#' ef3 <- extract_features(dirname(path2wav), filesRange = 3:6, mc.cores = 1)
-#' dim(ef3)
-#' ef3
-#' table(ef3$file_name_ext)
-#'
-#' # calculating correlation of ef2
-#' data <- cor(ef2[-1])
-#'
-#' # pane with 100 colors using RcolorBrewer
-#' my_colors <- brewer.pal(5, 'Spectral')
-#' my_colors <- colorRampPalette(my_colors)(100)
-#'
-#' # ordering the correlation matrix
-#' ord <- order(data[1, ])
-#' data_ord <- data[ord, ord]
-#' plotcorr(data_ord , col=my_colors[data_ord*50+50] , mar=c(1,1,1,1))
-#'
-#' # Principal Component Analysis (PCA)
-#' (pc <- prcomp(na.omit(ef2[-1]), scale = TRUE))
-#' stats::screeplot(pc, type = 'lines')
-#'
-#' autoplot(pc, data = na.omit(ef2), colour = 'file_name_ext',
-#' loadings = TRUE, loadings.label = TRUE)
+#' M3 <- extract_features(path2wav, filesRange = 3:6)
+#' table(basename(M3$wav_path))
 #' @export
-extract_features <- function(x, filesRange = NULL,
+extract_features <- function(x,
+                             filesRange = NULL,
                              features = c('f0','formants',
-                                          'df','pf','rf','rcf','rpf',
-                                          'zcr','mhs','rms',
-                                          'gain','rfc','ac','mfcc'),
+                                          'df','pf','rf','rcf','rpf'),
                              gender = 'u',
                              windowShift = 5,
                              numFormants = 8,
@@ -101,12 +66,19 @@ extract_features <- function(x, filesRange = NULL,
   # time processing
   pt0 <- proc.time()
 
-  # removing duplicates, using the first directory provided
-  x <- x[1]
-
-  # listing wav files
-  wavFiles <- list.files(x, pattern = '[[:punct:]][wW][aA][vV]$',
-                         full.names = full.names, recursive = recursive)
+  # checking if x is composed by files or directories
+  if(file_test('-f', x[1])){
+    wavDir <- lapply(x, dirname)
+    wavDir <- do.call(rbind, wavDir)
+    wavDir <- unique(wavDir)
+    wavFiles <- x
+  } else{
+    wavDir <- unique(x)
+    nWavDir <- length(wavDir)
+    wavFiles <- lapply(wavDir, list.files, pattern = '[[:punct:]][wW][aA][vV]$',
+                       full.names = full.names, recursive = recursive)
+    wavFiles <- do.call(rbind, wavFiles)
+  }
 
   # filtering by filesRange
   if(!is.null(filesRange)){
@@ -463,7 +435,7 @@ extract_features <- function(x, filesRange = NULL,
   }
 
   # id, using smaller length: n_min
-  id <- tibble::enframe(rep(basename(wavFiles), n_min), value = 'file_name_ext',
+  id <- tibble::enframe(rep(wavFiles, n_min), value = 'wav_path',
                         name = NULL)
 
   # colnames
@@ -599,8 +571,8 @@ extract_features <- function(x, filesRange = NULL,
 
   # creating ids
   idf <- lapply(n_min, seq, 1)
-  dat <- dplyr::bind_cols(id_seq = 1:nrow(dat),
-                          id_seq_file = unlist(lapply(idf, rev)), dat)
+  dat <- dplyr::bind_cols(slice_seq = 1:nrow(dat),
+                          slice_seq_file = unlist(lapply(idf, rev)), dat)
 
   # total time
   t0 <- proc.time()-pt0
