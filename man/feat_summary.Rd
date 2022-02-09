@@ -47,7 +47,7 @@ path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 pattern <- glob2rx('*.wav'), full.names = TRUE)
 
 # creating Extended synthetic data
-E <- tibble(subject_id = c(1,1,1,2,2,2,3,3,3),
+E <- dplyr::tibble(subject_id = c(1,1,1,2,2,2,3,3,3),
 wav_path = path2wav)
 
 # minimal usage
