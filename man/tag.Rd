@@ -61,7 +61,11 @@ wav_path = path2wav)
 tag(E)
 
 # canonical data
-tag(E, 'subject_id')
+tag(E, groupBy = 'subject_id')
+
+# limiting filesRange
+tag(E, filesRange = 3:6)
+
 
 # more features
 Et <- tag(E, features = c('f0', 'formants', 'df', 'pf', 'rf', 'rcf', 'rpf'))

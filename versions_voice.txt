@@ -39,7 +39,13 @@ To do
 * Add voice::Rf.R
 * Add voice::RCf.R
 * Add voice::RPf.R
+* Automatically found folder pattern in tag.R.
+* Create an anonymous list to be ignored by tag.R?
 
+
+Version 0.3.10
+2022-02-11
+. Set wavFiles <- do.call(rbind, wavFiles) to  wavFiles <- do.call(rbind, as.list(unlist(wavFiles))) @ extract_features.R.
 
 Version 0.3.9
 2022-02-10
@@ -47,9 +53,6 @@ Version 0.3.9
 . Added @param wavPath in feat_summary.R and tag.R documentation.
 . Added @param wavPathName in feat_summary.R and tag.R documentation.
 . Normalized dirnames @ feat_summary.R
-
-* Automatically found folder pattern in tag.R.
-* Create an anonymous list to be ignored by tag.R?
 
 
 Version 0.3.8

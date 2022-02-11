@@ -77,7 +77,8 @@ extract_features <- function(x,
     nWavDir <- length(wavDir)
     wavFiles <- lapply(wavDir, list.files, pattern = '[[:punct:]][wW][aA][vV]$',
                        full.names = full.names, recursive = recursive)
-    wavFiles <- do.call(rbind, wavFiles)
+    wavFiles <- do.call(rbind, as.list(unlist(wavFiles)))
+    # wavFiles <- do.call(rbind, wavFiles)
   }
 
   # filtering by filesRange
