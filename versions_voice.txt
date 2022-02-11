@@ -41,7 +41,18 @@ To do
 * Add voice::RPf.R
 
 
-Version 0.3.7
+Version 0.3.9
+2022-02-10
+. Tidy up tag.R documentation, removing @param subj.id, @param media.id and @param subj.id.simplify.
+. Added @param wavPath in feat_summary.R and tag.R documentation.
+. Added @param wavPathName in feat_summary.R and tag.R documentation.
+. Normalized dirnames @ feat_summary.R
+
+* Automatically found folder pattern in tag.R.
+* Create an anonymous list to be ignored by tag.R?
+
+
+Version 0.3.8
 2022-02-09
 . dplyr::vars @ feat_summary.R
 
@@ -56,14 +67,11 @@ Version 0.3.7
 . feat_summary.R
   . path > wav_path, id_seq > slice_seq, id_seq_file > slice_seq_file
   . Added 'groupBy' argument
-  * Automatically found folder pattern in tag.R.
   . Check tag.R applied on Canonical data
 . tag.R
   . Create examples
   . Remove arguments subj.id, media.id and subj.id.simplify
   . Disable audio_time
-* Create an anonymous list to be ignored by tag.R?
-
 
 
 Version 0.3.6

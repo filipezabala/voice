@@ -8,6 +8,7 @@ feat_summary(
   x,
   groupBy = "wav_path",
   wavPath = unique(x$wav_path),
+  wavPathName = "wav_path",
   filesRange = NULL,
   features = "f0",
   gender = "u",
@@ -29,15 +30,20 @@ feat_summary(
 )
 }
 \arguments{
-\item{x}{An Extended data frame to be tagged with media information. See details.}
+\item{x}{An Extended data frame to be tagged with media information. See references.}
 
 \item{groupBy}{A variable to group the summary measures. The argument must be a character vector. Default: \code{groupBy = 'wav_path'}.}
+
+\item{wavPath}{A vector containing the path(s) to WAV files. May be both as \code{dirname} or \code{basename} formats.}
+
+\item{wavPathName}{A string containing the WAV path name. Default: \code{wavPathName = 'wav_path'}}
+
+\item{tags}{Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.}
+
+\item{...}{See \code{?voice::extract_features}.}
 }
 \description{
 Returns summary measures of voice::extract_features
-}
-\details{
-Except by \code{groupBy} and \code{wavPath}, all the parameters are shared with \code{voice::extract_features}.
 }
 \examples{
 library(voice)
@@ -55,4 +61,7 @@ feat_summary(E)
 
 # canonical data
 feat_summary(E, 'subject_id')
+}
+\references{
+Zabala, F.J. (2022) to appear in...
 }

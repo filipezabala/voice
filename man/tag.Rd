@@ -8,6 +8,7 @@ tag(
   x,
   groupBy = "wav_path",
   wavPath = unique(x$wav_path),
+  wavPathName = "wav_path",
   tags = c("feat_summary"),
   filesRange = NULL,
   features = "f0",
@@ -30,27 +31,20 @@ tag(
 )
 }
 \arguments{
-\item{x}{An Extended data frame to be tagged with media information. See details.}
+\item{x}{An Extended data frame to be tagged with media information. See references.}
 
-\item{groupBy}{A variable to group the summary measures. Default: \code{groupBy = 1}, the first column.}
+\item{groupBy}{A variable to group the summary measures. The argument must be a character vector. Default: \code{groupBy = 'wav_path'}.}
+
+\item{wavPath}{A vector containing the path(s) to WAV files. May be both as \code{dirname} or \code{basename} formats.}
+
+\item{wavPathName}{A string containing the WAV path name. Default: \code{wavPathName = 'wav_path'}}
 
 \item{tags}{Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.}
-
-\item{mediaDir}{Directory containing media files. Currently accepts audio files.}
-
-\item{subj.id}{Column containing the subject ID to be searched in mediaDir file names. Default: \code{NULL}, i.e., uses the first column.}
-
-\item{media.id}{Column containing the media ID. Default: \code{NULL}, i.e., uses the first column.}
-
-\item{subj.id.simplify}{Logical. Should subject id must be simplified? Default: \code{FALSE}.}
 
 \item{...}{See \code{?voice::extract_features}.}
 }
 \description{
 Tag a data frame with media information.
-}
-\details{
-Except by \code{groupBy} and \code{wavPath}, all the parameters are shared with \code{voice::extract_features} and \code{voice::feat_summary}.
 }
 \examples{
 library(voice)
@@ -68,6 +62,11 @@ tag(E)
 
 # canonical data
 tag(E, 'subject_id')
+
+# more features
+Et <- tag(E, features = c('f0', 'formants', 'df', 'pf', 'rf', 'rcf', 'rpf'))
+Et
+str(Et)
 }
 \references{
 Zabala, F.J. (2022) to appear in...

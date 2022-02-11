@@ -1,8 +1,12 @@
 #' Returns summary measures of voice::extract_features
 #'
-#' @param x An Extended data frame to be tagged with media information. See details.
+#' @param x An Extended data frame to be tagged with media information. See references.
 #' @param groupBy A variable to group the summary measures. The argument must be a character vector. Default: \code{groupBy = 'wav_path'}.
-#' @details Except by \code{groupBy} and \code{wavPath}, all the parameters are shared with \code{voice::extract_features}.
+#' @param wavPath A vector containing the path(s) to WAV files. May be both as \code{dirname} or \code{basename} formats.
+#' @param wavPathName A string containing the WAV path name. Default: \code{wavPathName = 'wav_path'}
+#' @param tags Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.
+#' @param ... See \code{?voice::extract_features}.
+#' @references Zabala, F.J. (2022) to appear in...
 #' @examples
 #' library(voice)
 #'
@@ -23,6 +27,7 @@
 feat_summary <- function(x,
                          groupBy = 'wav_path',
                          wavPath = unique(x$wav_path),
+                         wavPathName = 'wav_path',
                          filesRange = NULL,
                          features = 'f0',
                          gender = 'u',
@@ -62,6 +67,19 @@ feat_summary <- function(x,
                                freq = freq,
                                round.to = round.to)
 
+  # normalizing dirnames
+  if(file_test('-f', dplyr::pull(M[, wavPathName])[1])){
+    M[,wavPathName] <- normalizePath(dirname(dplyr::pull(M[, wavPathName])))
+  } else{
+    M[,wavPathName] <- normalizePath(dplyr::pull(M[, wavPathName]))
+  }
+
+  if(file_test('-f', dplyr::pull(x[, wavPathName])[1])){
+    x[,wavPathName] <- normalizePath(dirname(dplyr::pull(x[, wavPathName])))
+  } else{
+    x[,wavPathName] <- normalizePath(dplyr::pull(x[, wavPathName]))
+  }
+
   # full vector of features
   featFull <- colnames(M[,-(1:3)])
 
@@ -71,12 +89,13 @@ feat_summary <- function(x,
   }
 
   # left join
-  M <- dplyr::left_join(x, M, by = 'wav_path')
+  M <- dplyr::left_join(M, x, by = wavPathName)
+  # cn <- wavPathName
   # M <- M %>%
-  #   dplyr::select(slice_seq:wav_path, all_of(featFull))
+  #   dplyr::select(slice_seq:slice_seq_file, tidyselect::all_of(featFull)) %>%
+    # dplyr::rename(!!wavPathName := tidyselect::ends_with('.y'))
 
   # group by
-  # gb <- dplyr::pull(M[, groupBy])
   Mg <- M %>%
     dplyr::group_by(.data[[groupBy]])
 
