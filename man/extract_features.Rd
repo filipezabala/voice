@@ -19,8 +19,8 @@ extract_features(
   mc.cores = 1,
   full.names = TRUE,
   recursive = FALSE,
-  check.mono = TRUE,
-  stereo2mono = TRUE,
+  check.mono = FALSE,
+  stereo2mono = FALSE,
   overwrite = FALSE,
   freq = 44100,
   round.to = NULL

@@ -41,6 +41,14 @@ To do
 * Add voice::RPf.R
 * Automatically found folder pattern in tag.R.
 * Create an anonymous list to be ignored by tag.R?
+* Parallelize # concatenating - for(j in 1:nWav) @ extract_features.R
+
+
+
+Version 0.3.11
+2022-02-11
+. Set check.mono and stereo2mono to FALSE @ extract_features.R, feat_summary.R and tag.R.
+. Added x <- dplyr::as_tibble(x) @ feat_summary.R.
 
 
 Version 0.3.10

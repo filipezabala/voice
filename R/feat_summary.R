@@ -41,8 +41,8 @@ feat_summary <- function(x,
                          mc.cores = 1,
                          full.names = TRUE,
                          recursive = FALSE,
-                         check.mono = TRUE,
-                         stereo2mono = TRUE,
+                         check.mono = FALSE,
+                         stereo2mono = FALSE,
                          overwrite = FALSE,
                          freq = 44100,
                          round.to = 4){
@@ -74,6 +74,7 @@ feat_summary <- function(x,
     M[,wavPathName] <- normalizePath(dplyr::pull(M[, wavPathName]))
   }
 
+  x <- dplyr::as_tibble(x)
   if(file_test('-f', dplyr::pull(x[, wavPathName])[1])){
     x[,wavPathName] <- normalizePath(dirname(dplyr::pull(x[, wavPathName])))
   } else{
