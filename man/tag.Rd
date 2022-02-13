@@ -10,6 +10,7 @@ tag(
   wavPath = unique(x$wav_path),
   wavPathName = "wav_path",
   tags = c("feat_summary"),
+  sortByGroupBy = TRUE,
   filesRange = NULL,
   features = "f0",
   gender = "u",
@@ -41,10 +42,15 @@ tag(
 
 \item{tags}{Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.}
 
+\item{sortByGroupBy}{Logical. Should the function sort the Extended data frame \code{x} by \code{gropuBy}? Default: \code{sortByGroupBy = TRUE}.}
+
 \item{...}{See \code{?voice::extract_features}.}
 }
 \description{
 Tag a data frame with media information.
+}
+\details{
+\code{filesRange} should only be used when all the WAV files are in the same folder.
 }
 \examples{
 library(voice)

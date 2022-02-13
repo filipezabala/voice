@@ -5,7 +5,9 @@
 #' @param wavPath A vector containing the path(s) to WAV files. May be both as \code{dirname} or \code{basename} formats.
 #' @param wavPathName A string containing the WAV path name. Default: \code{wavPathName = 'wav_path'}
 #' @param tags Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.
+#' @param sortByGroupBy Logical. Should the function sort the Extended data frame \code{x} by \code{gropuBy}? Default: \code{sortByGroupBy = TRUE}.
 #' @param ... See \code{?voice::extract_features}.
+#' @details \code{filesRange} should only be used when all the WAV files are in the same folder.
 #' @references Zabala, F.J. (2022) to appear in...
 #' @examples
 #' library(voice)
@@ -38,6 +40,7 @@ tag <- function(x,
                 wavPath = unique(x$wav_path),
                 wavPathName = 'wav_path',
                 tags = c('feat_summary'),
+                sortByGroupBy = TRUE,
                 filesRange = NULL,
                 features = 'f0',
                 gender = 'u',
@@ -56,6 +59,11 @@ tag <- function(x,
                 overwrite = FALSE,
                 freq = 44100,
                 round.to = 4){
+
+  # sort by groupBy
+  if(sortByGroupBy){
+    x <- dplyr::arrange(x, groupBy)
+  }
 
   # voice::feat_summary
   if('feat_summary' %in% tags){

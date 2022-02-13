@@ -42,7 +42,15 @@ To do
 * Automatically found folder pattern in tag.R.
 * Create an anonymous list to be ignored by tag.R?
 * Parallelize # concatenating - for(j in 1:nWav) @ extract_features.R
+* Implement optimization @ tag.R. Check memory, processors.
 
+
+
+
+
+Version 0.3.12
+2022-02-13
+. Removed toLowerGroupBy @ feat_summary.R and tag.R.
 
 
 Version 0.3.11

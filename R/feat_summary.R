@@ -6,6 +6,7 @@
 #' @param wavPathName A string containing the WAV path name. Default: \code{wavPathName = 'wav_path'}
 #' @param tags Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.
 #' @param ... See \code{?voice::extract_features}.
+#' @details \code{filesRange} should only be used when all the WAV files are in the same folder.
 #' @references Zabala, F.J. (2022) to appear in...
 #' @examples
 #' library(voice)
@@ -67,13 +68,14 @@ feat_summary <- function(x,
                                freq = freq,
                                round.to = round.to)
 
-  # normalizing dirnames
+  # normalizing dirnames @ Media
   if(file_test('-f', dplyr::pull(M[, wavPathName])[1])){
     M[,wavPathName] <- normalizePath(dirname(dplyr::pull(M[, wavPathName])))
   } else{
     M[,wavPathName] <- normalizePath(dplyr::pull(M[, wavPathName]))
   }
 
+  # normalizing dirnames @ Extended
   x <- dplyr::as_tibble(x)
   if(file_test('-f', dplyr::pull(x[, wavPathName])[1])){
     x[,wavPathName] <- normalizePath(dirname(dplyr::pull(x[, wavPathName])))

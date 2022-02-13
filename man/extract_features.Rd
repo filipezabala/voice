@@ -29,7 +29,7 @@ extract_features(
 \arguments{
 \item{x}{A vector containing either files or directories of audio files in WAV format.}
 
-\item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files).}
+\item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.}
 
 \item{features}{Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
 

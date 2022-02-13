@@ -45,6 +45,9 @@ feat_summary(
 \description{
 Returns summary measures of voice::extract_features
 }
+\details{
+\code{filesRange} should only be used when all the WAV files are in the same folder.
+}
 \examples{
 library(voice)
 
