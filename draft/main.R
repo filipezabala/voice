@@ -17,6 +17,7 @@
 # session_info
 # session_info()
 
+<<<<<<< HEAD
 # remove old voice
 remove.packages("voice", lib="/usr/local/lib/R/site-library")
 
@@ -25,6 +26,12 @@ devtools::document(getwd())
 # devtools::document(setwd('~/MEGAsync/pacotes/voice/'))
 
 # install voice
+=======
+# updating and creating manual
+devtools::document(setwd('~/Dropbox/D_Filipe_Zabala/pacotes/voice/'))
+
+remove.packages("voice", lib="/usr/local/lib/R/site-library")
+>>>>>>> 3682fe601fa29c465420a910c8375bfcf45d5aa6
 devtools::install_github('filipezabala/voice')
 
 # # loading

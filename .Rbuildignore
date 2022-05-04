@@ -1,2 +1,13 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+<<<<<<< HEAD
+=======
+^draft$
+^cran-comments\.md$
+^\.travis\.yml$
+^\.github$
+^revdep$
+^tests/extract_f0\.py$
+^tests/extract_formants\.py$
+^tests/libs\.py$
+>>>>>>> 3682fe601fa29c465420a910c8375bfcf45d5aa6

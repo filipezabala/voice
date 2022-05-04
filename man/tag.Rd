@@ -34,7 +34,11 @@ tag(
 \arguments{
 \item{x}{An Extended data frame to be tagged with media information. See references.}
 
+<<<<<<< HEAD
 \item{groupBy}{A variable to group the summary measures. The argument must be a character vector. Default: \code{groupBy = 'wav_path'}. To avoid duplications, consider order/arrange the Extended data frame by this column.}
+=======
+\item{groupBy}{A variable to group the summary measures. The argument must be a character vector. Default: \code{groupBy = 'wav_path'}.}
+>>>>>>> 3682fe601fa29c465420a910c8375bfcf45d5aa6
 
 \item{wavPath}{A vector containing the path(s) to WAV files. May be both as \code{dirname} or \code{basename} formats.}
 
@@ -42,7 +46,11 @@ tag(
 
 \item{tags}{Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.}
 
+<<<<<<< HEAD
 \item{sortByGroupBy}{Logical. Should the function sort the Extended data frame \code{x} by \code{gropuBy}? Default: \code{sortByGroupBy = TRUE}. TAKE A LOOK!!!}
+=======
+\item{sortByGroupBy}{Logical. Should the function sort the Extended data frame \code{x} by \code{gropuBy}? Default: \code{sortByGroupBy = TRUE}.}
+>>>>>>> 3682fe601fa29c465420a910c8375bfcf45d5aa6
 
 \item{...}{See \code{?voice::extract_features}.}
 }
