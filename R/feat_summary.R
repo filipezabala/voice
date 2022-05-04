@@ -74,7 +74,7 @@ feat_summary <- function(x,
     base_name <- basename(dplyr::pull(M[, wavPathName]))
     M[,wavPathName] <- paste0(path_name, base_name)
   } else{
-    M[,wavPathName] <- normalizePath(dplyr::pull(M[, wavPathName]))
+    M[,wavPathName] <- normalizePath(dplyr::pull(M[, wavPathName]));
   }
 
   # normalizing dirnames @ Extended
