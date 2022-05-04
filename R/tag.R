@@ -1,19 +1,11 @@
 #' Tag a data frame with media information.
 #'
 #' @param x An Extended data frame to be tagged with media information. See references.
-<<<<<<< HEAD
-#' @param groupBy A variable to group the summary measures. The argument must be a character vector. Default: \code{groupBy = 'wav_path'}. To avoid duplications, consider order/arrange the Extended data frame by this column.
-#' @param wavPath A vector containing the path(s) to WAV files. May be both as \code{dirname} or \code{basename} formats.
-#' @param wavPathName A string containing the WAV path name. Default: \code{wavPathName = 'wav_path'}
-#' @param tags Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.
-#' @param sortByGroupBy Logical. Should the function sort the Extended data frame \code{x} by \code{gropuBy}? Default: \code{sortByGroupBy = TRUE}. TAKE A LOOK!!!
-=======
 #' @param groupBy A variable to group the summary measures. The argument must be a character vector. Default: \code{groupBy = 'wav_path'}.
 #' @param wavPath A vector containing the path(s) to WAV files. May be both as \code{dirname} or \code{basename} formats.
 #' @param wavPathName A string containing the WAV path name. Default: \code{wavPathName = 'wav_path'}
 #' @param tags Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.
 #' @param sortByGroupBy Logical. Should the function sort the Extended data frame \code{x} by \code{gropuBy}? Default: \code{sortByGroupBy = TRUE}.
->>>>>>> 3682fe601fa29c465420a910c8375bfcf45d5aa6
 #' @param ... See \code{?voice::extract_features}.
 #' @details \code{filesRange} should only be used when all the WAV files are in the same folder.
 #' @references Zabala, F.J. (2022) to appear in...
