@@ -1,0 +1,17 @@
+class_svm               Fits, forecasts and gets performance from SVM
+                        models, serial and parallelized.
+conv                    Convolute vectors.
+conv_df                 Convolute data frames.
+conv_mc                 Convolute vectors using multicore.
+expand_model            Expand model given 'y' and 'x' variables.
+extract_features        Extracts features from WAV audio files.
+extract_features_py     Extract features from WAV audios using Python's
+                        Parselmouth library.
+is_mono                 Verify if an audio is mono.
+memory                  Gives the amount of memory RAM free, total and
+                        percentage = free/total.
+rm0                     Transforms 'n' sets of 'm>n' zeros (alternated
+                        with sets of non zeros) into 'n' sets of 'n'
+                        zeros.
+rp                      Prenda's rule. Returns '2t+p'.
+write_list              Writes a list to a path.
