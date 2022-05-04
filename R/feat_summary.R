@@ -68,7 +68,7 @@ feat_summary <- function(x,
                                freq = freq,
                                round.to = round.to)
 
-  # normalizing dirnames @ Media
+  # normalizing dirnames @ Media22
   if(file_test('-f', dplyr::pull(M[, wavPathName])[1])){
     path_name <- normalizePath(dirname(dplyr::pull(M[, wavPathName])))
     base_name <- basename(dplyr::pull(M[, wavPathName]))
