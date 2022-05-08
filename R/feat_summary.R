@@ -68,23 +68,23 @@ feat_summary <- function(x,
                                freq = freq,
                                round.to = round.to)
 
-  # normalizing dirnames @ Media2
+  # normalizing dirnames @ Media
   if(file_test('-f', dplyr::pull(M[, wavPathName])[1])){
-    path_name <- normalizePath(dirname(dplyr::pull(M[, wavPathName])))
-    base_name <- basename(dplyr::pull(M[, wavPathName]))
-    M[,wavPathName] <- paste0(path_name, base_name)
+    M_path_name <- normalizePath(dirname(dplyr::pull(M[, wavPathName])))
+    # M_base_name <- basename(dplyr::pull(M[, wavPathName]))
+    M[, wavPathName] <- paste0(M_path_name)
   } else{
-    M[,wavPathName] <- normalizePath(dplyr::pull(M[, wavPathName]));
+    M[, wavPathName] <- normalizePath(dplyr::pull(M[, wavPathName]));
   }
 
   # normalizing dirnames @ Extended
   x <- dplyr::as_tibble(x)
   if(file_test('-f', dplyr::pull(x[, wavPathName])[1])){
-    path_name <- normalizePath(dirname(dplyr::pull(x[, wavPathName])))
-    base_name <- basename(dplyr::pull(x[, wavPathName]))
-    x[,wavPathName] <- paste0(path_name, base_name)
+    x_path_name <- normalizePath(dirname(dplyr::pull(x[, wavPathName])))
+    # x_base_name <- basename(dplyr::pull(x[, wavPathName]))
+    x[, wavPathName] <- paste0(x_path_name)
   } else{
-    x[,wavPathName] <- normalizePath(dplyr::pull(x[, wavPathName]))
+    x[, wavPathName] <- normalizePath(dplyr::pull(x[, wavPathName]))
   }
 
   # full vector of features

@@ -19,6 +19,7 @@
 #' # creating Extended synthetic data
 #' E <- dplyr::tibble(subject_id = c(1,1,1,2,2,2,3,3,3),
 #' wav_path = path2wav)
+#' E
 #'
 #' # minimal usage
 #' tag(E)
@@ -29,11 +30,14 @@
 #' # limiting filesRange
 #' tag(E, filesRange = 3:6)
 #'
-#'
 #' # more features
-#' Et <- tag(E, features = c('f0', 'formants', 'df', 'pf', 'rf', 'rcf', 'rpf'))
+#' Et <- tag(E, features = c('f0', 'formants', 'df', 'pf', 'rf', 'rcf', 'rpf'),
+#' groupBy = 'subject_id')
 #' Et
 #' str(Et)
+#'
+#' # multicore (must not work on Windows)
+#' tag(E, mc.cores = parallel::detectCores(), groupBy = 'subject_id')
 #' @export
 tag <- function(x,
                 groupBy = 'wav_path',

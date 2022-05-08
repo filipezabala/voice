@@ -27,9 +27,6 @@ devtools::document(getwd())
 # install voice
 devtools::install_github('filipezabala/voice')
 
-# updating and creating manual
-devtools::document(setwd('~/Dropbox/D_Filipe_Zabala/pacotes/voice/'))
-
 # # loading
 # devtools::load_all()
 
@@ -129,3 +126,15 @@ library(voice)
 find.package('voice')
 packageDescription('voice')
 citation('voice')
+
+?tag
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+                       pattern <- glob2rx('*.wav'), full.names = TRUE)
+
+# creating Extended synthetic data
+E <- dplyr::tibble(subject_id = c(1,1,1,2,2,2,3,3,3),
+                   wav_path = path2wav)
+
+# minimal usage
+tag(E)
