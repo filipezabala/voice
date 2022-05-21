@@ -64,6 +64,9 @@ feat_summary(E)
 
 # canonical data
 feat_summary(E, 'subject_id')
+
+# advanced example using paths in wav_path, from VoxForge project
+
 }
 \references{
 Zabala, F.J. (2022) to appear in...
