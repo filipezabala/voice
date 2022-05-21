@@ -24,6 +24,9 @@
 #'
 #' # canonical data
 #' feat_summary(E, 'subject_id')
+#'
+#' # advanced example using paths in wav_path, from VoxForge project
+#'
 #' @export
 feat_summary <- function(x,
                          groupBy = 'wav_path',
@@ -68,38 +71,44 @@ feat_summary <- function(x,
                                freq = freq,
                                round.to = round.to)
 
+  # full vector of features
+  featFull <- colnames(M[,-(1:3)])
+
   # normalizing dirnames @ Media
   if(file_test('-f', dplyr::pull(M[, wavPathName])[1])){
     M_path_name <- normalizePath(dirname(dplyr::pull(M[, wavPathName])))
-    # M_base_name <- basename(dplyr::pull(M[, wavPathName]))
-    M[, wavPathName] <- paste0(M_path_name)
+    M_base_name <- basename(dplyr::pull(M[, wavPathName]))
+    M[, wavPathName] <- paste0(M_path_name, '/', M_base_name)
+    # M <- dplyr::select(M, slice_seq, slice_seq_file, wav_path, featFull)
   } else{
     M[, wavPathName] <- normalizePath(dplyr::pull(M[, wavPathName]));
+    # dir(M[, wavPathName])
   }
 
   # normalizing dirnames @ Extended
   x <- dplyr::as_tibble(x)
   if(file_test('-f', dplyr::pull(x[, wavPathName])[1])){
     x_path_name <- normalizePath(dirname(dplyr::pull(x[, wavPathName])))
-    # x_base_name <- basename(dplyr::pull(x[, wavPathName]))
-    x[, wavPathName] <- paste0(x_path_name)
+    x_base_name <- basename(dplyr::pull(x[, wavPathName]))
+    x[, wavPathName] <- paste0(x_path_name, '/', x_base_name)
   } else{
     x[, wavPathName] <- normalizePath(dplyr::pull(x[, wavPathName]))
   }
-
-  # full vector of features
-  featFull <- colnames(M[,-(1:3)])
 
   # Variation Coefficient function
   vc <- function(x, na.rm = TRUE){
     return(sd(x, na.rm = na.rm)/mean(x, na.rm = na.rm))
   }
 
+
   # left join
   M <- dplyr::left_join(M, x, by = wavPathName)
-  # cn <- wavPathName
-  # M <- M %>%
-  #   dplyr::select(slice_seq:slice_seq_file, tidyselect::all_of(featFull)) %>%
+
+  # complement of featFull
+  compFeatFull <- setdiff(colnames(M), featFull)
+
+  # tyding up
+  M <- dplyr::select(M, tidyselect::all_of(compFeatFull), tidyselect::all_of(featFull))
   # dplyr::rename(!!wavPathName := tidyselect::ends_with('.y'))
 
   # group by
@@ -145,3 +154,46 @@ feat_summary <- function(x,
 
   return(M_summ)
 }
+
+#
+# library(voice)
+# library(tidyverse)
+# ?voice::tag
+# path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+#                        pattern <- glob2rx('*.wav'), full.names = TRUE)
+# E <- dplyr::tibble(subject_id = c(1,1,1,2,2,2,3,3,3),
+#                    wav_path = path2wav)
+# x=E
+# groupBy = 'subject_id'
+# wavPath = unique(x$wav_path)
+# wavPathName = 'wav_path'
+# filesRange = NULL
+# features = 'f0'
+# gender = 'u'
+# windowShift = 5
+# numFormants = 8
+# numcep = 12
+# dcttype = c('t2', 't1', 't3', 't4')
+# fbtype = c('mel', 'htkmel', 'fcmel', 'bark')
+# resolution = 40
+# usecmp = FALSE
+# mc.cores = 1
+# full.names = TRUE
+# recursive = FALSE
+# check.mono = FALSE
+# stereo2mono = FALSE
+# overwrite = FALSE
+# freq = 44100
+# round.to = 4
+#
+#
+# # get path to audio file
+# wav_path <- list.files(system.file('extdata', package = 'voice'),
+#                        pattern <- glob2rx('*.wav'), full.names = TRUE)
+#
+#
+# E <- dplyr::tibble(subject_id = c('1snoke', '2old2play', '23yipikaye'),
+#             wav_path = list.files(system.file('extdata', package = 'voice'),
+#                                   pattern <- glob2rx('*.wav'), full.names = TRUE))
+# feat_summary(E)
+

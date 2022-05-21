@@ -117,7 +117,6 @@ devtools::install_github('filipezabala/voice')
 
 # attaching
 library(voice)
-?wsw
 ?conv_df
 ?conv_mc
 ?extract_features
@@ -138,3 +137,15 @@ E <- dplyr::tibble(subject_id = c(1,1,1,2,2,2,3,3,3),
 
 # minimal usage
 tag(E)
+
+# canonical data
+tag(E, groupBy = 'subject_id')
+
+# limiting filesRange
+tag(E, filesRange = 3:6)
+
+# minimal usage
+feat_summary(E)
+
+# canonical data
+feat_summary(E, 'subject_id')

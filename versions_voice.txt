@@ -43,20 +43,25 @@ To do
 * Create an anonymous list to be ignored by tag.R?
 * Parallelize # concatenating - for(j in 1:nWav) @ extract_features.R
 * Implement optimization @ tag.R. Check memory, processors.
-<<<<<<< HEAD
 * Solve "Note: possible error in 'audio_time(splitDir, ': unused argument (get.id = TRUE)"
+
+
+
+Version 0.3.15
+2022-05-21
+. Updated feat_summary.R normalizing dirnames @ Media and @ Extended (full path)
+. Added extdata directory.
+
+
+Version 0.3.14
+2022-05-07
+????
 
 
 
 Version 0.3.13
 2022-
 . Set id_path.Rda to mozilla_id_path.Rda
-
-=======
-
-
-
->>>>>>> 3682fe601fa29c465420a910c8375bfcf45d5aa6
 
 
 Version 0.3.12
