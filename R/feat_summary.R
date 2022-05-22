@@ -85,6 +85,7 @@ feat_summary <- function(x,
     x_path_name <- normalizePath(dirname(dplyr::pull(x[, wavPathName])))
     x_base_name <- basename(dplyr::pull(x[, wavPathName]))
     x[, wavPathName] <- paste0(x_path_name, '/', x_base_name)
+    M <- dplyr::left_join(M, x, wavPathName)
   } else{
     x[, wavPathName] <- normalizePath(dplyr::pull(x[, wavPathName]))
     wav_path_full <- dir(as.data.frame(x)[, wavPathName], full.names = TRUE)
@@ -92,15 +93,13 @@ feat_summary <- function(x,
                      wav_path_full = wav_path_full) # generalize wavPathName!
     x_full <- dplyr::left_join(x_full, x, by = 'wav_path')
     x_full <- dplyr::transmute(x_full, subject_id = subject_id, wav_path = wav_path_full)
+    M <- dplyr::left_join(M, x_full, wavPathName)
   }
 
   # Variation Coefficient function
   vc <- function(x, na.rm = TRUE){
     return(sd(x, na.rm = na.rm)/mean(x, na.rm = na.rm))
   }
-
-  # left join
-  M <- dplyr::left_join(M, x_full, wavPathName)
 
   # complement of featFull
   compFeatFull <- setdiff(colnames(M), featFull)
