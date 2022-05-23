@@ -28,7 +28,7 @@
 #' # advanced example using paths in wav_path, from VoxForge project
 #'
 #' @export
-feat_summary2 <- function(x,
+feat_summary <- function(x,
                          groupBy = 'wav_path',
                          wavPath = unique(x$wav_path),
                          wavPathName = 'wav_path',

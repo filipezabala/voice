@@ -127,7 +127,8 @@ find.package('voice')
 packageDescription('voice')
 citation('voice')
 
-?tag
+?voice::tag
+?feat_summary
 # get path to audio file
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
                        pattern <- glob2rx('*.wav'), full.names = TRUE)
