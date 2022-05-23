@@ -21,7 +21,8 @@
 remove.packages("voice", lib="/usr/local/lib/R/site-library")
 
 # updating and creating manual
-devtools::document(getwd())
+# devtools::document(getwd())
+devtools::document('/home/filipe/MEGAsync/pacotes/voice/')
 # devtools::document(setwd('~/MEGAsync/pacotes/voice/'))
 
 # install voice
@@ -137,12 +138,30 @@ E <- dplyr::tibble(subject_id = c(1,1,1,2,2,2,3,3,3),
 
 # minimal usage
 tag(E)
+feat_summary(E)
 
 # canonical data
 tag(E, groupBy = 'subject_id')
 
 # limiting filesRange
 tag(E, filesRange = 3:6)
+
+# Several files per directory (Mac)
+E <- dplyr::tibble(subject_id = c('1snoke', '2old2play', '23yipikaye'),
+                   wav_path = c('/Users/fz/MEGAsync/D_Filipe_Zabala/pacotes/voiceAudios/voxforge/1snoke-20120412-hge/wav',
+                                '/Users/fz/MEGAsync/D_Filipe_Zabala/pacotes/voiceAudios/voxforge/2old2play-20110606-hcn/wav',
+                                '/Users/fz/MEGAsync/D_Filipe_Zabala/pacotes/voiceAudios/voxforge/23yipikaye-20100807-ujm/wav'))
+voice::tag(E)
+voice::feat_summary(E)
+
+# Several files per directory (Linuxth  )
+E <- dplyr::tibble(subject_id = c('1snoke', '2old2play', '23yipikaye'),
+                   wav_path = c('/home/filipe/MEGAsync/pacotes/voiceAudios/voxforge/1snoke-20120412-hge/wav',
+                                '/home/filipe/MEGAsync/pacotes/voiceAudios/voxforge/2old2play-20110606-hcn/wav',
+                                '/home/filipe/MEGAsync/pacotes/voiceAudios/voxforge/23yipikaye-20100807-ujm/wav'))
+voice::tag(E)
+voice::feat_summary(E)
+
 
 # minimal usage
 feat_summary(E)

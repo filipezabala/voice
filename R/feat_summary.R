@@ -28,7 +28,7 @@
 #' # advanced example using paths in wav_path, from VoxForge project
 #'
 #' @export
-feat_summary <- function(x,
+feat_summary2 <- function(x,
                          groupBy = 'wav_path',
                          wavPath = unique(x$wav_path),
                          wavPathName = 'wav_path',
@@ -89,8 +89,8 @@ feat_summary <- function(x,
   } else{
     x[, wavPathName] <- normalizePath(dplyr::pull(x[, wavPathName]))
     wav_path_full <- dir(as.data.frame(x)[, wavPathName], full.names = TRUE)
-    x_full <- tibble(wav_path = dirname(wav_path_full),
-                     wav_path_full = wav_path_full) # generalize wavPathName!
+    x_full <- dplyr::tibble(wav_path = dirname(wav_path_full),
+                            wav_path_full = wav_path_full) # generalize wavPathName!
     x_full <- dplyr::left_join(x_full, x, by = 'wav_path')
     x_full <- dplyr::transmute(x_full, subject_id = subject_id, wav_path = wav_path_full)
     M <- dplyr::left_join(M, x_full, wavPathName)

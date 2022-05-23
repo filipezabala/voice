@@ -51,9 +51,19 @@ To do
 
 
 
-Version 0.3.16
+Version 0.3.18
+2022-05-23
+. Added dplyr::tibble in line 92 @ feat_summary.R.
+
+
+Version 0.3.17
 2022-05-22
 . Solved summarizing problem when wav_path was a directory (and not a file name) @ feat_summary.R.
+
+
+Version 0.3.16
+2022-05-22
+. Lost changes.
 
 
 Version 0.3.15
