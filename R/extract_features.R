@@ -62,7 +62,8 @@ extract_features <- function(x,
                              stereo2mono = FALSE,
                              overwrite = FALSE,
                              freq = 44100,
-                             round.to = NULL){
+                             round.to = NULL,
+                             verbose = TRUE){
 
   # time processing
   pt0 <- proc.time()

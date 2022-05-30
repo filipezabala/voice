@@ -23,7 +23,8 @@ extract_features(
   stereo2mono = FALSE,
   overwrite = FALSE,
   freq = 44100,
-  round.to = NULL
+  round.to = NULL,
+  verbose = TRUE
 )
 }
 \arguments{
