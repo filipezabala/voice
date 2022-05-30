@@ -19,6 +19,7 @@
 #' @param overwrite Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})
 #' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
 #' @param round.to Number of decimal places to round to. (default: \code{NULL})
+#' @param verbose Logical. Should the running status be showed? (default: \code{TRUE})
 #' @details When \code{features} 'df', 'pf', 'rf', 'rcf' or 'rpf' are selected, 'f0' and 'formants' must be selected. The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2022), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2022) and 'rpf' to 'formant position removal' (rpf1:rpf8) by Zabala (2022).
 #' @references Fitch, W.T. (1997) Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (\url{https://doi.org/10.1121/1.421048})
 #'
@@ -97,8 +98,10 @@ extract_features <- function(x,
     which.stereo <- which(!mono)
     ns <- length(which.stereo)
     if(sum(which.stereo)){
-      cat('The following', ns, 'audio files are stereo and must be converted to mono: \n',
-          paste0(names(mono[which.stereo]), sep = '\n'), '\n')
+      if(verbose){
+        cat('The following', ns, 'audio files are stereo and must be converted to mono: \n',
+            paste0(names(mono[which.stereo]), sep = '\n'), '\n')
+      }
       if(stereo2mono){
         audio <- sapply(wavFiles[which.stereo], tuneR::readWave)
         new.mono <- sapply(audio, tuneR::mono)
@@ -430,9 +433,13 @@ extract_features <- function(x,
                                   features.list.temp$mfcc[[j]][1:n_min[j],])
     }
 
-    cat('PROGRESS', paste0(round(j/nWav*100,2),'%'), '\n')
+    if(verbose){
+      cat('PROGRESS', paste0(round(j/nWav*100,2),'%'), '\n')
+    }
     t1 <- proc.time()-pt1
-    cat('FILE', j, 'OF', nWav, '|', t1[3], 'SECONDS\n\n')
+    if(verbose){
+      cat('FILE', j, 'OF', nWav, '|', t1[3], 'SECONDS\n\n')
+    }
   }
 
   # id, using smaller length: n_min
@@ -514,6 +521,7 @@ extract_features <- function(x,
     if(numFormants >= 8) {dat$df8 <- (dat$f8-dat$f1)/7}
   }
 
+  # TODO: in scale check if columns are not constant (degenerated random variables)
   # Scaling
   if('f0' %in% features & 'formants' %in% features &
      ('pf' %in% features | 'rf' %in% features |
@@ -577,7 +585,9 @@ extract_features <- function(x,
 
   # total time
   t0 <- proc.time()-pt0
-  cat('TOTAL TIME', t0[3], 'SECONDS\n\n')
+  if(verbose){
+    cat('TOTAL TIME', t0[3], 'SECONDS\n\n')
+  }
 
   # return dat
   return(dat)

@@ -64,6 +64,8 @@ extract_features(
 \item{freq}{Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})}
 
 \item{round.to}{Number of decimal places to round to. (default: \code{NULL})}
+
+\item{verbose}{Logical. Should the running status be showed? (default: \code{TRUE})}
 }
 \description{
 Extracts features from WAV audio files.

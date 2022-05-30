@@ -49,7 +49,8 @@ feat_summary <- function(x,
                          stereo2mono = FALSE,
                          overwrite = FALSE,
                          freq = 44100,
-                         round.to = 4){
+                         round.to = 4,
+                         verbose = TRUE){
 
   M <- voice::extract_features(wavPath,
                                filesRange = filesRange,

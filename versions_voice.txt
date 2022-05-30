@@ -48,8 +48,19 @@ To do
                    wav_path = c('/Users/fz/MEGAsync/D_Filipe_Zabala/pacotes/voiceAudios/voxforge/1snoke-20120412-hge/wav',
                                 '/Users/fz/MEGAsync/D_Filipe_Zabala/pacotes/voiceAudios/voxforge/2old2play-20110606-hcn/wav',
                                 '/Users/fz/MEGAsync/D_Filipe_Zabala/pacotes/voiceAudios/voxforge/23yipikaye-20100807-ujm/wav'))
+* Solve transmute(subject_id) issue @ feat_summary.R.
 
 
+Version 0.3.20
+2022-MM-DD
+. 
+
+
+Version 0.3.19
+2022-05-30
+. Added @ voice::extract_features in line 22: #' @param verbose Logical. Should the running status be showed?
+. Verbose also added to feat_summary.R and tag.R.
+. feat_summary2 set to feat_summary in line 31 @ feat_summary.R.
 
 Version 0.3.18
 2022-05-23
@@ -379,7 +390,5 @@ TI (análise de sistemas / alessandra/bernardo)
 jan - disciplinas
 ppc pronto em 20/02
 ppc na câmara 20/03
-
-
 
 

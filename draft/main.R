@@ -161,7 +161,9 @@ E <- dplyr::tibble(subject_id = c('1snoke', '2old2play', '23yipikaye'),
                                 '/home/filipe/MEGAsync/pacotes/voiceAudios/voxforge/2old2play-20110606-hcn/wav',
                                 '/home/filipe/MEGAsync/pacotes/voiceAudios/voxforge/23yipikaye-20100807-ujm/wav'))
 voice::tag(E)
+voice::tag(E, 'subject_id')
 voice::feat_summary(E)
+voice::feat_summary(E, 'subject_id')
 
 
 # minimal usage
