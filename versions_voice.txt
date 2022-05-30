@@ -52,8 +52,8 @@ To do
 
 
 Version 0.3.20
-2022-MM-DD
-. 
+2022-05-30
+. Corrected verbose = TRUE @ tag.R and @ feat_summary.R.
 
 
 Version 0.3.19

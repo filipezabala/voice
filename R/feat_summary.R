@@ -70,7 +70,8 @@ feat_summary <- function(x,
                                stereo2mono = stereo2mono,
                                overwrite = overwrite,
                                freq = freq,
-                               round.to = round.to)
+                               round.to = round.to,
+                               verbose = verbose)
 
   # full vector of features
   featFull <- colnames(M[,-(1:3)])

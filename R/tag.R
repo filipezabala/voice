@@ -93,7 +93,8 @@ tag <- function(x,
                                stereo2mono = stereo2mono,
                                overwrite = overwrite,
                                freq = freq,
-                               round.to = round.to)
+                               round.to = round.to,
+                               verbose = verbose)
   }
 
   # # voice::audio_time
