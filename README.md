@@ -252,16 +252,16 @@ MuseScore is an open source notation software.
 
 ### 8. [R](https://www.r-project.org)
 R is a free software environment for statistical computing and graphics.  
- . Download and run https://cloud.r-project.org/bin/macosx/base/R-4.1.0.pkg   
- . Will take 174.8 MB of disk space   
- . Send R-4.1.0.pkg to Trash   
+ . Download and run https://cloud.r-project.org/bin/macosx/base/R-4.2.0.pkg   
+ . Will take around 180 MB of disk space   
+ . Send R-4.2.0.pkg to Trash   
 
 ### 9. [RStudio](https://www.rstudio.com/)
 RStudio is an Integrated Development Environment (IDE) for R.  
- . Download and run https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg  
+ . Download and run https://download1.rstudio.org/desktop/macos/RStudio-2022.02.3-492.dmg  
  . Drag RStudio to Applications folder   
- . Will take 768.4 MB of disk space   
- . Unmount RStudio virtual disk and send RStudio-1.4.1717.dmg to Trash   
+ . Will take around 770 MB of disk space   
+ . Unmount RStudio virtual disk and send RStudio-2022.02.3-492.dmg to Trash   
  . Type `command + space 'rstudio'`   
  . Tools > Global Options... > Appearance > Merbivore (Restart required)   
 
