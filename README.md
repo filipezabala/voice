@@ -300,6 +300,8 @@ Miniconda3 will now be installed into this location: /Users/[your_user]/minicond
 
 Do you wish the installer to initialize Miniconda3 by running conda init? `yes`.   
 
+Close and reopen terminal.  
+
 ```bash
 export PATH="~/miniconda3/bin:$PATH"
 conda update -n base -c defaults conda
