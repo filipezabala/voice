@@ -229,7 +229,7 @@ cd MacPorts-2.7.2
 cd ../; rm -rf MacPorts-2.7.2*
 sudo nano /etc/paths
 ```
-Add the followinbg lines at the end of the file.
+Add the following lines at the end of the file.
 ```bash
 /opt/local/bin
 /opt/local/sbin
