@@ -219,13 +219,28 @@ The XQuartz project is an open-source effort to develop a version of the [X.Org 
  . Will take 319.2 MB of disk space   
  . Send XQuartz-2.8.1.dmg to Trash    
 
-### 6. [bwidget](http://sourceforge.net/projects/tcllib/files/)
- . Download https://sourceforge.net/projects/tcllib/files/latest/download  
+### 6. [MacPorts](https://guide.macports.org/chunked/installing.macports.html)
+You may prefer to proceed using the installer, see documentation.
 
 ```bash
-cd ~/Downloads
-tar -xf BWidget-1.9.15.zip
-mv bwidget-1.9.15 /usr/local/lib/bwidget-1.9.15
+wget https://github.com/macports/macports-base/releases/download/v2.7.2/MacPorts-2.7.2.tar.bz2
+tar xjvf MacPorts-2.7.2.tar.bz2
+cd MacPorts-2.7.2
+cd ../; rm -rf MacPorts-2.7.2*
+sudo nano /etc/paths
+```
+Add the followinbg lines at the end of the file.
+```bash
+/opt/local/bin
+/opt/local/sbin
+```
+Use Ctrl+O and return to save the file and Ctrl+X to cloe nano editor. Reboot your terminal.
+
+### 7. [tcllib](https://ports.macports.org/port/tcllib/)
+
+```bash
+sudo port selfupdate && sudo port upgrade tcllib
+sudo port install tcllib
 ```
 
 ### 7. [MuseScore](https://musescore.org/)
