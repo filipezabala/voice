@@ -24,9 +24,9 @@ remove.packages("voice", lib="/usr/local/lib/R/site-library")
 
 # updating and creating manual
 # devtools::document(getwd())
-devtools::document('/home/filipe/MEGAsync/pacotes/voice/')
+devtools::document('/home/filipe/MEGAsync/D_Filipe_Zabala/pacotes/voice/')
 # devtools::document(setwd('~/MEGAsync/pacotes/voice/'))
-
+'~/MEGAsync/'
 # install voice
 devtools::install_github('filipezabala/voice')
 
