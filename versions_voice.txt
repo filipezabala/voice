@@ -1,54 +1,12 @@
-Legend
-. done
-* to do
+
+Version 0.3.22
+2022-07-15
+. Update documentation @ extract_features.R.
 
 
-To do
-* Paper software. <- Journal Statistical Software (METAFOR)
-* Lista features depression.
-* Pre register.
-* IQ wave 2, depression.
-* Cut audios, shuffle and get finger print.
-* Write examples to read_rttm.R.
-* Write examples to enrich_rttm.R.
-* Write examples to audio_id.R.
-* Write plot_notes.R.
-* Vectorize smooth_df.R.
-* Write examples to smooth_df.R.
-* Build a 'rttm' object.
-* Conte até três! um, dois três! Gif guiando o tempo para induzir o falante e ter um ponto conhecido para parar a gravação.
-* Solve max(richRttm[[1]]$id_split, na.rm = T) - 1 @ enrich_rttm.R.
-* Write speakProp function @ enrich_rttm.R.
-* Standardize columns and rows @ extract_features.R and extract_features_py.R. 
-* Indicate NO WAV FILES FOUND when: Error in names(length.list) <- `*vtmp*` : 'names' attribute [2] must be the same length as the vector [1]
-* Indicate files with size 0 (QUAL O ERRO?)
-* Run 391-402 rows only inside if('mfcc' %in% features) the '11. Mel-Frequency Cepstral Coefficients (MFCC)' @ extract_features.R.
-* Add Pf, Df, Rf, RPf, RDf @ extract_features_py.R.
-* Adjust rowProp.R to interval [0,1], i.e., subtract the minimum.
-* At rowProp.R indicate inverted questions.
-* Add beta.scale parameter: df$var[df$var == 0] <- .0001, df$var[df$var] <- .9999
-* Add Variability Index by Oppliger Pinto (2017)
-* Stop criteria @ poetry.R: time, but recording and resuming.
-* Skip poetry if rttm exists.
-* random selector of MP3 files
-* create function to store files in directories of n (1000?) files. ZIP?
-* Save log @ extract_features. 
-* Add voice::yule.R
-* Add voice::Df.R
-* Add voice::Pf.R
-* Add voice::Rf.R
-* Add voice::RCf.R
-* Add voice::RPf.R
-* Automatically found folder pattern in tag.R.
-* Create an anonymous list to be ignored by tag.R?
-* Parallelize # concatenating - for(j in 1:nWav) @ extract_features.R
-* Implement optimization @ tag.R. Check memory, processors.
-* Solve "Note: possible error in 'audio_time(splitDir, ': unused argument (get.id = TRUE)"
-* E <- dplyr::tibble(subject_id = c('1snoke', '2old2play', '23yipikaye'),
-                   wav_path = c('/Users/fz/MEGAsync/D_Filipe_Zabala/pacotes/voiceAudios/voxforge/1snoke-20120412-hge/wav',
-                                '/Users/fz/MEGAsync/D_Filipe_Zabala/pacotes/voiceAudios/voxforge/2old2play-20110606-hcn/wav',
-                                '/Users/fz/MEGAsync/D_Filipe_Zabala/pacotes/voiceAudios/voxforge/23yipikaye-20100807-ujm/wav'))
-* Solve transmute(subject_id) issue @ feat_summary.R.
+Version 0.3.21
+2022-06-10
+. Lost changes.
 
 
 Version 0.3.20
@@ -360,6 +318,64 @@ print(file_list)
 Version 0.0.0.1
 2018-11-21 08:30:00 GMT-3
  
+
+###############################################################################
+
+
+
+Legend
+. done
+* to do
+
+
+To do
+* Paper software. <- Journal Statistical Software (METAFOR)
+* Write examples to read_rttm.R.
+* Write examples to enrich_rttm.R.
+* Write examples to audio_id.R.
+* Write plot_notes.R.
+* Vectorize smooth_df.R.
+* Write examples to smooth_df.R.
+* Build a 'rttm' object.
+* Conte até três! um, dois três! Gif guiando o tempo para induzir o falante e ter um ponto conhecido para parar a gravação.
+* Solve max(richRttm[[1]]$id_split, na.rm = T) - 1 @ enrich_rttm.R.
+* Write speakProp function @ enrich_rttm.R.
+* Indicate NO WAV FILES FOUND when: Error in names(length.list) <- `*vtmp*` : 'names' attribute [2] must be the same length as the vector [1]
+* Indicate files with size 0 (QUAL O ERRO?)
+* Run 391-402 rows only inside if('mfcc' %in% features) the '11. Mel-Frequency Cepstral Coefficients (MFCC)' @ extract_features.R.
+* Add Pf, Df, Rf, RPf, RDf @ extract_features_py.R.
+* Adjust rowProp.R to interval [0,1], i.e., subtract the minimum.
+* At rowProp.R indicate inverted questions.
+* Add beta.scale parameter: df$var[df$var == 0] <- .0001, df$var[df$var] <- .9999
+* Add Variability Index by Oppliger Pinto (2017)
+* Stop criteria @ poetry.R: time, but recording and resuming.
+* Skip poetry if rttm exists.
+* random selector of MP3 files
+* create function to store files in directories of n (1000?) files. ZIP?
+* Save log @ extract_features. 
+* Add voice::yule.R
+* Add voice::Df.R
+* Add voice::Pf.R
+* Add voice::Rf.R
+* Add voice::RCf.R
+* Add voice::RPf.R
+* Automatically found folder pattern in tag.R.
+* Create an anonymous list to be ignored by tag.R?
+* Parallelize # concatenating - for(j in 1:nWav) @ extract_features.R
+* Implement optimization @ tag.R. Check memory, processors.
+* Solve "Note: possible error in 'audio_time(splitDir, ': unused argument (get.id = TRUE)"
+* E <- dplyr::tibble(subject_id = c('1snoke', '2old2play', '23yipikaye'),
+                   wav_path = c('/Users/fz/MEGAsync/D_Filipe_Zabala/pacotes/voiceAudios/voxforge/1snoke-20120412-hge/wav',
+                                '/Users/fz/MEGAsync/D_Filipe_Zabala/pacotes/voiceAudios/voxforge/2old2play-20110606-hcn/wav',
+                                '/Users/fz/MEGAsync/D_Filipe_Zabala/pacotes/voiceAudios/voxforge/23yipikaye-20100807-ujm/wav'))
+* Solve transmute(subject_id) issue @ feat_summary.R.
+* Standardize columns and rows @ extract_features.R and extract_features_py.R. 
+* Adjust MFCC, ACF, ..., variable number of columns @ extract_features.R. 
+
+
+###############################################################################
+
+
 6577. 2018-11-21 08:30:00 O pacote voice começou!
 https://stat.ethz.ch/mailman/options/r-package-devel
 RP
@@ -368,27 +384,9 @@ http://dirk.eddelbuettel.com/cranberries/
 https://github.com/ropensci/webservices/wiki/ToDo
 
 
-
 Contacts
 . Trecenti
 . Musmath
 . gm
 . JF
 . Kolberg
-
-
-
-
-3 cursos Tecnólogo, 100% EAD
-banco de dados (analytics/ciência de dados) disciplinas da matemática p/ pegar o cara q trabalha. ML
-segurança (cristina nunes/avelino)
-TI (análise de sistemas / alessandra/bernardo)
-
-8 específicas
-10 disciplinas em comum, 20 disciplinas
-22/12 - objetivos, perfil egresso
-jan - disciplinas
-ppc pronto em 20/02
-ppc na câmara 20/03
-
-

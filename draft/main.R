@@ -30,6 +30,10 @@ devtools::install_github('filipezabala/voice')
 # # loading
 # devtools::load_all()
 
+# send to CRAN
+devtools::release()
+devtools::build()
+
 # checking
 # https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/
 

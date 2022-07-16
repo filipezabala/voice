@@ -7,7 +7,7 @@
 extract_features(
   x,
   filesRange = NULL,
-  features = c("f0", "formants", "df", "pf", "rf", "rcf", "rpf"),
+  features = c("f0", "formants", "mfcc", "df", "pf", "rf", "rcf", "rpf"),
   gender = "u",
   windowShift = 5,
   numFormants = 8,
@@ -32,7 +32,7 @@ extract_features(
 
 \item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.}
 
-\item{features}{Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
+\item{features}{Vector of features to be extracted. (default: 'f0','formants','mfcc','df','pf','rf','rcf','rpf'). The following features may contain a variable number of columns: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
 
 \item{gender}{\code{= <code>} set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.}
 

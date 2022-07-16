@@ -2,7 +2,7 @@
 #' @description Extracts features from WAV audio files.
 #' @param x A vector containing either files or directories of audio files in WAV format.
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.
-#' @param features Vector of features to be extracted. (default: 'f0','formants','zcr','mhs','rms','gain','rfc','ac','mfcc'). The following four features contain 4*257 = 1028 columns (257 each): \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
+#' @param features Vector of features to be extracted. (default: 'f0','formants','mfcc','df','pf','rf','rcf','rpf'). The following features may contain a variable number of columns: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
 #' @param gender \code{= <code>} set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
 #' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
 #' @param numFormants \code{= <num>} <num>ber of formants (default: 8). Used by \code{wrassp::forest}.
@@ -45,7 +45,7 @@
 #' @export
 extract_features <- function(x,
                              filesRange = NULL,
-                             features = c('f0','formants',
+                             features = c('f0','formants','mfcc',
                                           'df','pf','rf','rcf','rpf'),
                              gender = 'u',
                              windowShift = 5,
