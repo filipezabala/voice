@@ -2,7 +2,8 @@
 title: '`voice` vignette - The R part'
 subtitle: 'version `r packageVersion("voice")`'
 author: 'Filipe J. Zabala'
-date: "`r format(Sys.time(), '%Y-%m-%d %H:%M:%S')`"
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
+# date: "`r format(Sys.time(), '%Y-%m-%d %H:%M:%S')`"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -23,245 +24,34 @@ ini0 <- Sys.time()
 ## 0. Installation
 https://github.com/filipezabala/voice
 
-## 1. Extract features
-### Load packages
+### Load packages and audio files
 ```{r, message=FALSE, warning=FALSE}
 # packs
 library(voice)
-library(tidyverse)
-library(music)
-library(gm)
+
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+                       pattern <- glob2rx('*.wav'), full.names = TRUE)
 ```
 
-### Setting directories and removing old ones
+## 1. Extract features
+### Examples
 ```{r}
-dirs <- c('vaDir', 'wavDir', 'mp3Dir', 'musicxmlDir')
-vaDir <- '~/Downloads/voiceAudios'
-for(i in 1:length(dirs)){
-  if(i>1){ assign(dirs[i], paste0(get(dirs[1]), '/', dirs[i])) }
-  ifelse(!dir.exists(get(dirs[i])), dir.create(get(dirs[i])), 'Directory exists!')
-}
-cmd <- paste0('rm ', wavDir, '/*.*; ', 'rm ', mp3Dir, '/*.*')
-system(cmd)
+# minimal usage
+M <- extract_features(path2wav, verbose = FALSE)
+M
 ```
 
 
-<!-- #### >>> To do #10 [SOLVED @ VERSION 0.0.0.9044 2021-09-12] -->
-<!-- Automatize and test `autoDir` argument @ splitw.R.  <<< -->
-
-<!-- #### >>> To do #20 [SOLVED @ VERSION 0.0.0.9044 2021-09-12] -->
-<!-- Parameters fromWav, fromRttm admits either file or directory @ splitw.R. <<< -->
-
-### Get audio
+## 2. Tag
 ```{r}
-url0 <- 'https://github.com/filipezabala/voiceAudios/blob/main/mp3/doremi.mp3?raw=true'
-download.file(url0, paste0(mp3Dir, '/doremi.mp3'), mode = 'wb')
-embedr::embed_audio(url0)
+# creating Extended synthetic data
+E <- dplyr::tibble(subject_id = c(1,1,1,2,2,2,3,3,3), wav_path = path2wav)
+E
+
+# minimal usage
+tag(E, verbose = FALSE)
+
+# canonical data
+tag(E, groupBy = 'subject_id', verbose = FALSE)
 ```
-
-<!-- #### >>> To do #30 [SOLVED in 2021-11-07] -->
-<!-- Insert a button to play audio files. <<< -->
-
-<!-- #### >>> To do #40 -->
-<!-- At `url0 <- 'https://github.com/filipezabala/voiceAudios/raw/main/bebezinho_2.005.wav'`, find out why the downloaded file is called `wav_bebezinho_2.005.wav`. <<< -->
-
-### Convert mp3 to wav mono
-```{r}
-cmd <- 'cd ~/Downloads/voiceAudios/mp3Dir;
-for i in *.[Mm][Pp]3; do ffmpeg -i "$i" -ac 1 "../wavDir/${i%.*}.wav"; done'
-system(cmd)
-```
-
-### Extract features
-```{r}
-ef <- voice::extract_features(wavDir, features = c('f0','gain'),
-                              round.to = 6, windowShift = 5)
-ef
-```
-<!-- #### >>> To do #50 -->
-<!-- Automatize and test `stereo2mono`. <<< -->
-
-<!-- #### >>> To do #60 -->
-<!-- Test different windowShift values.  <<< -->
-
-
-## 2. Smooth
-<!-- #### >>> To do #70 [SOLVED @ VERSION 0.0.0.9042 2021-09-12] -->
-<!-- Write the function `smooth_df(x,k)`. <<< -->
-
-```{r, warning=FALSE, message=FALSE}
-odd <- seq(1,11,2)
-ef_sm <- vector('list', length(odd))
-names(ef_sm) <- paste0('k=', odd)
-for(i in 1:length(ef_sm)){
-  ef_sm[[i]] <- voice::smooth_df(ef, id = 3, k = i)
-}
-sapply(ef_sm, dim)
-```
-
-### Plot F0 smoothing
-```{r, fig.height=6, fig.width=8}
-par(mfrow = c(2,3))
-for(i in 1:length(ef_sm)){
-  plot(ef_sm[[i]]$F0, main = paste0('k = ', odd[i]))
-}
-```
-
-
-<!-- ### Pool -->
-<!-- ```{r} -->
-<!-- (ef01 <- voice::conv_df(ef, .01)) # 1% -->
-<!-- ``` -->
-<!-- #### >>> To do -->
-<!-- 1. Eliminate this step, assigning notes and durations after smooth with moving average.   -->
-<!-- 2. Apply voice::duration over the smoothed data.   -->
-
-## 3. Assign notes
-Assign notes in Scientific Pitch Notation to F0.
-```{r}
-for(i in 1:length(ef_sm)){
-  ef_sm[[i]]$F0_spn <- voice::notes(ef_sm[[i]]$F0)
-}
-```
-
-<!-- #### >>> To do #80 [WORK IN PROGRESS] -->
-<!-- Write plot_note function to show both frequency and notes in spn, midi and black formats. <<< -->
-
-<!-- #### >>> To do #90 -->
-<!-- Write a function to, given a frequency in Hz, convert in any SPN. <<< -->
-
-<!-- #### >>> To do #100 -->
-<!-- Implement and study major/minor chords identifier (consider `tabr` functions). <<< -->
-
-<!-- #### >>> To do #110 -->
-<!-- Study sequences (scales and arpeggios). <<< -->
-
-
-## 4. Duration
-```{r}
-dur_spn <- vector('list', length(ef_sm))
-names(dur_spn) <- paste0('k=', odd)
-for(i in 1:length(ef_sm)){
-  dur_spn[[i]] <- voice::duration(ef_sm[[i]]$F0_spn) 
-}
-```
-
-<!-- ## 5. Distance -->
-<!-- Distance in semitones -->
-<!-- ```{r} -->
-<!-- nd <- vector('list', length(ef_sm)) -->
-<!-- for(i in 1:length(ef_sm)){ -->
-<!--   nd[[i]] <- music::noteDistance(as.character(dur_spn[[i]]$note)) -->
-<!--   print(summary(nd[[i]])) -->
-<!-- } -->
-<!-- nd[[1]] -->
-<!-- ``` -->
-
-<!-- #### >>> To do #120 -->
-<!-- Extract and test microtones. (Giuliano's idea.) <<< -->
-
-<!-- ### Play -->
-<!-- ```{r} -->
-<!-- music::playNote(note = as.character(dur.spn$note), duration = dur.spn$dur_line) -->
-<!-- ``` -->
-<!-- #### >>> To do -->
-<!-- 1. Check version to play different durations.   -->
-
-<!-- To do:   -->
-<!-- 1. Solve in Linux:   -->
-
-<!-- ```{r} -->
-<!-- # ALSA lib pcm_dmix.c:1089:(snd_pcm_dmix_open) unable to open slave -->
-<!-- # ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear -->
-<!-- # ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe -->
-<!-- # ALSA lib pcm.c:2642:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.side -->
-<!-- # ALSA lib pcm_route.c:869:(find_matching_chmap) Found no matching channel map -->
-<!-- # ALSA lib pcm_oss.c:377:(_snd_pcm_oss_open) Unknown field port -->
-<!-- # ALSA lib pcm_oss.c:377:(_snd_pcm_oss_open) Unknown field port -->
-<!-- # ALSA lib pulse.c:242:(pulse_connect) PulseAudio: Unable to connect: Connection refused -->
-<!-- #  -->
-<!-- # ALSA lib pulse.c:242:(pulse_connect) PulseAudio: Unable to connect: Connection refused -->
-<!-- #  -->
-<!-- # ALSA lib pcm_usb_stream.c:486:(_snd_pcm_usb_stream_open) Invalid type for card -->
-<!-- # ALSA lib pcm_usb_stream.c:486:(_snd_pcm_usb_stream_open) Invalid type for card -->
-<!-- # ALSA lib pcm_dmix.c:1089:(snd_pcm_dmix_open) unable to open slave -->
-<!-- # ALSA lib pcm_dmix.c:1089:(snd_pcm_dmix_open) unable to open slave -->
-<!-- ``` -->
-
-## 5. Music sheet
-### Compress to 1%
-```{r}
-# compress
-ef_01 <- voice::conv_df(ef, 0.01, id = 3)
-
-# assign notes
-ef_01$F0_spn <- voice::notes(ef_01$F0, measure = 'spn')
-
-# duration
-nd_01 <- voice::duration(ef_01$F0_spn)
-
-# gm by Renfei Mao
-m01 <- gm::Music()
-m01 <- m01 +
-  gm::Meter(4, 4) +
-  gm::Line(pitches = as.list(as.character(nd_01$note)),
-           durations = as.list(nd_01$dur_line)) +
-  Tempo(170)
-show(m01, to = c('score', 'audio'))
-```
-
-
-## 6. Test your voice
-
-https://codepen.io/aeewhite/pen/BjzbOL
-https://developers.google.com/web/fundamentals/media/recording-audio
-
-<script>
-<h2>Not Recording</h2>
-
-<button class="notRec">Not Recording</button>
-
-<br />
-<br />
-<h2>Recording</h2>
-
-<button class="Rec">Recording</button>
-
-<h2>Demo</h2>
-<p>Click the button to start/stop recording</p>
-<button id="recButton"></button>
-
-</script>
-
-```{r}
-tm <- 2 # desired time in seconds
-rate <- 8000 # sample recording rate in Hz
-x <- rep(NA_real_, rate*tm)
-a <- audio::record(x, rate, 1)
-wait(a)
-class(a)
-play(x, rate = rate*2)
-save.wave(a$data, 'test.WAV')
-# aa <- load.wave('test.WAV')
-# play(aa, rate = rate*2)
-a2 <- tuneR::readWave('test.WAV')
-embedr::embed_audio(a2)
-
-```
-
-
-<!-- #### >>> To do #130 -->
-<!-- Automate `pitches` and `durations` at `gm::Line` to capture spn/midi from `duration` data frame. <<< -->
-
-
-<!-- ### Export musicxml file -->
-<!-- ```{r} -->
-<!-- gm::export(m01, musicxmlDir, 'bebezinho_01', 'musicxml') -->
-<!-- gm::export(m21, musicxmlDir, 'bebezinho_21', 'musicxml') -->
-<!-- ``` -->
-
-
-<!-- ```{r} -->
-<!-- Sys.time()-ini0 -->
-<!-- ``` -->
-

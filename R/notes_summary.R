@@ -3,6 +3,7 @@
 #' @param x Either a WAV file or a directory containing WAV files.
 #' @param get.id Logical. Should the ID must be extracted from file name? Default: \code{FALSE}.
 #' @param i ID position in file name. Default: \code{4}.
+#' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
 #' @export
 notes_summary <- function(x, get.id = FALSE, i = 4, recursive = FALSE){
   ef <- voice::extract_features(x, features = 'f0', recursive = TRUE, round.to = 1)

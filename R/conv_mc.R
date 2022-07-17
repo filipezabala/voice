@@ -24,13 +24,13 @@
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #'
 #' # getting all features
-#' ef <- extract_features(dirname(path2wav), features = c('f0','formants',
+#' M <- extract_features(dirname(path2wav), features = c('f0','formants',
 #' 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
-#' mc.cores = 1)
+#' mc.cores = 1, verbose = FALSE)
 #'
-#' ef.num <- ef[-1]
-#' nrow(ef.num)
-#' cm1 <- conv_mc(ef.num, compact.to = 0.1, drop.zeros = TRUE,
+#' M.num <- M[,-(1:3)]
+#' nrow(M.num)
+#' cm1 <- conv_mc(M.num, compact.to = 0.1, drop.zeros = TRUE,
 #' to.data.frame = FALSE, mc.cores = 1)
 #' names(cm1)
 #' lapply(cm1$f0, length)

@@ -39,9 +39,43 @@ feat_summary(
 
 \item{wavPathName}{A string containing the WAV path name. Default: \code{wavPathName = 'wav_path'}}
 
-\item{tags}{Tags to be added to \code{x}. Default: \code{'feat_summary'}. See details.}
+\item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.}
 
-\item{...}{See \code{?voice::extract_features}.}
+\item{features}{Vector of features to be extracted. (default: 'f0','formants','mfcc','df','pf','rf','rcf','rpf'). The following features may contain a variable number of columns: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
+
+\item{gender}{\code{= <code>} set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.}
+
+\item{windowShift}{\code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.}
+
+\item{numFormants}{\code{= <num>} <num>ber of formants (default: 8). Used by \code{wrassp::forest}.}
+
+\item{numcep}{Number of Mel-frequency cepstral coefficients (cepstra) to return (default: 12). Used by \code{tuneR::melfcc}.}
+
+\item{dcttype}{Type of DCT used. \code{'t1'} or \code{'t2'}, \code{'t3'} for HTK \code{'t4'} for feacalc (default = \code{'t2'}). Used by \code{tuneR::melfcc}.}
+
+\item{fbtype}{Auditory frequency scale to use: \code{'mel'}, \code{'bark'}, \code{'htkmel'}, \code{'fcmel'} (default: \code{'mel'}). Used by \code{tuneR::melfcc}.}
+
+\item{resolution}{\code{= <freq>} set FFT length to the smallest value which results in a frequency resolution of <freq> Hz or better (default: 40.0). Used by \code{wrassp::cssSpectrum}, \code{wrassp::dftSpectrum} and \code{wrassp::lpsSpectrum}.}
+
+\item{usecmp}{Logical. Apply equal-loudness weighting and cube-root compression (PLP instead of LPC) (default: \code{FALSE}). Used by \code{tuneR::melfcc}.}
+
+\item{mc.cores}{Number of cores to be used in parallel processing. (default: \code{1})}
+
+\item{full.names}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.}
+
+\item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
+
+\item{check.mono}{Logical. Check if the WAV file is mono. (default: \code{TRUE})}
+
+\item{stereo2mono}{Logical. Should files be converted from stereo to mono? (default: \code{TRUE})}
+
+\item{overwrite}{Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})}
+
+\item{freq}{Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})}
+
+\item{round.to}{Number of decimal places to round to. (default: \code{NULL})}
+
+\item{verbose}{Logical. Should the running status be showed? (default: \code{TRUE})}
 }
 \description{
 Returns summary measures of voice::extract_features

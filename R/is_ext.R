@@ -1,7 +1,7 @@
 #' Is a database of the extended type?
 #'
 #' @param x A data frame to be evaluated.
-#' @param subj.id Column containing the subject ID. Default: \coe{NULL}, i.e., uses the first column.
+#' @param subj.id Column containing the subject ID. Default: \code{NULL}, i.e., uses the first column.
 #' @export
 is_ext <- function(x, subj.id = NULL){
   if(is.null(subj.id)){

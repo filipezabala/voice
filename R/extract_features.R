@@ -69,7 +69,7 @@ extract_features <- function(x,
   pt0 <- proc.time()
 
   # checking if x is composed by files or directories
-  if(file_test('-f', x[1])){
+  if(utils::file_test('-f', x[1])){
     wavDir <- lapply(x, dirname)
     wavDir <- do.call(rbind, wavDir)
     wavDir <- unique(wavDir)

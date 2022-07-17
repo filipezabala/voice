@@ -2,8 +2,10 @@
 #'
 #' @param x A data frame to be tagged with media information.
 #' @param mediaDir Directory containing media files. Currently accepts audio files with WAV and MP3 formats.
-#' @param id Column containing the ID to be searched in mediaDir file names. Default: \coe{NULL}, i.e., uses the first column.
+#' @param id Column containing the ID to be searched in mediaDir file names. Default: \code{NULL}, i.e., uses the first column.
+#' @param get.id Logical. Should id_file be x id?
 #' @param i ID position in \code{col}. Default: \code{4}.
+#' @param to.int Logical. Should tag_has_audio be converted to integer?
 #' @export
 has_audio <- function(x, mediaDir, id = NULL, get.id = FALSE,
                       i = 4, to.int = TRUE){
@@ -22,10 +24,10 @@ has_audio <- function(x, mediaDir, id = NULL, get.id = FALSE,
   ha <- x[,id] %in% id.label
   if(get.id){
     if(to.int){
-      ha_df <- bind_cols(id_file = x[,id], tag_has_audio = as.integer(ha))
+      ha_df <- dplyr::bind_cols(id_file = x[,id], tag_has_audio = as.integer(ha))
       return(ha_df)
     } else{
-      ha_df <- bind_cols(id_file = x[,id], tag_has_audio = ha)
+      ha_df <- dplyr::bind_cols(id_file = x[,id], tag_has_audio = ha)
       return(ha_df)
     }
   } else{

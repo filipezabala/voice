@@ -13,11 +13,13 @@
 #' @param silence.gap The silence gap (in seconds) between adjacent words in a keyword. Rows with \code{tdur <= silence.gap} are removed. (default: \code{0.5})
 #' @details When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 #' @examples
+#' \dontrun{
 #' library(voice)
 #' wavDir <- list.files(system.file('extdata', package = 'wrassp'),
 #'                      pattern <- glob2rx('*.wav'), full.names = TRUE)
 #' poetry(dirname(path2wav), pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
 #' splitw(dirname(path2wav))
+#' }
 #' @export
 splitw <- function(fromWav,
                    fromRttm = NULL,
@@ -34,7 +36,7 @@ splitw <- function(fromWav,
   pt0 <- proc.time()
 
   # checking if is either a file or a directory
-  if(file_test('-f', fromWav)){
+  if(utils::file_test('-f', fromWav)){
     wavDir <- dirname(fromWav)
     wavFiles <- fromWav
   } else{
@@ -61,7 +63,7 @@ splitw <- function(fromWav,
   }
 
   # rttm
-  if(file_test('-f', fromRttm)){
+  if(utils::file_test('-f', fromRttm)){
     rttmDir <- dirname(fromRttm)
     rttmFiles <- fromRttm
   } else{
@@ -76,7 +78,7 @@ splitw <- function(fromWav,
   }
 
   # wav
-  if(file_test('-d', fromWav)){
+  if(utils::file_test('-d', fromWav)){
     wavFiles <- list.files(fromWav, pattern = '[[:punct:]][wW][aA][vV]$',
                            full.names = full.names, recursive = recursive)
   }

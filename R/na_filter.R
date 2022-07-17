@@ -6,7 +6,8 @@
 #' @examples
 #' library(voice)
 #' # http://archive.ics.uci.edu/ml/datasets/Arrhythmia
-#' bd <- read.table('http://archive.ics.uci.edu/ml/machine-learning-databases/00579/MI.data', sep = ',')
+#' dat <- 'http://archive.ics.uci.edu/ml/machine-learning-databases/00579/MI.data'
+#' bd <- read.table(dat, sep = ',')
 #' bd[bd=='?'] <- NA
 #' @export
 na_filter <- function(x, max.loss = 1){

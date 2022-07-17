@@ -51,19 +51,19 @@ library(voice)
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 pattern <- glob2rx('*.wav'), full.names = TRUE)
 
-# getting all the 1092 features
-ef <- extract_features(dirname(path2wav), features = c('f0','formants',
+# getting Media data frame
+M <- extract_features(dirname(path2wav), features = c('f0','formants',
 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
-mc.cores = 1)
+mc.cores = 1, verbose = FALSE)
 
 \dontrun{
-(cef.df <- conv_df(ef, 0.1, id = 'file_name', mc.cores = 1))
-(cef.df2 <- conv_df(ef, 0.1, id = 'file_name', drop.x = FALSE, mc.cores = 1))
+(cM.df <- conv_df(M[,-(1:2)], 0.1, mc.cores = 1))
+(cM.df2 <- conv_df(M[,-(1:2)], 0.1, drop.x = FALSE, mc.cores = 1))
 
-dim(ef)
-dim(cef.df)
-dim(cef.df2)
-(cef.list <- conv_df(ef, 0.1, id = 'file_name', to.data.frame = FALSE, mc.cores = 1))
+dim(M)
+dim(cM.df)
+dim(cM.df2)
+(cM.list <- conv_df(M[,-(1:2)], 0.1, to.data.frame = FALSE, mc.cores = 1))
 }
 }
 \seealso{

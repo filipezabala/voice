@@ -30,10 +30,6 @@ devtools::install_github('filipezabala/voice')
 # # loading
 # devtools::load_all()
 
-# send to CRAN
-devtools::release()
-devtools::build()
-
 # checking
 # https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/
 
@@ -45,6 +41,11 @@ devtools::check(args = c('--as-cran'))
 # devtools::check_win_release()
 usethis::use_github_actions()
 goodpractice::gp()
+
+# send to CRAN
+devtools::spell_check()
+devtools::release()
+devtools::build()
 
 # Run R CMD check on all downstream dependencies
 dep = tools::package_dependencies(reverse = TRUE, which = 'Depends', recursive = TRUE)

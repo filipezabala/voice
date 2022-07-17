@@ -11,9 +11,13 @@ has_audio(x, mediaDir, id = NULL, get.id = FALSE, i = 4, to.int = TRUE)
 
 \item{mediaDir}{Directory containing media files. Currently accepts audio files with WAV and MP3 formats.}
 
-\item{id}{Column containing the ID to be searched in mediaDir file names. Default: \coe{NULL}, i.e., uses the first column.}
+\item{id}{Column containing the ID to be searched in mediaDir file names. Default: \code{NULL}, i.e., uses the first column.}
+
+\item{get.id}{Logical. Should id_file be x id?}
 
 \item{i}{ID position in \code{col}. Default: \code{4}.}
+
+\item{to.int}{Logical. Should tag_has_audio be converted to integer?}
 }
 \description{
 Indicates if an ID has associated audio files

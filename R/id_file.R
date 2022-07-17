@@ -23,8 +23,8 @@ id_file <- function(x, col = NULL, pattern = '[_.]', i = 5, drop_col = FALSE){
   aid <- sapply(ss, geti)
   sprintf('%1.0f', aid)
 
-  x <- bind_cols(id_file = aid, x) %>%
-    arrange(id_file) %>%
+  x <- dplyr::bind_cols(id_file = aid, x) %>%
+    plyr::arrange(id_file) %>%
     dplyr::as_tibble()
 
   if(drop_col){

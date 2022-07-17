@@ -11,7 +11,7 @@ audio_time(x, filesRange = NULL, recursive = FALSE)
 
 \item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files).}
 
-\item{recursive}{Logical.}
+\item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
 }
 \description{
 Returns the total time of audio files in seconds

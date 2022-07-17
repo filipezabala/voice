@@ -16,9 +16,9 @@ spoken_time(
 
 \item{get.id}{Logical. Should the ID must be extracted from file name? Default: \code{FALSE}.}
 
-\item{pycall}{Python call.}
+\item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
 
-\item{i}{ID position in file name. Default: \code{7}.}
+\item{pycall}{Python call.}
 }
 \description{
 Returns the spoken time of audio files

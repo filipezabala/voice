@@ -13,7 +13,7 @@
 #' notes(c(220,440,880), method = 'octave')
 #' notes(c(220,440,880), method = 'midi')
 #' @export
-notes <- function(x, measure = 'spn', moving.average = FALSE, k = 11){
+notes <- function(x, method = 'spn', moving.average = FALSE, k = 11){
   if(moving.average){
     x <- zoo::rollmean(x, k)
   }
@@ -25,20 +25,20 @@ notes <- function(x, measure = 'spn', moving.average = FALSE, k = 11){
                 freq[-lf] + distance/2,
                 freq[lf]+distance[lf-1]/2)
   spn <- voice::notes_freq()$spn[findInterval(x, freqhalf)]
-  if(measure == 'spn'){
+  if(method == 'spn'){
     return(spn)
-  } else if(measure == 'midi'){
+  } else if(method == 'midi'){
     midi <- voice::notes_freq()$midi[match(spn, voice::notes_freq()$spn)]
     return(midi)
-  } else if(measure == 'octave'){
+  } else if(method == 'octave'){
     lev <- c('C','C#','D','D#','E','F','F#','G','G#','A','A#','B')
     octa <- base::strsplit(as.character(spn), '[0-9]')
     octa <- factor(unlist(octa), levels = lev)
     return(octa)
-  } else if(measure == 'black'){
+  } else if(method == 'black'){
     black <- notes_freq()$black[match(spn, voice::notes_freq()$spn)]
     return(black)
-  } else if(measure == 'Black'){
+  } else if(method == 'Black'){
     Black <- notes_freq()$Black[match(spn, voice::notes_freq()$spn)]
     return(Black)
   }

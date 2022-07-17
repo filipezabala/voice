@@ -2,12 +2,10 @@
 #'
 #' @param listRttm A list containing RTTM files.
 #' @param silence.gap The silence gap (in seconds) between adjacent words in a keyword. Rows with \code{tdur <= silence.gap} are removed. (default: \code{0.5})
+#' @param as.tibble Logical. Should it return a tibble?
 #' @description Enrich Rich Transcription Time Marked (RTTM) files obtained from \code{voice::read_rttm}.
 #' @references https://www.nist.gov/system/files/documents/itl/iad/mig/KWS15-evalplan-v05.pdf
 #' @seealso \code{voice::read_rttm}
-#' @examples
-#' library(voice)
-#' download.file...
 #' @export
 enrich_rttm <- function(listRttm, silence.gap = 0.5, as.tibble = TRUE){
   fltr <- function(x){

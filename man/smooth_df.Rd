@@ -23,10 +23,6 @@ A vector of convoluted values with length near to \code{compact.to*length(x)}.
 \description{
 Smooth numeric variables in a data frame.
 }
-\examples{
-library(voice)
-...
-}
 \seealso{
 \code{extract_features}
 }

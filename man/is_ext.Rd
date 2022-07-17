@@ -9,7 +9,7 @@ is_ext(x, subj.id = NULL)
 \arguments{
 \item{x}{A data frame to be evaluated.}
 
-\item{subj.id}{Column containing the subject ID. Default: \coe{NULL}, i.e., uses the first column.}
+\item{subj.id}{Column containing the subject ID. Default: \code{NULL}, i.e., uses the first column.}
 }
 \description{
 Is a database of the extended type?

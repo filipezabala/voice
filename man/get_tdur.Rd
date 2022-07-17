@@ -7,7 +7,7 @@
 get_tdur(x)
 }
 \arguments{
-\item{fromRttm}{A directory/folder containing RTTM files.}
+\item{x}{An RTTM file.}
 }
 \description{
 Get time duration from RTTM file.

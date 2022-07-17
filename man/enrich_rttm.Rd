@@ -10,13 +10,11 @@ enrich_rttm(listRttm, silence.gap = 0.5, as.tibble = TRUE)
 \item{listRttm}{A list containing RTTM files.}
 
 \item{silence.gap}{The silence gap (in seconds) between adjacent words in a keyword. Rows with \code{tdur <= silence.gap} are removed. (default: \code{0.5})}
+
+\item{as.tibble}{Logical. Should it return a tibble?}
 }
 \description{
 Enrich Rich Transcription Time Marked (RTTM) files obtained from \code{voice::read_rttm}.
-}
-\examples{
-library(voice)
-download.file...
 }
 \references{
 https://www.nist.gov/system/files/documents/itl/iad/mig/KWS15-evalplan-v05.pdf

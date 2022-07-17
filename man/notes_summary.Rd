@@ -12,6 +12,8 @@ notes_summary(x, get.id = FALSE, i = 4, recursive = FALSE)
 \item{get.id}{Logical. Should the ID must be extracted from file name? Default: \code{FALSE}.}
 
 \item{i}{ID position in file name. Default: \code{4}.}
+
+\item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
 }
 \description{
 Returns summary measures of the spoken notes in semitones

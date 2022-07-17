@@ -7,9 +7,6 @@
 #' @param mc.cores The number of cores to mclapply. By default uses \code{1}.
 #' @return A vector of convoluted values with length near to \code{compact.to*length(x)}.
 #' @importFrom dplyr %>%
-#' @examples
-#' library(voice)
-#' ...
 #' @seealso \code{extract_features}
 #' @export
 smooth_df <- function(x, k = 11, id = colnames(x)[1], colnum = NULL,

@@ -2,12 +2,12 @@
 #'
 #' @param x Either a WAV file or a directory containing WAV files.
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
-#' @param recursive Logical.
+#' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
 #' @export
 audio_time <- function(x, filesRange = NULL, recursive = FALSE){
 
   # checking if x is a file or directory
-  if(file_test('-f', x)){
+  if(utils::file_test('-f', x)){
     wavDir <- dirname(x)
     wavFiles <- x
   } else{
@@ -33,7 +33,7 @@ audio_time <- function(x, filesRange = NULL, recursive = FALSE){
     sr <- lapply(a, voice::get_samp.rate)
     le <- lapply(gl, length)
     at <- unlist(Map('/', le, sr))
-    at <- bind_cols(file_name = fn, tag_audio_time = at)
+    at <- dplyr::bind_cols(file_name = fn, tag_audio_time = at)
     return(at)
     }
   else{

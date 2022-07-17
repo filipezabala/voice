@@ -7,7 +7,7 @@
 get_tbeg(x)
 }
 \arguments{
-\item{fromRttm}{A directory/folder containing RTTM files.}
+\item{x}{An RTTM file.}
 }
 \description{
 Get time beginning from RTTM file.
