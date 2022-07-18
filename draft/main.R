@@ -36,14 +36,25 @@ devtools::install_github('filipezabala/voice')
 # usethis::use_build_ignore(c('draft', 'cran-comments.md'))
 devtools::check()
 devtools::check(args = c('--as-cran'))
-# devtools::check_win_devel()
+devtools::check_win_devel()
 # devtools::check_win_oldrelease()
 # devtools::check_win_release()
-usethis::use_github_actions()
-goodpractice::gp()
+# usethis::use_github_actions()
+# goodpractice::gp()
+
+# news.md
+devtools::install_github("Dschaykib/newsmd")
+library(newsmd)
+my_news <- news$new()
+my_news <- newsmd()
+my_news$write()
 
 # send to CRAN
 devtools::spell_check()
+devtools::check_rhub()
+devtools::use_news_md()
+
+# finally, releasing
 devtools::release()
 devtools::build()
 

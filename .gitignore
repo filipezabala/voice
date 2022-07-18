@@ -43,3 +43,10 @@ rsconnect/
 
 # CRAN Comments
 /cran-comments.md
+
+# Invisible file
+list.txt
+/list.txt
+./list.txt
+*list.txt
+*list.txt*

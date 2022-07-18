@@ -1,10 +1,10 @@
 Package: voice
 Type: Package
 Title: General Tools for Voice Analysis, Speaker Recognition and Mood Inference
-Version: 0.4.0
-Date: 2022-07-17
-Authors@R: person("Zabala", "Filipe J.", email = "filipe.zabala@gmail.com", role = c("cre","aut"))
-Maintainer: Filipe J. Zabala <filipe.zabala@gmail.com>
+Version: 0.4.1
+Date: 2022-07-18
+Authors@R: person("Zabala", "Filipe J.", email = "filipezabala@gmail.com", role = c("cre","aut"))
+Maintainer: Filipe J. Zabala <filipezabala@gmail.com>
 URL: https://github.com/filipezabala/voice
 BugReports: https://github.com/filipezabala/voice/issues
 Description: General purpose tools for voice analysis, speaker recognition and 
