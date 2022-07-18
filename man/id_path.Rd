@@ -5,7 +5,7 @@
   A dataset containing sample IDs and paths used in
   Zabala (2022) voice: new approaches to audio analysis.
   The considered sample contains 34,425 rows associated with
-  838 IDs (p_s ≈ 2.4\%).
+  838 IDs (p_s = 2.4\%).
 }
 \usage{
 id_path
