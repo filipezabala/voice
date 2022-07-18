@@ -1,8 +1,14 @@
-## version 0.4.2
+## version 0.4.3
 
 ---
 
 ### NEWS.md setup
+
+- Version 0.4.3
+2022-07-18
+. Replaced \url by \doi at 10.1121/1.421048 and 10.1098/rspb.2011.0829 @ extract_features.R.
+. Where is list.txt?????
+
 
 - Version 0.4.2
 2022-07-18
@@ -10,6 +16,7 @@
 . Adjusted Maintainer and Authors@R (Zabala Filipe J.):
   Maintainer: 'Zabala Filipe J. <filipezabala@gmail.com>'
   Authors@R:  'Zabala Filipe J. <filipezabala@gmail.com>'
+. Where is list.txt?????
 
 
 - Version 0.4.1

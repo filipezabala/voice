@@ -1,74 +1,9 @@
-* using log directory ‘/Users/filipezabala/Dropbox/D_Filipe_Zabala/pacotes/voice/voice.Rcheck’
-* using R version 4.0.3 (2020-10-10)
-* using platform: x86_64-apple-darwin17.0 (64-bit)
+* using log directory ‘/home/filipe/MEGAsync/D_Filipe_Zabala/pacotes/voice/voice.Rcheck’
+* using R version 4.2.1 (2022-06-23)
+* using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* checking for file ‘voice/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘voice’ version ‘0.0.0.9000’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... OK
-* checking if this is a source package ... OK
-* checking if there is a namespace ... OK
-* checking for executable files ... OK
-* checking for hidden files and directories ... NOTE
-Found the following hidden files and directories:
-  .DS_Store
-  .RData
-  .Rhistory
-  .git/objects/.DS_Store
-  .github/.gitignore
-  .gitignore
-  .travis.yml
-  draft/.DS_Store
-  revdep/.gitignore
-  tests/.DS_Store
-  .Rproj.user
-  .git
-  .github
-These were most likely included in error. See section ‘Package
-structure’ in the ‘Writing R Extensions’ manual.
-* checking for portable file names ... OK
-* checking for sufficient/correct file permissions ... OK
-* checking whether package ‘voice’ can be installed ... OK
-* checking installed package size ... OK
-* checking package directory ... OK
-* checking DESCRIPTION meta-information ... NOTE
-Checking should be performed on sources prepared by ‘R CMD build’.
-* checking top-level files ... OK
-* checking for left-over files ... OK
-* checking index information ... OK
-* checking package subdirectories ... WARNING
-Found the following directory with the name of a check directory:
-  ./voice.Rcheck
-Most likely, these were included erroneously.
-* checking R files for non-ASCII characters ... OK
-* checking R files for syntax errors ... OK
-* checking whether the package can be loaded ... OK
-* checking whether the package can be loaded with stated dependencies ... OK
-* checking whether the package can be unloaded cleanly ... OK
-* checking whether the namespace can be loaded with stated dependencies ... OK
-* checking whether the namespace can be unloaded cleanly ... OK
-* checking dependencies in R code ... NOTE
-Namespaces in Imports field not imported from:
-  ‘RColorBrewer’ ‘ellipse’ ‘ggfortify’ ‘ggplot2’
-  All declared Imports should be used.
-Package in Depends field not imported from: ‘utf8’
-  These packages need to be imported from (in the NAMESPACE file)
-  for when this namespace is loaded but not attached.
-* checking S3 generic/method consistency ... OK
-* checking replacement functions ... OK
-* checking foreign function calls ... OK
-* checking R code for possible problems ... OK
-* checking Rd files ... OK
-* checking Rd metadata ... OK
-* checking Rd cross-references ... OK
-* checking for missing documentation entries ... OK
-* checking for code/documentation mismatches ... OK
-* checking Rd \usage sections ... OK
-* checking Rd contents ... OK
-* checking for unstated dependencies in examples ... OK
-* checking examples ... OK
-* checking PDF version of manual ... OK
+* checking for file ‘voice/DESCRIPTION’ ... ERROR
+Required field missing or empty:
+  ‘Author’
 * DONE
-Status: 1 WARNING, 3 NOTEs
+Status: 1 ERROR

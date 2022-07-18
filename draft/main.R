@@ -34,6 +34,7 @@ devtools::install_github('filipezabala/voice')
 # https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/
 
 # usethis::use_build_ignore(c('draft', 'cran-comments.md'))
+unlink('list.txt')
 devtools::check()
 devtools::check(args = c('--as-cran'))
 devtools::check_win_devel()

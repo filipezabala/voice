@@ -21,9 +21,9 @@
 #' @param round.to Number of decimal places to round to. (default: \code{NULL})
 #' @param verbose Logical. Should the running status be showed? (default: \code{TRUE})
 #' @details When \code{features} 'df', 'pf', 'rf', 'rcf' or 'rpf' are selected, 'f0' and 'formants' must be selected. The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2022), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2022) and 'rpf' to 'formant position removal' (rpf1:rpf8) by Zabala (2022).
-#' @references Fitch, W.T. (1997) Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (\url{https://doi.org/10.1121/1.421048})
+#' @references Fitch, W.T. (1997) Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (\doi{10.1121/1.421048})
 #'
-#' Puts, D.A., Apicella, C.L., Cardenas, R.A. (2012) Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (\url{https://doi.org/10.1098/rspb.2011.0829})
+#' Puts, D.A., Apicella, C.L., Cardenas, R.A. (2012) Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (\doi{10.1098/rspb.2011.0829})
 #'
 #' Zabala, F.J. (2022) to appear in...
 #' @examples
