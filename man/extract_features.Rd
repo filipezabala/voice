@@ -92,9 +92,9 @@ M3 <- extract_features(path2wav, filesRange = 3:6)
 table(basename(M3$wav_path))
 }
 \references{
-Fitch, W.T. (1997) Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (\url{https://doi.org/10.1121/1.421048})
+Fitch, W.T. (1997) Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (\doi{10.1121/1.421048})
 
-Puts, D.A., Apicella, C.L., Cardenas, R.A. (2012) Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (\url{https://doi.org/10.1098/rspb.2011.0829})
+Puts, D.A., Apicella, C.L., Cardenas, R.A. (2012) Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (\doi{10.1098/rspb.2011.0829})
 
 Zabala, F.J. (2022) to appear in...
 }
