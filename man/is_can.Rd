@@ -2,7 +2,7 @@
 % Please edit documentation in R/is_can.R
 \name{is_can}
 \alias{is_can}
-\title{Is a database of the extended type?}
+\title{Is a database of the canonical type?}
 \usage{
 is_can(x, subj.id = subj.id)
 }
@@ -12,5 +12,5 @@ is_can(x, subj.id = subj.id)
 \item{subj.id}{Column containing the subject ID. Default: \code{NULL}, i.e., uses the first column.}
 }
 \description{
-Is a database of the extended type?
+Is a database of the canonical type?
 }

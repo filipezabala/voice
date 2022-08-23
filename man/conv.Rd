@@ -33,6 +33,8 @@ A list of convoluted \code{x} and \code{y} values with length near to \code{comp
 Convolute vectors.
 }
 \examples{
+library(voice)
+
 v1 <- 1:100
 (c1 <- conv(v1, compact.to = 0.2))
 length(c1$y)

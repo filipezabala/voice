@@ -14,6 +14,7 @@ Verify if an audio is mono.
 }
 \examples{
 library(voice)
+
 # get path to audio file
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 pattern <- glob2rx('*.wav'), full.names = TRUE)

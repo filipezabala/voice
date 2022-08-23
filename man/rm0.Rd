@@ -16,6 +16,8 @@ Vector with n zeros.
 Transforms \code{n} sets of \code{m>n} zeros (alternated with sets of non zeros) into \code{n} sets of \code{n} zeros.
 }
 \examples{
+library(voice)
+
 (v0 <- c(1:20,rep(0,10)))
 (r0 <- rm0(v0))
 length(v0)
