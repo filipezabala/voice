@@ -15,7 +15,9 @@ write_list(x, path)
 Writes a list to a path.
 }
 \examples{
+\dontrun{
 library(voice)
 pts <- list(x = cars[,1], y = cars[,2])
 write_list(pts, paste0(getwd(), '/list.txt'))
+}
 }
