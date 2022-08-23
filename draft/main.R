@@ -36,6 +36,17 @@ devtools::install_github('filipezabala/voice')
 # sudo find / -name list.txt
 unlink('/tmp/RtmpHB5Esg/voice.Rcheck/list.txt')
 
+sudo find / -name lastMiKTeXException
+# sudo find / -type d -name 'lastMiKTeXException'
+# sudo find / -type f -name 'lastMiKTeXException'
+
+# news.md
+devtools::install_github("Dschaykib/newsmd")
+library(newsmd)
+my_news <- news$new()
+my_news <- newsmd()
+my_news$write()
+
 # usethis::use_build_ignore(c('draft', 'cran-comments.md'))
 devtools::check(args = c('--as-cran'))
 # devtools::check()
@@ -45,17 +56,10 @@ devtools::check_win_release()
 # usethis::use_github_actions()
 # goodpractice::gp()
 
-# news.md
-devtools::install_github("Dschaykib/newsmd")
-library(newsmd)
-my_news <- news$new()
-my_news <- newsmd()
-my_news$write()
-
 # send to CRAN
 devtools::spell_check()
 devtools::check_rhub()
-devtools::use_news_md()
+# devtools::use_news_md()
 
 # finally, releasing
 devtools::release()
