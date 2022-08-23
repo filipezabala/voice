@@ -33,10 +33,12 @@ devtools::install_github('filipezabala/voice')
 # checking
 # https://kalimu.github.io/post/checklist-for-r-package-submission-to-cran/
 
+# sudo find / -name list.txt
+unlink('/tmp/RtmpHB5Esg/voice.Rcheck/list.txt')
+
 # usethis::use_build_ignore(c('draft', 'cran-comments.md'))
-unlink('list.txt')
-devtools::check()
 devtools::check(args = c('--as-cran'))
+# devtools::check()
 devtools::check_win_devel()
 devtools::check_win_oldrelease()
 devtools::check_win_release()
@@ -59,6 +61,9 @@ devtools::use_news_md()
 devtools::release()
 devtools::build()
 
+
+
+## OLD
 # Run R CMD check on all downstream dependencies
 dep = tools::package_dependencies(reverse = TRUE, which = 'Depends', recursive = TRUE)
 deplgc = sapply(dep, is.chr0)

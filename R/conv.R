@@ -8,6 +8,8 @@
 #' @param weight Vector of weights with same length of \code{y}. Default: \code{NULL}.
 #' @return A list of convoluted \code{x} and \code{y} values with length near to \code{compact.to*length(y)}.
 #' @examples
+#' library(voice)
+#'
 #' v1 <- 1:100
 #' (c1 <- conv(v1, compact.to = 0.2))
 #' length(c1$y)

@@ -21,12 +21,12 @@ memory <- function(){
                 mem.free.perc=memfreeperc))
 
   } else if(sum(plat[[1]] == 'apple')){
-    cat('Only works in Linux!\n')
+    cat('Only works on Linux!\n')
     # mem <- system('vm_stat', intern=TRUE)
     # memtotal <- ?
     # memfree  <- ?
     # memfreeperc <- memfree/memtotal
   } else if(sum(plat[[1]] == 'windows')){
-    cat('Only works in Linux!\n')
-  }  else{cat('Only works in Linux!\n')}
+    cat('Only works on Linux!\n')
+  }  else{cat('Only works on Linux!\n')}
 }

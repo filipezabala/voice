@@ -3,6 +3,7 @@
 #' @param x Path to WAV audio file.
 #' @examples
 #' library(voice)
+#'
 #' # get path to audio file
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
@@ -11,5 +12,6 @@
 #' @export
 is_mono <- function(x){
   audio <- tuneR::readWave(x, 1, 2)
-  return(tuneR::nchannel(audio) == 1)
+  is.mono <- tuneR::nchannel(audio) == 1
+  return(is.mono)
 }

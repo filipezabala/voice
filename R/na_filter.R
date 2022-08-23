@@ -30,7 +30,8 @@ na_filter <- function(x, max.loss = 1){
 # na_filter(miss, .005) # perda máxima (NA) de 0.5%
 #
 # # filtrando as variáveis com no máximo 0.5% de perda
-# bd2 = bd %>%
+# library(tidyverse)
+# bd2 <- bd %>%
 #   dplyr::select(sort(na_filter(miss, .005)))
 # dplyr::glimpse(bd2)
 #

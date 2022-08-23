@@ -1,4 +1,4 @@
-#' Is a database of the extended type?
+#' Is a database of the canonical type?
 #'
 #' @param x A data frame to be evaluated.
 #' @param subj.id Column containing the subject ID. Default: \code{NULL}, i.e., uses the first column.

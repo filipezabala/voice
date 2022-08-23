@@ -12,7 +12,7 @@
 #' library(voice)
 #' wavDir <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
-#' poetry(dirname(path2wav)) # Mac
+#' poetry(dirname(path2wav), autoDir = TRUE) # Mac
 #' poetry(dirname(path2wav), pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
 #' }
 #' @export

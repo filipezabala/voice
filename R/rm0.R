@@ -3,6 +3,8 @@
 #' @param y A vector or time series.
 #' @return Vector with n zeros.
 #' @examples
+#' library(voice)
+#'
 #' (v0 <- c(1:20,rep(0,10)))
 #' (r0 <- rm0(v0))
 #' length(v0)
