@@ -5,7 +5,7 @@
 <!-- badges: end -->
 
 General tools for voice analysis. The `voice` package is being developed to be an easy-to-use set of tools to deal with audio analysis in R.  
-It is based on [`wrassp`](https://cran.r-project.org/web/packages/wrassp/index.html), [`tuneR`](https://cran.r-project.org/web/packages/tuneR/index.html), [`seewave`](https://cran.r-project.org/web/packages/seewave/index.html), [`gm`](https://cran.r-project.org/web/packages/gm/index.html), as well as [Parselmouth](https://github.com/YannickJadoul/Parselmouth) - a Python library for the [Praat](http://www.praat.org/) software - and [pyannote-audio](https://github.com/pyannote/pyannote-audio) - an open-source toolkit written in Python for speaker diarization based on [PyTorch](https://github.com/pytorch/pytorch) machine learning framework.   
+It is based on [`wrassp`](https://cran.r-project.org/package=wrassp), [`tuneR`](https://cran.r-project.org/package=tuneR), [`seewave`](https://cran.r-project.org/package=seewave), [`gm`](https://cran.r-project.org/package=gm), as well as [Parselmouth](https://github.com/YannickJadoul/Parselmouth) - a Python library for the [Praat](https://www.fon.hum.uva.nl/praat/) software - and [pyannote-audio](https://github.com/pyannote/pyannote-audio) - an open-source toolkit written in Python for speaker diarization based on [PyTorch](https://github.com/pytorch/pytorch) machine learning framework.   
 
 A vignette may be found at http://filipezabala.com/voicegnette/.  
 
@@ -56,7 +56,7 @@ sudo apt install python3-pip
 pip3 --version
 ```
 
-### 4. [ffmpeg](http://ffmpeg.org/)
+### 4. [ffmpeg](https://ffmpeg.org/)
 ffmpeg is a cross-platform solution to record, convert and stream audio and video.
 ```bash
 sudo apt update
@@ -169,7 +169,7 @@ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requ
 
 
 ## MacOS Installation
-The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [MacOS Big Sur](https://www.apple.com/macos/big-sur/) and [MacOS Monterey](https://www.apple.com/macos/monterey/). Note the software versions during installation, inconsistency reporting is welcome.  
+The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [MacOS Monterey](https://www.apple.com/macos/monterey/). Note the software versions during installation, inconsistency reporting is welcome.  
 If the error "The package %@ is missing or invalid" appears during the upgrading from MacOS Catalina to Big Sur, press simultaneously `command + option + p + r` at restart. The processes may be accompanied using the keys `command + space 'Activity Monitor'`.    
 > Without the following Python items 3 and 11, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
 
@@ -206,13 +206,13 @@ python3 --version
 pip3 --version
 ```
 
-### 4. [ffmpeg](http://ffmpeg.org/)
+### 4. [ffmpeg](https://ffmpeg.org/)
 ffmpeg is a cross-platform solution to record, convert and stream audio and video. The installation may take several minutes.
 ```bash
 brew install ffmpeg
 ```
 
-### 5. [XQuartz](www.xquartz.org)
+### 5. [XQuartz](https://www.xquartz.org/)
 The XQuartz project is an open-source effort to develop a version of the [X.Org X Window System](https://www.x.org/wiki/) that runs on macOS.
 
  . Download and run https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg  
