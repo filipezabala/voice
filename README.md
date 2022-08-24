@@ -212,7 +212,7 @@ ffmpeg is a cross-platform solution to record, convert and stream audio and vide
 brew install ffmpeg
 ```
 
-### 5. [XQuartz](www.xquartz.org)
+### 5. [XQuartz](https://www.xquartz.org/)
 The XQuartz project is an open-source effort to develop a version of the [X.Org X Window System](https://www.x.org/wiki/) that runs on macOS.
 
  . Download and run https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg  
