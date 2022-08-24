@@ -12,7 +12,7 @@
 . Using fully specified URLs starting with the protocol for https://www.xquartz.org/ @ README.md.
 . Changed http --> https for https://ffmpeg.org/ and https://www.fon.hum.uva.nl/praat/ @ README.md. Note http://filipezabala.com/ and http://www.rob-mcculloch.org/ are non-secure protocols.
 . The canonical URL of the CRAN page was updated for https://cran.r-project.org/package=wrassp, https://cran.r-project.org/package=tuneR, https://cran.r-project.org/package=seewave and https://cran.r-project.org/package=gm.
-. Omitted "+ file LICENSE" @ DESCRIPTION file (that's enough?).
+. Can't find where to omit "+ file LICENSE", the DESCRIPTION file requires it.
 
 
 - Version 0.4.4
