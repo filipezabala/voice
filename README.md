@@ -56,7 +56,7 @@ sudo apt install python3-pip
 pip3 --version
 ```
 
-### 4. [ffmpeg](http://ffmpeg.org/)
+### 4. [ffmpeg](https://ffmpeg.org/)
 ffmpeg is a cross-platform solution to record, convert and stream audio and video.
 ```bash
 sudo apt update
@@ -206,7 +206,7 @@ python3 --version
 pip3 --version
 ```
 
-### 4. [ffmpeg](http://ffmpeg.org/)
+### 4. [ffmpeg](https://ffmpeg.org/)
 ffmpeg is a cross-platform solution to record, convert and stream audio and video. The installation may take several minutes.
 ```bash
 brew install ffmpeg
