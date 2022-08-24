@@ -36,7 +36,7 @@ devtools::install_github('filipezabala/voice')
 # sudo find / -name list.txt
 unlink('/tmp/RtmpHB5Esg/voice.Rcheck/list.txt')
 
-sudo find / -name lastMiKTeXException
+# sudo find / -name lastMiKTeXException
 # sudo find / -type d -name 'lastMiKTeXException'
 # sudo find / -type f -name 'lastMiKTeXException'
 
