@@ -5,7 +5,7 @@
 <!-- badges: end -->
 
 General tools for voice analysis. The `voice` package is being developed to be an easy-to-use set of tools to deal with audio analysis in R.  
-It is based on [`wrassp`](https://cran.r-project.org/web/packages/wrassp/index.html), [`tuneR`](https://cran.r-project.org/web/packages/tuneR/index.html), [`seewave`](https://cran.r-project.org/web/packages/seewave/index.html), [`gm`](https://cran.r-project.org/web/packages/gm/index.html), as well as [Parselmouth](https://github.com/YannickJadoul/Parselmouth) - a Python library for the [Praat](http://www.praat.org/) software - and [pyannote-audio](https://github.com/pyannote/pyannote-audio) - an open-source toolkit written in Python for speaker diarization based on [PyTorch](https://github.com/pytorch/pytorch) machine learning framework.   
+It is based on [`wrassp`](https://cran.r-project.org/package=wrassp), [`tuneR`](https://cran.r-project.org/package=tuneR), [`seewave`](https://cran.r-project.org/package=seewave), [`gm`](https://cran.r-project.org/package=gm), as well as [Parselmouth](https://github.com/YannickJadoul/Parselmouth) - a Python library for the [Praat](https://www.fon.hum.uva.nl/praat/) software - and [pyannote-audio](https://github.com/pyannote/pyannote-audio) - an open-source toolkit written in Python for speaker diarization based on [PyTorch](https://github.com/pytorch/pytorch) machine learning framework.   
 
 A vignette may be found at http://filipezabala.com/voicegnette/.  
 
