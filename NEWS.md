@@ -5,6 +5,11 @@
 ### NEWS.md setup
 
 
+- Version 0.4.6
+2022-08-25
+. Now depends: R (>= 4.1.3) in order to install on Windows.
+
+
 - Version 0.4.5
 2022-08-24
 . Following Uwe Ligges' list.
