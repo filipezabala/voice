@@ -7,7 +7,7 @@
 
 - Version 0.4.6
 2022-08-25
-. Now depends: R (>= 4.1.3) in order to install on Windows.
+. Now depends: R (>= 4.1.0) in order to install on Windows.
 
 
 - Version 0.4.5
