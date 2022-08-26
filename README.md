@@ -105,7 +105,7 @@ wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.2-
 sudo gdebi rstudio-server-2021.09.2-382-amd64.deb
 ```
 
-### 9. [R packages](https://cran.r-project.org/web/packages/)
+### 9. R packages
 "Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). The installation may take several minutes. At terminal run:
 ```bash
 sudo R
@@ -266,7 +266,7 @@ RStudio is an Integrated Development Environment (IDE) for R.
  . Type `command + space 'rstudio'`   
  . Tools > Global Options... > Appearance > Merbivore (Restart required)   
 
-### 10. [R packages](https://cran.r-project.org/web/packages/)
+### 10. R packages
 "Packages are the fundamental units of reproducible R code." [Hadley Wickham and Jennifer Bryan](https://r-pkgs.org/). Type `command + space 'terminal'`   
 ```bash
 sudo R
