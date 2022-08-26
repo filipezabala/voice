@@ -40,12 +40,12 @@ unlink('/tmp/RtmpHB5Esg/voice.Rcheck/list.txt')
 # sudo find / -type d -name 'lastMiKTeXException'
 # sudo find / -type f -name 'lastMiKTeXException'
 
-# news.md
-devtools::install_github("Dschaykib/newsmd")
-library(newsmd)
-my_news <- news$new()
-my_news <- newsmd()
-my_news$write()
+# # news.md
+# devtools::install_github("Dschaykib/newsmd")
+# library(newsmd)
+# my_news <- news$new()
+# my_news <- newsmd()
+# my_news$write()
 
 # usethis::use_build_ignore(c('draft', 'cran-comments.md'))
 devtools::check(args = c('--as-cran'))

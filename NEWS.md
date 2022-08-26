@@ -1,8 +1,13 @@
-## version 0.4.5
+## version 0.4.7
 
 ---
 
 ### NEWS.md setup
+
+
+- Version 0.4.7
+2022-08-26
+. License set to 'GPL-3' (instead of 'GPL-3 + file LICENSE') @ DESCRIPTION file.
 
 
 - Version 0.4.6
