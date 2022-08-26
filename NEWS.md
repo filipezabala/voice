@@ -1,8 +1,14 @@
-## version 0.4.7
+## version 0.4.8
 
 ---
 
 ### NEWS.md setup
+
+
+- Version 0.4.8
+2022-08-26
+. License set to 'MIT' (instead of either 'GPL-3' or 'GPL-3 + file LICENSE') @ DESCRIPTION file. 
+
 
 
 - Version 0.4.7
