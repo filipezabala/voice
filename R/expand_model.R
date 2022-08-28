@@ -18,7 +18,6 @@
 #' names(models) <- 1:nx
 #' models
 #' sum(sapply(models, length)) # total of models
-
 #' @export
 expand_model <- function(y, x, k){
 

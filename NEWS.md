@@ -1,9 +1,16 @@
-## version 0.4.8
+## version 0.4.11
 
 ---
 
 ### NEWS.md setup
 
+
+- Version 0.4.11
+2022-08-28
+. In order to reduce the examples runnig time:
+  - The following variables were omitted from conv_df.R example: 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'.
+  - `\dontrun` added to conv_mc.R.
+  - `\dontrun` added to na_filter.R.
 
 
 - Version 0.4.10

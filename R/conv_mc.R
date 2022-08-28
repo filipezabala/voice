@@ -23,6 +23,7 @@
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #'
+#' \dontrun{
 #' # getting all features
 #' M <- extract_features(dirname(path2wav), features = c('f0','formants',
 #' 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
@@ -34,6 +35,7 @@
 #' to.data.frame = FALSE, mc.cores = 1)
 #' names(cm1)
 #' lapply(cm1$f0, length)
+#' }
 #' @seealso \code{rm0}, \code{conv}, \code{conv_df}
 #' @export
 conv_mc <- function(y, compact.to, drop.zeros = FALSE, to.data.frame = FALSE,

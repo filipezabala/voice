@@ -52,8 +52,7 @@ path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 pattern <- glob2rx('*.wav'), full.names = TRUE)
 
 # getting Media data frame
-M <- extract_features(dirname(path2wav), features = c('f0','formants',
-'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),
+M <- extract_features(dirname(path2wav), features = c('f0','formants'),
 mc.cores = 1, verbose = FALSE)
 
 \dontrun{

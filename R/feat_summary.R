@@ -41,9 +41,6 @@
 #'
 #' # canonical data
 #' feat_summary(E, 'subject_id')
-#'
-#' # advanced example using paths in wav_path, from VoxForge project
-#'
 #' @export
 feat_summary <- function(x,
                          groupBy = 'wav_path',

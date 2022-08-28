@@ -15,9 +15,11 @@ na_filter(x, max.loss = 1)
 Filters
 }
 \examples{
+\dontrun{
 library(voice)
 # http://archive.ics.uci.edu/ml/datasets/Arrhythmia
 dat <- 'http://archive.ics.uci.edu/ml/machine-learning-databases/00579/MI.data'
 bd <- read.table(dat, sep = ',')
 bd[bd=='?'] <- NA
+}
 }

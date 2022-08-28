@@ -4,11 +4,13 @@
 #' @param x An object of class \code{aggr} from \code{VIM} package.
 #' @param max.loss A directory/folder containing RTTM files.
 #' @examples
+#' \dontrun{
 #' library(voice)
 #' # http://archive.ics.uci.edu/ml/datasets/Arrhythmia
 #' dat <- 'http://archive.ics.uci.edu/ml/machine-learning-databases/00579/MI.data'
 #' bd <- read.table(dat, sep = ',')
 #' bd[bd=='?'] <- NA
+#' }
 #' @export
 na_filter <- function(x, max.loss = 1){
   d <- x$missings

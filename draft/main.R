@@ -60,7 +60,6 @@ devtools::check_win_oldrelease()
 # send to CRAN
 devtools::spell_check()
 devtools::check_rhub()
-# devtools::use_news_md()
 
 # finally, releasing
 devtools::release()
