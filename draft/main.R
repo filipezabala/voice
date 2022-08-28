@@ -63,7 +63,6 @@ devtools::check_rhub()
 
 # finally, releasing
 devtools::release()
-devtools::build()
 
 
 
