@@ -51,16 +51,16 @@ sudo apt-get install git-all
 ### 3. [pip](https://pypi.org/project/pip/)
 pip is the package installer for Python. 
 ```bash
-sudo apt update
-sudo apt install python3-pip
+sudo apt-get update
+sudo apt-get install python3-pip
 pip3 --version
 ```
 
 ### 4. [ffmpeg](https://ffmpeg.org/)
 ffmpeg is a cross-platform solution to record, convert and stream audio and video.
 ```bash
-sudo apt update
-sudo apt install ffmpeg
+sudo apt-get update
+sudo apt-get install ffmpeg
 ```
 
 ### 5. Audio drivers, extra packages and some cleaning
@@ -69,8 +69,8 @@ sudo apt-get update
 sudo apt-get install portaudio19-dev libasound2-dev libfontconfig1-dev libmagick++-dev libxml2-dev libharfbuzz-dev libfribidi-dev libgdal-dev
 sudo rm -Rf /usr/local/lib/R/site-library/00LOCK-digest
 
-sudo apt update
-sudo apt install cmake cmake-doc ninja-build
+sudo apt-get update
+sudo apt-get install cmake cmake-doc ninja-build
 ```
 
 ### 6. [MuseScore](https://musescore.org/)
@@ -91,7 +91,7 @@ gpg -a --export E084DAB9 | sudo apt-key add -
 
 sudo add-apt-repository ppa:c2d4u.team/c2d4u4.0+
 
-sudo apt update && sudo apt upgrade
+sudo apt-get update && sudo apt-get upgrade
 sudo apt-get install r-base
 sudo apt-get install r-base-dev
 ```
