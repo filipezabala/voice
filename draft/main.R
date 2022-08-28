@@ -35,6 +35,7 @@ devtools::install_github('filipezabala/voice')
 
 # sudo find / -name list.txt
 unlink('/tmp/RtmpHB5Esg/voice.Rcheck/list.txt')
+unlink('LICENSE')
 
 # sudo find / -name lastMiKTeXException
 # sudo find / -type d -name 'lastMiKTeXException'
@@ -51,8 +52,8 @@ unlink('/tmp/RtmpHB5Esg/voice.Rcheck/list.txt')
 devtools::check(args = c('--as-cran'))
 # devtools::check()
 devtools::check_win_devel()
-devtools::check_win_oldrelease()
 devtools::check_win_release()
+devtools::check_win_oldrelease()
 # usethis::use_github_actions()
 # goodpractice::gp()
 

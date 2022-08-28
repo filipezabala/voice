@@ -4,6 +4,15 @@
 
 ### NEWS.md setup
 
+
+
+- Version 0.4.10
+2022-08-28
+. "You also have to remove the licences file which is part of R anyway. Best, Uwe Ligges". 
+License file removed by `unlink('LICENSE')` command.
+. License set to the original 'GPL-3' (instead of 'MIT + file LICENSE', 'MIT' or 'GPL-3 + file LICENSE') @ DESCRIPTION file. 
+
+
 - Version 0.4.9
 2022-08-26
 . License set to 'MIT + file LICENSE' (instead of either 'MIT', 'GPL-3' or 'GPL-3 + file LICENSE') @ DESCRIPTION file. 
