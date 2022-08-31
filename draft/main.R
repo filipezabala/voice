@@ -36,6 +36,16 @@ devtools::install_github('filipezabala/voice')
 # sudo find / -name list.txt
 unlink('/tmp/RtmpHB5Esg/voice.Rcheck/list.txt')
 unlink('LICENSE')
+unlink('__pycache__', recursive = TRUE)
+unlink('sherlock0')
+unlink('sherlock0.rttm')
+unlink('sherlock0.rttm')
+unlink('temp_diarization-pyannote.py')
+unlink('temp_extract_f0.py')
+unlink('temp_extract_formants.py')
+unlink('temp_libs.py')
+unlink('tempfile.rttm')
+
 
 # sudo find / -name lastMiKTeXException
 # sudo find / -type d -name 'lastMiKTeXException'

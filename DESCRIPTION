@@ -11,7 +11,7 @@ Description: General purpose tools for voice analysis, speaker recognition and
     mood inference. Gathers 'R' and 'Python' tools to solve problems concerning voice 
     and audio in general.
 Depends: R (>= 4.1.0)
-Imports: dplyr, ggplot2, music, plotly, plyr, R.utils, reticulate, seewave, tibble, tidyselect, tuneR, wrassp, zoo
+Imports: dplyr, R.utils, reticulate, seewave, tibble, tidyselect, tuneR, wrassp, zoo
 Suggests: knitr
 License: GPL-3
 Encoding: UTF-8

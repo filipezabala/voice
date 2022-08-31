@@ -5,8 +5,9 @@
 #' @examples
 #' \dontrun{
 #' library(voice)
+#'
 #' pts <- list(x = cars[,1], y = cars[,2])
-#' write_list(pts, paste0(getwd(), '/list.txt'))
+#' voice::write_list(pts, paste0(getwd(), '/list.txt'))
 #' }
 #' @export
 write_list <- function(x, path){

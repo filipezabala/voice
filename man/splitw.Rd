@@ -48,7 +48,7 @@ Split WAV files either in \code{fromWav} directory or using (same names) RTTM fi
 When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 }
 \examples{
-\donttest{
+\dontrun{
 library(voice)
 
 wavDir <- list.files(system.file('extdata', package = 'wrassp'),

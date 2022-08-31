@@ -11,7 +11,7 @@
 #' @details The function uses the \code{getwd()} folder to write the temp files.
 #' @examples
 #'
-#' \donttest{
+#' \dontrun{
 #' library(voice)
 #'
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),

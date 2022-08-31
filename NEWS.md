@@ -52,14 +52,11 @@ As suggested by Benjamin Altmann:
  - draft/rowProp.R
  - draft/rp.R
  - draft/spoken_time.R
- - draft/write_list.R
 . Functions in which `\dontrun` was replaced with or simply added `\donttest`:
  - R/conv_df.R
  - R/conv_mc.R
  - R/enrich_rttm.R
- - R/extract_features_py.R
  - R/poetry.R
- - R/splitw.R
 . In order to easily suppress information messages to the console, argument 'verbose' was set to \code{FALSE} as default @ R/extract_features.R .
 . tempdir() used @:
  - R/enrich_rttm.R
