@@ -48,7 +48,12 @@ unlink('tempfile.rttm')
 unlink('./vignettes/temp_diarization-pyannote.py')
 unlink('./vignettes/temp_libs.py')
 unlink('./vignettes/__pycache__', recursive = TRUE)
-
+unlink('~/temp_diarization-pyannote.py')
+unlink('~/temp_libs.py')
+unlink('~/__pycache__', recursive = TRUE)
+unlink('/tmp/RtmpdR6Vve/voice.Rcheck/temp_diarization-pyannote.py')
+unlink('/tmp/RtmpdR6Vve/voice.Rcheck/temp_libs.py')
+unlink('/tmp/RtmpdR6Vve/voice.Rcheck/__pycache__', recursive = TRUE)
 
 # sudo find / -name temp_diarization-pyannote.py
 # sudo find / -name lastMiKTeXException

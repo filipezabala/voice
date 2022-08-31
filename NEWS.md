@@ -56,7 +56,6 @@ As suggested by Benjamin Altmann:
  - R/conv_df.R
  - R/conv_mc.R
  - R/enrich_rttm.R
- - R/poetry.R
 . In order to easily suppress information messages to the console, argument 'verbose' was set to \code{FALSE} as default @ R/extract_features.R .
 . tempdir() used @:
  - R/enrich_rttm.R
