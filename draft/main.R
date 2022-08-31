@@ -45,8 +45,12 @@ unlink('temp_extract_f0.py')
 unlink('temp_extract_formants.py')
 unlink('temp_libs.py')
 unlink('tempfile.rttm')
+unlink('./vignettes/temp_diarization-pyannote.py')
+unlink('./vignettes/temp_libs.py')
+unlink('./vignettes/__pycache__', recursive = TRUE)
 
 
+# sudo find / -name temp_diarization-pyannote.py
 # sudo find / -name lastMiKTeXException
 # sudo find / -type d -name 'lastMiKTeXException'
 # sudo find / -type f -name 'lastMiKTeXException'
