@@ -20,18 +20,23 @@ poetry(
 
 \item{pycall}{Python call.}
 }
+\value{
+RTTM files in NIST standard. See 'voice::read_rttm'.
+}
 \description{
-Diarization from WAV audios using Python's pyannote-audio library.
+Diarization from WAV audios using 'Python's' 'pyannote-audio' library.
 }
 \details{
 When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 }
 \examples{
-\dontrun{
+\donttest{
 library(voice)
+
 wavDir <- list.files(system.file('extdata', package = 'wrassp'),
 pattern <- glob2rx('*.wav'), full.names = TRUE)
-poetry(dirname(path2wav), autoDir = TRUE) # Mac
-poetry(dirname(path2wav), pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
+
+voice::poetry(fromWav = unique(dirname(wavDir)), toRttm = tempdir())
+dir(tempdir())
 }
 }

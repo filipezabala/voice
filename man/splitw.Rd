@@ -38,6 +38,9 @@ splitw(
 
 \item{silence.gap}{The silence gap (in seconds) between adjacent words in a keyword. Rows with \code{tdur <= silence.gap} are removed. (default: \code{0.5})}
 }
+\value{
+Split audio files according to the correspondent RTTM file(s). See '\code{voice::poetry}'.
+}
 \description{
 Split WAV files either in \code{fromWav} directory or using (same names) RTTM files/subdirectories as guidance.
 }
@@ -45,11 +48,18 @@ Split WAV files either in \code{fromWav} directory or using (same names) RTTM fi
 When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 }
 \examples{
-\dontrun{
+\donttest{
 library(voice)
+
 wavDir <- list.files(system.file('extdata', package = 'wrassp'),
                      pattern <- glob2rx('*.wav'), full.names = TRUE)
-poetry(dirname(path2wav), pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
-splitw(dirname(path2wav))
+splitDir <- paste0(tempdir(), '/split')
+voice::poetry(fromWav = unique(dirname(wavDir)), toRttm = tempdir())
+dir.create(splitDir)
+dir(tempdir())
+
+splitw(unique(dirname(wavDir)), fromRttm = tempdir(), toSplit = paste0(tempdir(), '/split'))
+dir(splitDir)
 }
+
 }

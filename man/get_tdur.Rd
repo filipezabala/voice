@@ -7,8 +7,21 @@
 get_tdur(x)
 }
 \arguments{
-\item{x}{An RTTM file.}
+\item{x}{A data frame in RTTM standard. See 'voice::read_rttm'.}
+}
+\value{
+A numeric vector containing the time duration in seconds.
 }
 \description{
-Get time duration from RTTM file.
+Get time duration from a data frame in RTTM standard.
+}
+\examples{
+library(voice)
+
+url0 <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/rttm/sherlock0.rttm'
+download.file(url0, destfile = paste0(tempdir(), '/sherlock0.rttm'))
+
+rttm <- voice::read_rttm(tempdir())
+(gtd <- voice::get_tdur(rttm$sherlock0.rttm))
+class(gtd)
 }

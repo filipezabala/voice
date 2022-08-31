@@ -1,19 +1,22 @@
 #' Poetry. The best words in their best order.
 #'
-#' Diarization from WAV audios using Python's pyannote-audio library.
+#' Diarization from WAV audios using 'Python's' 'pyannote-audio' library.
 #'
 #' @param fromWav A directory/folder containing WAV files.
 #' @param toRttm A directory/folder to write RTTM files. If the default \code{toRttm = NULL} is used, \code{'./voiceAudios/rttm'} is created and used.
 #' @param autoDir Logical. Must the directories tree must be created? Default: \code{FALSE}. See 'Details'.
 #' @param pycall Python call.
+#' @return RTTM files in NIST standard. See 'voice::read_rttm'.
 #' @details When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(voice)
+#'
 #' wavDir <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
-#' poetry(dirname(path2wav), autoDir = TRUE) # Mac
-#' poetry(dirname(path2wav), pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
+#'
+#' voice::poetry(fromWav = unique(dirname(wavDir)), toRttm = tempdir())
+#' dir(tempdir())
 #' }
 #' @export
 poetry <- function(fromWav, toRttm = NULL, autoDir = FALSE,

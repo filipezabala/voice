@@ -1,8 +1,78 @@
-## version 0.4.11
+## version 0.4.12
 
 ---
 
 ### NEWS.md setup
+
+
+- Version 0.4.12
+As suggested by Benjamin Altmann:  
+. Reduced the length of the title to 64 characters, less than 65. In DESCRIPTION:  
+`nchar('Tools for Voice Analysis, Speaker Recognition and Mood Inference')`
+. Package names, software names and API names written in single quotes in title and description.
+ - enrich_rttm.R: '\code{voice::read_rttm}'
+ - extract_features_py.R: 'Python's' 'Parselmouth'
+ - feat_summary.R: 'voice::extract_features'
+ - poetry.R: 'Python's' 'pyannote-audio'
+ - DESCRIPTION: 'R' and 'Python' 
+. Reference "Zabala, F.J. (2022) to appear in..." removed from
+ - extract_features.R
+ - feat_summary.R
+ - tag.R
+. Added `@return` to the following .R files regarding exported methods and explaining the functions results in the documentation. This implies adding a `\value` field to the corresponding .Rd files.
+ - R/audio_time.R
+ - R/enrich_rttm.R
+ - R/extract_features.R
+ - R/extract_features_py.R
+ - R/feat_summary.R
+ - R/get_bit.R
+ - R/get_dur.R
+ - R/get_left.R
+ - R/get_right.R
+ - R/get_samp.rate.R
+ - R/get_tbeg.R
+ - R/get_tdur.R
+ - R/is_mono.R
+ - R/notes.R
+ - R/poetry.R
+ - R/read_rttm.R
+ - R/splitw.R
+ - R/tag.R
+. Functions moved to draft directory:
+ - draft/chords.R
+ - draft/has_audio.R
+ - draft/id_file.R
+ - draft/is_can.R
+ - draft/is_ext.R
+ - draft/memory.R
+ - draft/na_filter.R
+ - draft/notes_summary.R
+ - draft/plot_note.R
+ - draft/plot_q.R
+ - draft/rowProp.R
+ - draft/rp.R
+ - draft/spoken_time.R
+ - draft/write_list.R
+. Functions in which `\dontrun` was replaced with or simply added `\donttest`:
+ - R/conv_df.R
+ - R/conv_mc.R
+ - R/enrich_rttm.R
+ - R/extract_features_py.R
+ - R/poetry.R
+ - R/splitw.R
+. In order to easily suppress information messages to the console, argument 'verbose' was set to \code{FALSE} as default @ R/extract_features.R .
+. tempdir() used @:
+ - R/enrich_rttm.R
+ - R/get_tbeg.R
+ - R/get_tdur.R
+ - R/poetry.R
+ - R/read_rttm.R
+ - R/splitw.R
+. `\url` added to references at
+ - R/enrich_rttm.R
+ - R/notes_freq.R
+ - R/notes.R
+ - R/read_rttm.R
 
 
 - Version 0.4.11

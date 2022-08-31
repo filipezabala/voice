@@ -1,6 +1,6 @@
-#' Returns summary measures of voice::extract_features
+#' Returns summary measures of 'voice::extract_features'
 #'
-#' @param x An Extended data frame to be tagged with media information. See references.
+#' @param x An Extended data frame to be tagged with media information.
 #' @param groupBy A variable to group the summary measures. The argument must be a character vector. Default: \code{groupBy = 'wav_path'}.
 #' @param wavPath A vector containing the path(s) to WAV files. May be both as \code{dirname} or \code{basename} formats.
 #' @param wavPathName A string containing the WAV path name. Default: \code{wavPathName = 'wav_path'}
@@ -23,8 +23,8 @@
 #' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
 #' @param round.to Number of decimal places to round to. (default: \code{NULL})
 #' @param verbose Logical. Should the running status be showed? (default: \code{TRUE})
+#' @return A tibble data frame containing summarized numeric columns using mean, standard deviation, variation coefficient, media, interquartile range and median absolute deviation.
 #' @details \code{filesRange} should only be used when all the WAV files are in the same folder.
-#' @references Zabala, F.J. (2022) to appear in...
 #' @examples
 #' library(voice)
 #'

@@ -20,5 +20,5 @@ library(voice)
 notes_freq()
 }
 \references{
-https://pages.mtu.edu/~suits/notefreqs.html
+\url{https://pages.mtu.edu/~suits/notefreqs.html}
 }

@@ -83,6 +83,9 @@ tag(
 
 \item{verbose}{Logical. Should the running status be showed? (default: \code{TRUE})}
 }
+\value{
+A tibble data frame containing summarized columns by the mean, standard deviation, variation coefficient, median, interquartile range and median absolute deviation.
+}
 \description{
 Tag a data frame with media information.
 }
@@ -115,7 +118,4 @@ Et <- tag(E, features = c('f0', 'formants', 'df', 'pf', 'rf', 'rcf', 'rpf'),
 groupBy = 'subject_id')
 Et
 str(Et)
-}
-\references{
-Zabala, F.J. (2022) to appear in...
 }

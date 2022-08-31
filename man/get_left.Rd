@@ -9,6 +9,21 @@ get_left(x)
 \arguments{
 \item{x}{Wave object from `tuneR::readWave`.}
 }
+\value{
+A numeric vector indicating the left channel from a WAV file.
+}
 \description{
 Get left channel from WAV file.
+}
+\examples{
+library(voice)
+
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
+
+rw <- tuneR::readWave(path2wav[1])
+l <- voice::get_left(rw)
+head(l)
+length(l)
 }

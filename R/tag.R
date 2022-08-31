@@ -25,8 +25,8 @@
 #' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
 #' @param round.to Number of decimal places to round to. (default: \code{NULL})
 #' @param verbose Logical. Should the running status be showed? (default: \code{TRUE})
+#' @return A tibble data frame containing summarized columns by the mean, standard deviation, variation coefficient, median, interquartile range and median absolute deviation.
 #' @details \code{filesRange} should only be used when all the WAV files are in the same folder.
-#' @references Zabala, F.J. (2022) to appear in...
 #' @examples
 #' library(voice)
 #'

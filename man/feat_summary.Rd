@@ -2,7 +2,7 @@
 % Please edit documentation in R/feat_summary.R
 \name{feat_summary}
 \alias{feat_summary}
-\title{Returns summary measures of voice::extract_features}
+\title{Returns summary measures of 'voice::extract_features'}
 \usage{
 feat_summary(
   x,
@@ -31,7 +31,7 @@ feat_summary(
 )
 }
 \arguments{
-\item{x}{An Extended data frame to be tagged with media information. See references.}
+\item{x}{An Extended data frame to be tagged with media information.}
 
 \item{groupBy}{A variable to group the summary measures. The argument must be a character vector. Default: \code{groupBy = 'wav_path'}.}
 
@@ -77,8 +77,11 @@ feat_summary(
 
 \item{verbose}{Logical. Should the running status be showed? (default: \code{TRUE})}
 }
+\value{
+A tibble data frame containing summarized numeric columns using mean, standard deviation, variation coefficient, media, interquartile range and median absolute deviation.
+}
 \description{
-Returns summary measures of voice::extract_features
+Returns summary measures of 'voice::extract_features'
 }
 \details{
 \code{filesRange} should only be used when all the WAV files are in the same folder.
@@ -99,7 +102,4 @@ feat_summary(E)
 
 # canonical data
 feat_summary(E, 'subject_id')
-}
-\references{
-Zabala, F.J. (2022) to appear in...
 }

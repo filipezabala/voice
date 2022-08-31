@@ -9,6 +9,22 @@ get_dur(x)
 \arguments{
 \item{x}{Wave object from `tuneR::readWave`.}
 }
+\value{
+A numeric scalar indicating the time duration in seconds from a WAV file.
+}
 \description{
 Get time duration from WAV file.
+}
+\examples{
+library(voice)
+
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
+
+rw <- tuneR::readWave(path2wav[1])
+voice::get_dur(rw)
+
+rwl <- lapply(path2wav, tuneR::readWave)
+sapply(rwl, voice::get_dur)
 }

@@ -66,7 +66,10 @@ extract_features(
 
 \item{round.to}{Number of decimal places to round to. (default: \code{NULL})}
 
-\item{verbose}{Logical. Should the running status be showed? (default: \code{TRUE})}
+\item{verbose}{Logical. Should the running status be showed? (default: \code{FALSE})}
+}
+\value{
+A Media data frame containing the selected features.
 }
 \description{
 Extracts features from WAV audio files.
@@ -95,6 +98,4 @@ table(basename(M3$wav_path))
 Fitch, W.T. (1997) Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (\doi{10.1121/1.421048})
 
 Puts, D.A., Apicella, C.L., Cardenas, R.A. (2012) Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (\doi{10.1098/rspb.2011.0829})
-
-Zabala, F.J. (2022) to appear in...
 }

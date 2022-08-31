@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract_features_py.R
 \name{extract_features_py}
 \alias{extract_features_py}
-\title{Extract features from WAV audios using Python's Parselmouth library.}
+\title{Extract features from WAV audios using 'Python's' 'Parselmouth' library.}
 \usage{
 extract_features_py(
   directory,
@@ -30,17 +30,17 @@ extract_features_py(
 \item{round.to}{Number of decimal places to round to. (default: \code{NULL})}
 }
 \value{
-\code{char} vector containing the expanded models.
+A data frame containing the selected features.
 }
 \description{
-Extract features from WAV audios using Python's Parselmouth library.
+Extract features from WAV audios using 'Python's' 'Parselmouth' library.
 }
 \details{
 The function uses the \code{getwd()} folder to write the temp files.
 }
 \examples{
 
-\dontrun{
+\donttest{
 library(voice)
 
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),

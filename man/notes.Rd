@@ -15,6 +15,9 @@ notes(x, method = "spn", moving.average = FALSE, k = 11)
 
 \item{k}{Integer width of the rolling window used if moving.average is TRUE.}
 }
+\value{
+A vector containing the notes for equal-tempered scale, A4 = 440 Hz. When `method = 'spn'` the vector is of class 'ordered factor'. When `method = 'octave'` the vector is of class 'factor'.  When `method = 'midi'` the vector is of class 'integer'.
+}
 \description{
 Returns a vector of notes for equal-tempered scale, A4 = 440 Hz.
 }
@@ -29,7 +32,7 @@ notes(c(220,440,880), method = 'octave')
 notes(c(220,440,880), method = 'midi')
 }
 \references{
-https://pages.mtu.edu/~suits/notefreqs.html
+\url{https://pages.mtu.edu/~suits/notefreqs.html}
 }
 \seealso{
 \code{notes_freq}

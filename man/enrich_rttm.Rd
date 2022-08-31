@@ -13,11 +13,29 @@ enrich_rttm(listRttm, silence.gap = 0.5, as.tibble = TRUE)
 
 \item{as.tibble}{Logical. Should it return a tibble?}
 }
+\value{
+A list containing either data frames or tibbles obtained from standard RTTM files. See 'voice::read_rttm'.
+}
 \description{
-Enrich Rich Transcription Time Marked (RTTM) files obtained from \code{voice::read_rttm}.
+Enrich Rich Transcription Time Marked (RTTM) files obtained from '\code{voice::read_rttm}'.
+}
+\examples{
+\donttest{
+library(voice)
+
+url0 <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/rttm/sherlock0.rttm'
+download.file(url0, destfile = paste0(tempdir(), '/sherlock0.rttm'))
+url1 <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/rttm/sherlock1.rttm'
+download.file(url0, destfile = paste0(tempdir(), '/sherlock1.rttm'))
+
+rttm <- voice::read_rttm(tempdir())
+(er <- voice::enrich_rttm(rttm))
+class(er)
+lapply(er, class)
+}
 }
 \references{
-https://www.nist.gov/system/files/documents/itl/iad/mig/KWS15-evalplan-v05.pdf
+\url{https://www.nist.gov/system/files/documents/itl/iad/mig/KWS15-evalplan-v05.pdf}
 }
 \seealso{
 \code{voice::read_rttm}

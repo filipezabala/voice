@@ -1,6 +1,6 @@
 #' Returns a tibble of frequencies on Scientific Pitch Notation (SPN) for equal-tempered scale, A4 = 440 Hz.
 #' @details The symbol '#' is being used to represent a sharp note, the higher in pitch by one semitone. The SPN is also known as American Standard Pitch Notation (ASPN) or International Pitch Notation (IPN).
-#' @references https://pages.mtu.edu/~suits/notefreqs.html
+#' @references \url{https://pages.mtu.edu/~suits/notefreqs.html}
 #' @return A tibble with frequencies for equal-tempered scale, A4 = 440 Hz.
 #' @examples
 #' library(voice)

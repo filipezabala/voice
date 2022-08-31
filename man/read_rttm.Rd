@@ -9,11 +9,14 @@ read_rttm(fromRttm)
 \arguments{
 \item{fromRttm}{A directory/folder containing RTTM files.}
 }
+\value{
+A list containing data frames obtained from standard RTTM files. See 'Details'.
+}
 \description{
 Read Rich Transcription Time Marked (RTTM) files in \code{fromRttm} directory.
 }
 \details{
-The Rich Transcription Time Marked (RTTM) files are space-delimited text files containing one turn per line defined National Institute of Standards and Technology. Each line containing ten fields:
+The Rich Transcription Time Marked (RTTM) files are space-delimited text files containing one turn per line defined by NIST - National Institute of Standards and Technology. Each line containing ten fields:
 
 \code{type} Type: segment type; should always by SPEAKER.
 
@@ -35,8 +38,20 @@ The Rich Transcription Time Marked (RTTM) files are space-delimited text files c
 
 \code{slat} Signal Lookahead Time -- should always be <NA>.
 }
+\examples{
+library(voice)
+
+url0 <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/rttm/sherlock0.rttm'
+download.file(url0, destfile = paste0(tempdir(), '/sherlock0.rttm'))
+url1 <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/rttm/sherlock1.rttm'
+download.file(url0, destfile = paste0(tempdir(), '/sherlock1.rttm'))
+
+(rttm <- voice::read_rttm(tempdir()))
+class(rttm)
+lapply(rttm, class)
+}
 \references{
-https://www.nist.gov/system/files/documents/itl/iad/mig/KWS15-evalplan-v05.pdf
+\url{https://www.nist.gov/system/files/documents/itl/iad/mig/KWS15-evalplan-v05.pdf}
 }
 \seealso{
 \code{voice::enrich_rttm}

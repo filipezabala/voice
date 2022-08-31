@@ -3,9 +3,10 @@
 #' @param method Method of specifying musical pitch. (default: \code{spn}, i.e., Scientific Pitch Notation).
 #' @param moving.average Logical. Must apply moving average?
 #' @param k Integer width of the rolling window used if moving.average is TRUE.
+#' @return A vector containing the notes for equal-tempered scale, A4 = 440 Hz. When `method = 'spn'` the vector is of class 'ordered factor'. When `method = 'octave'` the vector is of class 'factor'.  When `method = 'midi'` the vector is of class 'integer'.
 #' @details The symbol '#' is being used to represent a sharp note, the higher
 #' in pitch by one semitone on Scientific Pitch Notation (SPN)
-#' @references https://pages.mtu.edu/~suits/notefreqs.html
+#' @references \url{https://pages.mtu.edu/~suits/notefreqs.html}
 #' @seealso \code{notes_freq}
 #' @examples
 #' library(voice)

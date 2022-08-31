@@ -41,6 +41,8 @@ unlink('LICENSE')
 # sudo find / -type d -name 'lastMiKTeXException'
 # sudo find / -type f -name 'lastMiKTeXException'
 
+nchar('Tools for Voice Analysis, Speaker Recognition and Mood Inference')
+
 # # news.md
 # devtools::install_github("Dschaykib/newsmd")
 # library(newsmd)

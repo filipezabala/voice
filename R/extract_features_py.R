@@ -1,4 +1,4 @@
-#' Extract features from WAV audios using Python's Parselmouth library.
+#' Extract features from WAV audios using 'Python's' 'Parselmouth' library.
 #'
 #' @param directory A directory/folder containing WAV files.
 #' @param filesRange The desired range of directory files (default: 0, i.e., all files).
@@ -7,11 +7,11 @@
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE})
 #' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE})
 #' @param round.to Number of decimal places to round to. (default: \code{NULL})
-#' @return \code{char} vector containing the expanded models.
+#' @return A data frame containing the selected features.
 #' @details The function uses the \code{getwd()} folder to write the temp files.
 #' @examples
 #'
-#' \dontrun{
+#' \donttest{
 #' library(voice)
 #'
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),

@@ -13,6 +13,20 @@ audio_time(x, filesRange = NULL, recursive = FALSE)
 
 \item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
 }
+\value{
+A tibble containing file name <chr> and audio time <dbl>.
+}
 \description{
 Returns the total time of audio files in seconds
+}
+\examples{
+library(voice)
+
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
+
+# Tibble containing file name and audio time
+(at <- voice::audio_time(unique(dirname(path2wav))))
+str(at)
 }

@@ -11,15 +11,23 @@
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
 #' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}. Inactive if \code{fromWav} is a file.
 #' @param silence.gap The silence gap (in seconds) between adjacent words in a keyword. Rows with \code{tdur <= silence.gap} are removed. (default: \code{0.5})
+#' @return Split audio files according to the correspondent RTTM file(s). See '\code{voice::poetry}'.
 #' @details When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(voice)
+#'
 #' wavDir <- list.files(system.file('extdata', package = 'wrassp'),
 #'                      pattern <- glob2rx('*.wav'), full.names = TRUE)
-#' poetry(dirname(path2wav), pycall = '/home/linuxbrew/.linuxbrew/bin/python3.9') # Linux
-#' splitw(dirname(path2wav))
+#' splitDir <- paste0(tempdir(), '/split')
+#' voice::poetry(fromWav = unique(dirname(wavDir)), toRttm = tempdir())
+#' dir.create(splitDir)
+#' dir(tempdir())
+#'
+#' splitw(unique(dirname(wavDir)), fromRttm = tempdir(), toSplit = paste0(tempdir(), '/split'))
+#' dir(splitDir)
 #' }
+#'
 #' @export
 splitw <- function(fromWav,
                    fromRttm = NULL,

@@ -55,7 +55,7 @@ pattern <- glob2rx('*.wav'), full.names = TRUE)
 M <- extract_features(dirname(path2wav), features = c('f0','formants'),
 mc.cores = 1, verbose = FALSE)
 
-\dontrun{
+\donttest{
 (cM.df <- conv_df(M[,-(1:2)], 0.1, mc.cores = 1))
 (cM.df2 <- conv_df(M[,-(1:2)], 0.1, drop.x = FALSE, mc.cores = 1))
 

@@ -48,7 +48,7 @@ conv_mc(1:100, compact.to = 0.1, drop.zeros = TRUE, to.data.frame = TRUE)
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 pattern <- glob2rx('*.wav'), full.names = TRUE)
 
-\dontrun{
+\donttest{
 # getting all features
 M <- extract_features(dirname(path2wav), features = c('f0','formants',
 'zcr','mhs','rms','gain','rfc','ac','cep','dft','css','lps','mfcc'),

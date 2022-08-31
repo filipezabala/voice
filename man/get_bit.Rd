@@ -2,13 +2,29 @@
 % Please edit documentation in R/get_bit.R
 \name{get_bit}
 \alias{get_bit}
-\title{Get bit}
+\title{Get bit rate}
 \usage{
 get_bit(x)
 }
 \arguments{
 \item{x}{Wave object from `tuneR::readWave`.}
 }
+\value{
+An integer scalar indicating the bit rate from a WAV file.
+}
 \description{
-Get bit from WAV file.
+Get bit rate from WAV file.
+}
+\examples{
+library(voice)
+
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+pattern <- glob2rx('*.wav'), full.names = TRUE)
+
+rw <- tuneR::readWave(path2wav[1])
+voice::get_bit(rw)
+
+rwl <- lapply(path2wav, tuneR::readWave)
+sapply(rwl, voice::get_bit)
 }
