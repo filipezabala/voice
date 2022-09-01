@@ -11,6 +11,9 @@ write_list(x, path)
 
 \item{path}{A full path to file.}
 }
+\value{
+A file named `list.txt` in `path`.
+}
 \description{
 Writes a list to a path.
 }

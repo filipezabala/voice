@@ -2,6 +2,7 @@
 #'
 #' @param x A list.
 #' @param path A full path to file.
+#' @return A file named `list.txt` in `path`.
 #' @examples
 #' \dontrun{
 #' library(voice)

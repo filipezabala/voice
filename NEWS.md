@@ -1,9 +1,14 @@
-## version 0.4.12
+## version 0.4.14
 
 ---
 
 ### NEWS.md setup
 
+
+- Version 0.4.14
+As suggested by Benjamin Altmann: 
+. Added `@return` to R/write_list.R. This implies adding a `\value` field to the corresponding .Rd file.
+ 
 
 - Version 0.4.12
 As suggested by Benjamin Altmann:  
