@@ -75,8 +75,6 @@ devtools::check(args = c('--as-cran'))
 devtools::check_win_devel()
 devtools::check_win_release()
 devtools::check_win_oldrelease()
-# usethis::use_github_actions()
-# goodpractice::gp()
 
 # send to CRAN
 devtools::spell_check()
