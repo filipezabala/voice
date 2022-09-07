@@ -82,7 +82,7 @@ summary(M)
 
 ### 3.2. Music sheet
 #### Compress to 1% {-}
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # compress
 M1 <- voice::conv_df(M, 0.01, id = 3)
 
