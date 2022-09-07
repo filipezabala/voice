@@ -23,9 +23,6 @@ ini0 <- Sys.time()
 
 ## 0. Installation
 https://github.com/filipezabala/voice
-```{r}
-install.packages('voice', dep = TRUE)
-```
 
 
 ### Load packages and audio files
@@ -62,14 +59,6 @@ voice::tag(E, groupBy = 'subject_id')
 
 ## 3. Voice2Sheet (experimental)
 ### 3.1. Extract features
-#### Load packages {-}
-```{r, message=FALSE, warning=FALSE}
-# packs
-library(voice)
-library(tidyverse)
-library(music)
-library(gm)
-```
 
 #### Get audio {-}
 ```{r, message=FALSE, warning=FALSE}
@@ -88,27 +77,28 @@ system(cmd)
 #### Extract features {-}
 ```{r, message=FALSE, warning=FALSE}
 M <- voice::extract_features(tempdir(), features = c('f0','gain'), round.to = 6)
-M
+summary(M)
 ```
 
 ### 3.2. Music sheet
 #### Compress to 1% {-}
 ```{r}
 # compress
-M_01 <- voice::conv_df(M, 0.01, id = 3)
+M1 <- voice::conv_df(M, 0.01, id = 3)
 
 # assign notes
-M_01$f0_spn <- voice::notes(M_01$f0)
+M1$f0_spn <- voice::notes(M1$f0)
 
 # duration
-nd_01 <- voice::duration(M_01$f0_spn)
+d1 <- voice::duration(M1$f0_spn)
 
 # gm by Renfei Mao
+library(gm)
 m <- gm::Music()
 m <- m +
   gm::Meter(4, 4) +
-  gm::Line(pitches = as.list(as.character(nd_01$note)),
-           durations = as.list(nd_01$dur_line)) +
-  Tempo(170)
-show(m, to = c('score', 'audio'))
+  gm::Line(pitches = as.list(as.character(d1$note)),
+           durations = as.list(d1$dur_line)) +
+  gm::Tempo(170)
+gm::show(m, to = c('score', 'audio'))
 ```

@@ -55,7 +55,11 @@ unlink('~/__pycache__', recursive = TRUE)
 unlink('/tmp/RtmpdR6Vve/voice.Rcheck/temp_diarization-pyannote.py')
 unlink('/tmp/RtmpdR6Vve/voice.Rcheck/temp_libs.py')
 unlink('/tmp/RtmpdR6Vve/voice.Rcheck/__pycache__', recursive = TRUE)
+unlink('/tmp/qtsingleapp-mscore-64b8-3e8-lockfile', recursive = TRUE)
+unlink('/tmp/runtime-filipe', recursive = TRUE)
 
+# sudo find / -name runtime-filipe
+# sudo find / -name qtsingleapp-mscore-64b8-3e8-lockfil
 # sudo find / -name temp_diarization-pyannote.py
 # sudo find / -name lastMiKTeXException
 # sudo find / -type d -name 'lastMiKTeXException'

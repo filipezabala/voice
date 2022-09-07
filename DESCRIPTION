@@ -12,7 +12,7 @@ Description: General purpose tools for voice analysis, speaker recognition and
     and audio in general.
 Depends: R (>= 4.1.0)
 Imports: dplyr, R.utils, reticulate, seewave, tibble, tidyselect, tuneR, wrassp, zoo
-Suggests: knitr
+Suggests: embedr, gm, knitr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
