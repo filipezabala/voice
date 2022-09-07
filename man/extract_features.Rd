@@ -24,7 +24,7 @@ extract_features(
   overwrite = FALSE,
   freq = 44100,
   round.to = NULL,
-  verbose = TRUE
+  verbose = FALSE
 )
 }
 \arguments{

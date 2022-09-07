@@ -62,7 +62,7 @@ extract_features <- function(x,
                              overwrite = FALSE,
                              freq = 44100,
                              round.to = NULL,
-                             verbose = TRUE){
+                             verbose = FALSE){
 
   # time processing
   pt0 <- proc.time()
