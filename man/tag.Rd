@@ -29,7 +29,7 @@ tag(
   overwrite = FALSE,
   freq = 44100,
   round.to = 4,
-  verbose = TRUE
+  verbose = FALSE
 )
 }
 \arguments{
@@ -81,7 +81,7 @@ tag(
 
 \item{round.to}{Number of decimal places to round to. (default: \code{NULL})}
 
-\item{verbose}{Logical. Should the running status be showed? (default: \code{TRUE})}
+\item{verbose}{Logical. Should the running status be showed? (default: \code{FALSE})}
 }
 \value{
 A tibble data frame containing summarized columns by the mean, standard deviation, variation coefficient, median, interquartile range and median absolute deviation.

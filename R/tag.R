@@ -24,7 +24,7 @@
 #' @param overwrite Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})
 #' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
 #' @param round.to Number of decimal places to round to. (default: \code{NULL})
-#' @param verbose Logical. Should the running status be showed? (default: \code{TRUE})
+#' @param verbose Logical. Should the running status be showed? (default: \code{FALSE})
 #' @return A tibble data frame containing summarized columns by the mean, standard deviation, variation coefficient, median, interquartile range and median absolute deviation.
 #' @details \code{filesRange} should only be used when all the WAV files are in the same folder.
 #' @examples
@@ -78,7 +78,7 @@ tag <- function(x,
                 overwrite = FALSE,
                 freq = 44100,
                 round.to = 4,
-                verbose = TRUE){
+                verbose = FALSE){
 
   # sort by groupBy
   if(sortByGroupBy){

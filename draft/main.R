@@ -26,6 +26,7 @@ devtools::document('/home/filipe/MEGAsync/D_Filipe_Zabala/pacotes/voice/')
 
 # install voice
 devtools::install_github('filipezabala/voice')
+install.packages('voice', dep = T)
 
 # # loading
 # devtools::load_all()

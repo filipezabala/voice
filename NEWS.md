@@ -1,11 +1,18 @@
-## version 0.4.14
+## version 0.4.15
 
 ---
 
 ### NEWS.md setup
 
+- Version 0.4.15 2022-09-07
+. Removed duplicated 'must' from `autoDir` parameter documentation at poetry.R
+. Updated vignettes/voicegnette_R.Rmd.
+. Set `verbose = FALSE`:
+  - R/feat_summary.R
+  - R/tag.R
 
-- Version 0.4.14
+
+- Version 0.4.14 2022-09-02
 As suggested by Benjamin Altmann: 
 . Added `@return` to R/write_list.R. This implies adding a `\value` field to the corresponding .Rd file.
  

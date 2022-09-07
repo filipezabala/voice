@@ -16,7 +16,7 @@ poetry(
 
 \item{toRttm}{A directory/folder to write RTTM files. If the default \code{toRttm = NULL} is used, \code{'./voiceAudios/rttm'} is created and used.}
 
-\item{autoDir}{Logical. Must the directories tree must be created? Default: \code{FALSE}. See 'Details'.}
+\item{autoDir}{Logical. Must the directories tree be created? Default: \code{FALSE}. See 'Details'.}
 
 \item{pycall}{Python call.}
 }
