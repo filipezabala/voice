@@ -69,7 +69,7 @@ conv_df <- function(x, compact.to, id = colnames(x)[1], colnum = NULL,
 
   # convoluting numeric variables
   cn.li <- lapply(snum, voice::conv_mc, compact.to = compact.to,
-                  drop.zeros = drop.zeros, to.data.frame = TRUE,
+                  drop.zeros = drop.zeros, to.data.frame = to.data.frame,
                   round.off = round.off, weight = weight, mc.cores = mc.cores)
 
   # transforming in dataframe
@@ -83,7 +83,12 @@ conv_df <- function(x, compact.to, id = colnames(x)[1], colnum = NULL,
     cn.li[[i]] <- snon[[i]][index,]
     even <- seq(2, ncol(cn.df[[i]]), by = 2)
     index2 <- sort(union(even, even-!drop.x))
-    cn.li[[i]] <- dplyr::bind_cols(cn.li[[i]], cn.df[[i]][,index2])
+    cn.df.temp <- cn.df[[i]][,index2]
+    if(is.numeric(cn.df.temp)){ # dealing with unitary features
+      cn.df.temp <- dplyr::as_tibble(cn.df.temp)
+      names(cn.df.temp) <- colnames(x[colnum])
+    }
+    cn.li[[i]] <- dplyr::bind_cols(cn.li[[i]], cn.df.temp)
     names(cn.li)[i] <- nlv[i]
   }
   if(drop.x){

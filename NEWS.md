@@ -10,6 +10,8 @@
 . Set `verbose = FALSE`:
   - R/feat_summary.R
   - R/tag.R
+. Set `to.data.frame = to.data.frame` to `cn.li` call @ R/conv_df.R.
+. Allow R/conv_df.R to use unitary `features` argument.
 
 
 - Version 0.4.14 2022-09-02

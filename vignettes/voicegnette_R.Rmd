@@ -76,7 +76,7 @@ system(cmd)
 
 #### Extract features {-}
 ```{r, message=FALSE, warning=FALSE}
-M <- voice::extract_features(tempdir(), features = c('f0'), round.to = 6)
+M <- voice::extract_features(tempdir(), features = 'f0', round.to = 6)
 summary(M)
 ```
 
