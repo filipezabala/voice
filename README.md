@@ -7,7 +7,7 @@
 General tools for voice analysis. The `voice` package is being developed to be an easy-to-use set of tools to deal with audio analysis in R.  
 It is based on [`wrassp`](https://cran.r-project.org/package=wrassp), [`tuneR`](https://cran.r-project.org/package=tuneR), [`seewave`](https://cran.r-project.org/package=seewave), [`gm`](https://cran.r-project.org/package=gm), as well as [Parselmouth](https://github.com/YannickJadoul/Parselmouth) - a Python library for the [Praat](https://www.fon.hum.uva.nl/praat/) software - and [pyannote-audio](https://github.com/pyannote/pyannote-audio) - an open-source toolkit written in Python for speaker diarization based on [PyTorch](https://github.com/pytorch/pytorch) machine learning framework.   
 
-A vignette may be found at http://filipezabala.com/voicegnette/.  
+More details may be found at https://cran.r-project.org/package=voice.  
 
 ## Ubuntu Installation
 The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [Ubuntu 20.04 LTS (Focal Fossa)](https://releases.ubuntu.com/20.04/). Note the software versions during installation, inconsistency reporting is welcome.  
@@ -114,11 +114,10 @@ sudo R
 Running R as super user paste the following, row by row:
 ```r
 ini <- Sys.time()
-packs <- c('audio','BART','devtools','e1071','ellipse','foreach','ggfortify','RColorBrewer','reticulate','R.utils','seewave','tidyverse','tuneR','VIM','wrassp')
+packs <- c('audio','BART','devtools','e1071','ellipse','foreach','ggfortify','RColorBrewer','reticulate','R.utils','seewave','tidyverse','tuneR','VIM','voice','wrassp')
 install.packages(packs, dep = T); Sys.time()-ini
 update.packages(ask = F); Sys.time()-ini
 devtools::install_github('egenn/music'); Sys.time()-ini
-devtools::install_github('filipezabala/voice'); Sys.time()-ini
 devtools::install_github('flujoo/gm'); Sys.time()-ini
 url <- 'http://www.rob-mcculloch.org/chm/nonlinvarsel_0.0.1.9001.tar.gz'
 download.file(url, destfile = 'temp')
@@ -275,11 +274,10 @@ sudo R
 Running R as super user paste the following, row by row:
 ```r
 ini <- Sys.time()
-packs <- c('audio','BART','devtools','e1071','ellipse','foreach','ggfortify','RColorBrewer','reticulate','R.utils','seewave','tidyverse','tuneR','VIM','wrassp')
+packs <- c('audio','BART','devtools','e1071','ellipse','foreach','ggfortify','RColorBrewer','reticulate','R.utils','seewave','tidyverse','tuneR','VIM','voice','wrassp')
 install.packages(packs, dep = T); Sys.time()-ini
 update.packages(ask = F); Sys.time()-ini
 devtools::install_github('egenn/music'); Sys.time()-ini
-devtools::install_github('filipezabala/voice'); Sys.time()-ini
 devtools::install_github('flujoo/gm'); Sys.time()-ini
 url <- 'http://www.rob-mcculloch.org/chm/nonlinvarsel_0.0.1.9001.tar.gz'
 download.file(url, destfile = 'temp')
