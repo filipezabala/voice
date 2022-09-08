@@ -25,6 +25,7 @@ ini0 <- Sys.time()
 https://github.com/filipezabala/voice
 
 
+## 1. Extract features
 ### Load packages and audio files
 ```{r, message=FALSE, warning=FALSE}
 # packs
@@ -35,7 +36,6 @@ wavDir <- list.files(system.file('extdata', package = 'wrassp'),
                      pattern <- glob2rx('*.wav'), full.names = TRUE)
 ```
 
-## 1. Extract features
 ### Examples
 ```{r, message=FALSE, warning=FALSE}
 # minimal usage
@@ -64,7 +64,7 @@ voice::tag(E, groupBy = 'subject_id')
 ```{r, message=FALSE, warning=FALSE}
 url0 <- 'https://github.com/filipezabala/voiceAudios/blob/main/mp3/doremi.mp3?raw=true'
 download.file(url0, paste0(tempdir(), '/doremi.mp3'), mode = 'wb')
-embedr::embed_audio(url0)
+# embedr::embed_audio(url0)X
 ```
 
 #### Convert mp3 to wav mono {-}

@@ -84,6 +84,7 @@ devtools::check_win_oldrelease()
 # send to CRAN
 devtools::spell_check()
 devtools::check_rhub()
+# devtools::check_rhub(env_vars = c(`_R_CHECK_FORCE_SUGGESTS_` = "false"))
 
 # finally, releasing
 devtools::release()
