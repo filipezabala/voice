@@ -1,8 +1,11 @@
-## version 0.4.15
+## version 0.4.16
 
 ---
 
 ### NEWS.md setup
+
+- Version 0.4.16 2022-09-14
+. Allow R/conv_df.R to use unitary `features` argument.
 
 - Version 0.4.15 2022-09-07
 . Removed duplicated 'must' from `autoDir` parameter documentation at poetry.R
@@ -11,7 +14,6 @@
   - R/feat_summary.R
   - R/tag.R
 . Set `to.data.frame = to.data.frame` to `cn.li` call @ R/conv_df.R.
-. Allow R/conv_df.R to use unitary `features` argument.
 
 
 - Version 0.4.14 2022-09-02

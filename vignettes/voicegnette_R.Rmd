@@ -80,6 +80,21 @@ M <- voice::extract_features(tempdir(), features = 'f0', round.to = 6)
 summary(M)
 ```
 
+#### Plot
+```{r, message=FALSE, warning=FALSE}
+# Plot
+plot(M$f0)
+legend(-40, 170, 'Do (C)' , bty = 'n')
+legend(100, 190, 'Re (D)' , bty = 'n')
+legend(240, 290, 'Mi (E)' , bty = 'n')
+legend(370, 220, 'Fa (F)' , bty = 'n')
+legend(500, 250, 'Sol (G)', bty = 'n')
+legend(620, 270, 'La (A)' , bty = 'n')
+legend(770, 300, 'Si (B)' , bty = 'n')
+legend(900, 320, 'Do (C)' , bty = 'n')
+```
+
+
 ### 3.2. Music sheet
 #### Compress to 1% {-}
 ```{r, message=FALSE, warning=FALSE}
