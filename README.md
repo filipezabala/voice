@@ -101,8 +101,8 @@ RStudio is an Integrated Development Environment (IDE) for R. Check for updates 
 ```bash
 sudo apt-get update
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.2-382-amd64.deb
-sudo gdebi rstudio-server-2021.09.2-382-amd64.deb
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2022.07.2-576-amd64.deb
+sudo gdebi rstudio-server-2022.07.2-576-amd64.deb
 ```
 
 ### 9. R packages
