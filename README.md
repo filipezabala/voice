@@ -29,9 +29,9 @@ sudo apt-get install -y libssl-dev autoconf libtool make
 cd /usr/local/src
 rm -rf curl*
 # downloading latest version (check before install!)
-sudo wget https://curl.se/download/curl-7.85.0.zip
-sudo unzip curl-7.85.0.zip
-cd curl-7.85.0
+sudo wget https://curl.se/download/curl-7.86.0.zip
+sudo unzip curl-7.86.0.zip
+cd curl-7.86.0
 sudo apt-get install autoconf
 sudo autoreconf -fi
 sudo ./configure --with-ssl 
