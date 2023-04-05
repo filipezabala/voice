@@ -1,0 +1,134 @@
+---
+title: '`voice` vignette'
+subtitle: 'version `r packageVersion("voice")`'
+author: 'Filipe J. Zabala'
+date: "`r format(Sys.time(), '%Y-%m-%d')`"
+# date: "`r format(Sys.time(), '%Y-%m-%d %H:%M:%S')`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{`voice` vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+ini0 <- Sys.time()
+```
+
+## 0. Installation
+### 0.1 Minimal
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+# CRAN (stable)
+install.packages('voice', dep = TRUE)
+
+# Github (development)
+devtools::install_github('filipezabala/voice')
+```
+
+### 0.2 Full
+https://github.com/filipezabala/voice
+
+
+## 1. Extract features
+### 1.1 Get path to audio files
+```{r, message=FALSE, warning=FALSE}
+wavFiles <- list.files(system.file('extdata', package = 'wrassp'),
+                       pattern <- glob2rx('*.wav'), full.names = TRUE)
+```
+
+### 1.2 Minimal usage
+```{r, message=FALSE, warning=FALSE}
+M <- voice::extract_features(wavFiles)
+dplyr::glimpse(M)
+```
+
+## 2. Tag
+### 2.1 Creating synthetic Extended data
+```{r, message=FALSE, warning=FALSE}
+E <- dplyr::tibble(subject_id = c(1,1,1,2,2,2,3,3,3), wav_path = wavFiles)
+E
+```
+
+### 2.2 Tagging Extended data
+```{r, message=FALSE, warning=FALSE}
+voice::tag(E)
+```
+
+### 2.3 Tagging Canonical data
+```{r, message=FALSE, warning=FALSE}
+voice::tag(E, groupBy = 'subject_id')
+```
+
+## 3. Voice2Sheet (experimental)
+### 3.1 Get audio
+```{r, message=FALSE, warning=FALSE}
+url0 <- 'https://github.com/filipezabala/voiceAudios/blob/main/wav/doremi.wav?raw=true'
+download.file(url0, paste0(tempdir(), '/doremi.wav'), mode = 'wb')
+# embedr::embed_audio(url0)
+```
+
+### 3.2 Extract F0
+```{r, message=FALSE, warning=FALSE}
+M <- voice::extract_features(tempdir(), features = 'f0')
+summary(M)
+```
+
+### 3.3 Plot
+```{r, message=FALSE, warning=FALSE, fig.width = 7, fig.asp = .65}
+# Plot
+plot(M$f0)
+legend(-60, 170, 'Do (C3)' , bty = 'n')
+legend(80, 190 , 'Re (D3)' , bty = 'n')
+legend(220, 290, 'Mi (E4)' , bty = 'n')
+legend(350, 210, 'Fa (F3)' , bty = 'n')
+legend(480, 250, 'Sol (G3)', bty = 'n')
+legend(600, 270, 'La (A3)' , bty = 'n')
+legend(720, 310, 'Si (B3)' , bty = 'n')
+legend(910, 320, 'Do (C4)' , bty = 'n')
+```
+
+
+### 3.4 Assign notes (manually)
+```{r, message=FALSE, warning=FALSE}
+(note1 <- median(M$f0[1:150], na.rm = TRUE))
+voice::notes(note1)
+(note2 <- median(M$f0[190:280], na.rm = TRUE))
+voice::notes(note2)
+(note3 <- median(M$f0[310:380], na.rm = TRUE))
+voice::notes(note3)
+(note4 <- median(M$f0[420:500], na.rm = TRUE))
+voice::notes(note4)
+(note5 <- median(M$f0[590:630], na.rm = TRUE))
+voice::notes(note5)
+(note6 <- median(M$f0[700:770], na.rm = TRUE))
+voice::notes(note6)
+(note7 <- median(M$f0[820:900], na.rm = TRUE))
+voice::notes(note7)
+(note8 <- median(M$f0[950:1100], na.rm = TRUE))
+voice::notes(note8)
+```
+
+### 3.5 Music sheet
+```{r, message=FALSE, warning=FALSE}
+# gather (manually)
+(notes_vec <- c(paste0('note', 1:8), 'note8'))
+(f0_spn <- voice::notes(mget(notes_vec)))
+
+# duration
+(dur <- voice::duration(f0_spn))
+
+# gm by Renfei Mao
+m <- gm::Music()
+m <- m +
+  gm::Meter(4, 4) +
+  gm::Line(pitches = as.list(as.character(dur$note)),
+           durations = as.list(dur$dur_line)) +
+  gm::Tempo(100)
+# gm::show(m, to = c('score', 'audio'))
+```

@@ -31,9 +31,9 @@ $ conda init
 
 import os
 import sys
-import torch
 import argparse
 import warnings
+from pyannote.audio import Pipeline
 
 # ignorar warnings
 warnings.filterwarnings('ignore')
@@ -76,15 +76,21 @@ def main():
     parser.add_argument('--pathto', help='Path to (writing .rttm)', action='store', required=True)
 
     args = parser.parse_args()
+    print('pipeline', Pipeline, file=sys.stderr)
 
-    pipeline = torch.hub.load('pyannote/pyannote-audio', 'dia')
+    pipeline = Pipeline.from_pretrained("pyannote/speaker-diarization",
+        use_auth_token=NULL)
+
     i=0
     for fileroot, filename in list_files(args.pathfrom):
-        diarization = pipeline({'audio': os.path.join(fileroot, filename)})
+        print(fileroot, filename, file=sys.stderr)
+        print(pipeline, file=sys.stderr)
+        diarization = pipeline(os.path.join(fileroot, filename))
+        print(diarization, file=sys.stderr)
         filename_base, filename_ext = os.path.splitext(filename)
         filename_out = '{}.rttm'.format(filename_base)
         with open(os.path.join(args.pathto, filename_out), 'w') as f:
-            diarization.write_rttm(f)
+          diarization.write_rttm(f)
         i=i+1
         print(i)
 

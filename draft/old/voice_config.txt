@@ -1,0 +1,122 @@
+The following steps were used to configure gitHub.com/filipezabala/voice in a MacOS Big Sur.  
+To upgrade from Catalina to Big Sur, if the error "The package %@ is missing or invalid" appears, press simultaneously option + command + p + r at restart). 
+
+Hardware
+ . MacBook Air (13-inch, 2017)
+ . Processor 1.8 GHz Dual-Core Intel Core i5
+ . Memory 8GB 1600 MHz DDR3
+ . Graphics Intel HD Graphics 6000 1536 MB
+
+The processes may be accompanied using command + space 'Activity Monitor'.
+
+
+1. Setting some preferences
+ . Background > Double click > Change Desktop Background > ...
+ . command + space, type 'system preferences', return. 
+   . System Preferences > Dock & Menu Bar > Clock > "Flash the time separators" and "Display the time with seconds".
+
+2. Install Google Chrome.
+
+3. Install Opera.
+
+4. Install Dropbox.
+
+5. command + space, type 'terminal', return.
+
+6. Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' @ https://brew.sh/. At terminal (indicated by $) starts at 09:43:27. Asked for password once, around 09:55:00. Ends at 10:04:02. Remember to 'brew doctor' eventually.
+
+$ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+$  sudo chown -R $(whoami) /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5
+$ chmod u+w /usr/local/lib/pkgconfig /usr/local/share/info /usr/local/share/man/man3 /usr/local/share/man/man5
+
+7. Install wget
+$ brew install wget
+
+8. Install Python 3.8 and 3.9 and make it consistent (may take several minutes). 
+https://github.com/Homebrew/homebrew-core/issues/62911
+$ brew install python@3.8
+$ brew install python@3.9
+$ brew unlink python@3.9
+$ brew unlink python@3.8
+$ brew link python@3.8
+$ python3 --version 
+$ pip3 --version
+
+9. Install ffmpeg (may take several minutes). 
+$ brew install ffmpeg
+
+10. Install X11/XQuartz from www.xquartz.org. https://github.com/XQuartz/XQuartz/releases/download/XQuartz-2.8.1/XQuartz-2.8.1.dmg.
+ . Double click in XQuartz-2.8.1.dmg
+ . Will take 319.2 MB of disk space. Send R-4.1.0.pkg to Trash.
+
+11. Install bwidget
+ . download from http://sourceforge.net/projects/tcllib/files/. https://sourceforge.net/projects/tcllib/files/latest/download
+ . install to a location where tcl will look (i.e. /usr/local/lib) (messy)
+
+$ cd ~/Downloads
+$ tar -xf bwidget-1.9.14.tar.gz
+$ mv bwidget-1.9.14 /usr/local/lib/bwidget-1.9.14
+
+12. Install R https://www.r-project.org. https://cloud.r-project.org/bin/macosx/base/R-4.1.0.pkg
+Will take 174.8 MB of disk space. Send R-4.1.0.pkg to Trash.
+
+13. Install RStudio. https://download1.rstudio.org/desktop/macos/RStudio-1.4.1717.dmg 
+Drag RStudio to Applications folder. Will take 768.4 MB of disk space. Unmount RStudio virtual disk and send RStudio-1.4.1717.dmg to Trash.
+
+14. command + space 'rstudio'.
+ . Tools > Global Options... > Appearance > Merbivore (Restart required)
+ . Terminal
+   $ sudo R
+
+15. To make full use of the R part of the `voice` package, paste the following code after 'sudo R'.
+
+ini <- Sys.time()
+packs <- c('devtools', 'e1071', 'ellipse', 'ggfortify', 'RColorBrewer', 'reticulate', 'R.utils', 'seewave', 'tidyverse', 'tuneR', 'VIM', 'wrassp')
+install.packages(packs, dep = T); Sys.time()-ini
+update.packages(ask = F); Sys.time()-ini
+devtools::install_github('cran/parallelSVM'); Sys.time()-ini
+devtools::install_github('filipezabala/voice', force = T); Sys.time()-ini
+
+16. Install Miniconda (/Users/filipe/miniconda3). Answer 'yes' to the questions.
+$ cd ~/Downloads
+$ wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+$ cd repo.anaconda.com/miniconda/
+$ bash Miniconda3-latest-MacOSX-x86_64.sh
+$ conda create -n pyvoice38 python=3.8
+$ conda activate pyvoice38
+$ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
+
+17. Empty Trash.
+
+
+# EXTRA
+
+18. Install git
+$ brew install git
+
+19. Install gdal
+$ brew install gdal
+
+20. 
+
+
+### OLD
+
+# Miniconda
+$ pip3 install -r librosa
+$ pip3 install pyannote.audio==1.1.1
+$ cd ~/miniconda3
+$ conda init
+
+9. Install tktable
+ . download from http://sourceforge.net/projects/tktable/files/. https://sourceforge.net/projects/tktable/files/latest/download
+
+$ cd ~/Downloads
+$ tar -xf tile-0.8.4.0.tar.gz
+$ ./configure ; make ; make install
+
+or: install directly with:
+   sudo port install tktable (if you have mac ports installed)
+
+see: http://osdir.com/ml/lang.r.mac/2006-10/msg00002.html
+
