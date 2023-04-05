@@ -1,11 +1,62 @@
-## version 0.4.16
+## version 0.4.17
 
 ---
 
 ### NEWS.md setup
 
+- Version 0.4.19 YYYY-MM-DD
+. Add tag `$feature_tag_n`.
+. Features ordered by the listed order in `features` argument.
+. Add time duration `tdur` as a column at voice::tag function return.
+. Solve `acf` feature extraction at voice::extract_features.
+  . Error in `dplyr::bind_cols()`:
+  ! Can't recycle `..1` (size 2396) to match `..4` (size 0).
+  Run `rlang::last_error()` to see where the error occurred.
+. Solve @ voice::diarize.R 
+  FileNotFoundError: [Errno 2] No such file or directory: '/home/fz/.cache/torch/hub/pyannote_pyannote-audio_master/hubconf.py'
+. Change message @ voice::tag: 
+  FROM 'Warning: no non-missing arguments to min; returning InfError in features.list.temp$f0[[j]] : subscript out of bounds' 
+  TO 'File does not exist!'
+
+
+- Version 0.4.18 2023-04-DD
+. Added `pycall` argument to `voice::extract_features_py`.
+. References updated in `voice::extract_features`.
+. References updated in `voice::extract_features_py`.
+. `F0` column inferred via `voice::extract_features_py` set to `f0_praat`. Line 39 of extract_f0.py, (`df_f0_long['f0_praat']`) and line 83 of extract_features_py.R (`dplyr::select(id, file_name, interval, F0) %>%`).
+. `1`,  column inferred via `voice::extract_features_py` set to `f0_praat`.
+. Column `mhs` set to `f0_mhs` in `voice::extract_features`.
+. Lean call to `voice::extract_features`:
+  `    features = c('f0', 'formants',   # Pitch and formants`
+  `                 'df', 'pf',         # Formant dispersion and position`
+  `                 'rf', 'rpf', 'rcf', # Formant removals`
+  `                 'rfc',              # (R)e(F)lection (C)oefficients`
+  `                 'mfcc'),            # (M)el (Frequency (C)epstral (C)oefficients`
+. RPf - Formant Position Removal by Zabala (2023) disentangled from Pf by Puts et al (2012) in `voice::extract_features`.
+. `voice::diarize` calls directly `pyannote.audio` via `reticulate` using a token. The download and call of `libs.py` and `diarization-pyannote.py` is no longer needed.
+
+
+- Version 0.4.17 2023-03-14
+. voice now depends of R (>= 4.0.0), not R (>= 4.1.0) in order to allow Kaggle installation.
+. Deprecated `poetry` (sent to `draft/poetry.R`), created `R/diarize` instead.
+. Deprecated `data/id_path.rda` and `man/id_path.Rd` (sent to `draft/id_path.rda` and `draft/id_path.Rd`), created `/data/mozilla_id_path.rda` and `man/mozilla_id_path.Rd` instead.
+. Updated .Rbuildignore:
+  ^.*\.Rproj$
+  ^\.Rproj\.user$
+  ^cran-comments\.md$
+  ^CRAN-SUBMISSION$
+  ^requirements.txt$
+  ^draft$
+  ^revdep$
+. rstudio.com became posit.co.
+. Monterey became Ventura.
+. `voice::diarize` exported to NAMESPACE.
+
+
+
 - Version 0.4.16 2022-09-14
 . Allow R/conv_df.R to use unitary `features` argument.
+
 
 - Version 0.4.15 2022-09-07
 . Removed duplicated 'must' from `autoDir` parameter documentation at poetry.R

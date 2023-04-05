@@ -7,9 +7,7 @@
 General tools for voice analysis. The `voice` package is being developed to be an easy-to-use set of tools to deal with audio analysis in R.  
 It is based on [`wrassp`](https://cran.r-project.org/package=wrassp), [`tuneR`](https://cran.r-project.org/package=tuneR), [`seewave`](https://cran.r-project.org/package=seewave), [`gm`](https://cran.r-project.org/package=gm), as well as [Parselmouth](https://github.com/YannickJadoul/Parselmouth) - a Python library for the [Praat](https://www.fon.hum.uva.nl/praat/) software - and [pyannote-audio](https://github.com/pyannote/pyannote-audio) - an open-source toolkit written in Python for speaker diarization based on [PyTorch](https://github.com/pytorch/pytorch) machine learning framework.   
 
-More details may be found at  
- - https://cran.r-project.org/package=voice 
- - https://filipezabala.com/voicegnette  
+More details may be found at https://cran.r-project.org/package=voice.  
 
 ## Ubuntu Installation
 The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [Ubuntu 20.04 LTS (Focal Fossa)](https://releases.ubuntu.com/20.04/). Note the software versions during installation, inconsistency reporting is welcome.  
@@ -29,9 +27,9 @@ sudo apt-get install -y libssl-dev autoconf libtool make
 cd /usr/local/src
 rm -rf curl*
 # downloading latest version (check before install!)
-sudo wget https://curl.se/download/curl-7.86.0.zip
-sudo unzip curl-7.86.0.zip
-cd curl-7.86.0
+sudo wget https://curl.se/download/curl-7.81.0.zip
+sudo unzip curl-7.81.0.zip
+cd curl-7.81.0
 sudo apt-get install autoconf
 sudo autoreconf -fi
 sudo ./configure --with-ssl 
@@ -98,13 +96,13 @@ sudo apt-get install r-base
 sudo apt-get install r-base-dev
 ```
 
-### 8. [RStudio Server](https://www.rstudio.com/)
-RStudio is an Integrated Development Environment (IDE) for R. Check for updates [here](https://www.rstudio.com/products/rstudio/download-server/debian-ubuntu/).
+### 8. [RStudio Server](https://posit.co/)
+RStudio is an Integrated Development Environment (IDE) for R. Check for updates [here](https://posit.co/download/rstudio-server/).
 ```bash
 sudo apt-get update
 sudo apt-get install gdebi-core
-wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2022.07.2-576-amd64.deb
-sudo gdebi rstudio-server-2022.07.2-576-amd64.deb
+wget https://download2.rstudio.org/server/bionic/amd64/rstudio-server-2021.09.2-382-amd64.deb
+sudo gdebi rstudio-server-2021.09.2-382-amd64.deb
 ```
 
 ### 9. R packages
@@ -116,10 +114,9 @@ sudo R
 Running R as super user paste the following, row by row:
 ```r
 ini <- Sys.time()
-packs <- c('audio','BART','devtools','e1071','ellipse','foreach','ggfortify','RColorBrewer','reticulate','R.utils','seewave','tidyverse','tuneR','VIM','wrassp')
+packs <- c('audio','BART','devtools','e1071','ellipse','foreach','ggfortify','RColorBrewer','reticulate','R.utils','seewave','tidyverse','tuneR','VIM','voice','wrassp')
 install.packages(packs, dep = T); Sys.time()-ini
 update.packages(ask = F); Sys.time()-ini
-devtools::install_github('filipezabala/voice'); Sys.time()-ini
 devtools::install_github('egenn/music'); Sys.time()-ini
 devtools::install_github('flujoo/gm'); Sys.time()-ini
 url <- 'http://www.rob-mcculloch.org/chm/nonlinvarsel_0.0.1.9001.tar.gz'
@@ -171,7 +168,7 @@ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requ
 
 
 ## MacOS Installation
-The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [MacOS Monterey](https://www.apple.com/macos/monterey/). Note the software versions during installation, inconsistency reporting is welcome.  
+The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [MacOS Ventura](https://www.apple.com/macos/ventura/). Note the software versions during installation, inconsistency reporting is welcome.  
 If the error "The package %@ is missing or invalid" appears during the upgrading from MacOS Catalina to Big Sur, press simultaneously `command + option + p + r` at restart. The processes may be accompanied using the keys `command + space 'Activity Monitor'`.    
 > Without the following Python items 3 and 11, you may run all the functions except `poetry` and `extract_features_py`, that run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
 
@@ -259,7 +256,7 @@ R is a free software environment for statistical computing and graphics.
  . Will take around 180 MB of disk space   
  . Send R-4.2.0.pkg to Trash   
 
-### 9. [RStudio](https://www.rstudio.com/)
+### 9. [RStudio](https://posit.co/)
 RStudio is an Integrated Development Environment (IDE) for R.  
  . Download and run https://download1.rstudio.org/desktop/macos/RStudio-2022.02.3-492.dmg  
  . Drag RStudio to Applications folder   
@@ -277,10 +274,9 @@ sudo R
 Running R as super user paste the following, row by row:
 ```r
 ini <- Sys.time()
-packs <- c('audio','BART','devtools','e1071','ellipse','foreach','ggfortify','RColorBrewer','reticulate','R.utils','seewave','tidyverse','tuneR','VIM','wrassp')
+packs <- c('audio','BART','devtools','e1071','ellipse','foreach','ggfortify','RColorBrewer','reticulate','R.utils','seewave','tidyverse','tuneR','VIM','voice','wrassp')
 install.packages(packs, dep = T); Sys.time()-ini
 update.packages(ask = F); Sys.time()-ini
-devtools::install_github('filipezabala/voice'); Sys.time()-ini
 devtools::install_github('egenn/music'); Sys.time()-ini
 devtools::install_github('flujoo/gm'); Sys.time()-ini
 url <- 'http://www.rob-mcculloch.org/chm/nonlinvarsel_0.0.1.9001.tar.gz'
@@ -324,3 +320,4 @@ conda activate pyvoice38
 pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 ```
 
+# voice
