@@ -22,9 +22,33 @@
 #' @param verbose Logical. Should the running status be showed? (default: \code{FALSE})
 #' @return A Media data frame containing the selected features.
 #' @details When \code{features} 'df', 'pf', 'rf', 'rcf' or 'rpf' are selected, 'f0' and 'formants' must be selected. The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2022), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2022) and 'rpf' to 'formant position removal' (rpf1:rpf8) by Zabala (2022).
-#' @references Fitch, W.T. (1997) Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (\doi{10.1121/1.421048})
+#' @references Levinson N. (1946). The Wiener (root mean square) error criterion in filter design and prediction. Journal of Mathematics and Physics, 25(1-4), 261–278. (\doi{10.1002/SAPM1946251261})
 #'
-#' Puts, D.A., Apicella, C.L., Cardenas, R.A. (2012) Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (\doi{10.1098/rspb.2011.0829})
+#' Durbin J. (1960). “The fitting of time-series models.” Revue de l’Institut International de Statistique, pp. 233–244. (\url{https://www.jstor.org/stable/1401322})
+#'
+#' Cooley J.W., Tukey J.W. (1965). “An algorithm for the machine calculation of complex Fourier series.” Mathematics of computation, 19(90), 297–301. (\url{https://www.ams.org/journals/mcom/1965-19-090/S0025-5718-1965-0178586-1/})
+#'
+#' Wasson D., Donaldson R. (1975). “Speech amplitude and zero crossings for automated identification of human speakers.” IEEE Transactions on Acoustics, Speech, and Signal Processing, 23(4), 390–392. (\url{https://ieeexplore.ieee.org/document/1162690})
+#'
+#' Allen J. (1977). “Short term spectral analysis, synthesis, and modification by discrete Fourier transform.” IEEE Transactions on Acoustics, Speech, and Signal Processing, 25(3), 235– 238. (\url{https://ieeexplore.ieee.org/document/1162950})
+#'
+#' Schäfer-Vincent K. (1982). "Significant points: Pitch period detection as a problem of segmentation." Phonetica, 39(4-5), 241–253. (\doi{10.1159/000261665} )
+#'
+#' Schäfer-Vincent K. (1983). "Pitch period detection and chaining: Method and evaluation." Phonetica, 40(3), 177–202. (\doi{10.1159/000261691})
+#'
+#' Ephraim Y., Malah D. (1984). “Speech enhancement using a minimum-mean square error short-time spectral amplitude estimator.” IEEE Transactions on acoustics, speech, and signal processing, 32(6), 1109–1121. (\url{https://ieeexplore.ieee.org/document/1164453})
+#'
+#' Delsarte P., Genin Y. (1986). “The split Levinson algorithm.” IEEE transactions on acoustics, speech, and signal processing, 34(3), 470–478. (\url{https://ieeexplore.ieee.org/document/1164830})
+#'
+#' Jackson J.C. (1995). "The Harmonic Sieve: A Novel Application of Fourier Analysis to Machine Learning Theory and Practice." Technical report, Carnegie-Mellon University Pittsburgh PA Schoo; of Computer Science. (\url{https://apps.dtic.mil/sti/pdfs/ADA303368.pdf})
+#'
+#' Fitch, W.T. (1997) "Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques." J. Acoust. Soc. Am. 102, 1213 – 1222. (\doi{10.1121/1.421048})
+#'
+#' Boersma P., van Heuven V. (2001). Praat, a system for doing phonetics by computer. Glot. Int., 5(9/10), 341–347. (\url{https://www.fon.hum.uva.nl/paul/papers/speakUnspeakPraat_glot2001.pdf})
+#'
+#' Ellis DPW (2005). “PLP and RASTA (and MFCC, and inversion) in Matlab.” Online web resource. (\url{https://www.ee.columbia.edu/~dpwe/resources/matlab/rastamat/})
+#'
+#' Puts, D.A., Apicella, C.L., Cardenas, R.A. (2012) "Masculine voices signal men's threat potential in forager and industrial societies." Proc. R. Soc. B Biol. Sci. 279, 601–609. (\doi{10.1098/rspb.2011.0829})
 #' @examples
 #' library(voice)
 #'
@@ -44,8 +68,11 @@
 #' @export
 extract_features <- function(x,
                              filesRange = NULL,
-                             features = c('f0','formants','mfcc',
-                                          'df','pf','rf','rcf','rpf'),
+                             features = c('f0', 'formants',   # Pitch and formants
+                                          'df', 'pf',         # Formant dispersion and position
+                                          'rf', 'rpf', 'rcf', # Formant removals
+                                          'rfc',              # (R)e(F)lection (C)oefficients
+                                          'mfcc'),            # (M)el (Frequency (C)epstral (C)oefficients
                              gender = 'u',
                              windowShift = 5,
                              numFormants = 8,
@@ -190,7 +217,7 @@ extract_features <- function(x,
   }
 
   # 4. Pitch analysis of the speech signal using Michel’s (M)odified (H)armonic (S)ieve algorithm
-  if('mhs' %in% features){
+  if('f0_mhs' %in% features){
     i.temp <- i.temp+1
     i <- i+1
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
@@ -199,9 +226,9 @@ extract_features <- function(x,
                                                        gender = gender,
                                                        windowShift = windowShift,
                                                        mc.cores = mc.cores)
-    names(features.list.temp)[i.temp] <- 'mhs'
-    names(features.list)[i] <- 'mhs'
-    names(length.list)[i] <- 'mhs'
+    names(features.list.temp)[i.temp] <- 'f0_mhs'
+    names(features.list)[i] <- 'f0_mhs'
+    names(length.list)[i] <- 'f0_mhs'
     length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
                                       wrassp::numRecs.AsspDataObj))
   }
@@ -374,10 +401,10 @@ extract_features <- function(x,
       features.list$zcr <- rbind(features.list$zcr, zcr_temp)
     }
 
-    if('mhs' %in% features){
-      mhs_temp <- as.matrix(features.list.temp$mhs[[j]]$pitch[1:n_min[j],],
+    if('f0_mhs' %in% features){
+      f0_mhs_temp <- as.matrix(features.list.temp$f0_mhs[[j]]$pitch[1:n_min[j],],
                             ncol = 1)
-      features.list$mhs <- rbind(features.list$mhs, mhs_temp)
+      features.list$f0_mhs <- rbind(features.list$f0_mhs, f0_mhs_temp)
     }
 
     if('rms' %in% features){
@@ -459,8 +486,8 @@ extract_features <- function(x,
     colnames(features.list$zcr) <- paste0('zcr', 1:ncol(features.list$zcr))
     }
 
-  if('mhs' %in% features){
-    colnames(features.list$mhs) <- paste0('mhs')
+  if('f0_mhs' %in% features){
+    colnames(features.list$f0_mhs) <- paste0('f0_mhs')
   }
 
   if('rms' %in% features){
@@ -554,7 +581,7 @@ extract_features <- function(x,
     if(numFormants >= 8) {dat$rf8 <- f_sc[,'f0']-f_sc[,'f8']}
   }
 
-  # 15. RCf - Formant Cumulated Removal by Zabala (2022)
+  # 15. RCf - Formant Cumulated Removal by Zabala (2023)
   if('f0' %in% features & 'formants' %in% features & 'rcf' %in% features){
     # if(numFormants >= 1) {dat$rcf1 <- f_sc[,'f0']-f_sc[,'f1']} # equivalent to Rf1 and RPf1
     if(numFormants >= 2) {dat$rcf2 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2')], na.rm = TRUE)}
@@ -566,16 +593,16 @@ extract_features <- function(x,
     if(numFormants >= 8) {dat$rcf8 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2','f3','f4','f5','f6','f7','f8')], na.rm = TRUE)}
   }
 
-  # 16. RPf - Formant Position Removal by Zabala (2022)
+  # 16. RPf - Formant Position Removal by Zabala (2023)
   if('f0' %in% features & 'formants' %in% features & 'rpf' %in% features){
     # if(numFormants >= 1) {dat$rpf1 <- f_sc[,'f0']-dat$pf1} # equivalent to Rf1 and RCf1
-    if(numFormants >= 2) {dat$rpf2 <- f_sc[,'f0']-dat$pf2}
-    if(numFormants >= 3) {dat$rpf3 <- f_sc[,'f0']-dat$pf3}
-    if(numFormants >= 4) {dat$rpf4 <- f_sc[,'f0']-dat$pf4}
-    if(numFormants >= 5) {dat$rpf5 <- f_sc[,'f0']-dat$pf5}
-    if(numFormants >= 6) {dat$rpf6 <- f_sc[,'f0']-dat$pf6}
-    if(numFormants >= 7) {dat$rpf7 <- f_sc[,'f0']-dat$pf7}
-    if(numFormants >= 8) {dat$rpf8 <- f_sc[,'f0']-dat$pf8}
+    if(numFormants >= 2) {dat$rpf2 <- f_sc[,'f0']-rowMeans(f_sc[,c('f1','f2')], na.rm = TRUE)}
+    if(numFormants >= 3) {dat$rpf3 <- f_sc[,'f0']-rowMeans(f_sc[,c('f1','f2','f3')], na.rm = TRUE)}
+    if(numFormants >= 4) {dat$rpf4 <- f_sc[,'f0']-rowMeans(f_sc[,c('f1','f2','f3','f4')], na.rm = TRUE)}
+    if(numFormants >= 5) {dat$rpf5 <- f_sc[,'f0']-rowMeans(f_sc[,c('f1','f2','f3','f4','f5')], na.rm = TRUE)}
+    if(numFormants >= 6) {dat$rpf6 <- f_sc[,'f0']-rowMeans(f_sc[,c('f1','f2','f3','f4','f5','f6')], na.rm = TRUE)}
+    if(numFormants >= 7) {dat$rpf7 <- f_sc[,'f0']-rowMeans(f_sc[,c('f1','f2','f3','f4','f5','f6','f7')], na.rm = TRUE)}
+    if(numFormants >= 8) {dat$rpf8 <- f_sc[,'f0']-rowMeans(f_sc[,c('f1','f2','f3','f4','f5','f6','f7','f8')], na.rm = TRUE)}
   }
 
   # creating ids
