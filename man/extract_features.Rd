@@ -7,7 +7,7 @@
 extract_features(
   x,
   filesRange = NULL,
-  features = c("f0", "formants", "mfcc", "df", "pf", "rf", "rcf", "rpf"),
+  features = c("f0", "formants", "df", "pf", "rf", "rpf", "rcf", "rfc", "mfcc"),
   gender = "u",
   windowShift = 5,
   numFormants = 8,
@@ -95,7 +95,31 @@ M3 <- extract_features(path2wav, filesRange = 3:6)
 table(basename(M3$wav_path))
 }
 \references{
-Fitch, W.T. (1997) Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques. J. Acoust. Soc. Am. 102, 1213 – 1222. (\doi{10.1121/1.421048})
+Levinson N. (1946). The Wiener (root mean square) error criterion in filter design and prediction. Journal of Mathematics and Physics, 25(1-4), 261–278. (\doi{10.1002/SAPM1946251261})
 
-Puts, D.A., Apicella, C.L., Cardenas, R.A. (2012) Masculine voices signal men's threat potential in forager and industrial societies. Proc. R. Soc. B Biol. Sci. 279, 601–609. (\doi{10.1098/rspb.2011.0829})
+Durbin J. (1960). “The fitting of time-series models.” Revue de l’Institut International de Statistique, pp. 233–244. (\url{https://www.jstor.org/stable/1401322})
+
+Cooley J.W., Tukey J.W. (1965). “An algorithm for the machine calculation of complex Fourier series.” Mathematics of computation, 19(90), 297–301. (\url{https://www.ams.org/journals/mcom/1965-19-090/S0025-5718-1965-0178586-1/})
+
+Wasson D., Donaldson R. (1975). “Speech amplitude and zero crossings for automated identification of human speakers.” IEEE Transactions on Acoustics, Speech, and Signal Processing, 23(4), 390–392. (\url{https://ieeexplore.ieee.org/document/1162690})
+
+Allen J. (1977). “Short term spectral analysis, synthesis, and modification by discrete Fourier transform.” IEEE Transactions on Acoustics, Speech, and Signal Processing, 25(3), 235– 238. (\url{https://ieeexplore.ieee.org/document/1162950})
+
+Schäfer-Vincent K. (1982). "Significant points: Pitch period detection as a problem of segmentation." Phonetica, 39(4-5), 241–253. (\doi{10.1159/000261665} )
+
+Schäfer-Vincent K. (1983). "Pitch period detection and chaining: Method and evaluation." Phonetica, 40(3), 177–202. (\doi{10.1159/000261691})
+
+Ephraim Y., Malah D. (1984). “Speech enhancement using a minimum-mean square error short-time spectral amplitude estimator.” IEEE Transactions on acoustics, speech, and signal processing, 32(6), 1109–1121. (\url{https://ieeexplore.ieee.org/document/1164453})
+
+Delsarte P., Genin Y. (1986). “The split Levinson algorithm.” IEEE transactions on acoustics, speech, and signal processing, 34(3), 470–478. (\url{https://ieeexplore.ieee.org/document/1164830})
+
+Jackson J.C. (1995). "The Harmonic Sieve: A Novel Application of Fourier Analysis to Machine Learning Theory and Practice." Technical report, Carnegie-Mellon University Pittsburgh PA Schoo; of Computer Science. (\url{https://apps.dtic.mil/sti/pdfs/ADA303368.pdf})
+
+Fitch, W.T. (1997) "Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques." J. Acoust. Soc. Am. 102, 1213 – 1222. (\doi{10.1121/1.421048})
+
+Boersma P., van Heuven V. (2001). Praat, a system for doing phonetics by computer. Glot. Int., 5(9/10), 341–347. (\url{https://www.fon.hum.uva.nl/paul/papers/speakUnspeakPraat_glot2001.pdf})
+
+Ellis DPW (2005). “PLP and RASTA (and MFCC, and inversion) in Matlab.” Online web resource. (\url{https://www.ee.columbia.edu/~dpwe/resources/matlab/rastamat/})
+
+Puts, D.A., Apicella, C.L., Cardenas, R.A. (2012) "Masculine voices signal men's threat potential in forager and industrial societies." Proc. R. Soc. B Biol. Sci. 279, 601–609. (\doi{10.1098/rspb.2011.0829})
 }

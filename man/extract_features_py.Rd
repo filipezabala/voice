@@ -7,8 +7,9 @@
 extract_features_py(
   directory,
   filesRange = 0,
-  features = c("f0", "formants"),
+  features = c("f0_praat", "formants"),
   windowShift = 5/1000,
+  pycall = "~/miniconda3/envs/pyvoice38/bin/python3.8",
   full.names = TRUE,
   recursive = FALSE,
   round.to = NULL
@@ -22,6 +23,8 @@ extract_features_py(
 \item{features}{Vector of features to be extracted. (default: 'f0' (pitch),'formants' (F1:F8)).}
 
 \item{windowShift}{\code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5/1000).}
+
+\item{pycall}{Python call.}
 
 \item{full.names}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE})}
 
@@ -54,4 +57,11 @@ efpl <- extract_features_py(dirname(path2wav), filesRange = 3:6)
 efpl
 table(efpl$file_name)
 }
+}
+\references{
+Childers DG (1978). Modern Spectrum Analysis. IEEE Computer Society Press.
+
+Boersma P. (1993). "Accurate short-term analysis of the fundamental frequency and the harmonics-to-noise ratio of a sampled sound." In Proceedings of the institute of phonetic sciences, volume 17, pp. 97–110. Amsterdam. (\url{http://xeds.eu/other/P_Boersma_ Accurate_short-term_analysis_of_the_fundametnal_freq.pdf})
+
+Press W.H., Teukolsky S., Vetterling W.T., Flannery B.P. (1992). Numerical Recipes in C: The Art of Scientific Computing. Cambridge University Press. (\url{https://www.grad.hr/nastava/gs/prg/NumericalRecipesinC.pdf})
 }
