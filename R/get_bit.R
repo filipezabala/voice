@@ -2,7 +2,7 @@
 #'
 #' @description Get bit rate from WAV file.
 #' @param x Wave object from `tuneR::readWave`.
-#' @return An integer scalar indicating the bit rate from a WAV file.
+#' @return Integer indicating the bit rate from a WAV file.
 #' @examples
 #' library(voice)
 #'

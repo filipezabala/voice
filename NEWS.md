@@ -4,7 +4,7 @@
 
 ### NEWS.md setup
 
-- Version 0.4.19 YYYY-MM-DD
+- Version 0.4.20 2023-04-DD
 . Add tag `$feature_tag_n`.
 . Features ordered by the listed order in `features` argument.
 . Add time duration `tdur` as a column at voice::tag function return.
@@ -19,7 +19,17 @@
   TO 'File does not exist!'
 
 
-- Version 0.4.18 2023-04-DD
+- Version 0.4.19 2023-04-06
+. All documentation verified.
+. `voice::conv` set to `voice::interp`.
+. `voice::conv_mc` set to `voice::interp_mc`.
+. `voice::conv_df` set to `voice::interp_df`.
+. `gender` set to `sex` as argument of `voice::extract_features`.
+. `gender` set to `sex` as argument of `voice::feat_summary`.
+. `gender` set to `sex` as argument of `voice::tag`.
+
+
+- Version 0.4.18 2023-04-05
 . Added `pycall` argument to `voice::extract_features_py`.
 . References updated in `voice::extract_features`.
 . References updated in `voice::extract_features_py`.
@@ -34,6 +44,7 @@
   `                 'mfcc'),            # (M)el (Frequency (C)epstral (C)oefficients`
 . RPf - Formant Position Removal by Zabala (2023) disentangled from Pf by Puts et al (2012) in `voice::extract_features`.
 . `voice::diarize` calls directly `pyannote.audio` via `reticulate` using a token. The download and call of `libs.py` and `diarization-pyannote.py` is no longer needed.
+. Reconnect to Github after 5 months.
 
 
 - Version 0.4.17 2023-03-14

@@ -2,7 +2,7 @@
 #'
 #' @description Get time beginning from a data frame in RTTM standard.
 #' @param x A data frame in RTTM standard. See 'voice::read_rttm'.
-#' @return A numeric vector containing the time beginning in seconds.
+#' @return Numeric vector containing the time beginning in seconds.
 #' @examples
 #' library(voice)
 #'

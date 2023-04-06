@@ -1,5 +1,6 @@
-#' Transforms \code{n} sets of \code{m>n} zeros (alternated with sets of non zeros) into \code{n} sets of \code{n} zeros.
+#' Compress zeros.
 #'
+#' @description Transforms \code{n} sets of \code{m>n} zeros (alternated with sets of non zeros) into \code{n} sets of \code{n} zeros.
 #' @param y A vector or time series.
 #' @return Vector with n zeros.
 #' @examples

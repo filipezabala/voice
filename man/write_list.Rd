@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_list.R
 \name{write_list}
 \alias{write_list}
-\title{Writes a list to a path.}
+\title{Writes a list to a path}
 \usage{
 write_list(x, path)
 }
@@ -15,13 +15,16 @@ write_list(x, path)
 A file named `list.txt` in `path`.
 }
 \description{
-Writes a list to a path.
+Writes a list to a path
 }
 \examples{
 \dontrun{
 library(voice)
 
 pts <- list(x = cars[,1], y = cars[,2])
-voice::write_list(pts, paste0(getwd(), '/list.txt'))
+listFile <- paste0(tempdir(), '/list.txt')
+voice::write_list(pts, listFile)
+file.info(listFile)
+system(paste0('head ', listFile))
 }
 }

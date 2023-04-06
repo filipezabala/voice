@@ -1,13 +1,25 @@
-#' Smooth numeric variables in a data frame.
+#' Smooth numeric variables in a data frame
 #'
 #' @param x A data frame.
 #' @param k Integer width of the rolling window. Default: \code{11}.
 #' @param id The identification column. Default: \code{colname} of the first column of \code{x}.
 #' @param colnum A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.
 #' @param mc.cores The number of cores to mclapply. By default uses \code{1}.
-#' @return A vector of convoluted values with length near to \code{compact.to*length(x)}.
+#' @return Vector of interpolated values with length near to \code{compact.to*length(x)}.
 #' @importFrom dplyr %>%
 #' @seealso \code{extract_features}
+#' @examples
+#' library(voice)
+#'
+#' # get path to audio file
+#' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+#' pattern <- glob2rx('*.wav'), full.names = TRUE)
+#'
+#' # minimal usage
+#' M <- extract_features(path2wav, features = c('f0', 'formants'))
+#' (Ms <- smooth_df(M[-(1:2)]))
+#' dim(M)
+#' dim(Ms)
 #' @export
 smooth_df <- function(x, k = 11, id = colnames(x)[1], colnum = NULL,
                       mc.cores = 1){

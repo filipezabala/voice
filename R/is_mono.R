@@ -1,8 +1,8 @@
-#' Verify if an audio is mono.
+#' Verify if an audio is mono
 #'
 #' @usage is_mono(x)
 #' @param x Path to WAV audio file.
-#' @return A logical value. `TRUE` indicates a mono (one-channel) file. `FALSE` indicates a non-mono (two-channel) file.
+#' @return Logical. `TRUE` indicates a mono (one-channel) file. `FALSE` indicates a non-mono (two-channel) file.
 #' @examples
 #' library(voice)
 #'

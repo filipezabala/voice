@@ -2,7 +2,7 @@
 % Please edit documentation in R/duration.R
 \name{duration}
 \alias{duration}
-\title{Gives the duration of sequences.}
+\title{Duration of sequences}
 \usage{
 duration(x, windowShift = 5)
 }
@@ -15,7 +15,7 @@ duration(x, windowShift = 5)
 A data frame with duration in number of lines/ocurrences (\code{dur_line}), milliseconds (\code{dur_ms}) and proportional (\code{dur_prop}).
 }
 \description{
-Gives the duration of sequences.
+Duration of sequences
 }
 \examples{
 library(voice)

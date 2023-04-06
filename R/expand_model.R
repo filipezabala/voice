@@ -1,5 +1,6 @@
-#' Expand model given \code{y} and \code{x} variables.
+#' Expand model
 #'
+#' @description Expand model given \code{y} and \code{x} variables.
 #' @param y The Y variable.
 #' @param x The X variables.
 #' @param k Number of additive components.

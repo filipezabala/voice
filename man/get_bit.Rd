@@ -10,7 +10,7 @@ get_bit(x)
 \item{x}{Wave object from `tuneR::readWave`.}
 }
 \value{
-An integer scalar indicating the bit rate from a WAV file.
+Integer indicating the bit rate from a WAV file.
 }
 \description{
 Get bit rate from WAV file.

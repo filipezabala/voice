@@ -24,11 +24,13 @@ Enrich Rich Transcription Time Marked (RTTM) files obtained from '\code{voice::r
 library(voice)
 
 url0 <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/rttm/sherlock0.rttm'
-download.file(url0, destfile = paste0(tempdir(), '/sherlock0.rttm'))
+destfile0 <- paste0(tempdir(), '/sherlock0.rttm')
+download.file(url0, destfile = destfile0)
 url1 <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/rttm/sherlock1.rttm'
-download.file(url0, destfile = paste0(tempdir(), '/sherlock1.rttm'))
+destfile1 <- paste0(tempdir(), '/sherlock1.rttm')
+download.file(url0, destfile = destfile1)
 
-rttm <- voice::read_rttm(tempdir())
+rttm <- voice::read_rttm(dirname(destfile0))
 (er <- voice::enrich_rttm(rttm))
 class(er)
 lapply(er, class)

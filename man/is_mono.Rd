@@ -2,7 +2,7 @@
 % Please edit documentation in R/is_mono.R
 \name{is_mono}
 \alias{is_mono}
-\title{Verify if an audio is mono.}
+\title{Verify if an audio is mono}
 \usage{
 is_mono(x)
 }
@@ -10,10 +10,10 @@ is_mono(x)
 \item{x}{Path to WAV audio file.}
 }
 \value{
-A logical value. `TRUE` indicates a mono (one-channel) file. `FALSE` indicates a non-mono (two-channel) file.
+Logical. `TRUE` indicates a mono (one-channel) file. `FALSE` indicates a non-mono (two-channel) file.
 }
 \description{
-Verify if an audio is mono.
+Verify if an audio is mono
 }
 \examples{
 library(voice)

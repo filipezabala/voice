@@ -1,33 +1,37 @@
-#'  Split Wave
+#' Split Wave
 #'
 #' @description Split WAV files either in \code{fromWav} directory or using (same names) RTTM files/subdirectories as guidance.
-#' @param fromWav Either WAV file or directory/folder containing WAV files.
-#' @param fromRttm Either RTTM file or directory/folder containing RTTM files. Default: \code{NULL}.
-#' @param toSplit A directory/folder to write generated files. Default: \code{NULL}.
+#' @param fromWav Either WAV file or directory containing WAV files.
+#' @param fromRttm Either RTTM file or directory containing RTTM files. Default: \code{NULL}.
+#' @param toSplit A directory to write generated files. Default: \code{NULL}.
 #' @param autoDir Logical. Must the directories tree be created? Default: \code{FALSE}. See 'Details'.
 #' @param subDir Logical. Must the splitted files be placed in subdirectories? Default: \code{FALSE}.
-#' @param output character string, the class of the object to return, either 'wave' or 'list'.
+#' @param output Character string, the class of the object to return, either 'wave' or 'list'.
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files). Must be TRUE only if \code{fromWav} is a directory.
 #' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
 #' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}. Inactive if \code{fromWav} is a file.
 #' @param silence.gap The silence gap (in seconds) between adjacent words in a keyword. Rows with \code{tdur <= silence.gap} are removed. (default: \code{0.5})
-#' @return Split audio files according to the correspondent RTTM file(s). See '\code{voice::poetry}'.
+#' @return Splited audio files according to the correspondent RTTM file(s). See '\code{voice::diarize}'.
 #' @details When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 #' @examples
 #' \dontrun{
 #' library(voice)
 #'
-#' wavDir <- list.files(system.file('extdata', package = 'wrassp'),
-#'                      pattern <- glob2rx('*.wav'), full.names = TRUE)
-#' splitDir <- paste0(tempdir(), '/split')
-#' voice::poetry(fromWav = unique(dirname(wavDir)), toRttm = tempdir())
-#' dir.create(splitDir)
-#' dir(tempdir())
+#' urlWav <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/wav/sherlock0.wav'
+#' destWav <- paste0(tempdir(), '/sherlock0.wav')
+#' download.file(urlWav, destfile = destWav)
 #'
-#' splitw(unique(dirname(wavDir)), fromRttm = tempdir(), toSplit = paste0(tempdir(), '/split'))
+#' urlRttm <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/rttm/sherlock0.rttm'
+#' destRttm <- paste0(tempdir(), '/sherlock0.rttm')
+#' download.file(urlRttm, destfile = destRttm)
+#'
+#' splitDir <- paste0(tempdir(), '/split')
+#' dir.create(splitDir)
+#' splitw(destWav, fromRttm = destRttm, toSplit = splitDir)
+#'
 #' dir(splitDir)
 #' }
-#'
+#' @seealso \code{voice::diarize}
 #' @export
 splitw <- function(fromWav,
                    fromRttm = NULL,

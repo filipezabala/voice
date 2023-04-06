@@ -3,7 +3,7 @@
 #' @param x Either a WAV file or a directory containing WAV files.
 #' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files).
 #' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
-#' @return A tibble containing file name <chr> and audio time <dbl>.
+#' @return A tibble containing file name <chr> and audio time <dbl> in seconds.
 #' @examples
 #' library(voice)
 #'

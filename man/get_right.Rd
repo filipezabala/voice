@@ -10,7 +10,7 @@ get_right(x)
 \item{x}{Wave object from `tuneR::readWave`.}
 }
 \value{
-A numeric vector indicating the right channel from a WAV file.
+Numeric vector indicating the right channel from a WAV file.
 }
 \description{
 Get right channel from WAV file.

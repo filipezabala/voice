@@ -1,9 +1,9 @@
 #'  Enrich RTTM files
 #'
+#' @description Enrich Rich Transcription Time Marked (RTTM) files obtained from '\code{voice::read_rttm}'.
 #' @param listRttm A list containing RTTM files.
 #' @param silence.gap The silence gap (in seconds) between adjacent words in a keyword. Rows with \code{tdur <= silence.gap} are removed. (default: \code{0.5})
 #' @param as.tibble Logical. Should it return a tibble?
-#' @description Enrich Rich Transcription Time Marked (RTTM) files obtained from '\code{voice::read_rttm}'.
 #' @return A list containing either data frames or tibbles obtained from standard RTTM files. See 'voice::read_rttm'.
 #' @references \url{https://www.nist.gov/system/files/documents/itl/iad/mig/KWS15-evalplan-v05.pdf}
 #' @seealso \code{voice::read_rttm}
@@ -12,11 +12,13 @@
 #' library(voice)
 #'
 #' url0 <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/rttm/sherlock0.rttm'
-#' download.file(url0, destfile = paste0(tempdir(), '/sherlock0.rttm'))
+#' destfile0 <- paste0(tempdir(), '/sherlock0.rttm')
+#' download.file(url0, destfile = destfile0)
 #' url1 <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/rttm/sherlock1.rttm'
-#' download.file(url0, destfile = paste0(tempdir(), '/sherlock1.rttm'))
+#' destfile1 <- paste0(tempdir(), '/sherlock1.rttm')
+#' download.file(url0, destfile = destfile1)
 #'
-#' rttm <- voice::read_rttm(tempdir())
+#' rttm <- voice::read_rttm(dirname(destfile0))
 #' (er <- voice::enrich_rttm(rttm))
 #' class(er)
 #' lapply(er, class)

@@ -2,7 +2,7 @@
 #'
 #' @description Get time duration from WAV file.
 #' @param x Wave object from `tuneR::readWave`.
-#' @return A numeric scalar indicating the time duration in seconds from a WAV file.
+#' @return Numeric indicating the time duration in seconds from a WAV file.
 #' @examples
 #' library(voice)
 #'

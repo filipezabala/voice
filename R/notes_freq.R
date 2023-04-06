@@ -1,7 +1,10 @@
-#' Returns a tibble of frequencies on Scientific Pitch Notation (SPN) for equal-tempered scale, A4 = 440 Hz.
+#' Frequencies on Scientific Pitch Notation (SPN)
+#'
+#' @description Returns a tibble of frequencies on Scientific Pitch Notation (SPN) for equal-tempered scale, A4 = 440 Hz.
 #' @details The symbol '#' is being used to represent a sharp note, the higher in pitch by one semitone. The SPN is also known as American Standard Pitch Notation (ASPN) or International Pitch Notation (IPN).
 #' @references \url{https://pages.mtu.edu/~suits/notefreqs.html}
 #' @return A tibble with frequencies for equal-tempered scale, A4 = 440 Hz.
+#' @seealso \code{notes}
 #' @examples
 #' library(voice)
 #' notes_freq()
@@ -121,6 +124,7 @@ notes_freq <- function(){
   )
   # add midi
   nf <- dplyr::bind_cols(nf, midi = 12:119)
+
   # add lo and hi limits to spn
   freq <- nf$freq
   distance <- diff(freq)
@@ -130,6 +134,7 @@ notes_freq <- function(){
                 freq[lf] + distance[lf-1]/2)
   nf$spn.lo <- freqhalf[1:lf]
   nf$spn.hi <- freqhalf[2:(lf+1)]
+
   # ordering spn
   lev <- c('C0','C#0','D0','D#0','E0','F0','F#0','G0','G#0','A0','A#0','B0',
            'C1','C#1','D1','D#1','E1','F1','F#1','G1','G#1','A1','A#1','B1',

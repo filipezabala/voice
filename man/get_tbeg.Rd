@@ -10,7 +10,7 @@ get_tbeg(x)
 \item{x}{A data frame in RTTM standard. See 'voice::read_rttm'.}
 }
 \value{
-A numeric vector containing the time beginning in seconds.
+Numeric vector containing the time beginning in seconds.
 }
 \description{
 Get time beginning from a data frame in RTTM standard.

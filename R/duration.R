@@ -1,4 +1,5 @@
-#' Gives the duration of sequences.
+#' Duration of sequences
+#'
 #' @param x A vector containing symbols and \code{NA}.
 #' @param windowShift Window shift to duration in ms (default: 5.0).
 #' @return A data frame with duration in number of lines/ocurrences (\code{dur_line}), milliseconds (\code{dur_ms}) and proportional (\code{dur_prop}).

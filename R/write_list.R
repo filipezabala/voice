@@ -1,4 +1,4 @@
-#' Writes a list to a path.
+#' Writes a list to a path
 #'
 #' @param x A list.
 #' @param path A full path to file.
@@ -8,7 +8,10 @@
 #' library(voice)
 #'
 #' pts <- list(x = cars[,1], y = cars[,2])
-#' voice::write_list(pts, paste0(getwd(), '/list.txt'))
+#' listFile <- paste0(tempdir(), '/list.txt')
+#' voice::write_list(pts, listFile)
+#' file.info(listFile)
+#' system(paste0('head ', listFile))
 #' }
 #' @export
 write_list <- function(x, path){

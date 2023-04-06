@@ -2,7 +2,7 @@
 % Please edit documentation in R/rm0.R
 \name{rm0}
 \alias{rm0}
-\title{Transforms \code{n} sets of \code{m>n} zeros (alternated with sets of non zeros) into \code{n} sets of \code{n} zeros.}
+\title{Compress zeros.}
 \usage{
 rm0(y)
 }

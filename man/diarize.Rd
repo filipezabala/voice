@@ -41,6 +41,7 @@ voice::diarize(fromWav = unique(dirname(wavDir)),
 toRttm = tempdir(),
 token = NULL) # Must enter a token! See documentation.
 
-dir(tempdir())
+(rttm <- dir(tempdir(), '.[Rr][Tt][Tt][Mm]$', full.names = TRUE))
+file.info(rttm)
 }
 }

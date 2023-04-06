@@ -10,7 +10,7 @@ get_samp.rate(x)
 \item{x}{Wave object from `tuneR::readWave`.}
 }
 \value{
-An integer scalar indicating the sample rate from a WAV file.
+Integer indicating the sample rate from a WAV file.
 }
 \description{
 Get sample rate from WAV file.

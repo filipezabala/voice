@@ -2,7 +2,7 @@
 % Please edit documentation in R/feat_summary.R
 \name{feat_summary}
 \alias{feat_summary}
-\title{Returns summary measures of 'voice::extract_features'}
+\title{Features summary}
 \usage{
 feat_summary(
   x,
@@ -11,7 +11,7 @@ feat_summary(
   wavPathName = "wav_path",
   filesRange = NULL,
   features = "f0",
-  gender = "u",
+  sex = "u",
   windowShift = 5,
   numFormants = 8,
   numcep = 12,
@@ -33,55 +33,55 @@ feat_summary(
 \arguments{
 \item{x}{An Extended data frame to be tagged with media information.}
 
-\item{groupBy}{A variable to group the summary measures. The argument must be a character vector. Default: \code{groupBy = 'wav_path'}.}
+\item{groupBy}{A variable to group the summary measures. The argument must be a character vector. (Default: \code{groupBy = 'wav_path'}).}
 
 \item{wavPath}{A vector containing the path(s) to WAV files. May be both as \code{dirname} or \code{basename} formats.}
 
-\item{wavPathName}{A string containing the WAV path name. Default: \code{wavPathName = 'wav_path'}}
+\item{wavPathName}{A string containing the WAV path name. (Default: \code{wavPathName = 'wav_path'}).}
 
 \item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.}
 
-\item{features}{Vector of features to be extracted. (default: 'f0','formants','mfcc','df','pf','rf','rcf','rpf'). The following features may contain a variable number of columns: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
+\item{features}{Vector of features to be extracted. (Default: \code{'f0'}).}
 
-\item{gender}{\code{= <code>} set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.}
+\item{sex}{\code{= <code>} set sex specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (Default: \code{'u'}). Used as 'gender' by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.}
 
-\item{windowShift}{\code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.}
+\item{windowShift}{\code{= <dur>} set analysis window shift to <dur>ation in ms (Default: \code{5.0}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.}
 
-\item{numFormants}{\code{= <num>} <num>ber of formants (default: 8). Used by \code{wrassp::forest}.}
+\item{numFormants}{\code{= <num>} <num>ber of formants (Default: \code{8}). Used by \code{wrassp::forest}.}
 
-\item{numcep}{Number of Mel-frequency cepstral coefficients (cepstra) to return (default: 12). Used by \code{tuneR::melfcc}.}
+\item{numcep}{Number of Mel-frequency cepstral coefficients (cepstra) to return (Default: \code{12}). Used by \code{tuneR::melfcc}.}
 
-\item{dcttype}{Type of DCT used. \code{'t1'} or \code{'t2'}, \code{'t3'} for HTK \code{'t4'} for feacalc (default = \code{'t2'}). Used by \code{tuneR::melfcc}.}
+\item{dcttype}{Type of DCT used. \code{'t1'} or \code{'t2'}, \code{'t3'} for HTK \code{'t4'} for feacalc (Default: \code{'t2'}). Used by \code{tuneR::melfcc}.}
 
-\item{fbtype}{Auditory frequency scale to use: \code{'mel'}, \code{'bark'}, \code{'htkmel'}, \code{'fcmel'} (default: \code{'mel'}). Used by \code{tuneR::melfcc}.}
+\item{fbtype}{Auditory frequency scale to use: \code{'mel'}, \code{'bark'}, \code{'htkmel'}, \code{'fcmel'} (Default: \code{'mel'}). Used by \code{tuneR::melfcc}.}
 
-\item{resolution}{\code{= <freq>} set FFT length to the smallest value which results in a frequency resolution of <freq> Hz or better (default: 40.0). Used by \code{wrassp::cssSpectrum}, \code{wrassp::dftSpectrum} and \code{wrassp::lpsSpectrum}.}
+\item{resolution}{\code{= <freq>} set FFT length to the smallest value which results in a frequency resolution of <freq> Hz or better (Default: \code{40.0}). Used by \code{wrassp::cssSpectrum}, \code{wrassp::dftSpectrum} and \code{wrassp::lpsSpectrum}.}
 
-\item{usecmp}{Logical. Apply equal-loudness weighting and cube-root compression (PLP instead of LPC) (default: \code{FALSE}). Used by \code{tuneR::melfcc}.}
+\item{usecmp}{Logical. Apply equal-loudness weighting and cube-root compression (PLP instead of LPC) (Default: \code{FALSE}). Used by \code{tuneR::melfcc}.}
 
-\item{mc.cores}{Number of cores to be used in parallel processing. (default: \code{1})}
+\item{mc.cores}{Number of cores to be used in parallel processing. (Default: \code{1})}
 
-\item{full.names}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.}
+\item{full.names}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (Default: \code{TRUE}). Used by \code{base::list.files}.}
 
-\item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
+\item{recursive}{Logical. Should the listing recursively into directories? (Default: \code{FALSE}) Used by \code{base::list.files}.}
 
-\item{check.mono}{Logical. Check if the WAV file is mono. (default: \code{TRUE})}
+\item{check.mono}{Logical. Check if the WAV file is mono. (Default: \code{TRUE})}
 
-\item{stereo2mono}{Logical. Should files be converted from stereo to mono? (default: \code{TRUE})}
+\item{stereo2mono}{(Experimental) Logical. Should files be converted from stereo to mono? (Default: \code{TRUE})}
 
-\item{overwrite}{Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})}
+\item{overwrite}{(Experimental) Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (Default: \code{FALSE})}
 
-\item{freq}{Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})}
+\item{freq}{Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (Default: \code{44100})}
 
-\item{round.to}{Number of decimal places to round to. (default: \code{NULL})}
+\item{round.to}{Number of decimal places to round to. (Default: \code{NULL})}
 
-\item{verbose}{Logical. Should the running status be showed? (default: \code{FALSE})}
+\item{verbose}{Logical. Should the running status be showed? (Default: \code{FALSE})}
 }
 \value{
-A tibble data frame containing summarized numeric columns using mean, standard deviation, variation coefficient, media, interquartile range and median absolute deviation.
+A tibble data frame containing summarized numeric columns using (1) mean, (2) standard deviation, (3) variation coefficient, (4) median, (5) interquartile range and (6) median absolute deviation.
 }
 \description{
-Returns summary measures of 'voice::extract_features'
+Returns summary measures of 'voice::extract_features'.
 }
 \details{
 \code{filesRange} should only be used when all the WAV files are in the same folder.
@@ -101,5 +101,5 @@ wav_path = path2wav)
 feat_summary(E)
 
 # canonical data
-feat_summary(E, 'subject_id')
+feat_summary(E, groupBy = 'subject_id')
 }

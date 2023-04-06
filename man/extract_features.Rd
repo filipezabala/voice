@@ -2,13 +2,13 @@
 % Please edit documentation in R/extract_features.R
 \name{extract_features}
 \alias{extract_features}
-\title{Extracts features from WAV audio files}
+\title{Extract audio features}
 \usage{
 extract_features(
   x,
   filesRange = NULL,
-  features = c("f0", "formants", "df", "pf", "rf", "rpf", "rcf", "rfc", "mfcc"),
-  gender = "u",
+  features = c("f0", "formants", "rf", "rpf", "rcf", "rfc", "mfcc"),
+  sex = "u",
   windowShift = 5,
   numFormants = 8,
   numcep = 12,
@@ -30,43 +30,43 @@ extract_features(
 \arguments{
 \item{x}{A vector containing either files or directories of audio files in WAV format.}
 
-\item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.}
+\item{filesRange}{The desired range of directory files (Default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.}
 
-\item{features}{Vector of features to be extracted. (default: 'f0','formants','mfcc','df','pf','rf','rcf','rpf'). The following features may contain a variable number of columns: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
+\item{features}{Vector of features to be extracted. (Default: \code{'f0','formants','rf','rcf','rpf','rfc','mfcc'}). The following features may contain a variable number of columns: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
 
-\item{gender}{\code{= <code>} set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.}
+\item{sex}{\code{= <code>} set sex specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (Default: \code{'u'}). Used as 'gender' by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.}
 
-\item{windowShift}{\code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.}
+\item{windowShift}{\code{= <dur>} set analysis window shift to <dur>ation in ms (Default: \code{5.0}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.}
 
-\item{numFormants}{\code{= <num>} <num>ber of formants (default: 8). Used by \code{wrassp::forest}.}
+\item{numFormants}{\code{= <num>} <num>ber of formants (Default: \code{8}). Used by \code{wrassp::forest}.}
 
-\item{numcep}{Number of Mel-frequency cepstral coefficients (cepstra) to return (default: 12). Used by \code{tuneR::melfcc}.}
+\item{numcep}{Number of Mel-frequency cepstral coefficients (cepstra) to return (Default: \code{12}). Used by \code{tuneR::melfcc}.}
 
-\item{dcttype}{Type of DCT used. \code{'t1'} or \code{'t2'}, \code{'t3'} for HTK \code{'t4'} for feacalc (default = \code{'t2'}). Used by \code{tuneR::melfcc}.}
+\item{dcttype}{Type of DCT used. \code{'t1'} or \code{'t2'}, \code{'t3'} for HTK \code{'t4'} for feacalc (Default: \code{'t2'}). Used by \code{tuneR::melfcc}.}
 
-\item{fbtype}{Auditory frequency scale to use: \code{'mel'}, \code{'bark'}, \code{'htkmel'}, \code{'fcmel'} (default: \code{'mel'}). Used by \code{tuneR::melfcc}.}
+\item{fbtype}{Auditory frequency scale to use: \code{'mel'}, \code{'bark'}, \code{'htkmel'}, \code{'fcmel'} (Default: \code{'mel'}). Used by \code{tuneR::melfcc}.}
 
-\item{resolution}{\code{= <freq>} set FFT length to the smallest value which results in a frequency resolution of <freq> Hz or better (default: 40.0). Used by \code{wrassp::cssSpectrum}, \code{wrassp::dftSpectrum} and \code{wrassp::lpsSpectrum}.}
+\item{resolution}{\code{= <freq>} set FFT length to the smallest value which results in a frequency resolution of <freq> Hz or better (Default: \code{40.0}). Used by \code{wrassp::cssSpectrum}, \code{wrassp::dftSpectrum} and \code{wrassp::lpsSpectrum}.}
 
-\item{usecmp}{Logical. Apply equal-loudness weighting and cube-root compression (PLP instead of LPC) (default: \code{FALSE}). Used by \code{tuneR::melfcc}.}
+\item{usecmp}{Logical. Apply equal-loudness weighting and cube-root compression (PLP instead of LPC) (Default: \code{FALSE}). Used by \code{tuneR::melfcc}.}
 
-\item{mc.cores}{Number of cores to be used in parallel processing. (default: \code{1})}
+\item{mc.cores}{Number of cores to be used in parallel processing. (Default: \code{1})}
 
-\item{full.names}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.}
+\item{full.names}{Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (Default: \code{TRUE}) Used by \code{base::list.files}.}
 
-\item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
+\item{recursive}{Logical. Should the listing recursively into directories? (Default: \code{FALSE}) Used by \code{base::list.files}.}
 
-\item{check.mono}{Logical. Check if the WAV file is mono. (default: \code{TRUE})}
+\item{check.mono}{Logical. Check if the WAV file is mono. (Default: \code{TRUE})}
 
-\item{stereo2mono}{Logical. Should files be converted from stereo to mono? (default: \code{TRUE})}
+\item{stereo2mono}{(Experimental) Logical. Should files be converted from stereo to mono? (Default: \code{TRUE})}
 
-\item{overwrite}{Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})}
+\item{overwrite}{(Experimental) Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (Default: \code{FALSE})}
 
-\item{freq}{Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})}
+\item{freq}{Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (Default: \code{44100})}
 
-\item{round.to}{Number of decimal places to round to. (default: \code{NULL})}
+\item{round.to}{Number of decimal places to round to. (Default: \code{NULL})}
 
-\item{verbose}{Logical. Should the running status be showed? (default: \code{FALSE})}
+\item{verbose}{Logical. Should the running status be showed? (Default: \code{FALSE})}
 }
 \value{
 A Media data frame containing the selected features.
@@ -75,7 +75,7 @@ A Media data frame containing the selected features.
 Extracts features from WAV audio files.
 }
 \details{
-When \code{features} 'df', 'pf', 'rf', 'rcf' or 'rpf' are selected, 'f0' and 'formants' must be selected. The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2022), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2022) and 'rpf' to 'formant position removal' (rpf1:rpf8) by Zabala (2022).
+The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2023), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2023) and 'rpf' to 'formant position removal' (rpf1:rpf8) by Zabala (2023).
 }
 \examples{
 library(voice)

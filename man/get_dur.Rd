@@ -10,7 +10,7 @@ get_dur(x)
 \item{x}{Wave object from `tuneR::readWave`.}
 }
 \value{
-A numeric scalar indicating the time duration in seconds from a WAV file.
+Numeric indicating the time duration in seconds from a WAV file.
 }
 \description{
 Get time duration from WAV file.

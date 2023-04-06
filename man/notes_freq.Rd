@@ -2,7 +2,7 @@
 % Please edit documentation in R/notes_freq.R
 \name{notes_freq}
 \alias{notes_freq}
-\title{Returns a tibble of frequencies on Scientific Pitch Notation (SPN) for equal-tempered scale, A4 = 440 Hz.}
+\title{Frequencies on Scientific Pitch Notation (SPN)}
 \usage{
 notes_freq()
 }
@@ -21,4 +21,7 @@ notes_freq()
 }
 \references{
 \url{https://pages.mtu.edu/~suits/notefreqs.html}
+}
+\seealso{
+\code{notes}
 }

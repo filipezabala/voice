@@ -2,7 +2,7 @@
 % Please edit documentation in R/expand_model.R
 \name{expand_model}
 \alias{expand_model}
-\title{Expand model given \code{y} and \code{x} variables.}
+\title{Expand model}
 \usage{
 expand_model(y, x, k)
 }

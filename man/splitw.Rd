@@ -18,17 +18,17 @@ splitw(
 )
 }
 \arguments{
-\item{fromWav}{Either WAV file or directory/folder containing WAV files.}
+\item{fromWav}{Either WAV file or directory containing WAV files.}
 
-\item{fromRttm}{Either RTTM file or directory/folder containing RTTM files. Default: \code{NULL}.}
+\item{fromRttm}{Either RTTM file or directory containing RTTM files. Default: \code{NULL}.}
 
-\item{toSplit}{A directory/folder to write generated files. Default: \code{NULL}.}
+\item{toSplit}{A directory to write generated files. Default: \code{NULL}.}
 
 \item{autoDir}{Logical. Must the directories tree be created? Default: \code{FALSE}. See 'Details'.}
 
 \item{subDir}{Logical. Must the splitted files be placed in subdirectories? Default: \code{FALSE}.}
 
-\item{output}{character string, the class of the object to return, either 'wave' or 'list'.}
+\item{output}{Character string, the class of the object to return, either 'wave' or 'list'.}
 
 \item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files). Must be TRUE only if \code{fromWav} is a directory.}
 
@@ -39,7 +39,7 @@ splitw(
 \item{silence.gap}{The silence gap (in seconds) between adjacent words in a keyword. Rows with \code{tdur <= silence.gap} are removed. (default: \code{0.5})}
 }
 \value{
-Split audio files according to the correspondent RTTM file(s). See '\code{voice::poetry}'.
+Splited audio files according to the correspondent RTTM file(s). See '\code{voice::diarize}'.
 }
 \description{
 Split WAV files either in \code{fromWav} directory or using (same names) RTTM files/subdirectories as guidance.
@@ -51,15 +51,21 @@ When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3
 \dontrun{
 library(voice)
 
-wavDir <- list.files(system.file('extdata', package = 'wrassp'),
-                     pattern <- glob2rx('*.wav'), full.names = TRUE)
-splitDir <- paste0(tempdir(), '/split')
-voice::poetry(fromWav = unique(dirname(wavDir)), toRttm = tempdir())
-dir.create(splitDir)
-dir(tempdir())
+urlWav <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/wav/sherlock0.wav'
+destWav <- paste0(tempdir(), '/sherlock0.wav')
+download.file(urlWav, destfile = destWav)
 
-splitw(unique(dirname(wavDir)), fromRttm = tempdir(), toSplit = paste0(tempdir(), '/split'))
+urlRttm <- 'https://raw.githubusercontent.com/filipezabala/voiceAudios/main/rttm/sherlock0.rttm'
+destRttm <- paste0(tempdir(), '/sherlock0.rttm')
+download.file(urlRttm, destfile = destRttm)
+
+splitDir <- paste0(tempdir(), '/split')
+dir.create(splitDir)
+splitw(destWav, fromRttm = destRttm, toSplit = splitDir)
+
 dir(splitDir)
 }
-
+}
+\seealso{
+\code{voice::diarize}
 }

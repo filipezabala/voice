@@ -1,4 +1,4 @@
-#'  Read RTTM files
+#' Read RTTM files
 #'
 #' @description Read Rich Transcription Time Marked (RTTM) files in \code{fromRttm} directory.
 #' @param fromRttm A directory/folder containing RTTM files.

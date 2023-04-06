@@ -1,16 +1,17 @@
-#' Convolute data frames using multicore.
+#' Inperpolate data frames
 #'
+#' @description Interpolate data frames using multicore, compressing to \code{compact.to} fraction. May remove zeros.
 #' @param x A data frame.
-#' @param compact.to Percentage of remaining points after compaction If equals to 1 and keep.zeros = T, the original vector is presented.
+#' @param compact.to Proportion of remaining points after interpolation. If equals to 1 and keep.zeros = TRUE, the original vector is presented.
 #' @param id The identification column. Default: \code{colname} of the first column of \code{x}.
 #' @param colnum A \code{char} vector indicating the numeric colnames. If \code{NULL}, uses the columns of the \code{numeric} class.
 #' @param drop.x Logical. Drop columns containing .x? Default: \code{TRUE}.
-#' @param drop.zeros Logical. Drop repeated zeros or compress to 1 zero per null set? Default: \code{FALSE}.
-#' @param to.data.frame Logical. Should the return be a data frame? If \code{FALSE} returns a list. Default: \code{TRUE}.
-#' @param round.off Number of decimal places of the convoluted vector. Default: \code{NULL}.
+#' @param drop.zeros Logical. Drop repeated zeros or keep 1 zero per null set? Default: \code{FALSE}.
+#' @param to.data.frame Logical. Should return a data frame? If \code{FALSE} returns a list. Default: \code{TRUE}.
+#' @param round.off Number of decimal places of the interpolated \code{y}. Default: \code{NULL}.
 #' @param weight Vector of weights with same length of \code{y}. Default: \code{NULL}.
-#' @param mc.cores The number of cores to mclapply. By default uses \code{1}.
-#' @return A vector of convoluted values with length near to \code{compact.to*length(x)}.
+#' @param mc.cores The number of cores to mclapply. Default: \code{1}.
+#' @return A data frame of interpolated values with nrow near to \code{compact.to*length(x)}.
 #' @importFrom dplyr %>%
 #' @importFrom dplyr mutate_each
 #' @examples
@@ -20,25 +21,25 @@
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
 #' pattern <- glob2rx('*.wav'), full.names = TRUE)
 #'
-#' # getting Media data frame
+#' # getting Media data frame via lean call
 #' M <- extract_features(dirname(path2wav), features = c('f0','formants'),
 #' mc.cores = 1, verbose = FALSE)
 #'
 #' \donttest{
-#' (cM.df <- conv_df(M[,-(1:2)], 0.1, mc.cores = 1))
-#' (cM.df2 <- conv_df(M[,-(1:2)], 0.1, drop.x = FALSE, mc.cores = 1))
+#' (cM.df <- interp_df(M[,-(1:2)], 0.1, mc.cores = 1))
+#' (cM.df2 <- interp_df(M[,-(1:2)], 0.1, drop.x = FALSE, mc.cores = 1))
 #'
 #' dim(M)
 #' dim(cM.df)
 #' dim(cM.df2)
-#' (cM.list <- conv_df(M[,-(1:2)], 0.1, to.data.frame = FALSE, mc.cores = 1))
+#' (cM.list <- interp_df(M[,-(1:2)], 0.1, to.data.frame = FALSE, mc.cores = 1))
 #' }
-#' @seealso \code{conv}, \code{conv_mc}
+#' @seealso \code{interp}, \code{interp_mc}
 #' @export
-conv_df <- function(x, compact.to, id = colnames(x)[1], colnum = NULL,
-                    drop.x = TRUE, drop.zeros = FALSE,
-                    to.data.frame = TRUE, round.off = NULL, weight = NULL,
-                    mc.cores = 1){
+interp_df <- function(x, compact.to, id = colnames(x)[1], colnum = NULL,
+                      drop.x = TRUE, drop.zeros = FALSE,
+                      to.data.frame = TRUE, round.off = NULL, weight = NULL,
+                      mc.cores = 1){
   ini <- Sys.time()
 
   # numeric columns
@@ -67,8 +68,8 @@ conv_df <- function(x, compact.to, id = colnames(x)[1], colnum = NULL,
   n <- ceiling(compact.to*lv)
   cs <- c(0, cumsum(n))
 
-  # convoluting numeric variables
-  cn.li <- lapply(snum, voice::conv_mc, compact.to = compact.to,
+  # interolationg numeric variables
+  cn.li <- lapply(snum, voice::interp_mc, compact.to = compact.to,
                   drop.zeros = drop.zeros, to.data.frame = to.data.frame,
                   round.off = round.off, weight = weight, mc.cores = mc.cores)
 

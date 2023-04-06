@@ -10,7 +10,7 @@ get_tdur(x)
 \item{x}{A data frame in RTTM standard. See 'voice::read_rttm'.}
 }
 \value{
-A numeric vector containing the time duration in seconds.
+Numeric vector containing the time duration in seconds.
 }
 \description{
 Get time duration from a data frame in RTTM standard.

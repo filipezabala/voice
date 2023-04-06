@@ -2,7 +2,7 @@
 #'
 #' @description Get left channel from WAV file.
 #' @param x Wave object from `tuneR::readWave`.
-#' @return A numeric vector indicating the left channel from a WAV file.
+#' @return Numeric vector indicating the left channel from a WAV file.
 #' @examples
 #' library(voice)
 #'

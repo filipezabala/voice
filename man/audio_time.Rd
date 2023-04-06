@@ -14,7 +14,7 @@ audio_time(x, filesRange = NULL, recursive = FALSE)
 \item{recursive}{Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.}
 }
 \value{
-A tibble containing file name <chr> and audio time <dbl>.
+A tibble containing file name <chr> and audio time <dbl> in seconds.
 }
 \description{
 Returns the total time of audio files in seconds

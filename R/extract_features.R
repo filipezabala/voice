@@ -1,27 +1,27 @@
-#' Extracts features from WAV audio files
+#' Extract audio features
 #' @description Extracts features from WAV audio files.
 #' @param x A vector containing either files or directories of audio files in WAV format.
-#' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.
-#' @param features Vector of features to be extracted. (default: 'f0','formants','mfcc','df','pf','rf','rcf','rpf'). The following features may contain a variable number of columns: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
-#' @param gender \code{= <code>} set gender specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (default: \code{'u'}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
-#' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (default: 5.0). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
-#' @param numFormants \code{= <num>} <num>ber of formants (default: 8). Used by \code{wrassp::forest}.
-#' @param numcep Number of Mel-frequency cepstral coefficients (cepstra) to return (default: 12). Used by \code{tuneR::melfcc}.
-#' @param dcttype Type of DCT used. \code{'t1'} or \code{'t2'}, \code{'t3'} for HTK \code{'t4'} for feacalc (default = \code{'t2'}). Used by \code{tuneR::melfcc}.
-#' @param fbtype Auditory frequency scale to use: \code{'mel'}, \code{'bark'}, \code{'htkmel'}, \code{'fcmel'} (default: \code{'mel'}). Used by \code{tuneR::melfcc}.
-#' @param resolution \code{= <freq>} set FFT length to the smallest value which results in a frequency resolution of <freq> Hz or better (default: 40.0). Used by \code{wrassp::cssSpectrum}, \code{wrassp::dftSpectrum} and \code{wrassp::lpsSpectrum}.
-#' @param usecmp Logical. Apply equal-loudness weighting and cube-root compression (PLP instead of LPC) (default: \code{FALSE}). Used by \code{tuneR::melfcc}.
-#' @param mc.cores Number of cores to be used in parallel processing. (default: \code{1})
-#' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (default: \code{TRUE}) Used by \code{base::list.files}.
-#' @param recursive Logical. Should the listing recursively into directories? (default: \code{FALSE}) Used by \code{base::list.files}.
-#' @param check.mono Logical. Check if the WAV file is mono. (default: \code{TRUE})
-#' @param stereo2mono Logical. Should files be converted from stereo to mono? (default: \code{TRUE})
-#' @param overwrite Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (default: \code{FALSE})
-#' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (default: \code{44100})
-#' @param round.to Number of decimal places to round to. (default: \code{NULL})
-#' @param verbose Logical. Should the running status be showed? (default: \code{FALSE})
+#' @param filesRange The desired range of directory files (Default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.
+#' @param features Vector of features to be extracted. (Default: \code{'f0','formants','rf','rcf','rpf','rfc','mfcc'}). The following features may contain a variable number of columns: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
+#' @param sex \code{= <code>} set sex specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (Default: \code{'u'}). Used as 'gender' by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
+#' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (Default: \code{5.0}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
+#' @param numFormants \code{= <num>} <num>ber of formants (Default: \code{8}). Used by \code{wrassp::forest}.
+#' @param numcep Number of Mel-frequency cepstral coefficients (cepstra) to return (Default: \code{12}). Used by \code{tuneR::melfcc}.
+#' @param dcttype Type of DCT used. \code{'t1'} or \code{'t2'}, \code{'t3'} for HTK \code{'t4'} for feacalc (Default: \code{'t2'}). Used by \code{tuneR::melfcc}.
+#' @param fbtype Auditory frequency scale to use: \code{'mel'}, \code{'bark'}, \code{'htkmel'}, \code{'fcmel'} (Default: \code{'mel'}). Used by \code{tuneR::melfcc}.
+#' @param resolution \code{= <freq>} set FFT length to the smallest value which results in a frequency resolution of <freq> Hz or better (Default: \code{40.0}). Used by \code{wrassp::cssSpectrum}, \code{wrassp::dftSpectrum} and \code{wrassp::lpsSpectrum}.
+#' @param usecmp Logical. Apply equal-loudness weighting and cube-root compression (PLP instead of LPC) (Default: \code{FALSE}). Used by \code{tuneR::melfcc}.
+#' @param mc.cores Number of cores to be used in parallel processing. (Default: \code{1})
+#' @param full.names Logical. If \code{TRUE}, the directory path is prepended to the file names to give a relative file path. If \code{FALSE}, the file names (rather than paths) are returned. (Default: \code{TRUE}) Used by \code{base::list.files}.
+#' @param recursive Logical. Should the listing recursively into directories? (Default: \code{FALSE}) Used by \code{base::list.files}.
+#' @param check.mono Logical. Check if the WAV file is mono. (Default: \code{TRUE})
+#' @param stereo2mono (Experimental) Logical. Should files be converted from stereo to mono? (Default: \code{TRUE})
+#' @param overwrite (Experimental) Logical. Should converted files be overwritten? If not, the file gets the suffix \code{_mono}. (Default: \code{FALSE})
+#' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (Default: \code{44100})
+#' @param round.to Number of decimal places to round to. (Default: \code{NULL})
+#' @param verbose Logical. Should the running status be showed? (Default: \code{FALSE})
 #' @return A Media data frame containing the selected features.
-#' @details When \code{features} 'df', 'pf', 'rf', 'rcf' or 'rpf' are selected, 'f0' and 'formants' must be selected. The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2022), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2022) and 'rpf' to 'formant position removal' (rpf1:rpf8) by Zabala (2022).
+#' @details The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2023), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2023) and 'rpf' to 'formant position removal' (rpf1:rpf8) by Zabala (2023).
 #' @references Levinson N. (1946). The Wiener (root mean square) error criterion in filter design and prediction. Journal of Mathematics and Physics, 25(1-4), 261–278. (\doi{10.1002/SAPM1946251261})
 #'
 #' Durbin J. (1960). “The fitting of time-series models.” Revue de l’Institut International de Statistique, pp. 233–244. (\url{https://www.jstor.org/stable/1401322})
@@ -69,11 +69,10 @@
 extract_features <- function(x,
                              filesRange = NULL,
                              features = c('f0', 'formants',   # Pitch and formants
-                                          'df', 'pf',         # Formant dispersion and position
                                           'rf', 'rpf', 'rcf', # Formant removals
                                           'rfc',              # (R)e(F)lection (C)oefficients
                                           'mfcc'),            # (M)el (Frequency (C)epstral (C)oefficients
-                             gender = 'u',
+                             sex = 'u',
                              windowShift = 5,
                              numFormants = 8,
                              numcep = 12,
@@ -171,7 +170,7 @@ extract_features <- function(x,
     i <- i+1
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::ksvF0,
-                                                       gender = gender,
+                                                       gender = sex,
                                                        toFile = FALSE,
                                                        windowShift = windowShift,
                                                        mc.cores = mc.cores)
@@ -188,7 +187,7 @@ extract_features <- function(x,
     i <- i+1
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::forest,
-                                                       gender = gender,
+                                                       gender = sex,
                                                        toFile = FALSE,
                                                        windowShift = windowShift,
                                                        numFormants = numFormants,
@@ -223,7 +222,7 @@ extract_features <- function(x,
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
                                                        wrassp::mhsF0,
                                                        toFile = FALSE,
-                                                       gender = gender,
+                                                       gender = sex,
                                                        windowShift = windowShift,
                                                        mc.cores = mc.cores)
     names(features.list.temp)[i.temp] <- 'f0_mhs'

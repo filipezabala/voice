@@ -2,18 +2,18 @@
 % Please edit documentation in R/notes.R
 \name{notes}
 \alias{notes}
-\title{Returns a vector of notes for equal-tempered scale, A4 = 440 Hz.}
+\title{Assign notes to frequencies}
 \usage{
 notes(x, method = "spn", moving.average = FALSE, k = 11)
 }
 \arguments{
-\item{x}{A vector of frequencies in Hz.}
+\item{x}{Numeric vector of frequencies in Hz.}
 
-\item{method}{Method of specifying musical pitch. (default: \code{spn}, i.e., Scientific Pitch Notation).}
+\item{method}{Method of specifying musical pitch. (Default: \code{spn}, i.e., Scientific Pitch Notation).}
 
-\item{moving.average}{Logical. Must apply moving average?}
+\item{moving.average}{Logical. Must apply moving average? (Default: \code{FALSE}).}
 
-\item{k}{Integer width of the rolling window used if moving.average is TRUE.}
+\item{k}{Integer width of the rolling window used if moving.average is TRUE. (Default: \code{11}).}
 }
 \value{
 A vector containing the notes for equal-tempered scale, A4 = 440 Hz. When `method = 'spn'` the vector is of class 'ordered factor'. When `method = 'octave'` the vector is of class 'factor'.  When `method = 'midi'` the vector is of class 'integer'.
@@ -23,7 +23,7 @@ Returns a vector of notes for equal-tempered scale, A4 = 440 Hz.
 }
 \details{
 The symbol '#' is being used to represent a sharp note, the higher
-in pitch by one semitone on Scientific Pitch Notation (SPN)
+in pitch by one semitone on Scientific Pitch Notation (SPN).
 }
 \examples{
 library(voice)

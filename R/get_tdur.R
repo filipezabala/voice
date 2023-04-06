@@ -2,7 +2,7 @@
 #'
 #' @description Get time duration from a data frame in RTTM standard.
 #' @param x A data frame in RTTM standard. See 'voice::read_rttm'.
-#' @return A numeric vector containing the time duration in seconds.
+#' @return Numeric vector containing the time duration in seconds.
 #' @examples
 #' library(voice)
 #'

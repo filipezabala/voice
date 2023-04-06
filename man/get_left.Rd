@@ -10,7 +10,7 @@ get_left(x)
 \item{x}{Wave object from `tuneR::readWave`.}
 }
 \value{
-A numeric vector indicating the left channel from a WAV file.
+Numeric vector indicating the left channel from a WAV file.
 }
 \description{
 Get left channel from WAV file.
