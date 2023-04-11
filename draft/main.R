@@ -176,6 +176,15 @@ find.package('voice')
 packageDescription('voice')
 citation('voice')
 
+
+# get path to audio file
+path2wav <- list.files(system.file('extdata', package = 'wrassp'),
+                       pattern = glob2rx('*.wav'), full.names = TRUE)
+
+# minimal usage
+M1 <- extract_features(path2wav, c('f0','f0_praat','fmt','fmt_praat'))
+M1
+
 ?voice::tag
 ?feat_summary
 # get path to audio file
