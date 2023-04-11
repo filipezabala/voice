@@ -66,7 +66,7 @@
 #' M3 <- extract_features(path2wav, filesRange = 3:6)
 #' table(basename(M3$wav_path))
 #' @export
-extract_features2 <- function(x,
+extract_features <- function(x,
                              features = c('f0', 'fmt',        # F0 and formants
                                           'rf', 'rpf', 'rcf', # Formant removals
                                           'rfc',              # (R)e(F)lection (C)oefficients

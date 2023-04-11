@@ -167,8 +167,8 @@ devtools::install_github('filipezabala/voice')
 
 # attaching
 library(voice)
-?conv_df
-?conv_mc
+?interp_df
+?interp_mc
 ?extract_features
 ?expand_model
 ?is_mono
