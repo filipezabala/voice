@@ -20,7 +20,7 @@ library(voice)
 
 # get path to audio file
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-pattern <- glob2rx('*.wav'), full.names = TRUE)
+pattern = glob2rx('*.wav'), full.names = TRUE)
 
 is_mono(path2wav[1])
 sapply(path2wav, is_mono)

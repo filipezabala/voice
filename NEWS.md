@@ -4,7 +4,7 @@
 
 ### NEWS.md setup
 
-- Version 0.4.20 2023-04-DD
+- Version 0.5.0 2022-MM-DD
 . Add tag `$feature_tag_n`.
 . Features ordered by the listed order in `features` argument.
 . Add time duration `tdur` as a column at voice::tag function return.
@@ -17,6 +17,19 @@
 . Change message @ voice::tag: 
   FROM 'Warning: no non-missing arguments to min; returning InfError in features.list.temp$f0[[j]] : subscript out of bounds' 
   TO 'File does not exist!'
+
+
+
+- Version 0.4.20 2023-04-20
+. `filesRange` and `features` switched. Now `filesRange` is in the 3rd and `features` in the 2nd positions in the argument vector. This change impacts the examples of `interp_df.R`, `interp_mc.R`, `smooth_df.R`, `tag.R`.
+. `f0_praat`, ..., `f8_praat` implemented in `extract_features.R`.
+. `pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8'` added as argument in `extract_features.R`.
+. `formants` set to `fmt` in `extract_features.R`.
+. `windowShift` set to `10` as default in `extract_features.R` and `feat_summary.R`.
+. `extract_features_py.R` deprecated.
+. `voice::conv` set to `voice::interp` at lines 45 and 50 of `interp_mc.R`.
+. Functions `get_` removed from `spltw.R`.
+
 
 
 - Version 0.4.19 2023-04-06

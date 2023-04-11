@@ -1,8 +1,8 @@
 #' Extract audio features
 #' @description Extracts features from WAV audio files.
 #' @param x A vector containing either files or directories of audio files in WAV format.
+#' @param features Vector of features to be extracted. (Default: \code{'f0','fmt','rf','rcf','rpf','rfc','mfcc'}). The \code{'fmt_praat'} feature may take long time processing. The following features may contain a variable number of columns: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
 #' @param filesRange The desired range of directory files (Default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.
-#' @param features Vector of features to be extracted. (Default: \code{'f0','formants','rf','rcf','rpf','rfc','mfcc'}). The following features may contain a variable number of columns: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
 #' @param sex \code{= <code>} set sex specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (Default: \code{'u'}). Used as 'gender' by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
 #' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (Default: \code{5.0}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
 #' @param numFormants \code{= <num>} <num>ber of formants (Default: \code{8}). Used by \code{wrassp::forest}.
@@ -21,7 +21,7 @@
 #' @param round.to Number of decimal places to round to. (Default: \code{NULL})
 #' @param verbose Logical. Should the running status be showed? (Default: \code{FALSE})
 #' @return A Media data frame containing the selected features.
-#' @details The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2023), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2023) and 'rpf' to 'formant position removal' (rpf1:rpf8) by Zabala (2023).
+#' @details The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2023), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2023) and 'rpf' to 'formant position removal' (rpf2:rpf8) by Zabala (2023).
 #' @references Levinson N. (1946). The Wiener (root mean square) error criterion in filter design and prediction. Journal of Mathematics and Physics, 25(1-4), 261–278. (\doi{10.1002/SAPM1946251261})
 #'
 #' Durbin J. (1960). “The fitting of time-series models.” Revue de l’Institut International de Statistique, pp. 233–244. (\url{https://www.jstor.org/stable/1401322})
@@ -54,7 +54,7 @@
 #'
 #' # get path to audio file
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-#' pattern <- glob2rx('*.wav'), full.names = TRUE)
+#' pattern = glob2rx('*.wav'), full.names = TRUE)
 #'
 #' # minimal usage
 #' M1 <- extract_features(path2wav)
@@ -66,14 +66,14 @@
 #' M3 <- extract_features(path2wav, filesRange = 3:6)
 #' table(basename(M3$wav_path))
 #' @export
-extract_features <- function(x,
-                             filesRange = NULL,
-                             features = c('f0', 'formants',   # Pitch and formants
+extract_features2 <- function(x,
+                             features = c('f0', 'fmt',        # F0 and formants
                                           'rf', 'rpf', 'rcf', # Formant removals
                                           'rfc',              # (R)e(F)lection (C)oefficients
                                           'mfcc'),            # (M)el (Frequency (C)epstral (C)oefficients
+                             filesRange = NULL,
                              sex = 'u',
-                             windowShift = 5,
+                             windowShift = 10,
                              numFormants = 8,
                              numcep = 12,
                              dcttype = c('t2', 't1', 't3', 't4'),
@@ -88,7 +88,8 @@ extract_features <- function(x,
                              overwrite = FALSE,
                              freq = 44100,
                              round.to = NULL,
-                             verbose = FALSE){
+                             verbose = FALSE,
+                             pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8'){
 
   # time processing
   pt0 <- proc.time()
@@ -164,7 +165,7 @@ extract_features <- function(x,
   i.temp <- 0
   i <- 0
 
-  # 1. f0 analysis of the signal
+  # 1. F0 analysis of the signal via Schafer-Vincent (1983), wrassp::ksvF0
   if('f0' %in% features){
     i.temp <- i.temp+1
     i <- i+1
@@ -181,41 +182,7 @@ extract_features <- function(x,
                                       wrassp::numRecs.AsspDataObj))
   }
 
-  # 2. Formant estimation (f1:f8)
-  if('formants' %in% features){
-    i.temp <- i.temp+1
-    i <- i+1
-    features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
-                                                       wrassp::forest,
-                                                       gender = sex,
-                                                       toFile = FALSE,
-                                                       windowShift = windowShift,
-                                                       numFormants = numFormants,
-                                                       mc.cores = mc.cores)
-    names(features.list.temp)[i.temp] <- 'formants'
-    names(features.list)[i] <- 'formants'
-    names(length.list)[i] <- 'formants'
-    length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
-                                      wrassp::numRecs.AsspDataObj))
-  }
-
-  # 3. Analysis of the averages of the short-term positive and negative (Z)ero-(C)rossing (R)ates
-  if('zcr' %in% features){
-    i.temp <- i.temp+1
-    i <- i+1
-    features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
-                                                       wrassp::zcrana,
-                                                       toFile = FALSE,
-                                                       windowShift = windowShift,
-                                                       mc.cores = mc.cores)
-    names(features.list.temp)[i.temp] <- 'zcr'
-    names(features.list)[i] <- 'zcr'
-    names(length.list)[i] <- 'zcr'
-    length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
-                                      wrassp::numRecs.AsspDataObj))
-  }
-
-  # 4. Pitch analysis of the speech signal using Michel’s (M)odified (H)armonic (S)ieve algorithm
+  # 2. F0 analysis of the signal via Jackson (1995) [Michel’s (M)odified (H)armonic (S)ieve algorithm], wrassp::mhsF0
   if('f0_mhs' %in% features){
     i.temp <- i.temp+1
     i <- i+1
@@ -232,7 +199,111 @@ extract_features <- function(x,
                                       wrassp::numRecs.AsspDataObj))
   }
 
-  # 5. (L)inear (P)rediction (A)nalysis [rms, gain, rfc]
+
+  # 3. F0 analysis of the signal via Boersma (1993)
+  if('f0_praat' %in% features){
+    i.temp <- i.temp+1
+    i <- i+1
+
+    # setting environment
+    reticulate::use_condaenv(pycall, required = TRUE)
+    parselmouth <- reticulate::import('parselmouth')
+
+    # setting structure
+    names(features.list.temp)[i.temp] <- 'f0_praat'
+    names(features.list)[i] <- 'f0_praat'
+    names(length.list)[i] <- 'f0_praat'
+    features.list.temp[[i.temp]] <- vector('list', nWav)
+
+    # F0 extraction
+    for(j in 1:nWav){
+      snd <- parselmouth$Sound(wavFiles[j])
+      pitch <- snd$to_pitch(time_step = windowShift/1000)
+      interval <- seq(pitch$start_time, pitch$end_time, windowShift/1000)
+
+      f0_praat_temp <- sapply(interval, pitch$get_value_at_time)
+      f0_praat_temp[is.nan(f0_praat_temp)] <- NA
+      features.list.temp[[i.temp]][[j]] <- f0_praat_temp
+    }
+
+    length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]], length))
+  }
+
+  # 4. Formant estimation (f1:f8) via wrassp::forest
+  if('fmt' %in% features){
+    i.temp <- i.temp+1
+    i <- i+1
+    features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
+                                                       wrassp::forest,
+                                                       gender = sex,
+                                                       toFile = FALSE,
+                                                       windowShift = windowShift,
+                                                       numFormants = numFormants,
+                                                       mc.cores = mc.cores)
+    names(features.list.temp)[i.temp] <- 'fmt'
+    names(features.list)[i] <- 'fmt'
+    names(length.list)[i] <- 'fmt'
+    length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
+                                      wrassp::numRecs.AsspDataObj))
+  }
+
+  # 5. Formant estimation (f1_praat:f8_praat) via Burg algorithm
+  if('fmt_praat' %in% features){
+    i.temp <- i.temp+1
+    i <- i+1
+
+    # setting environment
+    reticulate::use_condaenv(pycall, required = TRUE)
+    parselmouth <- reticulate::import('parselmouth')
+
+    # setting structure
+    names(features.list.temp)[i.temp] <- 'fmt_praat'
+    names(features.list)[i] <- 'fmt_praat'
+    names(length.list)[i] <- 'fmt_praat'
+    features.list.temp[[i.temp]] <- vector('list', nWav)
+
+    # Formant extraction
+    for(j in 1:nWav){
+      # formants extraction
+      snd <- parselmouth$Sound(wavFiles[j])
+      fmt <- snd$to_formant_burg(time_step = windowShift/1000,
+                                 max_number_of_formants = numFormants)
+      interval <- seq(fmt$start_time, fmt$end_time, windowShift/1000)
+
+      #TODO: build with apply
+      fmt_praat_temp <- matrix(nrow = length(interval), ncol = numFormants)
+      colnames(fmt_praat_temp) <- paste0('fmt_', 1:numFormants)
+      for(k in 1:numFormants){
+        for(l in 1:length(interval)){
+          fmt_praat_temp[l,k] <- fmt$get_value_at_time(formant_number = as.integer(k),
+                                                       time = interval[l])
+        }
+      }
+      fmt_praat_temp[is.nan(fmt_praat_temp)] <- NA
+      features.list.temp[[i.temp]][[j]] <- fmt_praat_temp
+    }
+
+    length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]], nrow))
+  }
+
+  # 6. Analysis of the averages of the short-term positive and negative (Z)ero-(C)rossing (R)ates
+  if('zcr' %in% features){
+    i.temp <- i.temp+1
+    i <- i+1
+    features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
+                                                       wrassp::zcrana,
+                                                       toFile = FALSE,
+                                                       windowShift = windowShift,
+                                                       mc.cores = mc.cores)
+    names(features.list.temp)[i.temp] <- 'zcr'
+    names(features.list)[i] <- 'zcr'
+    names(length.list)[i] <- 'zcr'
+    length.list[[i]] <- unlist(lapply(features.list.temp[[i.temp]],
+                                      wrassp::numRecs.AsspDataObj))
+  }
+
+
+  # 7. (L)inear (P)rediction (A)nalysis [rms, gain, rfc]
   if('rms' %in% features | 'gain' %in% features | 'rfc' %in% features){
     i.temp <- i.temp+1
     features.list.temp[[i.temp]] <- parallel::mclapply(wavFiles,
@@ -268,7 +339,7 @@ extract_features <- function(x,
     }
   }
 
-  # 6. Analysis of short-term (A)uto(C)orrelation function
+  # 8. Analysis of short-term (A)uto(C)orrelation function
   if('ac' %in% features){
     i.temp <- i.temp+1
     i <- i+1
@@ -284,7 +355,7 @@ extract_features <- function(x,
                                       wrassp::numRecs.AsspDataObj))
   }
 
-  # 7. Short-term (CEP)stral analysis
+  # 9. Short-term (CEP)stral analysis
   if('cep' %in% features){
     i.temp <- i.temp+1
     i <- i+1
@@ -300,7 +371,7 @@ extract_features <- function(x,
                                       wrassp::numRecs.AsspDataObj))
   }
 
-  # 8. Short-term (DFT) spectral analysis
+  # 10. Short-term (DFT) spectral analysis
   if('dft' %in% features){
     i.temp <- i.temp+1
     i <- i+1
@@ -317,7 +388,7 @@ extract_features <- function(x,
                                       wrassp::numRecs.AsspDataObj))
   }
 
-  # 9. (C)epstral (S)moothed version of dft(S)pectrum
+  # 11. (C)epstral (S)moothed version of dft(S)pectrum
   if('css' %in% features){
     i.temp <- i.temp+1
     i <- i+1
@@ -334,7 +405,7 @@ extract_features <- function(x,
                                       wrassp::numRecs.AsspDataObj))
   }
 
-  # 10. (L)inear (P)redictive (S)moothed version of dftSpectrum
+  # 12. (L)inear (P)redictive (S)moothed version of dftSpectrum
   if('lps' %in% features){
     i.temp <- i.temp+1
     i <- i+1
@@ -351,7 +422,7 @@ extract_features <- function(x,
                                       wrassp::numRecs.AsspDataObj))
   }
 
-  # 11. Mel-Frequency Cepstral Coefficients (MFCC)
+  # 13. Mel-Frequency Cepstral Coefficients (MFCC)
   rWave <- parallel::mclapply(wavFiles, tuneR::readWave, mc.cores = mc.cores)
   i.temp <- i.temp+1
   features.list.temp[[i.temp]] <- parallel::mclapply(rWave, tuneR::melfcc,
@@ -388,22 +459,34 @@ extract_features <- function(x,
       features.list$f0 <- rbind(features.list$f0, f0_temp)
     }
 
-    if('formants' %in% features){
-      fo_temp <- as.matrix(features.list.temp$fo[[j]]$fm[1:n_min[j],],
+    if('f0_mhs' %in% features){
+      f0_mhs_temp <- as.matrix(features.list.temp$f0_mhs[[j]]$pitch[1:n_min[j],],
+                               ncol = 1)
+      features.list$f0_mhs <- rbind(features.list$f0_mhs, f0_mhs_temp)
+    }
+
+    if('f0_praat' %in% features){
+      f0_praat_temp <- as.matrix(features.list.temp$f0_praat[[j]][1:n_min[j]],
+                                 ncol = 1)
+      features.list$f0_praat <- rbind(features.list$f0_praat, f0_praat_temp)
+    }
+
+    if('fmt' %in% features){
+      fmt_temp <- as.matrix(features.list.temp$fmt[[j]]$fm[1:n_min[j],],
                            ncol = numFormants)
-      features.list$formants <- rbind(features.list$formants, fo_temp)
+      features.list$fmt <- rbind(features.list$fmt, fmt_temp)
+    }
+
+    if('fmt_praat' %in% features){
+      fmt_praat_temp <- as.matrix(features.list.temp$fmt_praat[[j]][1:n_min[j],],
+                                  ncol = numFormants)
+      features.list$fmt_praat <- rbind(features.list$fmt_praat, fmt_praat_temp)
     }
 
     if('zcr' %in% features){
       zcr_temp <- as.matrix(features.list.temp$zcr[[j]]$zcr[1:n_min[j],],
                             ncol = 1)
       features.list$zcr <- rbind(features.list$zcr, zcr_temp)
-    }
-
-    if('f0_mhs' %in% features){
-      f0_mhs_temp <- as.matrix(features.list.temp$f0_mhs[[j]]$pitch[1:n_min[j],],
-                            ncol = 1)
-      features.list$f0_mhs <- rbind(features.list$f0_mhs, f0_mhs_temp)
     }
 
     if('rms' %in% features){
@@ -475,18 +558,26 @@ extract_features <- function(x,
   # colnames
   if('f0' %in% features){
     colnames(features.list$f0) <- 'f0'
-    }
-
-  if('formants' %in% features){
-    colnames(features.list$formants) <- paste0('f', 1:ncol(features.list$formants))
-    }
-
-  if('zcr' %in% features){
-    colnames(features.list$zcr) <- paste0('zcr', 1:ncol(features.list$zcr))
-    }
+  }
 
   if('f0_mhs' %in% features){
     colnames(features.list$f0_mhs) <- paste0('f0_mhs')
+  }
+
+  if('f0_praat' %in% features){
+    colnames(features.list$f0_praat) <- paste0('f0_praat')
+  }
+
+  if('fmt' %in% features){
+    colnames(features.list$fmt) <- paste0('f', 1:ncol(features.list$fmt))
+  }
+
+  if('fmt_praat' %in% features){
+    colnames(features.list$fmt_praat) <- paste0('f', 1:ncol(features.list$fmt_praat), '_praat')
+  }
+
+  if('zcr' %in% features){
+    colnames(features.list$zcr) <- paste0('zcr', 1:ncol(features.list$zcr))
   }
 
   if('rms' %in% features){
@@ -536,8 +627,8 @@ extract_features <- function(x,
   # replacing 0 by NA
   dat[-1][sapply(dat[-1], R.utils::isZero)] <- NA
 
-  # 12. Df - Formant Dispersion by Fitch (1997)
-  if('f0' %in% features & 'formants' %in% features & 'df' %in% features){
+  # 14. Df - Formant Dispersion by Fitch (1997)
+  if('f0' %in% features & 'fmt' %in% features & 'df' %in% features){
     if(numFormants >= 2) {dat$df2 <- (dat$f2-dat$f1)/1}
     if(numFormants >= 3) {dat$df3 <- (dat$f3-dat$f1)/2}
     if(numFormants >= 4) {dat$df4 <- (dat$f4-dat$f1)/3}
@@ -549,15 +640,15 @@ extract_features <- function(x,
 
   # TODO: in scale check if columns are not constant (degenerated random variables)
   # Scaling
-  if('f0' %in% features & 'formants' %in% features &
+  if('f0' %in% features & 'fmt' %in% features &
      ('pf' %in% features | 'rf' %in% features |
       'rcf' %in% features | 'rpf' %in% features)){
     cn <- paste0('f', 0:numFormants)
     f_sc <- sapply(dat[,cn], scale)
   }
 
-  # 13. Pf - Formant Position by Puts, Apicella & Cárdenas (2011)
-  if('f0' %in% features & 'formants' %in% features & 'pf' %in% features){
+  # 15. Pf - Formant Position by Puts, Apicella & Cárdenas (2011)
+  if('f0' %in% features & 'fmt' %in% features & 'pf' %in% features){
     if(numFormants >= 1) {dat$pf1 <- f_sc[,'f1']}
     if(numFormants >= 2) {dat$pf2 <- rowMeans(f_sc[,c('f1','f2')], na.rm = TRUE)}
     if(numFormants >= 3) {dat$pf3 <- rowMeans(f_sc[,c('f1','f2','f3')], na.rm = TRUE)}
@@ -568,8 +659,8 @@ extract_features <- function(x,
     if(numFormants >= 8) {dat$pf8 <- rowMeans(f_sc[,c('f1','f2','f3','f4','f5','f6','f7','f8')], na.rm = TRUE)}
   }
 
-  # 14. Rf - Formant Removal by Zabala (2022)
-  if('f0' %in% features & 'formants' %in% features & 'rf' %in% features){
+  # 16. Rf - Formant Removal by Zabala (2023)
+  if('f0' %in% features & 'fmt' %in% features & 'rf' %in% features){
     if(numFormants >= 1) {dat$rf1 <- f_sc[,'f0']-f_sc[,'f1']}
     if(numFormants >= 2) {dat$rf2 <- f_sc[,'f0']-f_sc[,'f2']}
     if(numFormants >= 3) {dat$rf3 <- f_sc[,'f0']-f_sc[,'f3']}
@@ -580,8 +671,8 @@ extract_features <- function(x,
     if(numFormants >= 8) {dat$rf8 <- f_sc[,'f0']-f_sc[,'f8']}
   }
 
-  # 15. RCf - Formant Cumulated Removal by Zabala (2023)
-  if('f0' %in% features & 'formants' %in% features & 'rcf' %in% features){
+  # 17. RCf - Formant Cumulated Removal by Zabala (2023)
+  if('f0' %in% features & 'fmt' %in% features & 'rcf' %in% features){
     # if(numFormants >= 1) {dat$rcf1 <- f_sc[,'f0']-f_sc[,'f1']} # equivalent to Rf1 and RPf1
     if(numFormants >= 2) {dat$rcf2 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2')], na.rm = TRUE)}
     if(numFormants >= 3) {dat$rcf3 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2','f3')], na.rm = TRUE)}
@@ -592,8 +683,8 @@ extract_features <- function(x,
     if(numFormants >= 8) {dat$rcf8 <- f_sc[,'f0']-rowSums(f_sc[,c('f1','f2','f3','f4','f5','f6','f7','f8')], na.rm = TRUE)}
   }
 
-  # 16. RPf - Formant Position Removal by Zabala (2023)
-  if('f0' %in% features & 'formants' %in% features & 'rpf' %in% features){
+  # 18. RPf - Formant Position Removal by Zabala (2023)
+  if('f0' %in% features & 'fmt' %in% features & 'rpf' %in% features){
     # if(numFormants >= 1) {dat$rpf1 <- f_sc[,'f0']-dat$pf1} # equivalent to Rf1 and RCf1
     if(numFormants >= 2) {dat$rpf2 <- f_sc[,'f0']-rowMeans(f_sc[,c('f1','f2')], na.rm = TRUE)}
     if(numFormants >= 3) {dat$rpf3 <- f_sc[,'f0']-rowMeans(f_sc[,c('f1','f2','f3')], na.rm = TRUE)}
@@ -606,8 +697,8 @@ extract_features <- function(x,
 
   # creating ids
   idf <- lapply(n_min, seq, 1)
-  dat <- dplyr::bind_cols(slice_seq = 1:nrow(dat),
-                          slice_seq_file = unlist(lapply(idf, rev)), dat)
+  dat <- dplyr::bind_cols(section_seq = 1:nrow(dat),
+                          section_seq_file = unlist(lapply(idf, rev)), dat)
 
   # total time
   t0 <- proc.time()-pt0

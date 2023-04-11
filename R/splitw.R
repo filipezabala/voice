@@ -127,29 +127,9 @@ splitw <- function(fromWav,
   }
   rttm <- lapply(rttm, keep.row)
 
-  # useful functions (voice::get_...)
-  get_tbeg <- function(x){
-    return(x$tbeg)
-  }
-  get_tdur <- function(x){
-    return(x$tdur)
-  }
-  get_left <- function(x){
-    return(x@left)
-  }
-  get_right <- function(x){
-    return(x@right)
-  }
-  get_samp.rate <- function(x){
-    return(x@samp.rate)
-  }
-  get_bit <- function(x){
-    return(x@bit)
-  }
-
   # time beginning, duration and ending
-  tbeg <- lapply(rttm, get_tbeg)
-  tdur <- lapply(rttm, get_tdur)
+  tbeg <- lapply(rttm, voice::get_tbeg)
+  tdur <- lapply(rttm, voice::get_tdur)
   tend <- Map('+', tbeg, tdur)
 
   # # tests
@@ -164,10 +144,10 @@ splitw <- function(fromWav,
   index <- lapply(nbreaks, seq, from = 2, by = 2)
 
   # audio information
-  freq <- sapply(audio, get_samp.rate)
-  # bit <- sapply(audio, get_bit)
-  # left <- lapply(audio, get_left)
-  # right <- lapply(audio, get_right)
+  freq <- sapply(audio, voice::get_samp.rate)
+  # bit <- sapply(audio, voice::get_bit)
+  # left <- lapply(audio, voice::get_left)
+  # right <- lapply(audio, voice::get_right)
   # totlen <- sapply(audio, length)
   # totsec <- totlen/freq
 
@@ -186,10 +166,10 @@ splitw <- function(fromWav,
   sa <- split.audio(x=audio, index=index, breaks=breaks, freq=freq)
 
   # splitted audio information
-  bitSpl <- lapply(unlist(sa), get_bit)
-  freqSpl <- lapply(unlist(sa), get_samp.rate)
-  leftSpl <- lapply(unlist(sa), get_left)
-  rightSpl <- lapply(unlist(sa), get_right)
+  bitSpl <- lapply(unlist(sa), voice::get_bit)
+  freqSpl <- lapply(unlist(sa), voice::get_samp.rate)
+  leftSpl <- lapply(unlist(sa), voice::get_left)
+  rightSpl <- lapply(unlist(sa), voice::get_right)
 
   # writing output as a list
   if(output == 'list'){

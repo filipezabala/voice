@@ -32,7 +32,7 @@
 #'
 #' # get path to audio file
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-#' pattern <- glob2rx('*.wav'), full.names = TRUE)
+#' pattern = glob2rx('*.wav'), full.names = TRUE)
 #'
 #' # creating Extended synthetic data
 #' E <- dplyr::tibble(subject_id = c(1,1,1,2,2,2,3,3,3),
@@ -49,7 +49,7 @@
 #' tag(E, filesRange = 3:6)
 #'
 #' # more features
-#' Et <- tag(E, features = c('f0', 'formants', 'df', 'pf', 'rf', 'rcf', 'rpf'),
+#' Et <- tag(E, features = c('f0', 'fmt', 'rf', 'rcf', 'rpf', 'rfc', 'mfcc'),
 #' groupBy = 'subject_id')
 #' Et
 #' str(Et)

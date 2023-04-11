@@ -9,10 +9,10 @@ feat_summary(
   groupBy = "wav_path",
   wavPath = unique(x$wav_path),
   wavPathName = "wav_path",
-  filesRange = NULL,
   features = "f0",
+  filesRange = NULL,
   sex = "u",
-  windowShift = 5,
+  windowShift = 10,
   numFormants = 8,
   numcep = 12,
   dcttype = c("t2", "t1", "t3", "t4"),
@@ -39,9 +39,9 @@ feat_summary(
 
 \item{wavPathName}{A string containing the WAV path name. (Default: \code{wavPathName = 'wav_path'}).}
 
-\item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.}
-
 \item{features}{Vector of features to be extracted. (Default: \code{'f0'}).}
+
+\item{filesRange}{The desired range of directory files (default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.}
 
 \item{sex}{\code{= <code>} set sex specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (Default: \code{'u'}). Used as 'gender' by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.}
 
@@ -91,7 +91,7 @@ library(voice)
 
 # get path to audio file
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-pattern <- glob2rx('*.wav'), full.names = TRUE)
+pattern = glob2rx('*.wav'), full.names = TRUE)
 
 # creating Extended synthetic data
 E <- dplyr::tibble(subject_id = c(1,1,1,2,2,2,3,3,3),

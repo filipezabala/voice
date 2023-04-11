@@ -46,13 +46,11 @@ interp_mc(1:100, compact.to = 0.1, drop.zeros = TRUE, to.data.frame = TRUE)
 
 # get path to audio file
 path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-pattern <- glob2rx('*.wav'), full.names = TRUE)
+pattern = glob2rx('*.wav'), full.names = TRUE)
 
 \donttest{
-# getting Media data frame via lean call
-M <- voice::extract_features(dirname(path2wav), features = c('f0','formants',
-'rf','rpf','rcf','rfc','mfcc'),
-mc.cores = 1, verbose = FALSE)
+# getting Media data frame
+M <- voice::extract_features(dirname(path2wav), mc.cores = 1, verbose = FALSE)
 
 M.num <- M[,-(1:3)]
 nrow(M.num)

@@ -13,10 +13,10 @@
 #'
 #' # get path to audio file
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-#' pattern <- glob2rx('*.wav'), full.names = TRUE)
+#' pattern = glob2rx('*.wav'), full.names = TRUE)
 #'
 #' # minimal usage
-#' M <- extract_features(path2wav, features = c('f0', 'formants'))
+#' M <- extract_features(path2wav, features = c('f0', 'fmt'))
 #' (Ms <- smooth_df(M[-(1:2)]))
 #' dim(M)
 #' dim(Ms)

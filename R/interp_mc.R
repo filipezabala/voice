@@ -21,13 +21,11 @@
 #'
 #' # get path to audio file
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-#' pattern <- glob2rx('*.wav'), full.names = TRUE)
+#' pattern = glob2rx('*.wav'), full.names = TRUE)
 #'
 #' \donttest{
-#' # getting Media data frame via lean call
-#' M <- voice::extract_features(dirname(path2wav), features = c('f0','formants',
-#' 'rf','rpf','rcf','rfc','mfcc'),
-#' mc.cores = 1, verbose = FALSE)
+#' # getting Media data frame
+#' M <- voice::extract_features(dirname(path2wav), mc.cores = 1, verbose = FALSE)
 #'
 #' M.num <- M[,-(1:3)]
 #' nrow(M.num)
@@ -42,12 +40,12 @@ interp_mc <- function(y, compact.to, drop.zeros = FALSE, to.data.frame = FALSE,
                       round.off = NULL, weight = NULL,
                       mc.cores = 1){
   if(is.vector(y)){
-    cm <- voice::conv(y, compact.to = compact.to, drop.zeros = drop.zeros,
-                      to.data.frame = to.data.frame, round.off = round.off,
-                      weight = weight)
+    cm <- voice::interp(y, compact.to = compact.to, drop.zeros = drop.zeros,
+                        to.data.frame = to.data.frame, round.off = round.off,
+                        weight = weight)
   }
   if(is.matrix(y) | is.data.frame(y)){
-    cm <- parallel::mclapply(y, voice::conv, compact.to = compact.to,
+    cm <- parallel::mclapply(y, voice::interp, compact.to = compact.to,
                              drop.zeros = drop.zeros,
                              to.data.frame = to.data.frame,
                              round.off = round.off, weight = weight,

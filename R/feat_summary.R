@@ -5,8 +5,8 @@
 #' @param groupBy A variable to group the summary measures. The argument must be a character vector. (Default: \code{groupBy = 'wav_path'}).
 #' @param wavPath A vector containing the path(s) to WAV files. May be both as \code{dirname} or \code{basename} formats.
 #' @param wavPathName A string containing the WAV path name. (Default: \code{wavPathName = 'wav_path'}).
-#' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.
 #' @param features Vector of features to be extracted. (Default: \code{'f0'}).
+#' @param filesRange The desired range of directory files (default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.
 #' @param sex \code{= <code>} set sex specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (Default: \code{'u'}). Used as 'gender' by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
 #' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (Default: \code{5.0}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
 #' @param numFormants \code{= <num>} <num>ber of formants (Default: \code{8}). Used by \code{wrassp::forest}.
@@ -31,7 +31,7 @@
 #'
 #' # get path to audio file
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-#' pattern <- glob2rx('*.wav'), full.names = TRUE)
+#' pattern = glob2rx('*.wav'), full.names = TRUE)
 #'
 #' # creating Extended synthetic data
 #' E <- dplyr::tibble(subject_id = c(1,1,1,2,2,2,3,3,3),
@@ -47,10 +47,10 @@ feat_summary <- function(x,
                          groupBy = 'wav_path',
                          wavPath = unique(x$wav_path),
                          wavPathName = 'wav_path',
-                         filesRange = NULL,
                          features = 'f0',
+                         filesRange = NULL,
                          sex = 'u',
-                         windowShift = 5,
+                         windowShift = 10,
                          numFormants = 8,
                          numcep = 12,
                          dcttype = c('t2', 't1', 't3', 't4'),

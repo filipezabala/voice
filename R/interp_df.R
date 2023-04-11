@@ -19,10 +19,10 @@
 #'
 #' # get path to audio file
 #' path2wav <- list.files(system.file('extdata', package = 'wrassp'),
-#' pattern <- glob2rx('*.wav'), full.names = TRUE)
+#' pattern = glob2rx('*.wav'), full.names = TRUE)
 #'
 #' # getting Media data frame via lean call
-#' M <- extract_features(dirname(path2wav), features = c('f0','formants'),
+#' M <- extract_features(dirname(path2wav), features = c('f0','fmt'),
 #' mc.cores = 1, verbose = FALSE)
 #'
 #' \donttest{
