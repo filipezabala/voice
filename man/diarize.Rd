@@ -19,13 +19,15 @@ diarize(
 
 \item{autoDir}{Logical. Must the directories tree be created? Default: \code{FALSE}. See 'Details'.}
 
-\item{pycall}{Python call.}
+\item{pycall}{Python call. See \url{https://github.com/filipezabala/voice} for details.}
+
+\item{token}{Access token needed to instantiate pretrained speaker diarization pipeline from pyannote.audio. #1. Visit \url{https://hf.co/pyannote/speaker-diarization} and accept user conditions. #2. Visit \url{https://hf.co/pyannote/segmentation} and accept user conditions. #3. Visit \url{https://hf.co/settings/tokens} to create an access token. More details at \url{https://github.com/pyannote/pyannote-audio}.}
 }
 \value{
 RTTM files in NIST standard. See 'voice::read_rttm'.
 }
 \description{
-Diarization from WAV audios using 'Python's' 'pyannote-audio' library.
+Diarization of WAV audios.
 }
 \details{
 When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.

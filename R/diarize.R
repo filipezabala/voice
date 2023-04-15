@@ -1,11 +1,12 @@
 #' Who spoke when?
 #'
-#' Diarization from WAV audios using 'Python's' 'pyannote-audio' library.
+#' Diarization of WAV audios.
 #'
 #' @param fromWav Either a file or a directory containing WAV files.
 #' @param toRttm A directory to write RTTM files. If the default \code{toRttm = NULL} is used, \code{'./voiceAudios/rttm'} is created and used.
 #' @param autoDir Logical. Must the directories tree be created? Default: \code{FALSE}. See 'Details'.
-#' @param pycall Python call.
+#' @param pycall Python call. See \url{https://github.com/filipezabala/voice} for details.
+#' @param token Access token needed to instantiate pretrained speaker diarization pipeline from pyannote.audio. #1. Visit \url{https://hf.co/pyannote/speaker-diarization} and accept user conditions. #2. Visit \url{https://hf.co/pyannote/segmentation} and accept user conditions. #3. Visit \url{https://hf.co/settings/tokens} to create an access token. More details at \url{https://github.com/pyannote/pyannote-audio}.
 #' @return RTTM files in NIST standard. See 'voice::read_rttm'.
 #' @details When \code{autoDir = TRUE}, the following directories are created: \code{'../mp3'},\code{'../rttm'}, \code{'../split'} and \code{'../musicxml'}. Use \code{getwd()} to find the parent directory \code{'../'}.
 #' @import reticulate
@@ -27,6 +28,10 @@
 diarize <- function(fromWav, toRttm = NULL, autoDir = FALSE,
                     pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8',
                     token = NULL){
+
+  if(is.null(token)){
+    stop('Must enter a token!')
+  }
 
   if(autoDir){
     wavDir <- fromWav[1]

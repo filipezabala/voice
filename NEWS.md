@@ -29,7 +29,7 @@
 . `extract_features_py.R` deprecated.
 . `voice::conv` set to `voice::interp` at lines 45 and 50 of `interp_mc.R`.
 . Functions `get_` removed from `spltw.R`.
-
+. More information given in `voice::diarize` documentation.
 
 
 - Version 0.4.19 2023-04-06
