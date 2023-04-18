@@ -18,7 +18,7 @@
 # session_info()
 
 # remove old voice
-remove.packages("voice", lib="/usr/local/lib/R/site-library")
+remove.packages('voice', lib='/usr/local/lib/R/site-library')
 
 # updating and creating manual
 # devtools::document(getwd())
@@ -84,6 +84,7 @@ devtools::check_win_oldrelease()
 
 # send to CRAN
 devtools::spell_check()
+rhub::validate_email()
 devtools::check_rhub()
 # devtools::check_rhub(env_vars = c(`_R_CHECK_FORCE_SUGGESTS_` = "false"))
 
