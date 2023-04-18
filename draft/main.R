@@ -167,6 +167,7 @@ devtools::install_github('filipezabala/voice')
 
 # attaching
 library(voice)
+?diarize
 ?interp_df
 ?interp_mc
 ?extract_features

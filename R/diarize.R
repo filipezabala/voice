@@ -15,7 +15,7 @@
 #' library(voice)
 #'
 #' wavDir <- list.files(system.file('extdata', package = 'wrassp'),
-#' pattern <- glob2rx('*.wav'), full.names = TRUE)
+#' pattern = glob2rx('*.wav'), full.names = TRUE)
 #'
 #' voice::diarize(fromWav = unique(dirname(wavDir)),
 #' toRttm = tempdir(),
