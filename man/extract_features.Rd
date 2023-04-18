@@ -68,6 +68,8 @@ extract_features(
 \item{round.to}{Number of decimal places to round to. (Default: \code{NULL})}
 
 \item{verbose}{Logical. Should the running status be showed? (Default: \code{FALSE})}
+
+\item{pycall}{Python call. See \url{https://github.com/filipezabala/voice} for details.}
 }
 \value{
 A Media data frame containing the selected features.

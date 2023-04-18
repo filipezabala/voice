@@ -20,6 +20,7 @@
 #' @param freq Frequency in Hz to write the converted files when \code{stereo2mono=TRUE}. (Default: \code{44100})
 #' @param round.to Number of decimal places to round to. (Default: \code{NULL})
 #' @param verbose Logical. Should the running status be showed? (Default: \code{FALSE})
+#' @param pycall Python call. See \url{https://github.com/filipezabala/voice} for details.
 #' @return A Media data frame containing the selected features.
 #' @details The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2023), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2023) and 'rpf' to 'formant position removal' (rpf2:rpf8) by Zabala (2023).
 #' @references Levinson N. (1946). The Wiener (root mean square) error criterion in filter design and prediction. Journal of Mathematics and Physics, 25(1-4), 261–278. (\doi{10.1002/SAPM1946251261})

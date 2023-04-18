@@ -33,7 +33,7 @@ library(voice)
 
 # get path to audio file
 wavDir <- list.files(system.file('extdata', package = 'wrassp'),
-                     pattern <- glob2rx('*.wav'), full.names = TRUE)
+                     pattern = glob2rx('*.wav'), full.names = TRUE)
 ```
 
 ### Examples
@@ -62,16 +62,9 @@ voice::tag(E, groupBy = 'subject_id')
 
 #### Get audio {-}
 ```{r, message=FALSE, warning=FALSE}
-url0 <- 'https://github.com/filipezabala/voiceAudios/blob/main/mp3/doremi.mp3?raw=true'
-download.file(url0, paste0(tempdir(), '/doremi.mp3'), mode = 'wb')
+url0 <- 'https://github.com/filipezabala/voiceAudios/blob/main/wav/doremi.wav?raw=true'
+download.file(url0, paste0(tempdir(), '/doremi.wav'), mode = 'wb')
 # embedr::embed_audio(url0)X
-```
-
-#### Convert mp3 to wav mono {-}
-```{r, message=FALSE, warning=FALSE}
-cmd <- paste0('cd ', tempdir(), ';', 
-' for i in *.[Mm][Pp]3; do ffmpeg -i "$i" -ac 1 "./${i%.*}.wav"; done')
-system(cmd)
 ```
 
 #### Extract features {-}
@@ -99,7 +92,7 @@ legend(900, 320, 'Do (C)' , bty = 'n')
 #### Compress to 1% {-}
 ```{r, message=FALSE, warning=FALSE}
 # compress
-M1 <- voice::conv_df(M, 0.01, id = 3)
+M1 <- voice::interp_df(M, 0.01, id = 3)
 
 # assign notes
 M1$f0_spn <- voice::notes(M1$f0)

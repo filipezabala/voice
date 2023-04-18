@@ -58,6 +58,7 @@ unlink('/tmp/RtmpdR6Vve/voice.Rcheck/__pycache__', recursive = TRUE)
 unlink('/tmp/qtsingleapp-mscore-64b8-3e8-lockfile', recursive = TRUE)
 unlink('/tmp/runtime-filipe', recursive = TRUE)
 
+# sudo find / -name qtsingleapp-mscore-7531-1f5-lockfile
 # sudo find / -name runtime-filipe
 # sudo find / -name qtsingleapp-mscore-64b8-3e8-lockfil
 # sudo find / -name temp_diarization-pyannote.py

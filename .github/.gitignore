@@ -1,1 +1,7 @@
 *.html
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+^\.travis\.yml$
+^\.github$
