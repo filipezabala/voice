@@ -84,7 +84,7 @@ devtools::check_win_oldrelease()
 
 # send to CRAN
 devtools::spell_check()
-rhub::validate_email()
+# rhub::validate_email()
 devtools::check_rhub()
 # devtools::check_rhub(env_vars = c(`_R_CHECK_FORCE_SUGGESTS_` = "false"))
 
