@@ -20,6 +20,14 @@
 
 
 
+- Version 0.4.21 2023-04-20
+. Dropped the section 3 from `voicegnette_R` after Prof Brian Ripley's email:
+Dear maintainer,
+Please see the problems shown on
+<https://cran.r-project.org/web/checks/check_results_voice.html>.
+Please correct before 2023-05-03 to safely retain your package on CRAN.
+The CRAN Team
+
 - Version 0.4.20 2023-04-20
 . `filesRange` and `features` switched. Now `filesRange` is in the 3rd and `features` in the 2nd positions in the argument vector. This change impacts the examples of `interp_df.R`, `interp_mc.R`, `smooth_df.R`, `tag.R`.
 . `f0_praat`, ..., `f8_praat` implemented in `extract_features.R`.
