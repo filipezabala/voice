@@ -168,15 +168,14 @@ pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requ
 
 
 ## MacOS Installation
-The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [MacOS Ventura](https://www.apple.com/macos/ventura/). Note the software versions during installation, inconsistency reporting is welcome.  
+The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [MacOS Sonoma](https://www.apple.com/macos/sonoma/). Note the software versions during installation, inconsistency reporting is welcome.  
 If the error "The package %@ is missing or invalid" appears during the upgrading from MacOS Catalina to Big Sur, press simultaneously `command + option + p + r` at restart. The processes may be accompanied using the keys `command + space 'Activity Monitor'`.    
 > Without the following Python items 3 and 11, you may run all the functions except `diarize` and `extract_features` calling `f0_praat` and `fmt_praat` features. These functions run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
 
 Hardware  
- . MacBook Air (13-inch, 2017)  
- . Processor 1.8 GHz Dual-Core Intel Core i5  
- . Memory 8GB 1600 MHz DDR3  
- . Graphics Intel HD Graphics 6000 1536 MB  
+ . MacBook Air (13-inch, 2020)  
+ . Chip Apple M1
+ . Memory 8GB LPDDR4
 
 ### 1. [Homebrew](https://brew.sh/)
 Install Homebrew, 'The Missing Package Manager for macOS (or Linux)' and remember to `brew doctor` eventually. At terminal (`command + space 'terminal'`) run:
@@ -223,10 +222,13 @@ The XQuartz project is an open-source effort to develop a version of the [X.Org 
 You may prefer to proceed using the installer, see documentation.
 
 ```bash
-wget https://github.com/macports/macports-base/releases/download/v2.7.2/MacPorts-2.7.2.tar.bz2
-tar xjvf MacPorts-2.7.2.tar.bz2
-cd MacPorts-2.7.2
-cd ../; rm -rf MacPorts-2.7.2*
+curl -O https://distfiles.macports.org/MacPorts/MacPorts-2.9.1.tar.bz2
+tar xf MacPorts-2.9.1.tar.bz2
+cd MacPorts-2.9.1
+./configure
+make
+sudo make install
+cd ../; rm -rf MacPorts-2.9.1*
 sudo nano /etc/paths
 ```
 Add the following lines at the end of the file.
@@ -234,7 +236,11 @@ Add the following lines at the end of the file.
 /opt/local/bin
 /opt/local/sbin
 ```
-Use Ctrl+O and return to save the file and Ctrl+X to cloe nano editor. Reboot your terminal.
+Use Ctrl+O and return to save the file and Ctrl+X to close nano editor. Reboot your terminal and use
+```bash
+sudo port -v selfupdate
+sudo port upgrade outdated
+```
 
 ### 7. [tcllib](https://ports.macports.org/port/tcllib/)
 
@@ -246,9 +252,9 @@ sudo port install tcllib
 ### 7. [MuseScore](https://musescore.org/)
 MuseScore is an open source notation software.  
  . Download and run https://musescore.org/en/download/musescore.dmg  
- . Drag MuseScore 3 to Applications folder   
- . Will take 314 MB of disk space   
- . Unmount MuseScore-3.6.2 virtual disk and send MuseScore-3.6.2.548020600.dmg to Trash   
+ . Drag MuseScore 4 to Applications folder   
+ . Will take around 320 MB of disk space   
+ . Unmount MuseScore-4.2.1 virtual disk and send MuseScore-4.2.1.240230937.dmg to Trash   
 
 ### 8. [R](https://www.r-project.org)
 R is a free software environment for statistical computing and graphics.  
@@ -285,7 +291,7 @@ install.packages('temp', repos = NULL, type='source')
 ```
 
 ### 11. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-Miniconda is a free minimal installer for [conda](https://docs.conda.io/), an open source package, dependency and environment management system for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN and more, that runs on Windows, macOS and Linux.
+Miniconda is a free minimal installer for [conda](https://docs.conda.io/), an open source package, dependency and environment management system for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN and more, that runs on Windows, macOS and Linux. For 64-bit version use the following:
 
 ```bash
 cd ~/Downloads
@@ -293,11 +299,20 @@ wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_
 cd repo.anaconda.com/miniconda/
 bash Miniconda3-latest-MacOSX-x86_64.sh
 ```
-Do you accept the license terms? [yes|no] `yes`.
 
-Miniconda3 will now be installed into this location: /Users/[your_user]/miniconda3 [ENTER]
+For M1 version use the following:
 
-Do you wish the installer to initialize Miniconda3 by running conda init? `yes`.   
+```bash
+cd ~/Downloads
+wget -r -np -k https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-arm64.sh
+cd repo.anaconda.com/miniconda/
+bash Miniconda3-latest-MacOSX-arm64.sh
+```
+
+In order to continue the installation process, please review the license
+agreement. Please, press ENTER to continue `ENTER`.
+
+You can undo this by running `conda init --reverse $SHELL`? `yes`
 
 Close and reopen terminal.  
 
