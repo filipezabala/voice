@@ -291,7 +291,9 @@ install.packages('temp', repos = NULL, type='source')
 ```
 
 ### 11. [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-Miniconda is a free minimal installer for [conda](https://docs.conda.io/), an open source package, dependency and environment management system for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN and more, that runs on Windows, macOS and Linux. For 64-bit version use the following:
+Miniconda is a free minimal installer for [conda](https://docs.conda.io/), an open source package, dependency and environment management system for any language—Python, R, Ruby, Lua, Scala, Java, JavaScript, C/ C++, FORTRAN and more, that runs on Windows, macOS and Linux. 
+
+For 64-bit version use the following:
 
 ```bash
 cd ~/Downloads
@@ -328,11 +330,23 @@ conda create -n pyvoice38 python=3.8
 ```
 The following (NEW) packages will be downloaded/INSTALLED:... Proceed ([y]/n)? `y`   
 
-Close and reopen terminal.
+Close and reopen terminal. 
+
+```bash
+conda activate pyvoice38
+```
+
+For 64-bit version use the following:
 
 ```bash
 conda activate pyvoice38
 pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 ```
 
-# voice
+For M1 version use the following:
+
+```bash
+brew install pipenv
+pipenv install -e git+ssh://github.com/Farissoliman/pyannote-audio.git@patch-1#egg=pyannote-audio
+pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
+```
