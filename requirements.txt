@@ -1,4 +1,3 @@
-hmmlearn >=0.2.7
 torch
 torchvision
 torchaudio
