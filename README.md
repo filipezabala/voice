@@ -156,14 +156,14 @@ conda update -n base -c defaults conda
 The following packages will be INSTALLED/REMOVED/UPDATED/DOWNGRADED:... Proceed ([y]/n)? `y` 
 
 ```bash
-conda create -n pyvoice38 python=3.8
+conda create -n pyvoice python=3.12
 ```
 
 The following (NEW) packages will be downloaded/INSTALLED:... Proceed ([y]/n)? `y`   
 
 ```bash
-conda activate pyvoice38
-pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
+conda activate pyvoice
+pip install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 ```
 
 
@@ -326,27 +326,13 @@ conda update -n base -c defaults conda
 The following packages will be INSTALLED/REMOVED/UPDATED/DOWNGRADED:... Proceed ([y]/n)? `y` 
 
 ```bash
-conda create -n pyvoice38 python=3.8
+conda create -n pyvoice python=3.12
 ```
 The following (NEW) packages will be downloaded/INSTALLED:... Proceed ([y]/n)? `y`   
 
 Close and reopen terminal. 
 
 ```bash
-conda activate pyvoice38
-```
-
-For 64-bit version use the following:
-
-```bash
-conda activate pyvoice38
-pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
-```
-
-For M1 version use the following:
-
-```bash
-brew install pipenv
-pipenv install -e git+ssh://github.com/Farissoliman/pyannote-audio.git@patch-1#egg=pyannote-audio
-pip3 install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
+conda activate pyvoice
+pip install -r https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 ```
