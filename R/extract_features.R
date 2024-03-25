@@ -90,7 +90,7 @@ extract_features <- function(x,
                              freq = 44100,
                              round.to = NULL,
                              verbose = FALSE,
-                             pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8'){
+                             pycall = '~/miniconda3/envs/pyvoice/bin/python'){
 
   # time processing
   pt0 <- proc.time()

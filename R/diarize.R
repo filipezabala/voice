@@ -26,7 +26,7 @@
 #' }
 #' @export
 diarize <- function(fromWav, toRttm = NULL, autoDir = FALSE,
-                    pycall = '~/miniconda3/envs/pyvoice38/bin/python3.8',
+                    pycall = '~/miniconda3/envs/pyvoice/bin/python',
                     token = NULL){
 
   if(is.null(token)){
