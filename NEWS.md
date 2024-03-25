@@ -4,6 +4,12 @@
 
 ### NEWS.md setup
 
+**Version 0.4.24 2022-MM-DD**
+
+- `'pyannote/speaker-diarization-3.1'` set to `'pyannote/speaker-diarization-3.1'` @ diarize.R
+- 
+
+
 **Version 0.4.22 2022-MM-DD**
 
 - `pycall` set from `'~/miniconda3/envs/pyvoice38/bin/python3.8'` to `'~/miniconda3/envs/pyvoice/bin/python'` @ diarize.R and extract_features.R

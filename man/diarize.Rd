@@ -21,7 +21,12 @@ diarize(
 
 \item{pycall}{Python call. See \url{https://github.com/filipezabala/voice} for details.}
 
-\item{token}{Access token needed to instantiate pretrained speaker diarization pipeline from pyannote.audio. #1. Visit \url{https://hf.co/pyannote/speaker-diarization} and accept user conditions. #2. Visit \url{https://hf.co/pyannote/segmentation} and accept user conditions. #3. Visit \url{https://hf.co/settings/tokens} to create an access token. More details at \url{https://github.com/pyannote/pyannote-audio}.}
+\item{token}{Access token needed to instantiate pretrained speaker diarization
+pipeline from pyannote.audio. #1 Install pyannote.audio 3.1 with pip install
+pyannote.audio (already listed @ https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt).
+#2. Accept \url{https://hf.co/pyannote/segmentation-3.0} user conditions.
+#3 Accept \url{https://hf.co/pyannote-speaker-diarization-3.1} user conditions.
+#4. Create access token at \url{https://hf.co/settings/tokens}.}
 }
 \value{
 RTTM files in NIST standard. See 'voice::read_rttm'.
