@@ -1,7 +1,7 @@
 Package: voice
 Type: Package
 Title: Tools for Voice Analysis, Speaker Recognition and Mood Inference
-Version: 0.4.22
+Version: 0.4.23
 Date: 2024-03-25
 Authors@R: person("Zabala", "Filipe J.", email = "filipezabala@gmail.com", role = c("cre","aut"))
 Maintainer: Zabala Filipe J. <filipezabala@gmail.com>
@@ -14,6 +14,6 @@ Suggests: gm, knitr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 VignetteBuilder: knitr
 Language: en-US

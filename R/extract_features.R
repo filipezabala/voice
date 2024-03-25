@@ -1,7 +1,7 @@
 #' Extract audio features
 #' @description Extracts features from WAV audio files.
 #' @param x A vector containing either files or directories of audio files in WAV format.
-#' @param features Vector of features to be extracted. (Default: \code{'f0','fmt','rf','rcf','rpf','rfc','mfcc'}). The \code{'fmt_praat'} feature may take long time processing. The following features may contain a variable number of columns: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.
+#' @param features Vector of features to be extracted. (Default: \code{'f0','fmt','rf','rcf','rpf','rfc','mfcc'}). Available features: \code{'f0','f0_mhs','f0_praat','fmt','fmt_praat','zcr','rms','gain','rfc','ac','cep','dft','css','lps','mfcc','df','pf','rf','rcf','rpf'}.
 #' @param filesRange The desired range of directory files (Default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.
 #' @param sex \code{= <code>} set sex specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (Default: \code{'u'}). Used as 'gender' by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
 #' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (Default: \code{5.0}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.
@@ -22,7 +22,14 @@
 #' @param verbose Logical. Should the running status be showed? (Default: \code{FALSE})
 #' @param pycall Python call. See \url{https://github.com/filipezabala/voice} for details.
 #' @return A Media data frame containing the selected features.
-#' @details The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2023), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2023) and 'rpf' to 'formant position removal' (rpf2:rpf8) by Zabala (2023).
+#' @details The feature 'df' corresponds to 'formant dispersion' (df2:df8) by
+#' Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena
+#' (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2023), 'rcf' to
+#' 'formant cumulated removal' (rcf2:rcf8) by Zabala (2023) and 'rpf' to
+#' 'formant position removal' (rpf2:rpf8) by Zabala (2023).
+#' The \code{'fmt_praat'} feature may take long time processing. The following
+#' features may contain a variable number of columns: \code{'cep'}, \code{'dft'},
+#' \code{'css'} and \code{'lps'}.
 #' @references Levinson N. (1946). The Wiener (root mean square) error criterion in filter design and prediction. Journal of Mathematics and Physics, 25(1-4), 261–278. (\doi{10.1002/SAPM1946251261})
 #'
 #' Durbin J. (1960). “The fitting of time-series models.” Revue de l’Institut International de Statistique, pp. 233–244. (\url{https://www.jstor.org/stable/1401322})

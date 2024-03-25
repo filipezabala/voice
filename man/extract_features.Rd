@@ -25,13 +25,13 @@ extract_features(
   freq = 44100,
   round.to = NULL,
   verbose = FALSE,
-  pycall = "~/miniconda3/envs/pyvoice38/bin/python3.8"
+  pycall = "~/miniconda3/envs/pyvoice/bin/python"
 )
 }
 \arguments{
 \item{x}{A vector containing either files or directories of audio files in WAV format.}
 
-\item{features}{Vector of features to be extracted. (Default: \code{'f0','fmt','rf','rcf','rpf','rfc','mfcc'}). The \code{'fmt_praat'} feature may take long time processing. The following features may contain a variable number of columns: \code{'cep'}, \code{'dft'}, \code{'css'} and \code{'lps'}.}
+\item{features}{Vector of features to be extracted. (Default: \code{'f0','fmt','rf','rcf','rpf','rfc','mfcc'}). Available features: \code{'f0','f0_mhs','f0_praat','fmt','fmt_praat','zcr','rms','gain','rfc','ac','cep','dft','css','lps','mfcc','df','pf','rf','rcf','rpf'}.}
 
 \item{filesRange}{The desired range of directory files (Default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.}
 
@@ -78,7 +78,14 @@ A Media data frame containing the selected features.
 Extracts features from WAV audio files.
 }
 \details{
-The feature 'df' corresponds to 'formant dispersion' (df2:df8) by Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2023), 'rcf' to 'formant cumulated removal' (rcf2:rcf8) by Zabala (2023) and 'rpf' to 'formant position removal' (rpf2:rpf8) by Zabala (2023).
+The feature 'df' corresponds to 'formant dispersion' (df2:df8) by
+Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena
+(2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2023), 'rcf' to
+'formant cumulated removal' (rcf2:rcf8) by Zabala (2023) and 'rpf' to
+'formant position removal' (rpf2:rpf8) by Zabala (2023).
+The \code{'fmt_praat'} feature may take long time processing. The following
+features may contain a variable number of columns: \code{'cep'}, \code{'dft'},
+\code{'css'} and \code{'lps'}.
 }
 \examples{
 library(voice)
