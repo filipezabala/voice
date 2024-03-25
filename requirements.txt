@@ -1,4 +1,5 @@
+pyannote-audio
+speechbrain
 torch
 torchvision
 torchaudio
-pyannote-audio
