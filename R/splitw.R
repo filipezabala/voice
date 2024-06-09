@@ -206,7 +206,7 @@ splitw <- function(fromWav,
     }
     for(i in 1:length(audio)){
       for(j in 1:length(sa[[i]])){
-        tuneR::writeWave(sa[[i]][[j]], filename = pathNameSplit[[i]][j])
+        try(tuneR::writeWave(sa[[i]][[j]], filename = pathNameSplit[[i]][j]))
       }
     }
   }

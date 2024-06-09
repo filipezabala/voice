@@ -1,13 +1,18 @@
-## version 0.4.22
+## version 0.4.24
 
 ---
 
 ### NEWS.md setup
 
-**Version 0.4.24 2022-MM-DD**
+**Version 0.4.25 2024-06-09**
 
-- `'pyannote/speaker-diarization-3.1'` set to `'pyannote/speaker-diarization-3.1'` @ diarize.R
-- 
+- Added `try` to line 209 of `splitw.R`.
+
+
+**Version 0.4.24 2024-03-25**
+
+- `'pyannote/speaker-diarization'` set to `'pyannote/speaker-diarization-3.1'` @ diarize.R
+- Added `speechbrain` to https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt
 
 
 **Version 0.4.22 2022-MM-DD**
