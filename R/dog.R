@@ -9,6 +9,7 @@
 #'
 #' # Print the dog information
 #' print(my_dog)
+#' class(my_dog)
 #' @export
 
 # Define the "Dog" class
