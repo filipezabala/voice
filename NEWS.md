@@ -1,8 +1,13 @@
-## version 0.4.24
+## version 0.5.0
 
 ---
 
 ### NEWS.md setup
+
+**Version 0.5.0 2025-03-11**
+
+- All functions re-written using S4 method.
+
 
 **Version 0.4.25 2024-06-09**
 
