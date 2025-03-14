@@ -1,7 +1,7 @@
 #' Extract audio features
 #' @description Extracts features from WAV audio files.
 #' @param x A vector containing either files or directories of audio files in WAV format.
-#' @param features Vector of features to be extracted. (Default: \code{'f0','fmt','rf','rcf','rpf','rfc','mfcc'}). Available features: \code{'f0','f0_mhs','f0_praat','fmt','fmt_praat','zcr','rms','gain','rfc','ac','cep','dft','css','lps','mfcc','df','pf','rf','rcf','rpf'}.
+#' @param features Vector of features to be extracted. (Default: \code{'f0','fmt','gain'}). Available features: \code{'f0','f0_mhs','f0_praat','fmt','fmt_praat','zcr','rms','gain','rfc','ac','cep','dft','css','lps','mfcc','df','pf','rf','rcf','rpf'}.
 #' @param filesRange The desired range of directory files (Default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.
 #' @param sex \code{= <code>} set sex specific parameters where <code> = \code{'f'}[emale], \code{'m'}[ale] or \code{'u'}[nknown] (Default: \code{'u'}). Used as 'gender' by \code{wrassp::ksvF0}, \code{wrassp::forest} and \code{wrassp::mhsF0}.
 #' @param windowShift \code{= <dur>} set analysis window shift to <dur>ation in ms (Default: \code{5.0}). Used by \code{wrassp::ksvF0}, \code{wrassp::forest}, \code{wrassp::mhsF0}, \code{wrassp::zcrana}, \code{wrassp::rfcana}, \code{wrassp::acfana}, \code{wrassp::cepstrum}, \code{wrassp::dftSpectrum}, \code{wrassp::cssSpectrum} and \code{wrassp::lpsSpectrum}.

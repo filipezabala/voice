@@ -31,7 +31,7 @@ extract_features(
 \arguments{
 \item{x}{A vector containing either files or directories of audio files in WAV format.}
 
-\item{features}{Vector of features to be extracted. (Default: \code{'f0','fmt','rf','rcf','rpf','rfc','mfcc'}). Available features: \code{'f0','f0_mhs','f0_praat','fmt','fmt_praat','zcr','rms','gain','rfc','ac','cep','dft','css','lps','mfcc','df','pf','rf','rcf','rpf'}.}
+\item{features}{Vector of features to be extracted. (Default: \code{'f0','fmt','gain'}). Available features: \code{'f0','f0_mhs','f0_praat','fmt','fmt_praat','zcr','rms','gain','rfc','ac','cep','dft','css','lps','mfcc','df','pf','rf','rcf','rpf'}.}
 
 \item{filesRange}{The desired range of directory files (Default: \code{NULL}, i.e., all files). Should only be used when all the WAV files are in the same folder.}
 

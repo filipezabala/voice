@@ -5,6 +5,7 @@
 #' @return A tibble containing file name <chr> and audio time <dbl> in seconds.
 #' @examples
 #' # Create a Dog object
+#' library(voice)
 #' my_dog <- Dog("Buddy", "Golden Retriever")
 #'
 #' # Print the dog information

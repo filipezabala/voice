@@ -23,9 +23,6 @@ ini0 <- Sys.time()
 
 ## 0. Installation
 https://github.com/filipezabala/voice
-```{r, eval=FALSE}
-devtools::install_github('filipezabala/voice')
-```
 
 
 ## 1. Extract features

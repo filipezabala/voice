@@ -21,13 +21,15 @@ notes <- function(x, method = 'spn', moving.average = FALSE, k = 11){
     x <- zoo::rollmean(x, k)
   }
   x <- as.matrix(x)
-  freq <- voice::notes_freq()$freq
-  distance <- diff(freq)
-  lf <- length(freq)
-  freqhalf <- c(freq[1] - distance[1]/2,
-                freq[-lf] + distance/2,
-                freq[lf]+distance[lf-1]/2)
-  spn <- voice::notes_freq()$spn[findInterval(x, freqhalf)]
+  # freq <- voice::notes_freq()$freq
+  # distance <- diff(freq)
+  # lf <- length(freq)
+  # freqhalf <- c(freq[1] - distance[1]/2,
+  #               freq[-lf] + distance/2,
+  #               freq[lf]+distance[lf-1]/2)
+  freqs <- c(voice::notes_freq()$spn.lo,
+             voice::notes_freq()$spn.hi[108])
+  spn <- voice::notes_freq()$spn[findInterval(x, freqs)]
   if(method == 'spn'){
     return(spn)
   } else if(method == 'midi'){

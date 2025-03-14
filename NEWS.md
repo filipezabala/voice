@@ -4,9 +4,19 @@
 
 ### NEWS.md setup
 
-**Version 0.5.0 2025-03-11**
+**Version 0.5.0 2025-03-31**
 
-- All functions re-written using S4 method.
+- Class 'voice' created, all functions re-written using S4 method.
+
+
+**Version 0.4.26 2025-03-14**
+
+- Package title updated to 'Voice Analysis, Speaker Recognition and Mood Inference via music theory'.
+- Removed `'mfcc'`,`'rf'`,`'rcf'`,`'rpf'`,`'rfc'` from the default argument of `extract_features.R`
+- Added `'gain'` to the default argument of `extract_features.R`
+- Added function `piano_plot.R`.
+- Added function `cut_audio.R`.
+- Added function `assign_notes.R`.
 
 
 **Version 0.4.25 2024-06-09**
