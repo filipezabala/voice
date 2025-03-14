@@ -75,10 +75,7 @@
 #' table(basename(M3$wav_path))
 #' @export
 extract_features <- function(x,
-                             features = c('f0', 'fmt',        # F0 and formants
-                                          'rf', 'rpf', 'rcf', # Formant removals
-                                          'rfc',              # (R)e(F)lection (C)oefficients
-                                          'mfcc'),            # (M)el (Frequency (C)epstral (C)oefficients
+                             features = c('f0', 'fmt', 'gain'), # F0, formants and gain
                              filesRange = NULL,
                              sex = 'u',
                              windowShift = 10,

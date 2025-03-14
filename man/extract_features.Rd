@@ -6,7 +6,7 @@
 \usage{
 extract_features(
   x,
-  features = c("f0", "fmt", "rf", "rpf", "rcf", "rfc", "mfcc"),
+  features = c("f0", "fmt", "gain"),
   filesRange = NULL,
   sex = "u",
   windowShift = 10,
