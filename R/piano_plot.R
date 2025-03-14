@@ -74,8 +74,8 @@ piano_plot <- function(data, num_fmt = 0){
   # Adding frequency limits
   freqs <- c(voice::notes_freq()$spn.lo,
              voice::notes_freq()$spn.hi[108])
-  fltr <- freqs >= min(data[,fmt], na.rm = TRUE) &
-    freqs <= max(data[,fmt], na.rm = TRUE)
+  fltr <- freqs >= min(data[,fmt_vec], na.rm = TRUE) &
+    freqs <= max(data[,fmt_vec], na.rm = TRUE)
 
   fig <- fig +
     ggplot2::geom_hline(yintercept = freqs[fltr], col = 'grey') +
