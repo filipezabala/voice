@@ -12,7 +12,7 @@ piano_plot(data, num_fmt = 0)
 \item{num_fmt}{Number of the desired formant (includes f0 for simplicity). Default: \code{num_fmt = 0}.}
 }
 \description{
-Piano plot showing the notes in Scientific Pitch Notation
+Piano plot showing the notes in Scientific Pitch Notation.
 }
 \examples{
 library(voice)
