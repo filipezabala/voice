@@ -39,7 +39,7 @@ piano_plot <- function(data, num_fmt = 0){
   df_long <- tibble::tibble(x_cut, f0_cut = unlist(f0_cut), gain_cut = unlist(gain_cut))
 
   # Base figure
-  fig <- ggplot2::ggplot(data, aes(x = x)) +
+  fig <- ggplot2::ggplot(data, ggplot2::aes(x = x)) +
     xlab('Sample') +
     ylab('Frequency') +
     ggtitle('Frequencies and notes in SPN')
@@ -47,9 +47,9 @@ piano_plot <- function(data, num_fmt = 0){
   # Adding f0
   if(sum(num_fmt == 0)){
     fig <- fig +
-      ggplot2::geom_line(aes(y = f0, col = col_gain), data = data) +
-      # ggplot2::geom_line(aes(y = f0), data = data) +
-      # ggplot2::geom_point(aes(color = df_long$gain_cut)) +
+      ggplot2::geom_line(ggplot2::aes(y = f0, col = col_gain), data = data) +
+      # ggplot2::geom_line(ggplot2::aes(y = f0), data = data) +
+      # ggplot2::geom_point(ggplot2::aes(color = df_long$gain_cut)) +
       ggplot2::scale_colour_gradient(low = "blue", high = "red") +
       ggplot2::xlim(beg-10, end)
     # fig
@@ -58,7 +58,7 @@ piano_plot <- function(data, num_fmt = 0){
   # Add ingf1
   if(sum(num_fmt == 1)){
     fig <- fig +
-      ggplot2::geom_line(aes(y = f1, col = col_gain), data = data) +
+      ggplot2::geom_line(ggplot2::aes(y = f1, col = col_gain), data = data) +
       ggplot2::scale_colour_gradient(low = "blue", high = "red") +
       ggplot2::xlim(beg-10, end)
   }
@@ -66,7 +66,7 @@ piano_plot <- function(data, num_fmt = 0){
   # Adding f2
   if(sum(num_fmt == 2)){
     fig <- fig +
-      ggplot2::geom_line(aes(y = f2, col = col_gain), data = data) +
+      ggplot2::geom_line(ggplot2::aes(y = f2, col = col_gain), data = data) +
       ggplot2::scale_colour_gradient(low = "blue", high = "red") +
       ggplot2::xlim(beg-10, end)
   }

@@ -13,7 +13,7 @@
 
 **Version 0.4.27 2025-03-14**
 
-- Minor corrections.
+- Imports `ggplot2``.
 
 
 **Version 0.4.26 2025-03-14**
