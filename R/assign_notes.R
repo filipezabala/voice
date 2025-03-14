@@ -15,6 +15,7 @@
 #' assign_notes(M, fmt = 0) # f0
 #' assign_notes(M, fmt = 1) # f1
 #' assign_notes(M, fmt = 2) # f2
+#' @export
 assign_notes <- function(x, fmt = 0,
                          min_points = 4,
                          min_percentile = 0.75,

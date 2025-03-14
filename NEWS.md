@@ -9,6 +9,13 @@
 - Class 'voice' created, all functions re-written using S4 method.
 
 
+
+
+**Version 0.4.27 2025-03-14**
+
+- Minor corrections.
+
+
 **Version 0.4.26 2025-03-14**
 
 - Package title updated to 'Voice Analysis, Speaker Recognition and Mood Inference via music theory'.

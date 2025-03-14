@@ -89,6 +89,6 @@ summary(M)
 
 ### 3.4 Plot
 ```{r}
-piano_plot(M, 0:3)
+voice::piano_plot(M, 0:2)
 ```
 

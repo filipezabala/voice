@@ -1,6 +1,6 @@
 #' Piano plot
 #'
-#' @description Piano plot showing the notes in Scientific Pitch Notation
+#' @description Piano plot showing the notes in Scientific Pitch Notation.
 #' @param data Data frame or tibble containing the desired frequencies to be plotted.
 #' @param num_fmt Number of the desired formant (includes f0 for simplicity). Default: \code{num_fmt = 0}.
 #' @examples
@@ -15,6 +15,7 @@
 #' @references https://en.wikipedia.org/wiki/12_equal_temperament
 #'
 #' https://en.wikipedia.org/wiki/Scientific_pitch_notation
+#' @export
 piano_plot <- function(data, num_fmt = 0){
 
   # Preparing data
