@@ -40,9 +40,9 @@ piano_plot <- function(data, num_fmt = 0){
 
   # Base figure
   fig <- ggplot2::ggplot(data, ggplot2::aes(x = x)) +
-    xlab('Sample') +
-    ylab('Frequency') +
-    ggtitle('Frequencies and notes in SPN')
+    ggplot2::xlab('Sample') +
+    ggplot2::ylab('Frequency') +
+    ggplot2::ggtitle('Frequencies and notes in SPN')
 
   # Adding f0
   if(sum(num_fmt == 0)){

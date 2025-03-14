@@ -11,9 +11,15 @@
 
 
 
-**Version 0.4.27 2025-03-14**
+**Version 0.4.28 2025-03-14**
 
 - Imports `ggplot2``.
+- Adds `ggplot2::` at `aes`, `xlab`, `ylab` and `ggtitle`.
+
+
+**Version 0.4.27 2025-03-14**
+
+- Minor corrections.
 
 
 **Version 0.4.26 2025-03-14**
