@@ -31,10 +31,10 @@ piano_plot <- function(data, num_fmt = 0){
   col_gain <- data$gain + abs(min(data$gain, na.rm = TRUE)) + 0.1
 
   # Non NA
-  f0_cut <- cut_audio(data$f0)
+  f0_cut <- voice::cut_audio(data$f0)
   cs_f0 <- cumsum(!is.na(data$f0))
   x_cut <- which(as.logical(diff(cs_f0)))+1
-  gain_cut <- cut_audio(data$gain, data$f0)
+  gain_cut <- voice::cut_audio(data$gain, data$f0)
   df_long <- tibble(x_cut, f0_cut = unlist(f0_cut), gain_cut = unlist(gain_cut))
 
   # Base figure

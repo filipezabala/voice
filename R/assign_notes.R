@@ -23,8 +23,8 @@ assign_notes <- function(x, fmt = 0,
   fmt_vec <- paste0('f', fmt)
 
   # cutting audio by f0 to garantee same number of notes along f0/formants
-  fmt_list <- cut_audio(x[,fmt_vec], x[,'f0'])
-  gain_list <- cut_audio(x[,'gain'], x[,'f0'])
+  fmt_list <- voice::cut_audio(x[,fmt_vec], x[,'f0'])
+  gain_list <- voice::cut_audio(x[,'gain'], x[,'f0'])
 
   # filtering min_points in f0/formant
   fmt_min_points <- sapply(fmt_list, length)
