@@ -36,7 +36,7 @@ piano_plot <- function(data, num_fmt = 0){
   cs_f0 <- cumsum(!is.na(data$f0))
   x_cut <- which(as.logical(diff(cs_f0)))+1
   gain_cut <- voice::cut_audio(data$gain, data$f0)
-  df_long <- tibble(x_cut, f0_cut = unlist(f0_cut), gain_cut = unlist(gain_cut))
+  df_long <- tibble::tibble(x_cut, f0_cut = unlist(f0_cut), gain_cut = unlist(gain_cut))
 
   # Base figure
   fig <- ggplot2::ggplot(data, aes(x = x)) +
