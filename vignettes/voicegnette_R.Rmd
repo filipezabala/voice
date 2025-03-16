@@ -82,14 +82,54 @@ system(cmd)
 ```
 
 ### 3.3 Media data
-```{r}
+```{r, message=FALSE, warning=FALSE}
 M <- voice::extract_features(tempdir())
 summary(M)
 ```
 
 ### 3.4 Plot
-```{r}
-voice::piano_plot(M, 0)
-voice::piano_plot(M, 0:1)
+```{r, message=FALSE, warning=FALSE, fig.width=7.5, fig.height=4}
+voice::piano_plot(M, 0) # f0
+voice::piano_plot(M, 0:1) # f0 + f1
 ```
 
+### 3.5 Assign notes
+```{r, message=FALSE, warning=FALSE}
+(f0_spn <- voice::assign_notes(M, fmt = 0, min_points = 22, min_percentile = .85)) # f0
+(f1_spn <- voice::assign_notes(M, fmt = 1, min_points = 22, min_percentile = .85)) # f1
+(f2_spn <- voice::assign_notes(M, fmt = 2, min_points = 22, min_percentile = .85)) # f2
+```
+
+### 3.6 Sheet music
+Must have [MuseScore](https://musescore.org/en) and [gm](https://flujoo.github.io/gm/articles/gm.html).
+
+#### 3.6.1 Notes sequence of f0
+```{r, message=FALSE, warning=FALSE}
+library(gm)
+line_0 <- gm::Line(as.character(f0_spn))
+m0 <- gm::Music() +
+  gm::Meter(4, 4) +
+  line_0
+gm::show(m0, to = c('score', 'audio'))
+```
+
+#### 3.6.2 Notes sequences using f0 and f1
+```{r, message=FALSE, warning=FALSE}
+line_0 <- gm::Line(as.character(f0_spn))
+line_1 <- gm::Line(as.character(f1_spn))
+m1 <- gm::Music() + 
+  gm::Meter(4, 4) + 
+  line_0 + line_1
+gm::show(m1, to = c('score', 'audio'))
+```
+
+#### 3.6.3 Chords sequence using f0, f1 and f2 
+```{r, message=FALSE, warning=FALSE}
+line_0 <- gm::Line(as.character(f0_spn))
+line_1 <- gm::Line(as.character(f1_spn))
+line_2 <- gm::Line(as.character(f2_spn))
+m2 <- gm::Music() + 
+  gm::Meter(4, 4) + 
+  line_0 + line_1 + line_2
+gm::show(m2, to = c('score', 'audio'))
+```
