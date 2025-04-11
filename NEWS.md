@@ -4,12 +4,15 @@
 
 ### NEWS.md setup
 
-**Version 0.5.0 2025-03-31**
+**Version 0.5.0 2025-04-11**
 
 - Class 'voice' created, all functions re-written using S4 method.
 
 
+**Version 0.4.30 2025-04-11**
 
+- Function `octave.R` renamed to `spn2octave.R`.
+- Added function `check_chords.R`.
 
 **Version 0.4.29 2025-03-16**
 
