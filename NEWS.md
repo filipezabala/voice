@@ -4,10 +4,9 @@
 
 ### NEWS.md setup
 
-**Version 0.5.0 2025-04-11**
+**Version 0.4.31 2025-04-11**
 
-- Class 'voice' created, all functions re-written using S4 method.
-
+- Correcting errors.
 
 **Version 0.4.30 2025-04-11**
 
