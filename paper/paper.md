@@ -35,19 +35,19 @@ The `voice` package [@zabala2025voice] for R [@r2024r] is a free, open-source to
 
 ## Statement of Need
 
-Audio data analysis is complex due to variability in file formats and the lack of integrated tools. While packages like `seewave` [@sueur2008seewave] provide foundational capabilities, they often require specialized knowledge. The `voice` package addresses these challenges by combining existing functionalities with novel features such as *Formant Removals*, which enhance predictive accuracy for tasks like sex classification. Its user-friendly design makes it accessible to researchers in linguistics, psychology, and bioacoustics, where audio data remains underutilized.
+Audio data analysis is complex due to variability in file formats and the lack of integrated tools. While packages like `seewave` [@sueur2008seewave] provide foundational capabilities, they often require specialized knowledge. The `voice` package addresses these challenges by combining existing functionalities with novel features such as *Formant Removals*, which enhance predictive accuracy for tasks like sex classification. 
 
-The package is particularly useful for researchers in fields such as linguistics, psychology, and bioacoustics, where audio data is underutilized due to the lack of accessible tools. By simplifying the extraction and analysis of audio features, `voice` lowers the barrier to entry for researchers and expands the potential for audio data in scientific studies.
+Its user-friendly design makes it accessible to researchers in linguistics, psychology, and bioacoustics, where audio data remains underutilized. There are currently work fronts in these areas making use of `voice` functionalities. By simplifying the extraction and analysis of audio features, `voice` lowers the barrier to entry for researchers and expands the potential for audio data in scientific studies.
 
 ## Features
 
 ### Core Functions
 
 1. **`extract_features`**:  
-   Extracts standardized audio features (e.g., *Formant Dispersion*, *Formant Position*) from files, leveraging `wrassp` and `tuneR` while introducing new metrics to capture vocal tract characteristics.
+   Extracts standardized audio features from files (e.g., *F0*, *Formant Dispersion*, *Gain*, *MFCC*), leveraging `wrassp` and `tuneR` while introducing new metrics to capture vocal tract characteristics.
 
 2. **`tag`**:  
-   Attaches summarized audio features (mean, median, etc.) to datasets, supporting anonymization and privacy-aware analysis via a *6-number summary*.
+   Attaches summarized audio features to datasets, supporting anonymization and privacy-aware analysis via a *6-number summary* (mean, median, standard deviation, coefficient of variation, interquartile range and median absolute deviation).
 
 3. **`diarize`**:  
    Identifies speaker segments using Python's `pyannote-audio` [@bredin2019pyannote], generating RTTM files for transcription and analysis.
@@ -58,7 +58,7 @@ The package is particularly useful for researchers in fields such as linguistics
   Isolates fundamental frequency (F0) from formants, improving feature interpretability for classification tasks. 
   
 - **Integration of R and Python**:  
-  Uses `reticulate` [@ushey2023reticulate] to combine R's statistical power with Python's diarization tools.
+  Uses `reticulate` [@ushey2023reticulate] to combine R's statistical power with Python's tools.
 
 ## Example Applications
 
@@ -66,16 +66,16 @@ The package is particularly useful for researchers in fields such as linguistics
 The package was tested on open datasets (AESDD [@vryzas2018speech; @vryzas2018subjective], CREMA-D [@cao2014crema], Mozilla Common Voice [@ardila2019common], RAVDESS [@livingstone2018ryerson] and VoxForge [@voxforge2023]) to predict sex from voice features. Results showed high accuracy across multiple model classes (Binary Logistic [@cramer2002origins], SVM [@vapnik2000nature], Random Forest [@breiman2001random], and BART [@sparapani2021nonparametric]), with formant removals ranking among the top predictive features.
 
 ### Speaker Diarization
-The `diarize` function was applied to a LibriVox recording of [*The Adventures of Sherlock Holmes*](https://archive.org/details/adventuressherlockholmes_v4_1501_librivox) by Conan Doyle, successfully segmenting the audio into speaker turns. This demonstrates the package's utility for applications in transcription and audio analysis.
+The `diarize` function has been used successfully, and as a didactic example was applied to a LibriVox recording of [*The Adventures of Sherlock Holmes*](https://archive.org/details/adventuressherlockholmes_v4_1501_librivox) by Conan Doyle, successfully segmenting the audio into speaker turns. This demonstrates the package's utility for applications in transcription and audio analysis.
 
 ## Performance
-The `voice` package efficiently processes audio files, with `extract_features` generating feature-rich data frames in seconds for typical audio lengths. The `diarize` function, while computationally intensive for long recordings, provides accurate segmentation and integrates seamlessly with R workflows.
+The `voice` package efficiently processes audio files, with `extract_features` allowing parallelization and generating feature-rich data frames in seconds for typical audio lengths. The `diarize` function, while computationally intensive for long recordings, provides accurate segmentation and integrates seamlessly with R workflows.
 
 ## Availability
 The `voice` package is available on CRAN ([https://CRAN.R-project.org/package=voice](https://CRAN.R-project.org/package=voice)) and GitHub ([https://github.com/filipezabala/voice](https://github.com/filipezabala/voice)). Documentation, including vignettes and examples, is provided to facilitate adoption.
 
 ## Acknowledgments
-The author acknowledges the contributions of the open-source communities behind `wrassp`, `tuneR`, `seewave`, and `pyannote-audio`, which form the foundation of this work. Special thanks to the developers of `reticulate` for enabling seamless R-Python integration.
+The authors gratefully acknowledge Renfei Mao for their technical support and guidance in implementing the `gm` library [@mao2025gm].
 
 ## References
  
