@@ -5,12 +5,12 @@
 <!-- badges: end -->
 
 General tools for voice analysis. The `voice` package is being developed to be an easy-to-use set of tools to deal with audio analysis in R.  
-It is based on [`wrassp`](https://cran.r-project.org/package=wrassp), [`tuneR`](https://cran.r-project.org/package=tuneR), [`seewave`](https://cran.r-project.org/package=seewave), [`gm`](https://cran.r-project.org/package=gm), as well as [Parselmouth](https://github.com/YannickJadoul/Parselmouth) - a Python library for the [Praat](https://www.fon.hum.uva.nl/praat/) software - and [pyannote-audio](https://github.com/pyannote/pyannote-audio) - an open-source toolkit written in Python for speaker diarization based on [PyTorch](https://github.com/pytorch/pytorch) machine learning framework.   
+It provides a free and user-friendly toolkit for audio analysis using music theory, enabling researchers to extract, tag, and analyze voice data efficiently. It enables extraction of audio features, enrichment of structured datasets with audio summaries, and automatic identification of spoken segments—while introducing novel features. It also allows audio analysis based on musical theory, associating frequencies with musical notes arranged in a score via [`gm`](https://github.com/flujoo/gm) package. 
 
 More details may be found at https://cran.r-project.org/package=voice.  
 
 ## Ubuntu Installation
-The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [Ubuntu 20.04 LTS (Focal Fossa)](https://releases.ubuntu.com/20.04/). Note the software versions during installation, inconsistency reporting is welcome.  
+The following steps were used to configure [github.com/filipezabala/voice](https://github.com/filipezabala/voice) on [Ubuntu 24.04 LTS (Noble Numbat)](https://ubuntu.com/blog/tag/ubuntu-24-04-lts). Note the software versions during installation, inconsistency reporting is welcome.  
 > Without the following Python items 3 and 10, you may run all the functions except `diarize` and `extract_features` calling `f0_praat` and `fmt_praat` features. These functions run respectively [pyannote-audio](https://github.com/pyannote/pyannote-audio) and [Parselmouth](https://github.com/YannickJadoul/Parselmouth).
 
 ### 1. [Curl](https://curl.se/)
