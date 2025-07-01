@@ -10,3 +10,6 @@ The `voice` package is being developed to be an easy-to-use set of tools to deal
 More details may be found at 
 - https://filipezabala.com/voicegnette/
 - https://cran.r-project.org/package=voice 
+
+## Issues
+If you want to contribute, report bugs or request new features, use the 'Issues' tab on Github.
