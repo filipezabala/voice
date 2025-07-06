@@ -1,4 +1,4 @@
-parselmouth
+praat-parselmouth
 pyannote-audio
 speechbrain
 torch
