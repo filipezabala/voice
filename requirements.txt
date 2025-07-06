@@ -1,3 +1,4 @@
+parselmouth
 pyannote-audio
 speechbrain
 torch
