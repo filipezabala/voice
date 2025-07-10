@@ -4,6 +4,12 @@
 
 ### NEWS.md setup
 
+
+**Version 0.5.0 2025-07-10**
+
+- Correcting minor issues for publication.
+
+
 **Version 0.4.31 2025-04-11**
 
 - Correcting errors.
