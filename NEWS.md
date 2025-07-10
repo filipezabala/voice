@@ -13,6 +13,7 @@
 **Version 0.4.31 2025-04-11**
 
 - Correcting errors.
+- Minor errors corrected.
 
 **Version 0.4.30 2025-04-11**
 
