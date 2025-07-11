@@ -15,8 +15,10 @@
 #' # assigning notes
 #' f0_spn <- assign_notes(M, fmt = 0)
 #' check_chords(f0_spn, window = 3, try_perm = FALSE)
+#' \dontrun{
 #' check_chords(f0_spn, window = 3, try_perm = TRUE)
 #' check_chords(f0_spn, window = 4, try_perm = TRUE)
+#' }
 #' @export
 check_chords <- function(x, window = 3, try_perm = FALSE){
 
@@ -33,12 +35,11 @@ check_chords <- function(x, window = 3, try_perm = FALSE){
     return(NA)
   }
 
-  #TODO: update octave > spn2abc
   # chords lowercase without space (tabr)
-  x_lo <- voice::octave(x, to_lower = TRUE) #TODO: , drop_rep_seq = TRUE)
+  x_lo <- voice::spn2abc(x, to_lower = TRUE) #TODO: , drop_rep_seq = TRUE)
 
   # chords uppercase with space
-  x_up <- voice::octave(x)
+  x_up <- voice::spn2abc(x)
 
   # major/minor by tabr
   if(try_perm){

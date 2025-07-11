@@ -1,10 +1,13 @@
 #' Assign musical notes
 #'
 #' @description Assign musical notes in Scientific Pitch Notation or other variant. See \code{voice::notes()}. The notes are cut considering f0 to ensure alignment.
+#' @param x Media dataset from voice::extract_features().
 #' @param fmt Either F0 or formant frequency (in Hz). Default: \code{fmt = 0}.
 #' @param min_points Minimum number of points for audio section. Default: \code{min_points = 4}.
 #' @param min_percentile Minimum percentile value of gain to be included on the average of \code{fmt}. Default: \code{min_percentile = 0.75}.
 #' @param max_na_prop Maximum proportion os NAs on gain sector. Default: \code{max_na_prop = 1}.
+#' @importFrom stats median
+#' @importFrom stats quantile
 #' @examples
 #' library(voice)
 #' # get path to audio file

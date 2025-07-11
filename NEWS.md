@@ -4,11 +4,20 @@
 
 ### NEWS.md setup
 
+**Version 0.5.1 2025-07-10**
+
+- Added to DESCRIPTION file: Imports: arrangements, Suggests: embedr, gm, tidyverse.
+- Removed from DESCRIPTION file: Imports: `gm`.
+- Function `spn2octave` renamed to `spn2abc`, examples updated (http added, `octave` removed).
+- TODO done: update octave > spn2abc @ check_chords.R.
+- Added `#' @param x` @ assign_notes.R.
+- Added `.data$` before f0, f1 and f2 @ piano_plot.R.
+- Added `\dontrun` to check_chords.R examples when `try_perm = TRUE`. Take a long time!
+
 
 **Version 0.5.0 2025-07-10**
 
 - Correcting minor issues for publication.
-
 
 **Version 0.4.31 2025-04-11**
 

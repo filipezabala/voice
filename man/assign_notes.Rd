@@ -13,6 +13,8 @@ assign_notes(
 )
 }
 \arguments{
+\item{x}{Media dataset from voice::extract_features().}
+
 \item{fmt}{Either F0 or formant frequency (in Hz). Default: \code{fmt = 0}.}
 
 \item{min_points}{Minimum number of points for audio section. Default: \code{min_points = 4}.}

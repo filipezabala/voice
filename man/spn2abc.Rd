@@ -12,25 +12,22 @@ spn2abc(x, to_lower = FALSE, spacing = TRUE)
 \item{to_lower}{Logical. Should the string be lower case? Default: \code{FALSE}.}
 
 \item{spacing}{Logical. Should the strin return spaces between notes? Default: \code{TRUE}.}
-
-\item{drop_rep_seq}{Logical. Should sequences of same note be replaced by one single note? Default: \code{FALSE}.}
 }
 \description{
 Convert SPN to standard octave.
 }
 \examples{
 library(voice)
-spn2octave('C4')
-spn2octave('C5')
-all.equal(octave('C4'), spn2octave('C4'))
-spn2octave('C4', to_lower = TRUE)
-spn2octave(c('C4','D#7','E2'))
-spn2octave(c('C4','D#7','E2'), to_lower = TRUE)
-spn2octave(c('C4','D#7','E2'), spacing = FALSE)
-spn2octave(c('C4','D#7','E2'), to_lower = TRUE, spacing = FALSE)
+spn2abc('C4')
+spn2abc('C5')
+spn2abc('C4', to_lower = TRUE)
+spn2abc(c('C4','D#7','E2'))
+spn2abc(c('C4','D#7','E2'), to_lower = TRUE)
+spn2abc(c('C4','D#7','E2'), spacing = FALSE)
+spn2abc(c('C4','D#7','E2'), to_lower = TRUE, spacing = FALSE)
 }
 \references{
 https://en.wikipedia.org/wiki/Scientific_pitch_notation
 
-://en.wikipedia.org/wiki/ABC_notation
+https://en.wikipedia.org/wiki/ABC_notation
 }
