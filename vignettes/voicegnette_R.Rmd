@@ -23,6 +23,9 @@ ini0 <- Sys.time()
 
 ## 0. Basic installation
 ```{r, eval=FALSE}
+# From CRAN
+install.packages('voice')
+# Development version from GitHub
 devtools::install_github('filipezabala/voice')
 ```
 More details at https://github.com/filipezabala/voice.
@@ -62,44 +65,37 @@ voice::tag(E, groupBy = 'subject_id')
 ```
 
 
-## 3. Voice2Sheet (experimental)
+## 3. Visualization
 ### 3.1 Get audio
 ```{r, message=FALSE, warning=FALSE}
-url0 <- 'https://github.com/filipezabala/voiceAudios/raw/refs/heads/main/mp3/doremi.mp3'
-download.file(url0, paste0(tempdir(), '/doremi.mp3'), mode = 'wb')
-embedr::embed_audio(url0)
+url0 <- 'https://github.com/filipezabala/voiceAudios/raw/refs/heads/main/wav/doremi.wav'
+download.file(url0, paste0(tempdir(), '/doremi.wav'), mode = 'wb')
+voice::embed_audio(url0) # See https://github.com/mccarthy-m-g/embedr for more details.
 ```
 
-### 3.2 Convert mp3 to wav mono
-```{r, message=FALSE, warning=FALSE}
-cmd <- paste0('cd ', tempdir(), ';', 
-' for i in *.[Mm][Pp]3; do ffmpeg -i "$i" -ac 1 "./${i%.*}.wav"; done')
-system(cmd)
-```
-
-### 3.3 Media data
+### 3.2 Media data
 ```{r, message=FALSE, warning=FALSE}
 M <- voice::extract_features(tempdir())
 summary(M)
 ```
 
-### 3.4 Plot
+### 3.3 Plot
 ```{r, message=FALSE, warning=FALSE, fig.width=7.5, fig.height=4}
 voice::piano_plot(M, 0) # f0
 voice::piano_plot(M, 0:1) # f0 + f1
 ```
 
-### 3.5 Assign notes
+### 3.4 Assign notes
 ```{r, message=FALSE, warning=FALSE}
 (f0_spn <- voice::assign_notes(M, fmt = 0, min_points = 22, min_percentile = .85)) # f0
 (f1_spn <- voice::assign_notes(M, fmt = 1, min_points = 22, min_percentile = .85)) # f1
 ```
 
-### 3.6 Sheet music
+### 3.5 Sheet music
 Must have [MuseScore](https://musescore.org/en) and [gm](https://flujoo.github.io/gm/articles/gm.html).
 
-#### 3.6.1 Notes sequence of f0
-```{r, message=FALSE, warning=FALSE}
+#### 3.5.1 Notes sequence of f0
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 library(gm)
 line_0 <- gm::Line(as.character(f0_spn))
 m0 <- gm::Music() +
@@ -107,16 +103,18 @@ m0 <- gm::Music() +
   line_0
 gm::show(m0, to = c('score', 'audio'))
 ```
+![](sheet1.png)
 
-#### 3.6.2 Notes sequences of f0 and f1
-```{r, message=FALSE, warning=FALSE}
+#### 3.5.2 Notes sequences of f0 and f1
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 line_0 <- gm::Line(as.character(f0_spn))
 line_1 <- gm::Line(as.character(f1_spn))
-m1 <- gm::Music() + 
-  gm::Meter(4, 4) + 
+m1 <- gm::Music() +
+  gm::Meter(4, 4) +
   line_0 + line_1
 gm::show(m1, to = c('score', 'audio'))
 ```
+![](sheet2.png)
 
 <!-- #### 3.6.3 Chords sequence using f0, f1 and f2  -->
 <!-- ```{r, message=FALSE, warning=FALSE} -->
@@ -272,7 +270,7 @@ pip install -r https://raw.githubusercontent.com/filipezabala/voice/master/requi
 
 
 ### 4.2 MacOS
-The following steps are used to fully configure `voice` on [MacOS Sonoma](https://www.apple.com/macos/sonoma/). Reports of inconsistencies are welcome.
+The following steps are used to fully configure `voice` on [MacOS Sonoma](https://www.apple.com/macos/macos-sequoia/) (Link to MacOS Sequoia). Reports of inconsistencies are welcome.
 
 <!-- Hardware   -->
 <!--  . MacBook Air (13-inch, 2020)   -->
@@ -436,14 +434,14 @@ pip install -r https://raw.githubusercontent.com/filipezabala/voice/master/requi
 
 ## 5. Diarize
 
-```{r}
+```{r, eval=FALSE}
 # download
 url0 <- 'https://github.com/filipezabala/voiceAudios/raw/main/wav/sherlock0.wav'
 wavDir <- normalizePath(tempdir())
 download.file(url0, paste0(wavDir, '/sherlock0.wav'), mode = 'wb')
 ```
 Diarization can be performed to detect speaker segments (i.e., 'who spoke when').
-```{r}
+```{r, eval=FALSE}
 # diarize
 voice::diarize(fromWav = wavDir, toRttm = wavDir, token = 'YOUR_TOKEN')
 ```
@@ -452,15 +450,14 @@ The `voice::diarize()` function creates Rich Transcription Time Marked (RTTM)[^r
 
 [^rttm]: See Appendix	C at https://www.nist.gov/system/files/documents/itl/iad/mig/KWS15-evalplan-v05.pdf.
 
-```{r}
+```{r, eval=FALSE}
 # read_rttm
 (rttm <- voice::read_rttm(wavDir))
 ```
 
 Finally, the audio waves can be automatically segmented.
-```{r}
+```{r, eval=FALSE}
 # split audio wave
 voice::splitw(fromWav = wavDir, fromRttm = wavDir, to = wavDir)
 dir(wavDir, pattern = '.[Ww][Aa][Vv]$')
 ```
-

@@ -20,7 +20,7 @@ library(voice)
 notes_freq()
 }
 \references{
-\url{https://pages.mtu.edu/~suits/notefreqs.html}
+\url{https://gist.github.com/nvictor/7b4ab7070e210bc1306356f037226dd9}
 }
 \seealso{
 \code{notes}

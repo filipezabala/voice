@@ -8,7 +8,7 @@
 #' @return A vector containing the notes for equal-tempered scale, A4 = 440 Hz. When `method = 'spn'` the vector is of class 'ordered factor'. When `method = 'octave'` the vector is of class 'factor'.  When `method = 'midi'` the vector is of class 'integer'.
 #' @details The symbol '#' is being used to represent a sharp note, the higher
 #' in pitch by one semitone on Scientific Pitch Notation (SPN).
-#' @references \url{https://pages.mtu.edu/~suits/notefreqs.html}
+#' @references \url{https://gist.github.com/nvictor/7b4ab7070e210bc1306356f037226dd9}
 #' @seealso \code{notes_freq}
 #' @examples
 #' library(voice)

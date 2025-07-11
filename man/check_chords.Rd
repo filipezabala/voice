@@ -17,6 +17,7 @@ check_chords(x, window = 3, try_perm = FALSE)
 Check the sequence of musical notes for chords.
 }
 \examples{
+\dontrun{
 library(voice)
 check_chords(c('C','E','G'), window = 3, try_perm = FALSE)
 check_chords(c('C','E','G'), window = 3, try_perm = TRUE)
@@ -27,7 +28,6 @@ M$gain[is.na(M$f0)] <- NA
 # assigning notes
 f0_spn <- assign_notes(M, fmt = 0)
 check_chords(f0_spn, window = 3, try_perm = FALSE)
-\dontrun{
 check_chords(f0_spn, window = 3, try_perm = TRUE)
 check_chords(f0_spn, window = 4, try_perm = TRUE)
 }

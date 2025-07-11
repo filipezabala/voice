@@ -32,7 +32,7 @@ notes(c(220,440,880), method = 'octave')
 notes(c(220,440,880), method = 'midi')
 }
 \references{
-\url{https://pages.mtu.edu/~suits/notefreqs.html}
+\url{https://gist.github.com/nvictor/7b4ab7070e210bc1306356f037226dd9}
 }
 \seealso{
 \code{notes_freq}

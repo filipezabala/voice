@@ -5,6 +5,7 @@
 #' @param window Size of window of notes to be checked. Default: \code{3}.
 #' @param try_perm Logical. Must try all notes permutations of notes? Default: \code{FALSE}.
 #' @examples
+#' \dontrun{
 #' library(voice)
 #' check_chords(c('C','E','G'), window = 3, try_perm = FALSE)
 #' check_chords(c('C','E','G'), window = 3, try_perm = TRUE)
@@ -15,7 +16,6 @@
 #' # assigning notes
 #' f0_spn <- assign_notes(M, fmt = 0)
 #' check_chords(f0_spn, window = 3, try_perm = FALSE)
-#' \dontrun{
 #' check_chords(f0_spn, window = 3, try_perm = TRUE)
 #' check_chords(f0_spn, window = 4, try_perm = TRUE)
 #' }

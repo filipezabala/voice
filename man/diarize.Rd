@@ -25,7 +25,7 @@ diarize(
 pipeline from pyannote.audio. #1 Install pyannote.audio 3.1 with pip install
 pyannote.audio (already listed @ https://raw.githubusercontent.com/filipezabala/voice/master/requirements.txt).
 #2. Accept \url{https://hf.co/pyannote/segmentation-3.0} user conditions.
-#3 Accept \url{https://hf.co/pyannote-speaker-diarization-3.1} user conditions.
+#3 Accept \url{https://huggingface.co/pyannote/speaker-diarization-3.1} user conditions.
 #4. Create access token at \url{https://hf.co/settings/tokens}.}
 }
 \value{
