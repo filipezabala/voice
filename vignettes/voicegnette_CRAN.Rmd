@@ -23,10 +23,10 @@ ini0 <- Sys.time()
 
 ## 0. Basic installation
 ```{r, eval=FALSE}
-# From CRAN
-install.packages('voice')
 # Development version from GitHub
 devtools::install_github('filipezabala/voice')
+# Stable version from CRAN
+install.packages('voice')
 ```
 More details at https://github.com/filipezabala/voice.
 
@@ -67,26 +67,28 @@ voice::tag(E, groupBy = 'subject_id')
 
 ## 3. Visualization
 ### 3.1 Get audio
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 url0 <- 'https://github.com/filipezabala/voiceAudios/raw/refs/heads/main/wav/doremi.wav'
 download.file(url0, paste0(tempdir(), '/doremi.wav'), mode = 'wb')
 voice::embed_audio(url0) # See https://github.com/mccarthy-m-g/embedr for more details.
 ```
 
 ### 3.2 Media data
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 M <- voice::extract_features(tempdir())
 summary(M)
 ```
 
 ### 3.3 Plot
-```{r, message=FALSE, warning=FALSE, fig.width=7.5, fig.height=4}
+```{r, message=FALSE, warning=FALSE, fig.width=7.5, fig.height=4, eval=FALSE}
 voice::piano_plot(M, 0) # f0
 voice::piano_plot(M, 0:1) # f0 + f1
 ```
+![](plot1.png){width=95%}
+![](plot2.png){width=95%}
 
 ### 3.4 Assign notes
-```{r, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
 (f0_spn <- voice::assign_notes(M, fmt = 0, min_points = 22, min_percentile = .85)) # f0
 (f1_spn <- voice::assign_notes(M, fmt = 1, min_points = 22, min_percentile = .85)) # f1
 ```
@@ -103,7 +105,7 @@ m0 <- gm::Music() +
   line_0
 gm::show(m0, to = c('score', 'audio'))
 ```
-![](sheet1.png)
+![](sheet1.png){width=95%}
 
 #### 3.5.2 Notes sequences of f0 and f1
 ```{r, message=FALSE, warning=FALSE, eval=FALSE}
@@ -114,7 +116,7 @@ m1 <- gm::Music() +
   line_0 + line_1
 gm::show(m1, to = c('score', 'audio'))
 ```
-![](sheet2.png)
+![](sheet2.png){width=95%}
 
 <!-- #### 3.6.3 Chords sequence using f0, f1 and f2  -->
 <!-- ```{r, message=FALSE, warning=FALSE} -->
