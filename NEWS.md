@@ -11,16 +11,6 @@
 MIT License: https://github.com/mccarthy-m-g/embedr/blob/master/LICENSE.md. This 
 inclusion is temporary and will be discontinued once `embedr` is available on 
 CRAN. See https://github.com/mccarthy-m-g/embedr for more details.
-- `devtools::check(args = c('--as-cran'))` return `0 errors ✔ | 0 warnings ✔ | 0 notes ✔` in 1m 43.5s.
-- `devtools::check_win_devel` and `devtools::check_win_oldrelease` return `Status: 1 NOTE`.
-- Can't find the error source from `devtools::check_win_release`:
-```Error(s) in re-building vignettes:
---- re-building 'voicegnette_R.Rmd' using rmarkdown
-trying URL 'https://github.com/filipezabala/voiceAudios/raw/refs/heads/main/wav/doremi.wav'
-Content type 'audio/wav' length 521396 bytes (509 KB)
-==================================================
-downloaded 509 KB
-```
 
 
 
