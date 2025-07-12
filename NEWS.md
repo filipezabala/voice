@@ -11,7 +11,8 @@
 MIT License: https://github.com/mccarthy-m-g/embedr/blob/master/LICENSE.md. This 
 inclusion is temporary and will be discontinued once `embedr` is available on 
 CRAN. See https://github.com/mccarthy-m-g/embedr for more details.
-
+- Omitted `+ file LICENSE` from DESCRIPTION (CRAN).
+- Shifted 'Speaker Recognition' and 'Voice Analysis', so The Title field DO NOT starts with the package name (CRAN).
 
 
 **Version 0.5.1 2025-07-10**
