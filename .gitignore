@@ -1,7 +1,9 @@
 ^\.git$
-.Rhistory
 .DS_Store
-.Rproj.user/**
-^\.Rproj\.user$
 ^\.voice.Rcheck/00check.log
 voice.Rcheck/
+.Rproj.user/
+*.Rproj
+.Rhistory
+.RData
+.Ruserdata
