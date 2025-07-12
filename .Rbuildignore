@@ -1,7 +1,0 @@
-^.*\.Rproj$
-^\.Rproj\.user$
-^cran-comments\.md$
-^CRAN-SUBMISSION$
-^requirements.txt$
-^draft$
-^revdep$

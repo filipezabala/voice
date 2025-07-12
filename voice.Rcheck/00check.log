@@ -1,9 +1,0 @@
-* using log directory ‘/home/filipe/MEGAsync/D_Filipe_Zabala/pacotes/voice/voice.Rcheck’
-* using R version 4.2.1 (2022-06-23)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* checking for file ‘voice/DESCRIPTION’ ... ERROR
-Required field missing or empty:
-  ‘Author’
-* DONE
-Status: 1 ERROR

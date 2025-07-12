@@ -1,6 +1,6 @@
-.Rproj.user
+^\.git$
 .Rhistory
-.RData
-.Ruserdata
-^\.travis\.yml$
-^\.github$
+.DS_Store
+^\.Rproj\.user$
+^\.voice.Rcheck/00check.log
+voice.Rcheck/

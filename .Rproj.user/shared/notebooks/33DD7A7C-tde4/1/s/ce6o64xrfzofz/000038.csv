@@ -1,0 +1,48 @@
+"0","garch_res(na.omit(fit_nnttar$residuals))
+"
+"1","$fit_aa
+Series: x 
+ARIMA(1,0,0) with zero mean 
+
+Coefficients:
+         ar1
+      0.0132
+s.e.  0.0189
+
+sigma^2 = 134.9:  log likelihood = -10819.6
+AIC=21643.2   AICc=21643.2   BIC=21655.07
+
+$fit_aa_g
+
+Call:
+tseries::garch(x = fit_aa$residuals, order = order, trace = FALSE)
+
+Model:
+GARCH(1,1)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-4.16018 -0.56433 -0.07595  0.51137  5.60362 
+
+Coefficient(s):
+    Estimate  Std. Error  t value Pr(>|t|)    
+a0 1.214e+02   8.647e+00   14.041  < 2e-16 ***
+a1 1.525e-01   2.430e-02    6.274 3.51e-10 ***
+b1 4.188e-12   5.494e-02    0.000        1    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Diagnostic Tests:
+	Jarque Bera Test
+
+data:  Residuals
+X-squared = 579, df = 2, p-value < 2.2e-16
+
+
+	Box-Ljung test
+
+data:  Squared.Residuals
+X-squared = 0.091042, df = 1, p-value = 0.7629
+
+
+"

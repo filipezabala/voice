@@ -1,0 +1,5 @@
+"0","(pred <- predict(fit, test, type = 'raw'))
+"
+"1","     não sim
+[1,] 0.4 0.6
+"
