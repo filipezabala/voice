@@ -2,7 +2,7 @@ Package: voice
 Type: Package
 Title: Speaker Recognition, Voice Analysis and Mood Inference via Music Theory
 Version: 0.5.2
-Date: 2025-07-11
+Date: 2025-07-12
 Authors@R: person("Zabala", "Filipe J.", email = "filipezabala@gmail.com", role = c("cre","aut"))
 Maintainer: Zabala Filipe J. <filipezabala@gmail.com>
 URL: https://github.com/filipezabala/voice
