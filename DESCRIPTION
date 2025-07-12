@@ -14,6 +14,7 @@ Depends: R (>= 4.0.0)
 Imports: arrangements, dplyr, ggplot2, R.utils, reticulate, seewave, tabr, tibble, tidyselect, tuneR, wrassp, zoo, htmltools, httr
 Suggests: gm, knitr, tidyverse
 License: GPL-3
+LicenseFile: LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2

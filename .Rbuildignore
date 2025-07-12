@@ -1,2 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^CRAN-SUBMISSION$
+^cran-comments\.md$
+^requirements\.txt$

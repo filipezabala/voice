@@ -4,6 +4,11 @@
 voice.Rcheck/
 .Rproj.user/
 *.Rproj
+^.*\.Rproj$
+^\.Rproj\.user$
 .Rhistory
 .RData
 .Ruserdata
+^CRAN-SUBMISSION$
+^cran-comments\.md$
+^requirements\.txt$
