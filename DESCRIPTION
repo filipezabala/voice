@@ -5,16 +5,13 @@ Version: 0.5.2
 Date: 2025-07-12
 Authors@R: person("Zabala", "Filipe J.", email = "filipezabala@gmail.com", role = c("cre","aut"))
 Maintainer: Zabala Filipe J. <filipezabala@gmail.com>
-URL: https://github.com/filipezabala/voice
-BugReports: https://github.com/filipezabala/voice/issues
-Description: Provides tools for audio data analysis, including feature extraction, 
-  pitch detection, and speaker diarization. Designed for voice research and 
-  signal processing applications.
+Description: Provides tools for audio data analysis, including feature extraction, pitch detection, and speaker diarization. Designed for voice research and signal processing applications.
+License: GPL-3
 Depends: R (>= 4.0.0)
 Imports: arrangements, dplyr, ggplot2, R.utils, reticulate, seewave, tabr, tibble, tidyselect, tuneR, wrassp, zoo, htmltools, httr
 Suggests: gm, knitr, tidyverse
-LicenseFile: LICENSE
-License: GPL-3
+URL: https://github.com/filipezabala/voice
+BugReports: https://github.com/filipezabala/voice/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
