@@ -369,7 +369,7 @@ MuseScore is an open source notation software.
 #### 4.2.9. [R](https://www.r-project.org)
 R is a free software environment for statistical computing and graphics.  
 
- - Download and run the pkg file according to you architecture from https://cloud.r-project.org/bin/macosx/
+ - Download and run the pkg file according to you architecture from https://www.r-project.org
  - Will take around 180 MB of disk space   
 
 

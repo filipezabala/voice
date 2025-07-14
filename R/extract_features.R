@@ -48,13 +48,13 @@
 #'
 #' Delsarte P., Genin Y. (1986). “The split Levinson algorithm.” IEEE transactions on acoustics, speech, and signal processing, 34(3), 470–478. (\url{https://ieeexplore.ieee.org/document/1164830})
 #'
-#' Jackson J.C. (1995). "The Harmonic Sieve: A Novel Application of Fourier Analysis to Machine Learning Theory and Practice." Technical report, Carnegie-Mellon University Pittsburgh PA Schoo; of Computer Science. (\url{https://apps.dtic.mil/sti/pdfs/ADA303368.pdf})
+#' Jackson J.C. (1995). "The Harmonic Sieve: A Novel Application of Fourier Analysis to Machine Learning Theory and Practice." Technical report, Carnegie-Mellon University Pittsburgh PA Schoo; of Computer Science.
 #'
 #' Fitch, W.T. (1997) "Vocal tract length and formant frequency dispersion correlate with body size in rhesus macaques." J. Acoust. Soc. Am. 102, 1213 – 1222. (\doi{10.1121/1.421048})
 #'
 #' Boersma P., van Heuven V. (2001). Praat, a system for doing phonetics by computer. Glot. Int., 5(9/10), 341–347. (\url{https://www.fon.hum.uva.nl/paul/papers/speakUnspeakPraat_glot2001.pdf})
 #'
-#' Ellis DPW (2005). “PLP and RASTA (and MFCC, and inversion) in Matlab.” Online web resource. (\url{https://www.ee.columbia.edu/~dpwe/resources/matlab/rastamat/})
+#' Ellis DPW (2005). “PLP and RASTA (and MFCC, and inversion) in Matlab.” Online web resource.
 #'
 #' Puts, D.A., Apicella, C.L., Cardenas, R.A. (2012) "Masculine voices signal men's threat potential in forager and industrial societies." Proc. R. Soc. B Biol. Sci. 279, 601–609. (\doi{10.1098/rspb.2011.0829})
 #' @examples

@@ -1,8 +1,16 @@
-## version 0.5.2
+## version 0.5.3
 
 ---
 
 ### NEWS.md setup
+
+**Version 0.5.3 2025-07-14**
+
+- Drop https://cloud.r-project.org/bin/macosx/ from vignette because 'CRAN URL not in canonical form'.
+- Drop https://hf.co/settings/tokens from `diarize.R` because it is 'Unauthorized' by CRAN.
+- Drop https://www.ee.columbia.edu/~dpwe/resources/matlab/rastamat/ from `extract_features.R` because it is 'Forbidden' by CRAN.
+- Drop https://apps.dtic.mil/sti/pdfs/ADA303368.pdf from `extract_features.R` because it is 'Forbidden' by CRAN.
+
 
 **Version 0.5.2 2025-07-11**
 
