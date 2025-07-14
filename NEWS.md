@@ -1,8 +1,15 @@
-## version 0.5.3
+## version 0.5.5
 
 ---
 
 ### NEWS.md setup
+
+**Version 0.5.5 2025-07-14**
+
+- Put back LICENSE file and updated `LicenseFile: LICENSE` @ DESCRIPTION.
+- Put back https://cloud.r-project.org/bin/macosx/ in vignette.
+- Put back https://hf.co/settings/tokens in `diarize.R`.
+
 
 **Version 0.5.4 2025-07-14**
 
