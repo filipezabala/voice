@@ -4,6 +4,11 @@
 
 ### NEWS.md setup
 
+**Version 0.5.4 2025-07-14**
+
+- 'diarisation' substituted by 'identification' in DESCRIPTION.
+
+
 **Version 0.5.3 2025-07-14**
 
 - Drop https://cloud.r-project.org/bin/macosx/ from vignette because 'CRAN URL not in canonical form'.

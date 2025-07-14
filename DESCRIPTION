@@ -1,11 +1,11 @@
 Package: voice
 Type: Package
 Title: Speaker Recognition, Voice Analysis and Mood Inference via Music Theory
-Version: 0.5.3
+Version: 0.5.4
 Date: 2025-07-14
 Authors@R: person("Zabala", "Filipe J.", email = "filipezabala@gmail.com", role = c("cre","aut"))
 Maintainer: Zabala Filipe J. <filipezabala@gmail.com>
-Description: Provides tools for audio data analysis, including feature extraction, pitch detection, and speaker diarisation. Designed for voice research and signal processing applications.
+Description: Provides tools for audio data analysis, including feature extraction, pitch detection, and speaker identification. Designed for voice research and signal processing applications.
 License: GPL-3
 Depends: R (>= 4.0.0)
 Imports: arrangements, dplyr, ggplot2, R.utils, reticulate, seewave, tabr, tibble, tidyselect, tuneR, wrassp, zoo, htmltools, httr
