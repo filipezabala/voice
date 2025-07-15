@@ -10,12 +10,15 @@ If you want to contribute, report bugs or request new features, use the 'Issues'
 ## 0. Basic installation
 ```{r, eval=FALSE}
 # Development version from GitHub
-install.packages('devtools')
+install.packages(c('devtools','tidyverse'))
 devtools::install_github('filipezabala/voice')
 
 # Stable version from CRAN
 install.packages('voice')
 ```
+
+If you wish to perform a full installation, proceed to Section 4.
+
 
 ### 0.1 For Windows Users
 If you're compiling R packages from source, you may need to install [RTools](https://cran.r-project.org/bin/windows/Rtools/), a collection of Windows-specific build tools for R.
