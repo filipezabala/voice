@@ -27,7 +27,7 @@ If you're compiling packages, ensure you have [Xcode Command Line Tools](https:/
 # Install Xcode on MacOS
 xcode-select --install
 ```
-More details may be found at https://github.com/filipezabala/voice.
+More details may be found at https://filipezabala.com/voicegnette/.
 
 ## 1. Extract features
 ### 1.1 Load packages and audio files
