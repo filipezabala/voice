@@ -68,8 +68,12 @@ voice::tag(E, groupBy = 'subject_id')
 ```{r, message=FALSE, warning=FALSE}
 url0 <- 'https://github.com/filipezabala/voiceAudios/raw/refs/heads/main/wav/doremi.wav'
 download.file(url0, paste0(tempdir(), '/doremi.wav'), mode = 'wb')
-voice::embed_audio(url0) # See https://github.com/mccarthy-m-g/embedr for more details.
 ```
+
+You may use the command `voice::embed_audio(url0)` if you wish to show a play 
+button when compiling an .Rmd file. See https://github.com/mccarthy-m-g/embedr 
+for more details about `embed_audio()` related functions.
+
 
 ### 3.2 Media data
 ```{r, message=FALSE, warning=FALSE}
