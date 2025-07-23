@@ -24,12 +24,13 @@
 #' @return A Media data frame containing the selected features.
 #' @details The feature 'df' corresponds to 'formant dispersion' (df2:df8) by
 #' Fitch (1997), 'pf' to formant position' (pf1:pf8) by Puts, Apicella & Cárdena
-#' (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2023), 'rcf' to
-#' 'formant cumulated removal' (rcf2:rcf8) by Zabala (2023) and 'rpf' to
-#' 'formant position removal' (rpf2:rpf8) by Zabala (2023).
+#' (2011), 'rf' to 'formant removal' (rf1:rf8) by Zabala (2025), 'rcf' to
+#' 'formant cumulated removal' (rcf2:rcf8) by Zabala (2025) and 'rpf' to
+#' 'formant position removal' (rpf2:rpf8) by Zabala (2025).
 #' The \code{'fmt_praat'} feature may take long time processing. The following
 #' features may contain a variable number of columns: \code{'cep'}, \code{'dft'},
 #' \code{'css'} and \code{'lps'}.
+#' On Windows, this function may occasionally cause the RStudio session to crash.
 #' @references Levinson N. (1946). The Wiener (root mean square) error criterion in filter design and prediction. Journal of Mathematics and Physics, 25(1-4), 261–278. (\doi{10.1002/SAPM1946251261})
 #'
 #' Durbin J. (1960). “The fitting of time-series models.” Revue de l’Institut International de Statistique, pp. 233–244. (\url{https://www.jstor.org/stable/1401322})
