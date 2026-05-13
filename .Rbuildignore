@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.positai$
+^\.claude$
+^CRAN-SUBMISSION$
+^cran-comments\.md$
+^draft$
+^logs$
+^paper$
+^requirements\.txt$
+^LICENSE$
